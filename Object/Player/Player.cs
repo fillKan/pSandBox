@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     {
         while (gameObject.activeSelf)
         {
-            if (Input.GetKeyDown(KeyCode.Space)) yield return StartCoroutine(CR_Vibration(0.3f, 0.3f));
+            if (Input.GetKeyDown(KeyCode.Space)) yield return StartCoroutine(CR_Vibration(0.1f, 0.3f));
 
             if (Input.GetAxis("Horizontal") != 0)
             {
