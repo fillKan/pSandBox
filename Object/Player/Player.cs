@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     {
         while (gameObject.activeSelf)
         {
+            if (Input.GetKeyDown(KeyCode.Space)) yield return StartCoroutine(CR_Vibration(0.3f, 0.3f));
+
             if (Input.GetAxis("Horizontal") != 0)
             {
                 vDir.x += Input.GetAxis("Horizontal") * Time.deltaTime * 3.5f;
@@ -32,6 +34,23 @@ public class Player : MonoBehaviour
 
             yield return new WaitForFixedUpdate();
         }
+
+        yield break;
+    }
+
+    private IEnumerator CR_Vibration(float amount, float time)
+    {
+        Vector2 vInitPos = transform.position;
+
+        while(time > 0)
+        {
+            time -= Time.deltaTime;
+
+            transform.position = ((Vector2)Random.insideUnitSphere * amount) + vInitPos;
+
+            yield return new WaitForFixedUpdate();
+        }
+        transform.position = vInitPos;
 
         yield break;
     }
