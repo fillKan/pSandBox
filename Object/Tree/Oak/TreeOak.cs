@@ -12,5 +12,7 @@ public class TreeOak : Tree
     protected override void InitTree()
     {
         fDurability = 20;
+
+        sprite = gameObject.GetComponent<SpriteRenderer>();
     }
 }

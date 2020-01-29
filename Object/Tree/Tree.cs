@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Tree : MonoBehaviour
 {
-    private SpriteRenderer sprite;
+    protected SpriteRenderer sprite;
 
     protected bool doingChopTree = false;
     protected float fDurability;
