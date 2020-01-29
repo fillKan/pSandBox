@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeWhiteBirch : MonoBehaviour
+public class TreeWhiteBirch : Tree
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void DropItem()
     {
-        
+       
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void InitTree()
     {
-        
+        fDurability = 20;
     }
 }

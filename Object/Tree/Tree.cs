@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tree : MonoBehaviour
+public abstract class Tree : MonoBehaviour
 {
     private SpriteRenderer sprite;
 
@@ -20,9 +20,7 @@ public class Tree : MonoBehaviour
 
     private void OnEnable()
     {
-        fDurability = 10;
-
-        sprite = gameObject.GetComponent<SpriteRenderer>();
+        InitTree();
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -36,7 +34,7 @@ public class Tree : MonoBehaviour
         }
     }
 
-    protected IEnumerator CR_chopTree()
+    protected virtual IEnumerator CR_chopTree()
     {
         doingChopTree = true;
         fDurability  -= 3;
@@ -78,7 +76,7 @@ public class Tree : MonoBehaviour
         doingChopTree = false;        
     }
 
-    protected IEnumerator CR_chopDownTree()
+    protected virtual IEnumerator CR_chopDownTree()
     {
         float alpha = 1;
 
@@ -93,4 +91,18 @@ public class Tree : MonoBehaviour
 
         yield break;
     }
+
+    #region 설명 :
+    /// <summary>
+    /// 나무를 베고나서 드롭되는 아이템을 담는다.
+    /// </summary>
+    #endregion
+    protected abstract void DropItem();
+
+    #region 설명 :
+    /// <summary>
+    /// 오브젝트가 활성화 될 때 실행된다.(초기화)
+    /// </summary>
+    #endregion
+    protected abstract void InitTree();
 }
