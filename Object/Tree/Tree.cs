@@ -2,12 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct RECT
+{
+    public float right;
+    public float left;
+    public float top;
+    public float bottom;
+
+    /// <summary>
+    /// 렉트의 크기를 설정하는 함수
+    /// </summary>
+    /// <param name="_value">
+    /// 순서대로 right, left, top, bottom
+    /// </param>
+    public void SetRect(params float[] _value)
+    {
+        this.right  = _value[0];
+        this.left   = _value[1];
+        this.top    = _value[2];
+        this.bottom = _value[3];
+    }
+}
 public abstract class Tree : MonoBehaviour
 {
     protected SpriteRenderer sprite;
-
+    protected RECT rect;
     protected bool doingChopTree = false;
+
     protected float fDurability;
+
+    private IEnumerator _update;
 
     #region 변수 설명 :
     /*
@@ -21,28 +45,37 @@ public abstract class Tree : MonoBehaviour
     private void OnEnable()
     {
         InitTree();
+
+        _update = CR_update();
+        StartCoroutine(_update);
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private IEnumerator CR_update()
     {
-        if(other.gameObject.CompareTag("Player"))
+        while(gameObject.activeSelf)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && !doingChopTree)
+            if(PlayerGetter.Instance.GetPos().x - transform.position.x <= rect.right
+            && PlayerGetter.Instance.GetPos().x - transform.position.x >= rect.left
+            && PlayerGetter.Instance.GetPos().y - transform.position.y <= rect.top
+            && PlayerGetter.Instance.GetPos().y - transform.position.y >= rect.bottom)
             {
-                StartCoroutine(CR_chopTree());
+                if (Input.GetKeyDown(KeyCode.Space) && !doingChopTree)
+                {
+                    StartCoroutine(CR_chopTree());
+                }
             }
+            yield return new WaitForFixedUpdate();
         }
+        yield break;
     }
 
     protected virtual IEnumerator CR_chopTree()
     {
-        doingChopTree = true;
-        fDurability  -= 3;
-
         #region 변수 설명
 
         float fTime = 0.4f;
         Vector2 vInitPos = transform.position;
+        fDurability -= 3;
 
         /*
          * 오브젝트 흔들기의 지속시간 설정, 
@@ -51,6 +84,7 @@ public abstract class Tree : MonoBehaviour
          */
         #endregion
 
+        doingChopTree = true;
 
         // 0.4초 동안 오브젝트 흔들기
         while (fTime > 0)
@@ -62,18 +96,22 @@ public abstract class Tree : MonoBehaviour
         }
         // 위치를 다시 처음 위치로
         transform.position = vInitPos;
+        doingChopTree = false;
 
         // 나무의 내구도가 0 이하라면, 나무를 쓰러뜨리는 코루틴을 실행시키고,
         // 실행시킨 코루틴이 종료되면 오브젝트를 비활성화한 뒤 코루틴을 종료시킨다. 
         if (fDurability <= 0)
         {
+            StopCoroutine(_update);
+
             yield return StartCoroutine(CR_chopDownTree());
 
             gameObject.SetActive(false);
 
             yield break;
         }
-        doingChopTree = false;        
+        
+        yield break;
     }
 
     protected virtual IEnumerator CR_chopDownTree()

@@ -14,5 +14,7 @@ public class TreeWhiteBirch : Tree
         fDurability = 20;
 
         sprite = gameObject.GetComponent<SpriteRenderer>();
+
+        rect.SetRect(1, -1, -2, -5);
     }
 }
