@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TreeWhiteBirch : Tree
 {
-    private Stack<GameObject> dropItems = new Stack<GameObject>();
+    private Stack<Item> dropItems = new Stack<Item>();
 
     protected override void DropItem()
     {
@@ -20,7 +20,7 @@ public class TreeWhiteBirch : Tree
     {
         fDurability = 20;
         int repeat = Random.Range(8, 14);
-        GameObject tItem;
+        Item tItem;
         
         for(int i = 0; i < repeat; i++)
         {
@@ -30,7 +30,7 @@ public class TreeWhiteBirch : Tree
             }
             else tItem = Instantiate(ItemPool.Instance.GetItem(ItemPool.ItemList.LOG_WHITEBIRCH), transform.position, Quaternion.identity);
 
-            tItem.SetActive(false);
+            tItem.gameObject.SetActive(false);
 
             dropItems.Push(tItem);
         }
