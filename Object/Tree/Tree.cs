@@ -61,7 +61,7 @@ public abstract class Tree : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Space) && !doingChopTree)
                 {
-                    StartCoroutine(CR_chopTree());
+                    yield return StartCoroutine(CR_chopTree());
                 }
             }
             yield return new WaitForFixedUpdate();
@@ -85,7 +85,6 @@ public abstract class Tree : MonoBehaviour
         #endregion
 
         doingChopTree = true;
-        sprite.color = new Color(1, 0.5f, 0.5f, 1);
 
         // 0.4초 동안 오브젝트 흔들기
         while (fTime > 0)
@@ -99,7 +98,6 @@ public abstract class Tree : MonoBehaviour
         transform.position = vInitPos;
 
         doingChopTree = false;
-        sprite.color = new Color(1, 1, 1, 1);
 
         // 나무의 내구도가 0 이하라면, 나무를 쓰러뜨리는 코루틴을 실행시키고,
         // 실행시킨 코루틴이 종료되면 오브젝트를 비활성화한 뒤 코루틴을 종료시킨다. 
