@@ -27,12 +27,15 @@ public class Chicken : MonoBehaviour
 
     private IEnumerator CR_update()
     {
+        // fCoolTime은 다음 움직임까지 걸리는 시간을 저장한다.
+        float fCoolTime = Random.Range(0.2f, 1.6f);
+
         while(gameObject.activeSelf)
         {
             fTimer += Time.deltaTime;
 
             // 1.5초 이상의 시간이 지나면,
-            if(fTimer >= 1.5f)
+            if(fTimer >= fCoolTime)
             {
                 // 시간을 0으로 초기화
                 fTimer = 0;
