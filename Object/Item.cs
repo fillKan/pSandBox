@@ -13,8 +13,10 @@ public abstract class Item : MonoBehaviour
 
     protected abstract void Init();
 
-    private void Reset()
+    private void Awake()
     {
         Init();
+
+        ItemPool.Instance.AddItem(gameObject);
     }
 }

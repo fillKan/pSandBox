@@ -428,7 +428,7 @@ GameObject:
   - component: {fileID: 1425139353}
   - component: {fileID: 1425139352}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: SingletonObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemList:
-  - {fileID: 0}
+  - {fileID: 2114334455}
 --- !u!4 &1425139353
 Transform:
   m_ObjectHideFlags: 0
@@ -534,8 +534,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8822178320297807051, guid: 7bad272acc573a24bb8e138ec07808cc,
+        type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 2114334455}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bad272acc573a24bb8e138ec07808cc, type: 3}
+--- !u!1 &2114334455 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3648679970874400120, guid: 25c286c2509467b4bb578d52ced52c43,
+    type: 3}
+  m_PrefabInstance: {fileID: 3648679971375419122}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1892154163962607085
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -547,6 +558,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WhiteBirch_seed
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892154163268618005, guid: 4ce3868468f8b5c4680d66c88a4e8454,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1892154163268618007, guid: 4ce3868468f8b5c4680d66c88a4e8454,
         type: 3}
@@ -617,6 +633,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Oak_log
       objectReference: {fileID: 0}
+    - target: {fileID: 2063010513597447666, guid: e64fc755f2f7f064e805089ded6036dc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2063010513597447670, guid: e64fc755f2f7f064e805089ded6036dc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -685,6 +706,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Oak_seed
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778243033363838994, guid: a8ecc25d8d03d10438de2358600153d9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2778243033363839004, guid: a8ecc25d8d03d10438de2358600153d9,
         type: 3}
@@ -1036,11 +1062,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree_WhiteBirch
       objectReference: {fileID: 0}
-    - target: {fileID: 8822178320297807048, guid: 7bad272acc573a24bb8e138ec07808cc,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8822178320297807050, guid: 7bad272acc573a24bb8e138ec07808cc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1096,5 +1117,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8822178320297807051, guid: 7bad272acc573a24bb8e138ec07808cc,
+        type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 2114334455}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bad272acc573a24bb8e138ec07808cc, type: 3}

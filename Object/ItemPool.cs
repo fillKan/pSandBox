@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class ItemPool : Singleton<ItemPool>
 {
-    private Dictionary<int, Item> m_items = new Dictionary<int, Item>();
+    private Dictionary<int, GameObject> m_items = new Dictionary<int, GameObject>();
 
-    public Item[] itemList;
+    public GameObject[] itemList;
     public enum ItemList
     {
         LOG_WHITEBIRCH,
         LOG_OAK
     };
 
-    private void Awake()
+    public void AddItem(GameObject item)
     {
-        for(int i = 0; i < itemList.Length; i++)
+        if (item.TryGetComponent(out Item _item))
         {
-            m_items.Add(itemList[i].itemCode, itemList[i]);
+            if(!m_items.ContainsKey(_item.itemCode))
+            {
+                m_items.Add(_item.itemCode, item);
+            }
+            
         }
     }
 
-    public Item GetItem(int itemCode)
+    public GameObject GetItem(int itemCode)
     {
         if (m_items.ContainsKey(itemCode))
         {
@@ -29,7 +33,7 @@ public class ItemPool : Singleton<ItemPool>
         }
         return null;
     }
-    public Item GetItem(ItemList item)
+    public GameObject GetItem(ItemList item)
     {
         if (m_items.ContainsKey((int)item))
         {

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3648679970874400127}
   - component: {fileID: 3648679970874400126}
   - component: {fileID: 3648679970874400121}
-  - component: {fileID: 3648679970874400125}
+  - component: {fileID: 8297088663940404516}
   m_Layer: 0
   m_Name: WhiteBirch_log
   m_TagString: Untagged
@@ -131,7 +131,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3648679970874400125
+--- !u!114 &8297088663940404516
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
