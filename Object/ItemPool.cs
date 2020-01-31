@@ -20,4 +20,12 @@ public class ItemPool : Singleton<ItemPool>
     {
         return null;
     }
+
+    public void PlayerDetectionCheck()
+    {
+        foreach (Item item in m_items.Values)
+        {
+            
+        }
+    }
 }
