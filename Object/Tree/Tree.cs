@@ -118,7 +118,7 @@ public abstract class Tree : MonoBehaviour
     protected virtual IEnumerator CR_chopDownTree()
     {
         float alpha = 1;
-
+        DropItem();
         // Fade . . .
         while (sprite.color.a > 0)
         {

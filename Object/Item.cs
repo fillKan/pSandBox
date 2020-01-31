@@ -2,8 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public abstract class Item : MonoBehaviour
 {
-    public int itemCode;
+    [HideInInspector]
+    public int itemCode
+    {
+        get { return _itemCode; }
+    }
+    protected int _itemCode;
 
+    protected abstract void Init();
+
+    private void Reset()
+    {
+        Init();
+    }
 }
