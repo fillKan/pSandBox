@@ -42,7 +42,7 @@ public abstract class Tree : MonoBehaviour
     #endregion
 
 
-    private void OnEnable()
+    private void Start()
     {
         InitTree();
 
