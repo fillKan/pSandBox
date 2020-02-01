@@ -17,6 +17,6 @@ public abstract class Item : MonoBehaviour
     {
         Init();
 
-        ItemPool.Instance.AddItem(this);
+        ItemMaster.Instance.Registration(this);
     }
 }

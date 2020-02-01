@@ -26,9 +26,9 @@ public class TreeOak : Tree
         {
             if (Random.Range(0, 4) == 0)
             {
-                 tItem = Instantiate(ItemPool.Instance.GetItem(ItemPool.ItemList.SEED_OAK), transform.position, Quaternion.identity);
+                 tItem = Instantiate(ItemMaster.Instance.GetItem(ItemMaster.ItemList.SEED_OAK), transform.position, Quaternion.identity);
             }
-            else tItem = Instantiate(ItemPool.Instance.GetItem(ItemPool.ItemList.LOG_OAK), transform.position, Quaternion.identity);
+            else tItem = Instantiate(ItemMaster.Instance.GetItem(ItemMaster.ItemList.LOG_OAK), transform.position, Quaternion.identity);
 
             tItem.gameObject.SetActive(false);
 

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemPool : Singleton<ItemPool>
+public class ItemMaster : Singleton<ItemMaster>
 {
-    private Dictionary<int, Item> m_items = new Dictionary<int, Item>();
+    private Dictionary<int, Item> items = new Dictionary<int, Item>();
 
     public enum ItemList
     {
@@ -14,27 +14,27 @@ public class ItemPool : Singleton<ItemPool>
         SEED_OAK
     };
 
-    public void AddItem(Item item)
+    public void Registration(Item item)
     {
-        if(!m_items.ContainsKey(item.itemCode))
+        if (!items.ContainsKey(item.itemCode))
         {
-            m_items.Add(item.itemCode, item);
+            items.Add(item.itemCode, item);
         }
     }
 
     public Item GetItem(int itemCode)
     {
-        if (m_items.ContainsKey(itemCode))
+        if (items.ContainsKey(itemCode))
         {
-            return m_items[itemCode];
+            return items[itemCode];
         }
         return null;
     }
     public Item GetItem(ItemList item)
     {
-        if (m_items.ContainsKey((int)item))
+        if (items.ContainsKey((int)item))
         {
-            return m_items[(int)item];
+            return items[(int)item];
         }
         return null;
     }

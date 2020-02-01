@@ -6,6 +6,6 @@ public class WhiteBirch_seed : Item
 {
     protected override void Init()
     {
-        _itemCode = (int)ItemPool.ItemList.SEED_WHITEBIRCH;
+        _itemCode = (int)ItemMaster.ItemList.SEED_WHITEBIRCH;
     }
 }
