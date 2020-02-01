@@ -24,9 +24,9 @@ public class TreeOak : Tree
 
         for (int i = 0; i < repeat; i++)
         {
-            if (Random.Range(0, 2) == 0)
+            if (Random.Range(0, 4) == 0)
             {
-                 tItem = Instantiate(ItemPool.Instance.GetItem(ItemPool.ItemList.LOG_OAK), transform.position, Quaternion.identity);
+                 tItem = Instantiate(ItemPool.Instance.GetItem(ItemPool.ItemList.SEED_OAK), transform.position, Quaternion.identity);
             }
             else tItem = Instantiate(ItemPool.Instance.GetItem(ItemPool.ItemList.LOG_OAK), transform.position, Quaternion.identity);
 

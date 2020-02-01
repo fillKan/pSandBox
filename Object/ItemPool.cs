@@ -9,7 +9,9 @@ public class ItemPool : Singleton<ItemPool>
     public enum ItemList
     {
         LOG_WHITEBIRCH,
-        LOG_OAK
+        LOG_OAK,
+        SEED_WHITEBIRCH,
+        SEED_OAK
     };
 
     public void AddItem(Item item)
