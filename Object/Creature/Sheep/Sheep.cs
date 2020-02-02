@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sheep : MonoBehaviour
+public class Sheep : MonoBehaviour, Interaction
 {
     public float fMaxSpeed;
     public Sprite sheepSprite;
     public Sprite woolySprite;
 
-    private RECT rect;
     private float fTimer = 0;
     private SpriteRenderer sprite;
 
@@ -27,7 +26,9 @@ public class Sheep : MonoBehaviour
     private void OnEnable()
     {
         sprite = GetComponent<SpriteRenderer>();
-        rect.SetRect(1, -1, 0.75f, -0.75f);
+
+        RegisterInteraction();
+
         StartCoroutine(CR_update());
     }
 
@@ -39,21 +40,6 @@ public class Sheep : MonoBehaviour
         while (gameObject.activeSelf)
         {
             fTimer += Time.deltaTime;
-
-            if (PlayerGetter.Instance.GetPos().x - transform.position.x <= rect.right
-            && PlayerGetter.Instance.GetPos().x - transform.position.x >= rect.left
-            && PlayerGetter.Instance.GetPos().y - transform.position.y <= rect.top
-            && PlayerGetter.Instance.GetPos().y - transform.position.y >= rect.bottom)
-            {
-                if (Input.GetKeyDown(KeyCode.Space) && sprite.sprite == woolySprite)
-                {
-                    for(int i = 0; i < 5; i++)
-                    {
-                        Instantiate(ItemMaster.Instance.GetItem(ItemMaster.ItemList.WOOL), transform.position, Quaternion.identity);
-                    }
-                    sprite.sprite = sheepSprite;
-                }
-            }
 
             // 1.5초 이상의 시간이 지나면,
             if (fTimer >= fCoolTime)
@@ -151,5 +137,19 @@ public class Sheep : MonoBehaviour
 
         // 움직임이 끝났고, 스케일이 복구되었다면 종료!
         yield break;
+    }
+
+    public void OperateAction()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            Instantiate(ItemMaster.Instance.GetItem(ItemMaster.ItemList.WOOL), transform.position, Quaternion.identity);
+        }
+        sprite.sprite = sheepSprite;
+    }
+
+    public void RegisterInteraction()
+    {
+        PlayerGetter.Instance.AddInteractObj(this);
     }
 }

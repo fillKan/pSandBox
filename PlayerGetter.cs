@@ -21,4 +21,9 @@ public class PlayerGetter : Singleton<PlayerGetter>
         return player.transform.position;
     }
 
+    public void AddInteractObj(Interaction interaction)
+    {
+        player.AddInteractObj(interaction);
+    }
+
 }
