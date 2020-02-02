@@ -3,10 +3,10 @@ guid: 76d3079e62f05344d92ed1784c76e1cb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3053566679240924513
+      213: 3184159518366690391
     second: sheep
   - first:
-      213: -3574166498816875438
+      213: -94349284460663922
     second: wooly_sheep
   externalObjects: {}
   serializedVersion: 10
@@ -107,19 +107,19 @@ TextureImporter:
       name: sheep
       rect:
         serializedVersion: 2
-        x: 19
+        x: 1
         y: 0
-        width: 265
-        height: 220
+        width: 266
+        height: 214
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ac28af0519189242933869088b1ccb6
-      internalID: 3053566679240924513
+      spriteID: e36b852734213e145a9c6ba6261200df
+      internalID: 3184159518366690391
       vertices: []
       indices: 
       edges: []
@@ -128,19 +128,19 @@ TextureImporter:
       name: wooly_sheep
       rect:
         serializedVersion: 2
-        x: 296
+        x: 278
         y: 0
-        width: 265
-        height: 220
+        width: 266
+        height: 214
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ffa1f1d4ad833d44866c9f5a1c0e89a
-      internalID: -3574166498816875438
+      spriteID: 436282901abca3b40ba98257c3dd76c9
+      internalID: -94349284460663922
       vertices: []
       indices: 
       edges: []

@@ -11,7 +11,8 @@ public class ItemMaster : Singleton<ItemMaster>
         LOG_WHITEBIRCH,
         LOG_OAK,
         SEED_WHITEBIRCH,
-        SEED_OAK
+        SEED_OAK,
+        WOOL
     };
 
     public void Registration(Item item)
