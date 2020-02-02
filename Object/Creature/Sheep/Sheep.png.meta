@@ -109,7 +109,7 @@ TextureImporter:
         serializedVersion: 2
         x: 1
         y: 0
-        width: 266
+        width: 280
         height: 214
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -128,9 +128,9 @@ TextureImporter:
       name: wooly_sheep
       rect:
         serializedVersion: 2
-        x: 278
+        x: 310
         y: 0
-        width: 266
+        width: 280
         height: 214
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
