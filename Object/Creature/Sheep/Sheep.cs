@@ -150,6 +150,6 @@ public class Sheep : MonoBehaviour, Interaction
 
     public void RegisterInteraction()
     {
-        PlayerGetter.Instance.AddInteractObj(this);
+        PlayerGetter.Instance.AddInteractObj(gameObject.GetInstanceID(), this);
     }
 }
