@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 190874585}
   - component: {fileID: 190874583}
   - component: {fileID: 190874584}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sheep
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -56,44 +56,36 @@ public class Player : MonoBehaviour
             #region 상호작용
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                // 충돌한 collider를 모두 담을 RaycastHit2D배열.
-                // collider를 모두 담는 이유는, collider를 가진 오브젝트들 모두가
-                // *상호작용* 인터페이스를 보유하지는 않기 때문.
-                RaycastHit2D[] hits;
+                // 광선투사를 통한 충돌 정보를 담는 변수. 
+                RaycastHit2D hit2D;
 
                 // 바라보고 있는 방향은 스프라이트의 flip값을 통해 확인.
                 if (sprite.flipX)
                 {
-                    // *광선투사*
-                    // 왼쪽 방향으로 0.75의 거리안에 위치한 모든 collider를 담는다~
-                    hits = Physics2D.RaycastAll(transform.position, Vector2.left, 0.75f);
-                    
-                    // 광선 투사를 통해 감지한 collider의 숫자만큼 반복.
-                    for (int i = 0; i < hits.Length; i++)
-                    {
-                        // 만약 광선투사를 통해 감지한 오브젝트가 상호작용 오브젝트라면?
-                        if (InteractObj.ContainsKey(hits[i].collider.gameObject.GetInstanceID()))
-                        {
-                            // 상호작용 실행!
-                            InteractObj[hits[i].collider.gameObject.GetInstanceID()].OperateAction();
+                    // 특정 layer하고만 충돌한다! 레이어 마스크 설정!
+                    // 이걸 시프트 연산을 하는 이유는..
+                    // raycast함수에서는 비트마스크를 사용해 각각의 비트에서 각 레이어를 무시할지의 여부를 판정시키기 때문임.
+                    int layerMask = 1 << LayerMask.NameToLayer("Player Interaction");
 
-                            break;
-                        }
+                    // Player Interaction 레이어 하고만 충돌하는 광선을 투사!
+                    hit2D = Physics2D.Raycast(transform.position, Vector2.left, 0.75f, layerMask);
+
+                    if (hit2D)
+                    {
+                        // 닿았나? 그렇다면 상호작용 실행!
+                        InteractObj[hit2D.collider.gameObject.GetInstanceID()].OperateAction();
                     }
                 }
                 // 이하 동문
                 else
                 {
-                    hits = Physics2D.RaycastAll(transform.position, Vector2.right, 0.75f);
+                    int layerMask = 1 << LayerMask.NameToLayer("Player Interaction");
 
-                    for (int i = 0; i < hits.Length; i++)
+                    hit2D = Physics2D.Raycast(transform.position, Vector2.right, 0.75f, layerMask);
+
+                    if(hit2D)
                     {
-                        if (InteractObj.ContainsKey(hits[i].collider.gameObject.GetInstanceID()))
-                        {
-                            InteractObj[hits[i].collider.gameObject.GetInstanceID()].OperateAction();
-
-                            break;
-                        }
+                        InteractObj[hit2D.collider.gameObject.GetInstanceID()].OperateAction();
                     }
                 }
                 yield return StartCoroutine(CR_Vibration(0.1f, 0.3f));
