@@ -8,7 +8,10 @@ public class Sheep : MonoBehaviour, Interaction
     public Sprite sheepSprite;
     public Sprite woolySprite;
 
-    private float fTimer = 0;
+    private float fMovementTimer = 0;
+    private float         fTimer = 0;
+
+    private bool isMovement = false;
     private SpriteRenderer sprite;
 
     #region 변수 설명 :
@@ -17,7 +20,7 @@ public class Sheep : MonoBehaviour, Interaction
      * sheepSprite : 털이 깎인 상태의 스프라이트를 저정하는 변수
      * woolySprite : 털이 있는 상태의 스프라이트를 저장하는 변수
      * rect        : 플레이어와의 상호작용 범위 렉트
-     * fTimer      : 초 단위의 시간을 저장하는 변수. 
+     * fMovementTimer      : 초 단위의 시간을 저장하는 변수. 
      * sprite      : 양의 스프라이트를 담는 변수.
      * 
      */
@@ -39,19 +42,32 @@ public class Sheep : MonoBehaviour, Interaction
 
         while (gameObject.activeSelf)
         {
-            fTimer += Time.deltaTime;
+            fMovementTimer += Time.deltaTime;
+
+            if(sprite.sprite.Equals(sheepSprite))
+            {
+                fTimer += Time.deltaTime;
+                Debug.Log(fTimer);
+
+                if (fTimer >= 10)
+                {
+                    fTimer = 0;
+                    sprite.sprite = woolySprite;
+                }
+            }
 
             // 1.5초 이상의 시간이 지나면,
-            if (fTimer >= fCoolTime)
+            if (fMovementTimer >= fCoolTime && !isMovement)
             {
                 // 시간을 0으로 초기화
-                fTimer = 0;
+                fMovementTimer = 0;
 
                 // 2/3의 확률로 움직인다!
                 if (Random.Range(0, 3) != 2)
                 {
-                    // 움직임 코루틴 실행 (실행이 종료될 떄까지 대기)
-                    yield return StartCoroutine(CR_movement());
+                    isMovement = true;
+                    // 움직임 코루틴 실행
+                    StartCoroutine(CR_movement());
                 }
             }
             yield return new WaitForFixedUpdate();
@@ -67,8 +83,11 @@ public class Sheep : MonoBehaviour, Interaction
         // vTarget은 현재 위치를 기준으로 랜덤한 지점을 지정한다.(x축만)
 
         // vTarget가 지정한 곳이 지금의 위치라면, 해당 코루틴을 종료한다.
-        if (vTarget.x.Equals(transform.position.x)) yield break;
-
+        if (vTarget.x.Equals(transform.position.x))
+        {
+            isMovement = false;
+            yield break;
+        }
         // vRefVel은 움직임의 속도를 저장하며, 초기 속도는 0이다.
         // vScale은 움직임이 끝난뒤에 오브젝트의 크기를 저장한다.
 
@@ -135,13 +154,18 @@ public class Sheep : MonoBehaviour, Interaction
             yield return new WaitForFixedUpdate();
         }
 
+        isMovement = false;
         // 움직임이 끝났고, 스케일이 복구되었다면 종료!
         yield break;
     }
 
     public void OperateAction()
     {
-        for (int i = 0; i < 5; i++)
+        if (sprite.sprite.Equals(sheepSprite)) return;
+
+        int nCount = Random.Range(1, 4);
+
+        for (int i = 0; i < nCount; i++)
         {
             Instantiate(ItemMaster.Instance.GetItem(ItemMaster.ItemList.WOOL), transform.position, Quaternion.identity);
         }
