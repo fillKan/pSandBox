@@ -1118,11 +1118,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree_Oak
       objectReference: {fileID: 0}
-    - target: {fileID: 3727555888068603049, guid: 0a35f28349fdf674ea5ebd0d78052a46,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3727555888068603051, guid: 0a35f28349fdf674ea5ebd0d78052a46,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -2,36 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct RECT
-{
-    public float right;
-    public float left;
-    public float top;
-    public float bottom;
-
-    /// <summary>
-    /// 렉트의 크기를 설정하는 함수
-    /// </summary>
-    /// <param name="_value">
-    /// 순서대로 right, left, top, bottom
-    /// </param>
-    public void SetRect(params float[] _value)
-    {
-        this.right  = _value[0];
-        this.left   = _value[1];
-        this.top    = _value[2];
-        this.bottom = _value[3];
-    }
-}
 public abstract class Tree : MonoBehaviour
 {
     protected SpriteRenderer sprite;
-    protected RECT rect;
-    protected bool doingChopTree = false;
 
+    protected bool doingChopTree = false;
+    
     protected float fDurability;
 
-    private IEnumerator _update;
 
     #region 변수 설명 :
     /*
@@ -45,28 +23,6 @@ public abstract class Tree : MonoBehaviour
     private void Start()
     {
         InitTree();
-
-        _update = CR_update();
-        StartCoroutine(_update);
-    }
-
-    private IEnumerator CR_update()
-    {
-        while(gameObject.activeSelf)
-        {
-            if(PlayerGetter.Instance.GetPos().x - transform.position.x <= rect.right
-            && PlayerGetter.Instance.GetPos().x - transform.position.x >= rect.left
-            && PlayerGetter.Instance.GetPos().y - transform.position.y <= rect.top
-            && PlayerGetter.Instance.GetPos().y - transform.position.y >= rect.bottom)
-            {
-                if (Input.GetKeyDown(KeyCode.Space) && !doingChopTree)
-                {
-                    yield return StartCoroutine(CR_chopTree());
-                }
-            }
-            yield return new WaitForFixedUpdate();
-        }
-        yield break;
     }
 
     protected virtual IEnumerator CR_chopTree()
@@ -103,8 +59,6 @@ public abstract class Tree : MonoBehaviour
         // 실행시킨 코루틴이 종료되면 오브젝트를 비활성화한 뒤 코루틴을 종료시킨다. 
         if (fDurability <= 0)
         {
-            StopCoroutine(_update);
-
             yield return StartCoroutine(CR_chopDownTree());
 
             gameObject.SetActive(false);

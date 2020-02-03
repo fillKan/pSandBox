@@ -2,9 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeOak : Tree
+public class TreeOak : Tree, Interaction
 {
     private Stack<Item> dropItems = new Stack<Item>();
+
+    public void OperateAction()
+    {
+        if(!doingChopTree)
+        {
+            StartCoroutine(CR_chopTree());
+        }
+    }
+
+    public void RegisterInteraction()
+    {
+        PlayerGetter.Instance.AddInteractObj(gameObject.GetInstanceID(), this);
+    }
 
     protected override void DropItem()
     {
@@ -22,6 +35,8 @@ public class TreeOak : Tree
         int repeat = Random.Range(8, 14);
         Item tItem;
 
+        RegisterInteraction();
+
         for (int i = 0; i < repeat; i++)
         {
             if (Random.Range(0, 4) == 0)
@@ -37,6 +52,5 @@ public class TreeOak : Tree
 
         sprite = gameObject.GetComponent<SpriteRenderer>();
 
-        rect.SetRect(1, -1, -2, -5);
     }
 }
