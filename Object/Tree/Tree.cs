@@ -53,8 +53,6 @@ public abstract class Tree : MonoBehaviour
         // 위치를 다시 처음 위치로
         transform.position = vInitPos;
 
-        doingChopTree = false;
-
         // 나무의 내구도가 0 이하라면, 나무를 쓰러뜨리는 코루틴을 실행시키고,
         // 실행시킨 코루틴이 종료되면 오브젝트를 비활성화한 뒤 코루틴을 종료시킨다. 
         if (fDurability <= 0)
@@ -65,7 +63,8 @@ public abstract class Tree : MonoBehaviour
 
             yield break;
         }
-        
+        doingChopTree = false;
+
         yield break;
     }
 
