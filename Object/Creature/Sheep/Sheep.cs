@@ -9,19 +9,20 @@ public class Sheep : MonoBehaviour, Interaction
     public Sprite woolySprite;
 
     private float fMovementTimer = 0;
-    private float fTimer = 0;
+    private float         fTimer = 0;
 
     private bool isMovement = false;
     private SpriteRenderer sprite;
 
     #region 변수 설명 :
     /*
-     * fMaxSpeed   : 양의 최대 속도를 지정하는 변수.
-     * sheepSprite : 털이 깎인 상태의 스프라이트를 저정하는 변수
-     * woolySprite : 털이 있는 상태의 스프라이트를 저장하는 변수
-     * rect        : 플레이어와의 상호작용 범위 렉트
-     * fMovementTimer      : 초 단위의 시간을 저장하는 변수. 
-     * sprite      : 양의 스프라이트를 담는 변수.
+     * fMaxSpeed      : 양의 최대 속도를 지정하는 변수.
+     * sheepSprite    : 털이 깎인 상태의 스프라이트를 저정하는 변수
+     * woolySprite    : 털이 있는 상태의 스프라이트를 저장하는 변수
+     * rect           : 플레이어와의 상호작용 범위 렉트
+     * fMovementTimer : 초 단위의 시간을 저장하는 변수. 
+     * fTimer         : 초 단위의 털 재생시간을 담는 변수.
+     * sprite         : 양의 스프라이트를 담는 변수.
      * 
      */
     #endregion
@@ -47,7 +48,6 @@ public class Sheep : MonoBehaviour, Interaction
             if (sprite.sprite.Equals(sheepSprite))
             {
                 fTimer += Time.deltaTime;
-                Debug.Log(fTimer);
 
                 if (fTimer >= 10)
                 {
@@ -113,9 +113,9 @@ public class Sheep : MonoBehaviour, Interaction
             {
                 if (vRefVel.x < 0)
                 {
-                    transform.localScale += new Vector3(0, Time.deltaTime * -vRefVel.x * 0.7f, 0);
+                     transform.localScale += new Vector3(0, Time.deltaTime * -vRefVel.x * 0.7f, 0);
                 }
-                else transform.localScale += new Vector3(0, Time.deltaTime * vRefVel.x * 0.7f, 0);
+                else transform.localScale += new Vector3(0, Time.deltaTime *  vRefVel.x * 0.7f, 0);
 
                 // 스케일의 변화량은 움직이는 속도에 맞춘다.
                 // vRefVel.x의 값이 양수일 때 자연스럽기 떄문에 vRefVel.x이 양수인지 음수인지를 확인한다.
@@ -128,9 +128,9 @@ public class Sheep : MonoBehaviour, Interaction
             {
                 if (vRefVel.x < 0)
                 {
-                    transform.localScale -= new Vector3(0, Time.deltaTime * -vRefVel.x * 0.7f, 0);
+                     transform.localScale -= new Vector3(0, Time.deltaTime * -vRefVel.x * 0.7f, 0);
                 }
-                else transform.localScale -= new Vector3(0, Time.deltaTime * vRefVel.x * 0.7f, 0);
+                else transform.localScale -= new Vector3(0, Time.deltaTime *  vRefVel.x * 0.7f, 0);
 
                 // 스케일의 변화량은 움직이는 속도에 맞춘다.
                 // vRefVel.x의 값이 양수일 때 자연스럽기 떄문에 vRefVel.x이 양수인지 음수인지를 확인한다.
