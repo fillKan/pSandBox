@@ -5,14 +5,19 @@ using UnityEngine;
 public class Chicken : MonoBehaviour
 {
     public float fMaxSpeed;
+    public bool isHen;
 
-    private float fTimer = 0;
+    private float fMovementTimer = 0;
+    private float         fTimer = 0;
+
     private SpriteRenderer sprite;
+
+    private bool isMoving = false;
 
     #region 변수 설명 :
     /*
      * fMaxSpeed : 닭의 최대 속도를 지정하는 변수.
-     * fTimer    : 초 단위의 시간을 저장하는 변수. 
+     * fMovementTimer    : 초 단위의 시간을 저장하는 변수. 
      * sprite    : 닭의 스프라이트를 담는 변수.
      * 
      */
@@ -28,24 +33,40 @@ public class Chicken : MonoBehaviour
     private IEnumerator CR_update()
     {
         // fCoolTime은 다음 움직임까지 걸리는 시간을 저장한다.
-        float fCoolTime = Random.Range(0.2f, 1.6f);
+        float fMoveCoolTime = Random.Range(0.2f, 1.6f);
+        float fSpawnEggTime = Random.Range(50, 70);
 
         while(gameObject.activeSelf)
         {
-            fTimer += Time.deltaTime;
+            fMovementTimer += Time.deltaTime;
+
+            if(isHen)
+            {
+                fTimer += Time.deltaTime;
+
+                if (fTimer >= fSpawnEggTime)
+                {
+                    fTimer = 0;
+                    Instantiate(ItemMaster.Instance.GetItem(ItemMaster.ItemList.EGG), transform.position, Quaternion.identity);
+
+                    fSpawnEggTime = Random.Range(50, 70);
+                }
+            }
 
             // 1.5초 이상의 시간이 지나면,
-            if(fTimer >= fCoolTime)
+            if(fMovementTimer >= fMoveCoolTime && !isMoving)
             {
                 // 시간을 0으로 초기화
-                fTimer = 0;
+                fMovementTimer = 0;
 
                 // 2/3의 확률로 움직인다!
                 if(Random.Range(0,3) != 2)
                 {
                     // 움직임 코루틴 실행 (실행이 종료될 떄까지 대기)
-                    yield return StartCoroutine(CR_movement());
+                    isMoving = true;
+                    StartCoroutine(CR_movement());
                 }
+                fMoveCoolTime = Random.Range(0.2f, 1.6f);
             }
             yield return new WaitForFixedUpdate();
         }
@@ -60,8 +81,11 @@ public class Chicken : MonoBehaviour
         // vTarget은 현재 위치를 기준으로 랜덤한 지점을 지정한다.(x축만)
 
         // vTarget가 지정한 곳이 지금의 위치라면, 해당 코루틴을 종료한다.
-        if (vTarget.x.Equals(transform.position.x)) yield break;
-
+        if (vTarget.x.Equals(transform.position.x))
+        {
+            isMoving = false;
+            yield break;
+        }
         // vRefVel은 움직임의 속도를 저장하며, 초기 속도는 0이다.
         // vScale은 움직임이 끝난뒤에 오브젝트의 크기를 저장한다.
 
@@ -112,7 +136,6 @@ public class Chicken : MonoBehaviour
                 // 스케일이 일정수준에 도달한다면? 커지기로 한다.
                 if (transform.localScale.y <= 0.85f) growBiggerTurn = true;
             }
-
             yield return new WaitForFixedUpdate();
         }
 
@@ -129,6 +152,8 @@ public class Chicken : MonoBehaviour
         }
 
         // 움직임이 끝났고, 스케일이 복구되었다면 종료!
+        isMoving = false;
+
         yield break;
     }
 }
