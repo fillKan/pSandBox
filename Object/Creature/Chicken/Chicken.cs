@@ -68,7 +68,7 @@ public class Chicken : MonoBehaviour
                 }
                 fMoveCoolTime = Random.Range(0.2f, 1.6f);
             }
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
         yield break;
     }
@@ -136,7 +136,7 @@ public class Chicken : MonoBehaviour
                 // 스케일이 일정수준에 도달한다면? 커지기로 한다.
                 if (transform.localScale.y <= 0.85f) growBiggerTurn = true;
             }
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
 
         // 움직임이 끝났다면, 스케일 원상복구
@@ -148,7 +148,7 @@ public class Chicken : MonoBehaviour
             fTime += Time.deltaTime;
             transform.localScale = Vector3.Lerp(vScale, Vector3.one, fTime);
             
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
 
         // 움직임이 끝났고, 스케일이 복구되었다면 종료!

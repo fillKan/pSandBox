@@ -48,7 +48,7 @@ public abstract class Tree : MonoBehaviour
             fTime -= Time.deltaTime;
             
             transform.position = ((Vector2)Random.insideUnitSphere * 0.1f) + vInitPos;
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
         // 위치를 다시 처음 위치로
         transform.position = vInitPos;
@@ -78,7 +78,7 @@ public abstract class Tree : MonoBehaviour
             alpha -= 0.02f;
             sprite.color = new Color(1, 1, 1, alpha);
 
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
 
         yield break;

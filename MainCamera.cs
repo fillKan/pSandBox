@@ -14,7 +14,7 @@ public class MainCamera : MonoBehaviour
     {
         while(player.enabled)
         {
-            yield return new WaitForFixedUpdate();
+            yield return null;
 
             transform.position = Vector3.Lerp(transform.position, player.transform.position, 0.07f);
 

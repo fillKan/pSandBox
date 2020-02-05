@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
                 transform.position = vDir;
             }
 
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
 
         yield break;
@@ -118,7 +118,7 @@ public class Player : MonoBehaviour
 
             transform.position = ((Vector2)Random.insideUnitSphere * amount) + vInitPos;
 
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
         transform.position = vInitPos;
 

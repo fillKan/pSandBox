@@ -70,7 +70,7 @@ public class Sheep : MonoBehaviour, Interaction
                     StartCoroutine(CR_movement());
                 }
             }
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
         yield break;
     }
@@ -139,7 +139,7 @@ public class Sheep : MonoBehaviour, Interaction
                 if (transform.localScale.y <= 0.95f) growBiggerTurn = true;
             }
 
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
 
         // 움직임이 끝났다면, 스케일 원상복구
@@ -151,7 +151,7 @@ public class Sheep : MonoBehaviour, Interaction
             fTime += Time.deltaTime;
             transform.localScale = Vector3.Lerp(vScale, Vector3.one, fTime);
 
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
 
         isMovement = false;
