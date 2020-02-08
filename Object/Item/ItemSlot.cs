@@ -18,6 +18,11 @@ public class ItemSlot : MonoBehaviour
 
     public Text text;
 
+    private void OnEnable()
+    {
+        UpdateItemCount();
+    }
+
     public void AddItem(params Item[] items)
     {
         int i = 0;
