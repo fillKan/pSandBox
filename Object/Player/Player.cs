@@ -30,13 +30,17 @@ public class Player : MonoBehaviour
     private Vector2 vDir;
     private SpriteRenderer sprite;
 
-    private Dictionary<int, Interaction> InteractObj = new Dictionary<int, Interaction>();
+    private Dictionary<int, Interaction> _interactObj = new Dictionary<int, Interaction>();
+    public Dictionary<int, Interaction> InteractObj
+    {
+        get { return _interactObj; }
+    }
 
     public void AddInteractObj(int instanceID, Interaction interaction)
     {
-        if(!InteractObj.ContainsKey(instanceID))
+        if(!_interactObj.ContainsKey(instanceID))
         {
-            InteractObj.Add(instanceID, interaction);
+            _interactObj.Add(instanceID, interaction);
         }
     }
 
@@ -73,7 +77,7 @@ public class Player : MonoBehaviour
                     if (hit2D)
                     {
                         // 닿았나? 그렇다면 상호작용 실행!
-                        InteractObj[hit2D.collider.gameObject.GetInstanceID()].OperateAction();
+                        _interactObj[hit2D.collider.gameObject.GetInstanceID()].OperateAction();
                     }
                 }
                 // 이하 동문
@@ -85,7 +89,7 @@ public class Player : MonoBehaviour
 
                     if(hit2D)
                     {
-                        InteractObj[hit2D.collider.gameObject.GetInstanceID()].OperateAction();
+                        _interactObj[hit2D.collider.gameObject.GetInstanceID()].OperateAction();
                     }
                 }
                 yield return StartCoroutine(CR_Vibration(0.1f, 0.3f));

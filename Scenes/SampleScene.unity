@@ -266,6 +266,21 @@ PrefabInstance:
       propertyPath: prefab
       value: 
       objectReference: {fileID: 2114334455}
+    - target: {fileID: 8822178320297807049, guid: 7bad272acc573a24bb8e138ec07808cc,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822178320297807049, guid: 7bad272acc573a24bb8e138ec07808cc,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822178320297807049, guid: 7bad272acc573a24bb8e138ec07808cc,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bad272acc573a24bb8e138ec07808cc, type: 3}
 --- !u!1 &519420028
@@ -660,7 +675,7 @@ GameObject:
   - component: {fileID: 1347581791}
   - component: {fileID: 1347581792}
   m_Layer: 0
-  m_Name: SingletonObject
+  m_Name: MouseCursor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1374,21 +1389,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727555888068603048, guid: 0a35f28349fdf674ea5ebd0d78052a46,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727555888068603048, guid: 0a35f28349fdf674ea5ebd0d78052a46,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3727555888068603048, guid: 0a35f28349fdf674ea5ebd0d78052a46,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a35f28349fdf674ea5ebd0d78052a46, type: 3}

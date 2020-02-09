@@ -7,8 +7,7 @@ public class MouseCursor : Singleton<MouseCursor>
     private Vector2 vPrevPos;
     private Vector2 vCurrPos;
 
-    private bool castRay = false;
-
+    private SpriteRenderer targetSprite;
     public Camera MainCamera;
 
     private void Start()
@@ -31,8 +30,46 @@ public class MouseCursor : Singleton<MouseCursor>
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
+        if (PlayerGetter.Instance.GetInteractObj().ContainsKey(other.gameObject.GetInstanceID()))
+        {
+            SpriteRenderer spr = other.GetComponent<SpriteRenderer>();
 
+            if(spr.Equals(targetSprite)) return;
+
+            EnterObject(spr);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (targetSprite == null) return;
+
+        if (other.gameObject.Equals(targetSprite.gameObject))
+        {
+            ExitObject();
+        }
+    }
+
+    private void EnterObject(SpriteRenderer enterSpr)
+    {
+        if (targetSprite == null) targetSprite = enterSpr;
+
+        else if(enterSpr.sortingLayerID <= targetSprite.sortingLayerID)
+        {
+            targetSprite.color = Color.white;
+
+            targetSprite = enterSpr;
+        }
+        Debug.Log(targetSprite.sortingLayerID);
+
+        targetSprite.color = new Color(0.9f, 1, 0.5f);
+    }
+
+    private void ExitObject()
+    {
+        targetSprite.color = Color.white;
+
+        targetSprite = null;
     }
 }
