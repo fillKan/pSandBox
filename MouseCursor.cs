@@ -7,6 +7,8 @@ public class MouseCursor : Singleton<MouseCursor>
     private Vector2 vPrevPos;
     private Vector2 vCurrPos;
 
+    private bool castRay = false;
+
     public Camera MainCamera;
 
     private void Start()
@@ -16,30 +18,21 @@ public class MouseCursor : Singleton<MouseCursor>
 
     private IEnumerator CR_update()
     {
-        int layer = 1 << LayerMask.NameToLayer("Player Interaction");
-
-        vPrevPos.x = (long)(Input.mousePosition.x);
-        vPrevPos.y = (long)(Input.mousePosition.y);
-        vCurrPos = vPrevPos;
+        vCurrPos = Input.mousePosition;
+        vPrevPos = vCurrPos;
 
         while(true)
         {
-            vCurrPos.x = (long)(Input.mousePosition.x);
-            vCurrPos.y = (long)(Input.mousePosition.y);
+            vCurrPos = Input.mousePosition;
 
-            if (vCurrPos != vPrevPos)
-            {
-                vPrevPos = vCurrPos;
-                Vector2 vRayPos = MainCamera.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = MainCamera.ScreenToWorldPoint(Input.mousePosition);
 
-                RaycastHit2D hit2D = Physics2D.Raycast(vRayPos, Vector2.zero, 10, layer);
-
-                if (hit2D)
-                {
-                    Debug.Log(hit2D.point);
-                }
-            }
             yield return null;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+
     }
 }
