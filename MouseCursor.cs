@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class MouseCursor : Singleton<MouseCursor>
 {
-    private Vector2 vPrevPos;
-    private Vector2 vCurrPos;
-
     private SpriteRenderer targetSprite;
     public Camera MainCamera;
 
@@ -17,9 +14,6 @@ public class MouseCursor : Singleton<MouseCursor>
 
     private IEnumerator CR_update()
     {
-        vCurrPos = Input.mousePosition;
-        vPrevPos = vCurrPos;
-
         while(true)
         {
             if (Input.GetMouseButtonDown(0))
@@ -29,9 +23,6 @@ public class MouseCursor : Singleton<MouseCursor>
                     PlayerGetter.Instance.InteractCommend(targetSprite.gameObject.GetInstanceID());
                 }
             }
-
-            vCurrPos = Input.mousePosition;
-
             transform.position = MainCamera.ScreenToWorldPoint(Input.mousePosition);
 
             yield return null;
