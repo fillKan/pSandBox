@@ -31,4 +31,9 @@ public class PlayerGetter : Singleton<PlayerGetter>
         return player.InteractObj;
     }
 
+    public void InteractCommend(int xInstanceID)
+    {
+        player.InteractCommend(xInstanceID);
+    }
+
 }

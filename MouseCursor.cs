@@ -22,6 +22,14 @@ public class MouseCursor : Singleton<MouseCursor>
 
         while(true)
         {
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (targetSprite != null)
+                {
+                    PlayerGetter.Instance.InteractCommend(targetSprite.gameObject.GetInstanceID());
+                }
+            }
+
             vCurrPos = Input.mousePosition;
 
             transform.position = MainCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -61,7 +69,7 @@ public class MouseCursor : Singleton<MouseCursor>
 
             targetSprite = enterSpr;
         }
-        Debug.Log(targetSprite.sortingLayerID);
+        if (enterSpr != targetSprite) return;
 
         targetSprite.color = new Color(0.9f, 1, 0.5f);
     }

@@ -158,6 +158,10 @@ public class Sheep : MonoBehaviour, Interaction
         // 움직임이 끝났고, 스케일이 복구되었다면 종료!
         yield break;
     }
+    public GameObject InteractObject()
+    {
+        return gameObject;
+    }
 
     public void OperateAction()
     {

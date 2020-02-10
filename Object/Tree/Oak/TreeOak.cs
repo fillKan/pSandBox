@@ -6,6 +6,11 @@ public class TreeOak : Tree, Interaction
 {
     private Stack<Item> dropItems = new Stack<Item>();
 
+    public GameObject InteractObject()
+    {
+        return gameObject;
+    }
+
     public void OperateAction()
     {
         if(!doingChopTree)
