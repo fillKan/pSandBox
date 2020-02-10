@@ -67,6 +67,13 @@ public class Player : MonoBehaviour
     {
         if(_interactObj.ContainsKey(instanceID))
         {
+            if(moveInteractionPoint != null)
+            {
+                StopCoroutine(moveInteractionPoint);
+
+                moveInteractionPoint = null;
+            }
+
             moveInteractionPoint = CR_moveInteractionPoint(instanceID);
 
             StartCoroutine(moveInteractionPoint);
