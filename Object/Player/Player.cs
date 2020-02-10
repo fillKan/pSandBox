@@ -210,7 +210,7 @@ public class Player : MonoBehaviour
         }
 
         // 만약 이동 대상의 x좌표가 더 작다면?
-        else
+        else if (posX < transform.position.x - 0.75f)
         {
             // 스프라이트 전환
             sprite.flipX = true;
