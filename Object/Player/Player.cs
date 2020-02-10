@@ -93,45 +93,6 @@ public class Player : MonoBehaviour
     {
         while (gameObject.activeSelf)
         {
-            #region 상호작용
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                // 광선투사를 통한 충돌 정보를 담는 변수. 
-                RaycastHit2D hit2D;
-
-                // 바라보고 있는 방향은 스프라이트의 flip값을 통해 확인.
-                if (sprite.flipX)
-                {
-                    // 특정 layer하고만 충돌한다! 레이어 마스크 설정!
-                    // 이걸 시프트 연산을 하는 이유는..
-                    // raycast함수에서는 비트마스크를 사용해 각각의 비트에서 각 레이어를 무시할지의 여부를 판정시키기 때문임.
-                    int layerMask = 1 << LayerMask.NameToLayer("Player Interaction");
-
-                    // Player Interaction 레이어 하고만 충돌하는 광선을 투사!
-                    hit2D = Physics2D.Raycast(transform.position, Vector2.left, 0.75f, layerMask);
-
-                    if (hit2D)
-                    {
-                        // 닿았나? 그렇다면 상호작용 실행!
-                        _interactObj[hit2D.collider.gameObject.GetInstanceID()].OperateAction();
-                    }
-                }
-                // 이하 동문
-                else
-                {
-                    int layerMask = 1 << LayerMask.NameToLayer("Player Interaction");
-
-                    hit2D = Physics2D.Raycast(transform.position, Vector2.right, 0.75f, layerMask);
-
-                    if(hit2D)
-                    {
-                        _interactObj[hit2D.collider.gameObject.GetInstanceID()].OperateAction();
-                    }
-                }
-                yield return StartCoroutine(CR_Vibration(0.1f, 0.3f));
-            }
-            #endregion
-
             // 이동 방향은 현재 플레이어의 위치로 계속해서 초기화한다.
             vDir = transform.position;
 
@@ -167,7 +128,6 @@ public class Player : MonoBehaviour
     /// </param>
     private IEnumerator CR_moveInteractionPoint(int interactObj)
     {
-        float posX = _interactObj[interactObj].InteractObject().transform.position.x;
         float moveAmount = 0;
         #region 변수 설명 :
         /*
@@ -177,13 +137,13 @@ public class Player : MonoBehaviour
         #endregion
 
         // 만약 이동 대상의 x좌표가 더 크다면?
-        if (posX > transform.position.x + 0.75f)
+        if (_interactObj[interactObj].InteractObject().transform.position.x > transform.position.x + 0.75f)
         {
             // 스프라이트 전환
             sprite.flipX = false;
 
             // 서로의 x축이 0.75정도 차이날 때 까지 이동한다.
-            while (posX > transform.position.x + 0.75f)
+            while (_interactObj[interactObj].InteractObject().transform.position.x > transform.position.x + 0.75f)
             {
                 // moveAmount는 서서히 증가한다.
                 if (moveAmount < 1) moveAmount += 0.06f;
@@ -210,13 +170,13 @@ public class Player : MonoBehaviour
         }
 
         // 만약 이동 대상의 x좌표가 더 작다면?
-        else if (posX < transform.position.x - 0.75f)
+        else if (_interactObj[interactObj].InteractObject().transform.position.x < transform.position.x - 0.75f)
         {
             // 스프라이트 전환
             sprite.flipX = true;
 
             // 상호작용 대상과의 x좌표가 0.75차이날 때 까지 이동한다.
-            while (posX < transform.position.x - 0.75f)
+            while (_interactObj[interactObj].InteractObject().transform.position.x < transform.position.x - 0.75f)
             {
                 // 서서히 가속...
                 if (moveAmount > -1) moveAmount -= 0.06f;
