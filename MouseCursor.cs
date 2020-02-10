@@ -43,7 +43,6 @@ public class MouseCursor : Singleton<MouseCursor>
         if (PlayerGetter.Instance.GetInteractObj().ContainsKey(other.gameObject.GetInstanceID()))
         {
             SpriteRenderer spr = other.GetComponent<SpriteRenderer>();
-
             if(spr.Equals(targetSprite)) return;
 
             EnterObject(spr);
@@ -63,7 +62,7 @@ public class MouseCursor : Singleton<MouseCursor>
     {
         if (targetSprite == null) targetSprite = enterSpr;
 
-        else if(enterSpr.sortingLayerID <= targetSprite.sortingLayerID)
+        else if(SortingLayer.GetLayerValueFromID(enterSpr.sortingLayerID) >= SortingLayer.GetLayerValueFromID(targetSprite.sortingLayerID))
         {
             targetSprite.color = Color.white;
 
