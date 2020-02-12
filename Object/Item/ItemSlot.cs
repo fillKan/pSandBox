@@ -25,6 +25,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
 
     private void OnEnable()
     {
+        RegisterAction();
         UpdateItemCount();
     }
 
@@ -74,7 +75,11 @@ public class ItemSlot : MonoBehaviour, MouseAction
 
     public void OperateAction()
     {
-        
+        if(MouseCursor.Instance.CarryItem == null || MouseCursor.Instance.CarryItem.itemCode == ContainItem.itemCode)
+        {
+            MouseCursor.Instance.AddCarryItem(_itemContainer.Pop());
+            UpdateItemCount();
+        }
     }
 
     public void RegisterAction()

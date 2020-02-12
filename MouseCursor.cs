@@ -5,8 +5,16 @@ using UnityEngine;
 public class MouseCursor : Singleton<MouseCursor>
 {
     private SpriteRenderer targetSprite;
-    private Stack<Item> _carryItems;
+    private Stack<Item> _carryItems = new Stack<Item>();
+    private ItemSlot SelectSlot;
     public Stack<Item> CarryItems { get { return _carryItems; } }
+    public Item CarryItem {
+        get 
+        {
+            if (_carryItems.Count == 0) return null;
+            return _carryItems.Peek(); 
+        } 
+    }
     public Camera MainCamera;
 
     public void AddCarryItem(Item item)
@@ -33,6 +41,17 @@ public class MouseCursor : Singleton<MouseCursor>
         {
             if (Input.GetMouseButtonDown(0))
             {
+                if(SelectSlot != null)
+                {
+                    SelectSlot.OperateAction();
+                }
+                else if(CarryItem != null)
+                {
+                    _carryItems.Peek().transform.position = (Vector2)transform.position;
+                    _carryItems.Peek().gameObject.SetActive(true);
+                    _carryItems.Pop();
+                }
+
                 if (targetSprite != null)
                 {
                     PlayerGetter.Instance.InteractCommend(targetSprite.gameObject.GetInstanceID());
@@ -43,7 +62,16 @@ public class MouseCursor : Singleton<MouseCursor>
             yield return null;
         }
     }
-
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.TryGetComponent<ItemSlot>(out ItemSlot slot))
+        {
+            if (MouseRepeater.Instance.ActionObj.ContainsKey(slot.gameObject.GetInstanceID()))
+            {
+                SelectSlot = slot;
+            }
+        }
+    }
     private void OnTriggerStay2D(Collider2D other)
     {
         if (PlayerGetter.Instance.GetInteractObj().ContainsKey(other.gameObject.GetInstanceID()))
@@ -56,6 +84,11 @@ public class MouseCursor : Singleton<MouseCursor>
     }
     private void OnTriggerExit2D(Collider2D other)
     {
+        if(other.TryGetComponent<ItemSlot>(out ItemSlot slot))
+        {
+            if (SelectSlot.Equals(slot)) SelectSlot = null;
+        }
+
         if (targetSprite == null) return;
 
         if (other.gameObject.Equals(targetSprite.gameObject))
