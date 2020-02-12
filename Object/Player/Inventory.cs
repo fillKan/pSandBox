@@ -12,6 +12,11 @@ public class Inventory : MonoBehaviour
 
         for(int i = 0; i < itemSlots.Length; i++)
         {
+            if (itemSlots[i].ContainItem == null)
+            {
+                continue;
+            }
+
             if(itemSlots[i].ContainItem.itemCode == item.itemCode)
             {
                 itemSlots[i].AddItem(item);
