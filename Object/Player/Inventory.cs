@@ -12,16 +12,18 @@ public class Inventory : MonoBehaviour
 
         for(int i = 0; i < itemSlots.Length; i++)
         {
-            if(itemSlots[i].ContainItem == null)
+            if(itemSlots[i].ContainItem.itemCode == item.itemCode)
             {
                 itemSlots[i].AddItem(item);
-                break;
+                return;
             }
-
-            else if(itemSlots[i].ContainItem.itemCode == item.itemCode)
+        }
+        for (int i = 0; i < itemSlots.Length; i++)
+        {
+            if (itemSlots[i].ContainItem == null)
             {
                 itemSlots[i].AddItem(item);
-                break;
+                return;
             }
         }
     }
