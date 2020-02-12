@@ -5,7 +5,22 @@ using UnityEngine;
 public class MouseCursor : Singleton<MouseCursor>
 {
     private SpriteRenderer targetSprite;
+    private Stack<Item> _carryItems;
+    public Stack<Item> CarryItems { get { return _carryItems; } }
     public Camera MainCamera;
+
+    public void AddCarryItem(Item item)
+    {
+        if(_carryItems.Count == 0)
+        {
+            _carryItems.Push(item);
+            return;
+        }
+        if(_carryItems.Peek().itemCode == item.itemCode)
+        {
+            _carryItems.Push(item);
+        }
+    }
 
     private void Start()
     {
