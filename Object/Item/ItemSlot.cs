@@ -13,7 +13,12 @@ public class ItemSlot : MonoBehaviour
     }
     public Item ContainItem
     {
-        get { return _itemContainer.Peek(); }
+        get 
+        {
+            if (_itemContainer.Count == 0) return null;
+
+            return _itemContainer.Peek(); 
+        }
     }
 
     public Text text;
@@ -21,6 +26,11 @@ public class ItemSlot : MonoBehaviour
     private void OnEnable()
     {
         UpdateItemCount();
+    }
+
+    public void GetContainItem()
+    {
+
     }
 
     public void AddItem(params Item[] items)
@@ -34,7 +44,7 @@ public class ItemSlot : MonoBehaviour
 
         for (; i < items.Length; i++)
         {
-            if (_itemContainer.Peek() == items[i])
+            if (_itemContainer.Peek().itemCode == items[i].itemCode)
             {
                 _itemContainer.Push(items[i]);
             }
@@ -50,7 +60,7 @@ public class ItemSlot : MonoBehaviour
             _itemContainer.Push(item);
         }
 
-        else if (item == _itemContainer.Peek())
+        else if (item.itemCode == _itemContainer.Peek().itemCode)
         {
             _itemContainer.Push(item);          
         }

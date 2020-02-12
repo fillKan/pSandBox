@@ -11,6 +11,11 @@ public class PlayerGetter : Singleton<PlayerGetter>
         get { return _player; }
     }
 
+    public Inventory Inventory
+    {
+        get { return _player.Inventory; }
+    }
+
     private void Awake()
     {
         _player = FindObjectOfType(typeof(Player)) as Player;

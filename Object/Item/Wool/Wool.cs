@@ -11,7 +11,7 @@ public class Wool : Item, Interaction
 
     public void OperateAction()
     {
-        gameObject.SetActive(false);
+        PlayerGetter.Instance.Inventory.AddItemInventory(this);
     }
 
     public void RegisterInteraction()

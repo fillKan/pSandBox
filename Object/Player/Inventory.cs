@@ -4,13 +4,27 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    private Item[] _itemSlot;
-    public Item[] ItemSlot
+    public ItemSlot[] itemSlots;
+
+    public void AddItemInventory(Item item)
     {
-        get { return _itemSlot; }
+        item.gameObject.SetActive(false);
+
+        for(int i = 0; i < itemSlots.Length; i++)
+        {
+            if(itemSlots[i].ContainItem == null)
+            {
+                itemSlots[i].AddItem(item);
+                break;
+            }
+
+            else if(itemSlots[i].ContainItem.itemCode == item.itemCode)
+            {
+                itemSlots[i].AddItem(item);
+                break;
+            }
+        }
     }
-
-
 
 
 

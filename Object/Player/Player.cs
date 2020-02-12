@@ -35,6 +35,8 @@ public interface Interaction
 
 public class Player : MonoBehaviour
 {
+    public Inventory Inventory;
+
     private Vector2 vDir;
     private SpriteRenderer sprite;
 
