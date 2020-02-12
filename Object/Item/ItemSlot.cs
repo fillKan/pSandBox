@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemSlot : MonoBehaviour
+public class ItemSlot : MonoBehaviour, MouseAction
 {
     private Stack<Item> _itemContainer = new Stack<Item>();
     
@@ -70,5 +70,20 @@ public class ItemSlot : MonoBehaviour
     public void UpdateItemCount()
     {
         text.text = ItemCount.ToString();
+    }
+
+    public void OperateAction()
+    {
+        
+    }
+
+    public void RegisterAction()
+    {
+        MouseRepeater.Instance.AddActionObj(gameObject.GetInstanceID(), this);
+    }
+
+    public GameObject ActionObject()
+    {
+        return gameObject;
     }
 }
