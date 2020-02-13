@@ -81,14 +81,14 @@ public class ItemSlot : MonoBehaviour, MouseAction
         {
             if(ContainItem == null)
             {
-                MouseCursor.Instance.DelCarryItem();
                 _itemContainer.Push(MouseCursor.Instance.CarryItem);
+                MouseCursor.Instance.DelCarryItem();
                 UpdateItemCount();
             }
             else if(MouseCursor.Instance.CarryItem.itemCode == ContainItem.itemCode)
             {
-                MouseCursor.Instance.DelCarryItem();
                 _itemContainer.Push(MouseCursor.Instance.CarryItem);
+                MouseCursor.Instance.DelCarryItem();
                 UpdateItemCount();
             }
         }

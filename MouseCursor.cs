@@ -43,9 +43,8 @@ public class MouseCursor : Singleton<MouseCursor>
         if(_carryItems.Count == 0)
         {
             _carryItems.Push(item);
-            return;
         }
-        if(_carryItems.Peek().itemCode == item.itemCode)
+        else if(_carryItems.Peek().itemCode == item.itemCode)
         {
             _carryItems.Push(item);
         }
