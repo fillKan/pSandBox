@@ -26,14 +26,13 @@ public class ItemSlot : MonoBehaviour, MouseAction
     private void OnEnable()
     {
         RegisterAction();
+
         UpdateItemCount();
     }
 
-    public void GetContainItem()
-    {
-
-    }
-
+    /***************************************
+           ItemSlot를 관리하는 함수들
+    ****************************************/
     public void AddItem(params Item[] items)
     {
         int i = 0;
@@ -53,7 +52,6 @@ public class ItemSlot : MonoBehaviour, MouseAction
         }
         UpdateItemCount();
     }
-
     public void AddItem(Item item)
     {
         if (_itemContainer.Count == 0)
@@ -73,6 +71,10 @@ public class ItemSlot : MonoBehaviour, MouseAction
         text.text = ItemCount.ToString();
     }
 
+
+    /******************************************
+            MouseAction 인터페이스 함수들
+     ******************************************/
     public void OperateAction()
     {
         if(MouseCursor.Instance.CarryItem == null || MouseCursor.Instance.CarryItem.itemCode == ContainItem.itemCode)
