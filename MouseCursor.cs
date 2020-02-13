@@ -8,7 +8,11 @@ public class MouseCursor : Singleton<MouseCursor>
 
     private SpriteRenderer targetSprite;
 
-    private ItemSlot SelectSlot;
+    public  ItemSlot  SelectSlot
+    {
+        get { return _selectSlot; }
+    }
+    private ItemSlot _selectSlot;
     public  Stack<Item>  CarryItems 
     {
         get 
@@ -47,6 +51,22 @@ public class MouseCursor : Singleton<MouseCursor>
         }
     }
 
+    #region 함수 설명 :
+    /// <summary>
+    /// 마우스로 들고있는 아이템의 갯수를 줄이는 함수 
+    /// </summary>
+    /// <param name="item">
+    /// 줄일 갯수
+    /// </param>
+    #endregion
+    public void DelCarryItem(int count = 1)
+    {
+        for(int i = 0; i < count; ++i)
+        {
+            _carryItems.Pop();
+        }
+    }
+
     private void Start()
     {
         StartCoroutine(CR_update());
@@ -59,9 +79,9 @@ public class MouseCursor : Singleton<MouseCursor>
             if (Input.GetMouseButtonDown(0))
             {
                 #region 아이템 슬롯에게 작용
-                if (SelectSlot != null)
+                if (_selectSlot != null)
                 {
-                    SelectSlot.OperateAction();
+                    _selectSlot.OperateAction();
                 }
                 else if(CarryItem != null)
                 {
@@ -144,7 +164,7 @@ public class MouseCursor : Singleton<MouseCursor>
     {
         if(collider.TryGetComponent<ItemSlot>(out ItemSlot slot))
         {
-            SelectSlot = slot;
+            _selectSlot = slot;
         }
     }
     #region 함수 설명 :
@@ -159,9 +179,9 @@ public class MouseCursor : Singleton<MouseCursor>
     {
         if(MouseRepeater.Instance.ActionObj.ContainsKey(collider.gameObject.GetInstanceID()))
         {
-            if(MouseRepeater.Instance.ActionObj[collider.gameObject.GetInstanceID()].Equals(SelectSlot))
+            if(MouseRepeater.Instance.ActionObj[collider.gameObject.GetInstanceID()].Equals(_selectSlot))
             {
-                SelectSlot = null;
+                _selectSlot = null;
             }
         }
     }

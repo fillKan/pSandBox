@@ -77,11 +77,34 @@ public class ItemSlot : MonoBehaviour, MouseAction
      ******************************************/
     public void OperateAction()
     {
-        if(MouseCursor.Instance.CarryItem == null || MouseCursor.Instance.CarryItem.itemCode == ContainItem.itemCode)
+        if(MouseCursor.Instance.CarryItem != null)
         {
-            MouseCursor.Instance.AddCarryItem(_itemContainer.Pop());
-            UpdateItemCount();
+            if(ContainItem == null)
+            {
+                MouseCursor.Instance.DelCarryItem();
+                _itemContainer.Push(MouseCursor.Instance.CarryItem);
+                UpdateItemCount();
+            }
+            else if(MouseCursor.Instance.CarryItem.itemCode == ContainItem.itemCode)
+            {
+                MouseCursor.Instance.DelCarryItem();
+                _itemContainer.Push(MouseCursor.Instance.CarryItem);
+                UpdateItemCount();
+            }
         }
+        else if(ItemCount > 0)
+        {
+            if (MouseCursor.Instance.CarryItem == null)
+            {
+                MouseCursor.Instance.AddCarryItem(_itemContainer.Pop());
+                UpdateItemCount();
+            }
+            else if (MouseCursor.Instance.CarryItem.itemCode == ContainItem.itemCode)
+            {
+                MouseCursor.Instance.AddCarryItem(_itemContainer.Pop());
+                UpdateItemCount();
+            }
+        }       
     }
 
     public void RegisterAction()
