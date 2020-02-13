@@ -80,7 +80,7 @@ public class MouseCursor : Singleton<MouseCursor>
                 #region 아이템 슬롯에게 작용
                 if (_selectSlot != null)
                 {
-                    _selectSlot.OperateAction();
+                    _selectSlot.OperateAction(0);
                 }
                 else if(CarryItem != null)
                 {
@@ -97,6 +97,16 @@ public class MouseCursor : Singleton<MouseCursor>
                 }
                 #endregion
             }
+            else if(Input.GetMouseButtonDown(1))
+            {
+                #region 아이템 슬롯에게 작용
+                if (_selectSlot != null)
+                {
+                    _selectSlot.OperateAction(1);
+                }
+                #endregion
+            }
+
             transform.position = MainCamera.ScreenToWorldPoint(Input.mousePosition);
 
             yield return null;

@@ -9,7 +9,7 @@ public interface MouseAction
     /// 마우스 조작으로 취하게 될 동작을 담는 함수.
     /// </summary>
     #endregion
-    void OperateAction();
+    void OperateAction(byte input);
 
     #region 설명 :
     /// <summary>

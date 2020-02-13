@@ -75,36 +75,44 @@ public class ItemSlot : MonoBehaviour, MouseAction
     /******************************************
             MouseAction 인터페이스 함수들
      ******************************************/
-    public void OperateAction()
+    public void OperateAction(byte input)
     {
-        if(MouseCursor.Instance.CarryItem != null)
+        switch (input)
         {
-            if(ContainItem == null)
-            {
-                _itemContainer.Push(MouseCursor.Instance.CarryItem);
-                MouseCursor.Instance.DelCarryItem();
-                UpdateItemCount();
-            }
-            else if(MouseCursor.Instance.CarryItem.itemCode == ContainItem.itemCode)
-            {
-                _itemContainer.Push(MouseCursor.Instance.CarryItem);
-                MouseCursor.Instance.DelCarryItem();
-                UpdateItemCount();
-            }
-        }
-        else if(ItemCount > 0)
-        {
-            if (MouseCursor.Instance.CarryItem == null)
-            {
-                MouseCursor.Instance.AddCarryItem(_itemContainer.Pop());
-                UpdateItemCount();
-            }
-            else if (MouseCursor.Instance.CarryItem.itemCode == ContainItem.itemCode)
-            {
-                MouseCursor.Instance.AddCarryItem(_itemContainer.Pop());
-                UpdateItemCount();
-            }
-        }       
+            case 0:
+                if (MouseCursor.Instance.CarryItem != null)
+                {
+                    if (ContainItem == null)
+                    {
+                        _itemContainer.Push(MouseCursor.Instance.CarryItem);
+                        MouseCursor.Instance.DelCarryItem();
+                        UpdateItemCount();
+                    }
+                    else if (MouseCursor.Instance.CarryItem.itemCode == ContainItem.itemCode)
+                    {
+                        _itemContainer.Push(MouseCursor.Instance.CarryItem);
+                        MouseCursor.Instance.DelCarryItem();
+                        UpdateItemCount();
+                    }
+                }
+                break;
+
+            case 1:
+                if (ItemCount > 0)
+                {
+                    if (MouseCursor.Instance.CarryItem == null)
+                    {
+                        MouseCursor.Instance.AddCarryItem(_itemContainer.Pop());
+                        UpdateItemCount();
+                    }
+                    else if (MouseCursor.Instance.CarryItem.itemCode == ContainItem.itemCode)
+                    {
+                        MouseCursor.Instance.AddCarryItem(_itemContainer.Pop());
+                        UpdateItemCount();
+                    }
+                }
+                break;
+        }             
     }
 
     public void RegisterAction()
