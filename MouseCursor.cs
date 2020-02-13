@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class MouseCursor : Singleton<MouseCursor>
 {
+    public Camera MainCamera;
+
     private SpriteRenderer targetSprite;
-    private Stack<Item> _carryItems = new Stack<Item>();
+
     private ItemSlot SelectSlot;
-    public Stack<Item> CarryItems { get { return _carryItems; } }
+    public  Stack<Item>  CarryItems 
+    {
+        get 
+        {
+            return _carryItems; 
+        }
+    }
+    private Stack<Item> _carryItems = new Stack<Item>();
+
     public Item CarryItem {
         get 
         {
@@ -15,8 +25,15 @@ public class MouseCursor : Singleton<MouseCursor>
             return _carryItems.Peek(); 
         } 
     }
-    public Camera MainCamera;
-
+   
+    #region 함수 설명 :
+    /// <summary>
+    /// 마우스로 들고있는 아이템의 갯수를 더하는 함수 
+    /// </summary>
+    /// <param name="item">
+    ///더할 아이템
+    /// </param>
+    #endregion
     public void AddCarryItem(Item item)
     {
         if(_carryItems.Count == 0)
@@ -41,7 +58,8 @@ public class MouseCursor : Singleton<MouseCursor>
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if(SelectSlot != null)
+                #region 아이템 슬롯에게 작용
+                if (SelectSlot != null)
                 {
                     SelectSlot.OperateAction();
                 }
@@ -51,11 +69,14 @@ public class MouseCursor : Singleton<MouseCursor>
                     _carryItems.Peek().gameObject.SetActive(true);
                     _carryItems.Pop();
                 }
+                #endregion
 
+                #region 오브젝트 상호작용 지시
                 if (targetSprite != null)
                 {
                     PlayerGetter.Instance.InteractCommend(targetSprite.gameObject.GetInstanceID());
                 }
+                #endregion
             }
             transform.position = MainCamera.ScreenToWorldPoint(Input.mousePosition);
 
@@ -64,36 +85,28 @@ public class MouseCursor : Singleton<MouseCursor>
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent<ItemSlot>(out ItemSlot slot))
-        {
-            if (MouseRepeater.Instance.ActionObj.ContainsKey(slot.gameObject.GetInstanceID()))
-            {
-                SelectSlot = slot;
-            }
-        }
+        InItemSlot(other);
     }
     private void OnTriggerStay2D(Collider2D other)
     {
         if (PlayerGetter.Instance.GetInteractObj().ContainsKey(other.gameObject.GetInstanceID()))
         {
-            SpriteRenderer spr = other.GetComponent<SpriteRenderer>();
-            if(spr.Equals(targetSprite)) return;
-
-            EnterObject(spr);
+            if(other.TryGetComponent<SpriteRenderer>(out SpriteRenderer spr))
+            {
+                if (!spr.Equals(targetSprite)) EnterObject(spr);
+            }         
         }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.TryGetComponent<ItemSlot>(out ItemSlot slot))
-        {
-            if (SelectSlot.Equals(slot)) SelectSlot = null;
-        }
+        OutItemSlot(other);
 
-        if (targetSprite == null) return;
-
-        if (other.gameObject.Equals(targetSprite.gameObject))
+        if (targetSprite != null)
         {
-            ExitObject();
+            if (other.gameObject.Equals(targetSprite.gameObject))
+            {
+                ExitObject();
+            }
         }
     }
 
@@ -117,5 +130,39 @@ public class MouseCursor : Singleton<MouseCursor>
         targetSprite.color = Color.white;
 
         targetSprite = null;
+    }
+
+    #region 함수 설명 :
+    /// <summary>
+    /// 마우스가 작용을 받을 슬롯을 지정하였는지를 판단하여, 선택한 슬롯의 값을 조정하는 함수.
+    /// </summary>
+    /// <param name="collider">
+    /// 지정할 오브젝트의 콜라이더
+    /// </param>
+    #endregion
+    private void InItemSlot(Collider2D collider)
+    {
+        if(collider.TryGetComponent<ItemSlot>(out ItemSlot slot))
+        {
+            SelectSlot = slot;
+        }
+    }
+    #region 함수 설명 :
+    /// <summary>
+    /// 마우스가 선택한 아이템 슬롯에서 벗어났는지를 판단하여, 선택한 슬롯의 값을 조정하는 함수.
+    /// </summary>
+    /// <param name="collider">
+    /// 벗어난 오브젝트의 콜라이더
+    /// </param>
+    #endregion
+    private void OutItemSlot(Collider2D collider)
+    {
+        if(MouseRepeater.Instance.ActionObj.ContainsKey(collider.gameObject.GetInstanceID()))
+        {
+            if(MouseRepeater.Instance.ActionObj[collider.gameObject.GetInstanceID()].Equals(SelectSlot))
+            {
+                SelectSlot = null;
+            }
+        }
     }
 }
