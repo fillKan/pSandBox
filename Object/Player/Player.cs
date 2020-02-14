@@ -35,6 +35,11 @@ public interface Interaction
 
 public class Player : MonoBehaviour
 {
+    public enum Directions
+    {
+        GOTO_POINT,
+        DO_INTERACT
+    }
     public Inventory Inventory;
 
     private Vector2 vDir;
@@ -125,6 +130,22 @@ public class Player : MonoBehaviour
         moveMovementPoint = CR_moveMovementPoint(targetPoint);
 
         StartCoroutine(moveMovementPoint);
+    }
+
+    // 외부에서 플레이어에게 지시를 하는 허브
+    public void GiveDirections<T>(Directions directions, T value) //where T : struct
+    {
+        switch (directions)
+        {
+            case Directions.GOTO_POINT:
+                if(typeof(T).Equals(typeof(GameObject)))
+                {
+                    GameObject gameObj = value as GameObject;
+                }
+                break;
+            case Directions.DO_INTERACT:
+                break;
+        }
     }
 
     private void OnEnable()
