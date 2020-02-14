@@ -41,4 +41,8 @@ public class PlayerGetter : Singleton<PlayerGetter>
         player.InteractCommend(xInstanceID);
     }
 
+    public void MovementCommend(Vector2 targetPoint)
+    {
+        _player.MovementCommend(targetPoint);
+    }
 }

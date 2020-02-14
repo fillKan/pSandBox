@@ -96,6 +96,13 @@ public class MouseCursor : Singleton<MouseCursor>
                     PlayerGetter.Instance.InteractCommend(targetSprite.gameObject.GetInstanceID());
                 }
                 #endregion
+
+                // 마우스로 선택한 대상이 없다면, 마우스로 클릭한 지점으로 이동한다.
+                if(targetSprite == null && _selectSlot == null)
+                {
+                    PlayerGetter.Instance.MovementCommend(transform.position);
+                }
+
             }
             else if(Input.GetMouseButtonDown(1))
             {

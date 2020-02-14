@@ -40,10 +40,19 @@ public class Player : MonoBehaviour
     private Vector2 vDir;
     private SpriteRenderer sprite;
 
+    #region 설명 :
     /// <summary>
     /// 플레이어가 상호작용 대상으로 이동하는 코루틴을 담는다.
     /// </summary>
+    #endregion
     private IEnumerator moveInteractionPoint;
+
+    #region 설명 :
+    /// <summary>
+    /// 플레이어가 특정 지점으로 이동하게끔 하는 코루틴을 담는 열거체. 
+    /// </summary>
+    #endregion
+    private IEnumerator moveMovementPoint;
 
     private Dictionary<int, Interaction> _interactObj = new Dictionary<int, Interaction>();
     public Dictionary<int, Interaction> InteractObj
@@ -59,12 +68,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    #region 함수 설명 :
     /// <summary>
     /// 플레이어에게 상호작용을 지시하는 코루틴.
     /// </summary>
     /// <param name="instanceID">
     /// 상호작용할 오브젝트의 GetInstanceID()를 담느다.
     /// </param>
+    #endregion
     public void InteractCommend(int instanceID)
     {
         if(_interactObj.ContainsKey(instanceID))
@@ -80,6 +91,28 @@ public class Player : MonoBehaviour
 
             StartCoroutine(moveInteractionPoint);
         }
+    }
+
+    #region 함수 설명 :
+    /// <summary>
+    /// 플레이어에게 특정 지점으로 이동할 것을 지시하는 코루틴.
+    /// </summary>
+    /// <param name="targetPoint">
+    /// 플레이어가 이동할 특정 지점.
+    /// </param>
+    #endregion
+    public void MovementCommend(Vector2 targetPoint)
+    {
+        if(moveMovementPoint != null)
+        {
+            StopCoroutine(moveMovementPoint);
+
+            moveMovementPoint = null;
+        }
+
+        moveMovementPoint = CR_moveMovementPoint(targetPoint);
+
+        StartCoroutine(moveMovementPoint);
     }
 
     private void OnEnable()
@@ -122,12 +155,14 @@ public class Player : MonoBehaviour
         yield break;
     }
 
+    #region 코루틴 설명
     /// <summary>
     /// 플레이어가 상호작용 대상으로 이동하는 코루틴.
     /// </summary>
     /// <param name="interactObj">
     /// 상호작용할 오브젝트의 GetInstanceID()를 담느다.
     /// </param>
+    #endregion
     private IEnumerator CR_moveInteractionPoint(int interactObj)
     {
         float moveAmount = 0;
@@ -209,6 +244,67 @@ public class Player : MonoBehaviour
         StartCoroutine(CR_Vibration(0.07f, 0.2f));
         _interactObj[interactObj].OperateAction();
 
+        yield break;
+    }
+
+    private IEnumerator CR_moveMovementPoint(Vector2 targetPoint)
+    {
+        float fMoveAmount = 0;
+
+        if(targetPoint.x > transform.position.x)
+        {
+            sprite.flipX = false;
+
+            while (targetPoint.x > transform.position.x)
+            {
+                if (fMoveAmount < 1)
+                {
+                    fMoveAmount += 0.06f;
+                }
+                vDir.x += fMoveAmount * Time.deltaTime * 3.5f;
+                transform.position = vDir;
+
+                yield return null;
+            }
+            while (fMoveAmount > 0)
+            {
+                fMoveAmount -= 0.16f;
+
+                vDir.x += fMoveAmount * Time.deltaTime * 3.5f;
+                transform.position = vDir;
+
+                yield return null;
+            }
+        }
+
+        else if (targetPoint.x < transform.position.x)
+        {
+            sprite.flipX = true;
+
+            while (targetPoint.x < transform.position.x)
+            {
+                if (fMoveAmount < 1)
+                {
+                    fMoveAmount += 0.06f;
+                }
+                vDir.x -= fMoveAmount * Time.deltaTime * 3.5f;
+                transform.position = vDir;
+
+                yield return null;
+            }
+            while (fMoveAmount > 0)
+            {
+                fMoveAmount -= 0.16f;
+
+                vDir.x -= fMoveAmount * Time.deltaTime * 3.5f;
+                transform.position = vDir;
+
+                yield return null;
+            }
+        }
+
+        moveMovementPoint = null;
+        
         yield break;
     }
 
