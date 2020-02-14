@@ -206,6 +206,7 @@ public class Player : MonoBehaviour
 
         moveInteractionPoint = null;
 
+        StartCoroutine(CR_Vibration(0.07f, 0.2f));
         _interactObj[interactObj].OperateAction();
 
         yield break;
