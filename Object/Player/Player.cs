@@ -86,6 +86,12 @@ public class Player : MonoBehaviour
 
                 moveInteractionPoint = null;
             }
+            if (moveMovementPoint != null)
+            {
+                StopCoroutine(moveMovementPoint);
+
+                moveMovementPoint = null;
+            }
 
             moveInteractionPoint = CR_moveInteractionPoint(instanceID);
 
@@ -103,7 +109,13 @@ public class Player : MonoBehaviour
     #endregion
     public void MovementCommend(Vector2 targetPoint)
     {
-        if(moveMovementPoint != null)
+        if (moveInteractionPoint != null)
+        {
+            StopCoroutine(moveInteractionPoint);
+
+            moveInteractionPoint = null;
+        }
+        if (moveMovementPoint != null)
         {
             StopCoroutine(moveMovementPoint);
 
@@ -241,7 +253,7 @@ public class Player : MonoBehaviour
 
         moveInteractionPoint = null;
 
-        StartCoroutine(CR_Vibration(0.07f, 0.2f));
+        StartCoroutine(CR_Vibration(0.06f, 0.25f));
         _interactObj[interactObj].OperateAction();
 
         yield break;
