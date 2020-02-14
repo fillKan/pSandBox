@@ -77,6 +77,12 @@ public class MouseCursor : Singleton<MouseCursor>
         {
             if (Input.GetMouseButtonDown(0))
             {
+                // 마우스로 취할 수 있는 동작이 없다면, 마우스로 클릭한 지점으로 이동한다.
+                if (targetSprite == null && _selectSlot == null && CarryItem == null)
+                {
+                    PlayerGetter.Instance.MovementCommend(transform.position);
+                }
+
                 #region 아이템 슬롯에게 작용
                 if (_selectSlot != null)
                 {
@@ -97,11 +103,7 @@ public class MouseCursor : Singleton<MouseCursor>
                 }
                 #endregion
 
-                // 마우스로 선택한 대상이 없다면, 마우스로 클릭한 지점으로 이동한다.
-                if(targetSprite == null && _selectSlot == null)
-                {
-                    PlayerGetter.Instance.MovementCommend(transform.position);
-                }
+                
 
             }
             else if(Input.GetMouseButtonDown(1))
