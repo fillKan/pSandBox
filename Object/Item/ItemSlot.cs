@@ -76,7 +76,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
         }
         else if (IsSlotEmpty)
         {
-            _itemContainer.First.Value.ContainItem(transform);
+            _itemContainer.First.Value.EnterContainer(transform);
             IsSlotEmpty = false;
         }
     }
@@ -113,12 +113,24 @@ public class ItemSlot : MonoBehaviour, MouseAction
                     if (MouseCursor.Instance.CarryItem == null)
                     {
                         MouseCursor.Instance.AddCarryItem(_itemContainer.Last.Value);
+
+                        if(ContainItem.Equals(_itemContainer.Last.Value))
+                        {
+                            _itemContainer.Last.Value.ExitContainer();
+                        }
+
                         _itemContainer.RemoveLast();
                         UpdateSlotInfo();
                     }
                     else if (MouseCursor.Instance.CarryItem.itemCode == ContainItem.itemCode)
                     {
                         MouseCursor.Instance.AddCarryItem(_itemContainer.Last.Value);
+
+                        if (ContainItem.Equals(_itemContainer.Last.Value))
+                        {
+                            _itemContainer.Last.Value.ExitContainer();
+                        }
+
                         _itemContainer.RemoveLast();
                         UpdateSlotInfo();
                     }
