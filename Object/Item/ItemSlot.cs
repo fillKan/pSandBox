@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour, MouseAction
 {
-    private Stack<Item> _itemContainer = new Stack<Item>();
+    private LinkedList<Item> _itemContainer = new LinkedList<Item>();
     
     public int ItemCount
     {
@@ -17,7 +17,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
         {
             if (_itemContainer.Count == 0) return null;
 
-            return _itemContainer.Peek(); 
+            return _itemContainer.First.Value; 
         }
     }
 
@@ -39,14 +39,14 @@ public class ItemSlot : MonoBehaviour, MouseAction
 
         if (ItemCount == 0)
         {
-            _itemContainer.Push(items[i++]);
+            _itemContainer.AddLast(items[i++]);
         }
 
         for (; i < items.Length; i++)
         {
-            if (_itemContainer.Peek().itemCode == items[i].itemCode)
+            if (_itemContainer.First.Value.itemCode == items[i].itemCode)
             {
-                _itemContainer.Push(items[i]);
+                _itemContainer.AddLast(items[i]);
             }
             else Debug.LogWarning("적합하지 않은 아이템은 추가할 수 없습니다.");
         }
@@ -56,12 +56,12 @@ public class ItemSlot : MonoBehaviour, MouseAction
     {
         if (_itemContainer.Count == 0)
         {
-            _itemContainer.Push(item);
+            _itemContainer.AddLast(item);
         }
 
-        else if (item.itemCode == _itemContainer.Peek().itemCode)
+        else if (item.itemCode == _itemContainer.First.Value.itemCode)
         {
-            _itemContainer.Push(item);          
+            _itemContainer.AddLast(item);          
         }
         UpdateItemCount();
     }
@@ -84,13 +84,13 @@ public class ItemSlot : MonoBehaviour, MouseAction
                 {
                     if (ContainItem == null)
                     {
-                        _itemContainer.Push(MouseCursor.Instance.CarryItem);
+                        _itemContainer.AddLast(MouseCursor.Instance.CarryItem);
                         MouseCursor.Instance.DelCarryItem();
                         UpdateItemCount();
                     }
                     else if (MouseCursor.Instance.CarryItem.itemCode == ContainItem.itemCode)
                     {
-                        _itemContainer.Push(MouseCursor.Instance.CarryItem);
+                        _itemContainer.AddLast(MouseCursor.Instance.CarryItem);
                         MouseCursor.Instance.DelCarryItem();
                         UpdateItemCount();
                     }
@@ -102,12 +102,14 @@ public class ItemSlot : MonoBehaviour, MouseAction
                 {
                     if (MouseCursor.Instance.CarryItem == null)
                     {
-                        MouseCursor.Instance.AddCarryItem(_itemContainer.Pop());
+                        MouseCursor.Instance.AddCarryItem(_itemContainer.Last.Value);
+                        _itemContainer.RemoveLast();
                         UpdateItemCount();
                     }
                     else if (MouseCursor.Instance.CarryItem.itemCode == ContainItem.itemCode)
                     {
-                        MouseCursor.Instance.AddCarryItem(_itemContainer.Pop());
+                        MouseCursor.Instance.AddCarryItem(_itemContainer.Last.Value);
+                        _itemContainer.RemoveLast();
                         UpdateItemCount();
                     }
                 }

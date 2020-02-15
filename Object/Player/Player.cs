@@ -226,11 +226,12 @@ public class Player : MonoBehaviour
     {
         progressInstr.instructions = Instructions.NONE;
 
-        if(progressInstr.progress != null)
+        if (progressInstr.progress != null)
         {
             StopCoroutine(progressInstr.progress);
+
+            progressInstr.progress = null;
         }
-        progressInstr.progress = null;
     }
 
     private void OnEnable()
