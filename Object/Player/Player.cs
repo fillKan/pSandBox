@@ -251,14 +251,9 @@ public class Player : MonoBehaviour
 
             if (Input.GetAxis("Horizontal") != 0)
             {
-                // 민약 상호작용 대상으로 이동하는 코루틴이 실행 중 이라면..
-                if (moveInteractionPoint != null)
-                {
-                    // 해당 코루틴을 정지, 상호작용 대상으로 이동하는 코루틴을 담는 변수를... 비워준다.
-                    StopCoroutine(moveInteractionPoint);
+                // 수행중인 지시를 중단한다.
+                DiscontinueInstr();
 
-                    moveInteractionPoint = null;
-                }
                 vDir.x += Input.GetAxis("Horizontal") * Time.deltaTime * 3.5f;
 
                 if (Input.GetAxis("Horizontal") > 0) sprite.flipX = false;
