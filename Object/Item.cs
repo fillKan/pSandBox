@@ -28,22 +28,23 @@ public abstract class Item : MonoBehaviour
     /// 띄워질 아이템 슬롯의 transform.
     /// </param>
     #endregion
-    public void EnterContainer(Transform parent)
+    public void EnterContainer(Transform parent, SlotSpriteInfo slotSprite)
     {
-        transform.parent = parent;
+        transform.parent        = parent;
         transform.localRotation = Quaternion.Euler(0, 0, 0);
         transform.localPosition = Vector2.zero;
-        transform.localScale = new Vector3(0.7f, 0.7f, 1);
+        transform.localScale    = new Vector3(0.7f, 0.7f, 1);
 
         gameObject.SetActive(true);
-        TryGetComponent<SpriteRenderer>(out SpriteRenderer spr);
-        TryGetComponent<Rigidbody2D>(out Rigidbody2D rigidbody);
-        TryGetComponent<BoxCollider2D>(out BoxCollider2D box);
-        rigidbody.bodyType = RigidbodyType2D.Kinematic;
-        
-        box.enabled = false;
-        spr.sortingLayerID = FindObjectOfType<ItemSlot>().GetComponent<SpriteRenderer>().sortingLayerID;
-        spr.sortingOrder = 1;
+        TryGetComponent<SpriteRenderer> (out slotSprite.Spr);
+        TryGetComponent<Rigidbody2D>    (out slotSprite.Rigidbody);
+        TryGetComponent<BoxCollider2D>  (out slotSprite.Box);
+
+        slotSprite.Rigidbody.bodyType = RigidbodyType2D.Kinematic;
+
+        slotSprite.Box.enabled = false;
+        slotSprite.Spr.sortingLayerID = slotSprite.SortingLayerID;
+        slotSprite.Spr.sortingOrder   = 1;
     }
 
     #region 함수 설명 : 
@@ -51,19 +52,18 @@ public abstract class Item : MonoBehaviour
     /// 해당 아이템이 아이템 슬롯에 띄워지는 스프라이트로써의 역할이 끝났을 때에 실행하는 함수.
     /// </summary>
     #endregion
-    public void ExitContainer()
+    public void ExitContainer(SlotSpriteInfo slotSprite)
     {
-        transform.parent = null;
+        transform.parent     = null;
         transform.localScale = Vector3.one;
 
         gameObject.SetActive(false);
-        TryGetComponent<SpriteRenderer>(out SpriteRenderer spr);
-        TryGetComponent<Rigidbody2D>(out Rigidbody2D rigidbody);
-        TryGetComponent<BoxCollider2D>(out BoxCollider2D box);
-        rigidbody.bodyType = RigidbodyType2D.Dynamic;
+        slotSprite.Rigidbody.bodyType = RigidbodyType2D.Dynamic;
 
-        box.enabled = true;
-        spr.sortingLayerID = ItemMaster.Instance.GetItem(ItemMaster.ItemList.WOOL).GetComponent<SpriteRenderer>().sortingLayerID;
-        spr.sortingOrder = 0;
+        slotSprite.Box.enabled        = true;
+        slotSprite.Spr.sortingLayerID = ItemMaster.Instance.GetItem(ItemMaster.ItemList.WOOL).GetComponent<SpriteRenderer>().sortingLayerID;
+        slotSprite.Spr.sortingOrder   = 0;
+
+        slotSprite.Init();
     }
 }
