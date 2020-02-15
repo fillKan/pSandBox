@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour, MouseAction
 {
     private LinkedList<Item> _itemContainer = new LinkedList<Item>();
-    
+    private bool IsSlotEmpty = true;
     public int ItemCount
     {
         get { return _itemContainer.Count; }
@@ -69,10 +69,15 @@ public class ItemSlot : MonoBehaviour, MouseAction
     public void UpdateSlotInfo()
     {
         text.text = ItemCount.ToString();
-
-        if (ContainItem != null)
+       
+        if (ContainItem == null)
+        {
+            IsSlotEmpty = true;
+        }
+        else if (IsSlotEmpty)
         {
             _itemContainer.First.Value.ContainItem(transform);
+            IsSlotEmpty = false;
         }
     }
 
