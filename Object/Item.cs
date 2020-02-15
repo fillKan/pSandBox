@@ -19,4 +19,21 @@ public abstract class Item : MonoBehaviour
 
         ItemMaster.Instance.Registration(this);
     }
+
+    public void ContainItem(Transform parent)
+    {
+        transform.parent = parent;
+        transform.localPosition = Vector2.zero;
+        transform.localScale = new Vector3(0.7f, 0.7f, 1);
+
+        gameObject.SetActive(true);
+        TryGetComponent<SpriteRenderer>(out SpriteRenderer spr);
+        TryGetComponent<Rigidbody2D>(out Rigidbody2D rigidbody);
+        TryGetComponent<BoxCollider2D>(out BoxCollider2D box);
+        rigidbody.bodyType = RigidbodyType2D.Kinematic;
+        
+        box.enabled = false;
+        spr.sortingLayerID = FindObjectOfType<ItemSlot>().GetComponent<SpriteRenderer>().sortingLayerID;
+        spr.sortingOrder = 1;
+    }
 }

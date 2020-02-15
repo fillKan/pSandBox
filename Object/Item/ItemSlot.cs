@@ -27,7 +27,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
     {
         RegisterAction();
 
-        UpdateItemCount();
+        UpdateSlotInfo();
     }
 
     /***************************************
@@ -50,7 +50,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
             }
             else Debug.LogWarning("적합하지 않은 아이템은 추가할 수 없습니다.");
         }
-        UpdateItemCount();
+        UpdateSlotInfo();
     }
     public void AddItem(Item item)
     {
@@ -63,12 +63,17 @@ public class ItemSlot : MonoBehaviour, MouseAction
         {
             _itemContainer.AddLast(item);          
         }
-        UpdateItemCount();
+        UpdateSlotInfo();
     }
 
-    public void UpdateItemCount()
+    public void UpdateSlotInfo()
     {
         text.text = ItemCount.ToString();
+
+        if (ContainItem != null)
+        {
+            _itemContainer.First.Value.ContainItem(transform);
+        }
     }
 
 
@@ -86,13 +91,13 @@ public class ItemSlot : MonoBehaviour, MouseAction
                     {
                         _itemContainer.AddLast(MouseCursor.Instance.CarryItem);
                         MouseCursor.Instance.DelCarryItem();
-                        UpdateItemCount();
+                        UpdateSlotInfo();
                     }
                     else if (MouseCursor.Instance.CarryItem.itemCode == ContainItem.itemCode)
                     {
                         _itemContainer.AddLast(MouseCursor.Instance.CarryItem);
                         MouseCursor.Instance.DelCarryItem();
-                        UpdateItemCount();
+                        UpdateSlotInfo();
                     }
                 }
                 break;
@@ -104,13 +109,13 @@ public class ItemSlot : MonoBehaviour, MouseAction
                     {
                         MouseCursor.Instance.AddCarryItem(_itemContainer.Last.Value);
                         _itemContainer.RemoveLast();
-                        UpdateItemCount();
+                        UpdateSlotInfo();
                     }
                     else if (MouseCursor.Instance.CarryItem.itemCode == ContainItem.itemCode)
                     {
                         MouseCursor.Instance.AddCarryItem(_itemContainer.Last.Value);
                         _itemContainer.RemoveLast();
-                        UpdateItemCount();
+                        UpdateSlotInfo();
                     }
                 }
                 break;
