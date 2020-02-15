@@ -34,17 +34,65 @@ public interface Interaction
     GameObject InteractObject();
 }
 
+#region 구조체 설명 :
+/// <summary>
+/// 플레이어가 수행중인 지시와, 지시의 코루틴을 포함하는 구조체. 
+/// </summary>
+#endregion
+public struct ProgressInstr
+{
+    #region 설명 : 
+    /// <summary>
+    /// 현재 수행하고 있는 지시를 담는 변수.
+    /// <para>만약 값이 NONE이라면, 수행중인 지시가 없다는 의미이다.</para>
+    /// </summary>
+    #endregion
+    public Player.Instructions instructions;
+    #region 설명 : 
+    /// <summary>
+    /// 현재 플레이어가 수행중인 지시의 코루틴을 담는 변수.
+    /// </summary>
+    #endregion
+    public IEnumerator progress;
+}
+
 public class Player : MonoBehaviour
 {
-    public enum Directions
+    #region 열거체 설명 : 
+    /// <summary>
+    /// 플레이어에게 지시하는 행동들의 종류를 담는다.
+    /// <para>
+    /// 구성되는 열거자들의 설명은 FollowInstr함수를 사용할 때에 필요한 설명이다.
+    /// </para>
+    /// </summary>
+    #endregion
+    public enum Instructions
     {
+        #region 설명 : 
+        /// <summary>
+        /// 이행중인 지시를 중단하라는 지시. 또는 그런 상태.
+        /// </summary>
+        #endregion
+        NONE,
+        #region 설명 : 
+        /// <summary>
+        /// 특정 지점으로 이동하라는 지시. 필요한 인자 : Vector2
+        /// </summary>
+        #endregion
         GOTO_POINT,
+        #region 설명 : 
+        /// <summary>
+        /// 특정 오브젝트와 상호작용 하라는 지시. 필요한 인자 : GetInstanceID()
+        /// </summary>
+        #endregion
         DO_INTERACT
     }
     public Inventory Inventory;
 
     private Vector2 vDir;
     private SpriteRenderer sprite;
+
+    private ProgressInstr progressInstr;
 
     #region 설명 :
     /// <summary>
@@ -76,72 +124,62 @@ public class Player : MonoBehaviour
 
     #region 함수 설명 :
     /// <summary>
-    /// 플레이어에게 상호작용을 지시하는 코루틴.
+    /// 플레이어에게 상호작용을 지시하는 함수.
     /// </summary>
     /// <param name="instanceID">
     /// 상호작용할 오브젝트의 GetInstanceID()를 담느다.
     /// </param>
     #endregion
-    public void InteractCommend(int instanceID)
+    private void InteractCommend(int instanceID)
     {
         if(_interactObj.ContainsKey(instanceID))
         {
-            if(moveInteractionPoint != null)
-            {
-                StopCoroutine(moveInteractionPoint);
+            progressInstr.progress = CR_moveInteractionPoint(instanceID);
 
-                moveInteractionPoint = null;
-            }
-            if (moveMovementPoint != null)
-            {
-                StopCoroutine(moveMovementPoint);
-
-                moveMovementPoint = null;
-            }
-
-            moveInteractionPoint = CR_moveInteractionPoint(instanceID);
-
-            StartCoroutine(moveInteractionPoint);
+            StartCoroutine(progressInstr.progress);
         }
     }
 
     #region 함수 설명 :
     /// <summary>
-    /// 플레이어에게 특정 지점으로 이동할 것을 지시하는 코루틴.
+    /// 플레이어에게 특정 지점으로 이동할 것을 지시하는 함수.
     /// </summary>
     /// <param name="targetPoint">
     /// 플레이어가 이동할 특정 지점.
     /// </param>
     #endregion
-    public void MovementCommend(Vector2 targetPoint)
+    private void MovementCommend(Vector2 targetPoint)
     {
-        if (moveInteractionPoint != null)
-        {
-            StopCoroutine(moveInteractionPoint);
+        progressInstr.progress = CR_moveMovementPoint(targetPoint);
 
-            moveInteractionPoint = null;
-        }
-        if (moveMovementPoint != null)
-        {
-            StopCoroutine(moveMovementPoint);
-
-            moveMovementPoint = null;
-        }
-
-        moveMovementPoint = CR_moveMovementPoint(targetPoint);
-
-        StartCoroutine(moveMovementPoint);
+        StartCoroutine(progressInstr.progress);
     }
 
-    // 외부에서 플레이어에게 지시를 하는 허브
-    public void GiveDirections<T>(Directions directions, T xValue) //where T : struct
+    #region 함수 설명 : 
+    /// <summary>
+    /// 외부에서 플레이어에게 특정 행동을 지시를 하는 허브
+    /// </summary>
+    /// <typeparam name="T">
+    /// 지시하는 행동에 필요한 인자의 자료형.
+    /// </typeparam>
+    /// <param name="directions">
+    /// 플레이어에게 지시할 특정한 행동.
+    /// </param>
+    /// <param name="xValue">
+    /// 지시하는 행동에 필요한 인자 값.
+    /// </param>
+    #endregion 
+    public void FollowInstr<T>(Instructions instructions, T xValue) 
     {
-        switch (directions)
+        switch (instructions)
         {
-            case Directions.GOTO_POINT:
+            case Instructions.GOTO_POINT:
                 
                 if(typeof(T).Equals(typeof(Vector2)))
                 {
+                    DiscontinueInstr();
+                    progressInstr.instructions = Instructions.GOTO_POINT;
+
                     Vector2 value;
                             value = (Vector2)Convert.ChangeType(xValue, typeof(Vector2));
 
@@ -149,18 +187,52 @@ public class Player : MonoBehaviour
                 }
                 break;
 
-            case Directions.DO_INTERACT:
+            case Instructions.DO_INTERACT:
 
                 if (typeof(T).Equals(typeof(int)))
                 {
+                    DiscontinueInstr();
+                    progressInstr.instructions = Instructions.DO_INTERACT;
+
                     int value;
                         value = (int)Convert.ChangeType(xValue, typeof(int));
 
                     InteractCommend(value);
                 }
                 break;
+
+            default:
+                Debug.LogWarning("잘못된 지시입니다");
+                break;
         }
     }
+    #region 함수 설명 : 
+    /// <summary>
+    /// 외부에서 플레이어에게 수행중인 지시를 중단시키는 함수.
+    /// </summary>
+    /// <param name="directions">
+    /// 인자로 NONE를 사용한다.
+    /// </param>
+    #endregion 
+    public void FollowInstr(Instructions instructions)
+    {
+        if(instructions.Equals(Instructions.NONE))
+        {
+            DiscontinueInstr();
+        }
+    }
+
+    private void DiscontinueInstr()
+    {
+        progressInstr.instructions = Instructions.NONE;
+
+        if(progressInstr.progress != null)
+        {
+            StopCoroutine(progressInstr.progress);
+        }
+        progressInstr.progress = null;
+    }
+
     private void OnEnable()
     {
         vDir = transform.position;
