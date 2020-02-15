@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -133,21 +134,33 @@ public class Player : MonoBehaviour
     }
 
     // 외부에서 플레이어에게 지시를 하는 허브
-    public void GiveDirections<T>(Directions directions, T value) //where T : struct
+    public void GiveDirections<T>(Directions directions, T xValue) //where T : struct
     {
         switch (directions)
         {
             case Directions.GOTO_POINT:
-                if(typeof(T).Equals(typeof(GameObject)))
+                
+                if(typeof(T).Equals(typeof(Vector2)))
                 {
-                    GameObject gameObj = value as GameObject;
+                    Vector2 value;
+                            value = (Vector2)Convert.ChangeType(xValue, typeof(Vector2));
+
+                    MovementCommend(value);
                 }
                 break;
+
             case Directions.DO_INTERACT:
+
+                if (typeof(T).Equals(typeof(int)))
+                {
+                    int value;
+                        value = (int)Convert.ChangeType(xValue, typeof(int));
+
+                    InteractCommend(value);
+                }
                 break;
         }
     }
-
     private void OnEnable()
     {
         vDir = transform.position;
@@ -349,7 +362,7 @@ public class Player : MonoBehaviour
         {
             time -= Time.deltaTime;
 
-            transform.position = ((Vector2)Random.insideUnitSphere * amount) + vInitPos;
+            transform.position = ((Vector2)UnityEngine.Random.insideUnitSphere * amount) + vInitPos;
 
             yield return null;
         }
