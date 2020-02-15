@@ -31,6 +31,7 @@ public abstract class Item : MonoBehaviour
     public void EnterContainer(Transform parent)
     {
         transform.parent = parent;
+        transform.localRotation = Quaternion.Euler(0, 0, 0);
         transform.localPosition = Vector2.zero;
         transform.localScale = new Vector3(0.7f, 0.7f, 1);
 
