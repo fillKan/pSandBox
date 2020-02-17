@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
     }
     public Inventory Inventory;
 
-    private Vector2 vDir;
+    private Vector3 vDir;
     private SpriteRenderer sprite;
 
     private ProgressInstr progressInstr;
@@ -250,12 +250,13 @@ public class Player : MonoBehaviour
             // 이동 방향은 현재 플레이어의 위치로 계속해서 초기화한다.
             vDir = transform.position;
 
-            if (Input.GetAxis("Horizontal") != 0)
+            if (Input.GetAxis("Horizontal") + Input.GetAxis("Vertical") != 0)
             {
                 // 수행중인 지시를 중단한다.
                 DiscontinueInstr();
 
                 vDir.x += Input.GetAxis("Horizontal") * Time.deltaTime * 3.5f;
+                vDir.z += Input.GetAxis("Vertical") * Time.deltaTime * 3.5f;
 
                 if (Input.GetAxis("Horizontal") > 0) sprite.flipX = false;
                 if (Input.GetAxis("Horizontal") < 0) sprite.flipX = true;
