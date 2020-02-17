@@ -37,10 +37,10 @@ public abstract class Item : MonoBehaviour
 
         gameObject.SetActive(true);
         TryGetComponent<SpriteRenderer> (out slotSprite.Spr);
-        TryGetComponent<Rigidbody2D>    (out slotSprite.Rigidbody);
-        TryGetComponent<BoxCollider2D>  (out slotSprite.Box);
+        TryGetComponent<Rigidbody>    (out slotSprite.Rigidbody);
+        TryGetComponent<BoxCollider>  (out slotSprite.Box);
 
-        slotSprite.Rigidbody.bodyType = RigidbodyType2D.Kinematic;
+        slotSprite.Rigidbody.isKinematic = true;
 
         slotSprite.Box.enabled = false;
         slotSprite.Spr.sortingLayerID = slotSprite.SortingLayerID;
@@ -58,7 +58,7 @@ public abstract class Item : MonoBehaviour
         transform.localScale = Vector3.one;
 
         gameObject.SetActive(false);
-        slotSprite.Rigidbody.bodyType = RigidbodyType2D.Dynamic;
+        slotSprite.Rigidbody.isKinematic = false;
 
         slotSprite.Box.enabled        = true;
         slotSprite.Spr.sortingLayerID = ItemMaster.Instance.GetItem(ItemMaster.ItemList.WOOL).GetComponent<SpriteRenderer>().sortingLayerID;

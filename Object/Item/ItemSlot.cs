@@ -21,13 +21,13 @@ public class SlotSpriteInfo
     /// 아이템 슬롯에서 보여지는 오브젝트의 Rigidbody2D를 담는다.
     /// </summary>
     #endregion
-    public Rigidbody2D Rigidbody;
+    public Rigidbody Rigidbody;
     #region 설명 : 
     /// <summary>
     /// 아이템 슬롯에서 보여지는 오브젝트의 BoxCollider2D를 담는다.
     /// </summary>
     #endregion
-    public BoxCollider2D Box;
+    public BoxCollider Box;
 
     #region 설명 : 
     /// <summary>
