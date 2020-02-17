@@ -116,16 +116,21 @@ public class MouseCursor : Singleton<MouseCursor>
                 #endregion
             }
 
-            transform.position = MainCamera.ScreenToWorldPoint(Input.mousePosition);
+            //Xtransform.position = MainCamera.WorldToScreenPoint(Input.mousePosition);
+            //transform.position = MainCamera.WorldToViewportPoint(Input.mousePosition);
+            //transform.position = MainCamera.ScreenToViewportPoint(Input.mousePosition);
+            
+            transform.position = MainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y,-MainCamera.transform.position.z));
+            transform.position = new Vector3(transform.position.x, -4, transform.position.z);
 
             yield return null;
         }
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter(Collider other)
     {
         InItemSlot(other);
     }
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerStay(Collider other)
     {
         if (PlayerGetter.Instance.GetInteractObj().ContainsKey(other.gameObject.GetInstanceID()))
         {
@@ -135,7 +140,7 @@ public class MouseCursor : Singleton<MouseCursor>
             }         
         }
     }
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit(Collider other)
     {
         OutItemSlot(other);
 
@@ -178,7 +183,7 @@ public class MouseCursor : Singleton<MouseCursor>
     /// 지정할 오브젝트의 콜라이더
     /// </param>
     #endregion
-    private void InItemSlot(Collider2D collider)
+    private void InItemSlot(Collider collider)
     {
         if(collider.TryGetComponent<ItemSlot>(out ItemSlot slot))
         {
@@ -193,7 +198,7 @@ public class MouseCursor : Singleton<MouseCursor>
     /// 벗어난 오브젝트의 콜라이더
     /// </param>
     #endregion
-    private void OutItemSlot(Collider2D collider)
+    private void OutItemSlot(Collider collider)
     {
         if(MouseRepeater.Instance.ActionObj.ContainsKey(collider.gameObject.GetInstanceID()))
         {

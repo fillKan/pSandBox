@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Wool : Item, Interaction
 {
-    private BreakMotion breakMotion;
-    private Rigidbody2D Rigidbody2D;
     public GameObject InteractObject()
     {
         return gameObject;
@@ -25,12 +23,5 @@ public class Wool : Item, Interaction
     {
         RegisterInteraction();
         _itemCode = (int)ItemMaster.ItemList.WOOL;
-        TryGetComponent<Rigidbody2D>(out Rigidbody2D);
-        breakMotion = new BreakMotion(Rigidbody2D, -10);
-    }
-
-    private void Update()
-    {
-        breakMotion.ChkOperCondition();
     }
 }
