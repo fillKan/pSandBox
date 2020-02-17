@@ -69,6 +69,7 @@ public class MouseCursor : Singleton<MouseCursor>
     private void Start()
     {
         StartCoroutine(CR_update());
+        StartCoroutine(CR_mouseRayCast());
     }
 
     private IEnumerator CR_update()
@@ -119,13 +120,38 @@ public class MouseCursor : Singleton<MouseCursor>
             //Xtransform.position = MainCamera.WorldToScreenPoint(Input.mousePosition);
             //transform.position = MainCamera.WorldToViewportPoint(Input.mousePosition);
             //transform.position = MainCamera.ScreenToViewportPoint(Input.mousePosition);
-            
-            transform.position = MainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y,-MainCamera.transform.position.z));
-            transform.position = new Vector3(transform.position.x, -4, transform.position.z);
+
+            //transform.position = MainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y,-MainCamera.transform.position.z));
+            //transform.position = new Vector3(transform.position.x, -4, transform.position.z);
 
             yield return null;
         }
     }
+
+    private IEnumerator CR_mouseRayCast()
+    {
+        RaycastHit raycastHit;
+
+        while (gameObject.activeSelf)
+        {
+            Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out raycastHit))
+            {
+                if (PlayerGetter.Instance.GetInteractObj().ContainsKey(raycastHit.collider.gameObject.GetInstanceID()))
+                {
+                    if (raycastHit.collider.TryGetComponent<SpriteRenderer>(out SpriteRenderer spr))
+                    {
+                        if (!spr.Equals(targetSprite)) EnterObject(spr);
+                    }
+                }
+            }
+            yield return new WaitForFixedUpdate();
+        }
+
+        yield break;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         InItemSlot(other);
