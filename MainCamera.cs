@@ -15,14 +15,17 @@ public class MainCamera : MonoBehaviour
         while(player.enabled)
         {
             yield return null;
+            Vector3 playerPos = player.transform.position;
+                    playerPos.y += 3.75f;
+                    playerPos.z -= 4;
 
-            transform.position = Vector3.Lerp(transform.position, player.transform.position, Time.deltaTime * 3);
+            transform.position = Vector3.Lerp(transform.position, playerPos, Time.deltaTime * 3);
 
             if (transform.position.y < -3.1f)
             {
                 transform.Translate(0, -(transform.position.y + 3.1f), 0);
             }
-            transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+            //transform.position = new Vector3(transform.position.x, transform.position.y, -10);
 
         }
 
