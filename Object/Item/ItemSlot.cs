@@ -34,7 +34,7 @@ public class SlotSpriteInfo
     /// 아이템 슬롯의 SpriteRenderer.sortingLayerID의 값을 담는다.
     /// </summary>
     #endregion
-    public int  SortingLayerID
+    public int SortingLayerID
     {
         get { return _sortingLayerID; }
     }
@@ -56,8 +56,8 @@ public class SlotSpriteInfo
         this._sortingLayerID = layerID;
 
         this.Rigidbody = null;
-        this.Spr       = null;
-        this.Box       = null;
+        this.Spr = null;
+        this.Box = null;
     }
 
     #region 함수 설명 : 
@@ -68,8 +68,8 @@ public class SlotSpriteInfo
     public void Init()
     {
         this.Rigidbody = null;
-        this.Spr       = null;
-        this.Box       = null;
+        this.Spr = null;
+        this.Box = null;
     }
 }
 
@@ -83,11 +83,11 @@ public class ItemSlot : MonoBehaviour, MouseAction
     }
     public Item ContainItem
     {
-        get 
+        get
         {
             if (_itemContainer.Count == 0) return null;
 
-            return _itemContainer.First.Value; 
+            return _itemContainer.First.Value;
         }
     }
 
@@ -137,7 +137,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
 
         else if (item.itemCode == _itemContainer.First.Value.itemCode)
         {
-            _itemContainer.AddLast(item);          
+            _itemContainer.AddLast(item);
         }
         UpdateSlotInfo();
     }
@@ -145,7 +145,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
     public void UpdateSlotInfo()
     {
         text.text = ItemCount.ToString();
-       
+
         if (ContainItem == null)
         {
             IsSlotEmpty = true;
@@ -190,7 +190,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
                     {
                         MouseCursor.Instance.AddCarryItem(_itemContainer.Last.Value);
 
-                        if(ContainItem.Equals(_itemContainer.Last.Value))
+                        if (ContainItem.Equals(_itemContainer.Last.Value))
                         {
                             _itemContainer.Last.Value.ExitContainer(SlotSprite);
                         }
@@ -212,7 +212,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
                     }
                 }
                 break;
-        }             
+        }
     }
 
     public void RegisterAction()
