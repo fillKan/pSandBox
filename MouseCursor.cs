@@ -69,12 +69,15 @@ public class MouseCursor : Singleton<MouseCursor>
     private void Start()
     {
         StartCoroutine(CR_update());
+        StartCoroutine(CR_mouseRayCast());
     }
 
     private IEnumerator CR_update()
     {
         while(true)
         {
+            transform.position = MainCamera.ScreenToWorldPoint(Input.mousePosition);
+
             if (Input.GetMouseButtonDown(0))
             {
                 // 마우스로 취할 수 있는 동작이 없다면, 마우스로 클릭한 지점으로 이동한다.
@@ -106,6 +109,7 @@ public class MouseCursor : Singleton<MouseCursor>
                 
 
             }
+
             else if(Input.GetMouseButtonDown(1))
             {
                 #region 아이템 슬롯에게 작용
@@ -115,42 +119,65 @@ public class MouseCursor : Singleton<MouseCursor>
                 }
                 #endregion
             }
-
-            //Xtransform.position = MainCamera.WorldToScreenPoint(Input.mousePosition);
-            //transform.position = MainCamera.WorldToViewportPoint(Input.mousePosition);
-            //transform.position = MainCamera.ScreenToViewportPoint(Input.mousePosition);
-            
-            transform.position = MainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y,-MainCamera.transform.position.z));
-            transform.position = new Vector3(transform.position.x, -4, transform.position.z);
-
             yield return null;
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        InItemSlot(other);
-    }
-    private void OnTriggerStay(Collider other)
-    {
-        if (PlayerGetter.Instance.GetInteractObj().ContainsKey(other.gameObject.GetInstanceID()))
-        {
-            if(other.TryGetComponent<SpriteRenderer>(out SpriteRenderer spr))
-            {
-                if (!spr.Equals(targetSprite)) EnterObject(spr);
-            }         
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        OutItemSlot(other);
 
-        if (targetSprite != null)
+    private IEnumerator CR_mouseRayCast()
+    {
+        RaycastHit raycastHit;
+
+        while (gameObject.activeSelf)
         {
-            if (other.gameObject.Equals(targetSprite.gameObject))
+            Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out raycastHit))
             {
-                ExitObject();
+                if(_selectSlot == null)
+                {
+                    InItemSlot(raycastHit.collider);
+                }
+                else
+                {
+                    if (!raycastHit.collider.gameObject.Equals(_selectSlot.gameObject))
+                    {
+                        OutItemSlot(_selectSlot.gameObject.GetInstanceID());
+                         InItemSlot(raycastHit.collider);
+                    }
+                }
+
+                if (targetSprite != null)
+                {
+                    if (!raycastHit.collider.gameObject.Equals(targetSprite.gameObject))
+                    {
+                        ExitObject();
+                    }
+                }
+                if (PlayerGetter.Instance.GetInteractObj().ContainsKey(raycastHit.collider.gameObject.GetInstanceID()))
+                {
+                    if (raycastHit.collider.TryGetComponent<SpriteRenderer>(out SpriteRenderer spr))
+                    {
+                        if (!spr.Equals(targetSprite)) EnterObject(spr);
+                    }
+                }              
             }
+
+            else
+            {
+                if(_selectSlot != null)
+                {
+                    OutItemSlot(_selectSlot.gameObject.GetInstanceID());
+                }
+
+                if (targetSprite != null)
+                {
+                    ExitObject();
+                }
+            }
+            yield return new WaitForFixedUpdate();
         }
+
+        yield break;
     }
 
     private void EnterObject(SpriteRenderer enterSpr)
@@ -203,6 +230,24 @@ public class MouseCursor : Singleton<MouseCursor>
         if(MouseRepeater.Instance.ActionObj.ContainsKey(collider.gameObject.GetInstanceID()))
         {
             if(MouseRepeater.Instance.ActionObj[collider.gameObject.GetInstanceID()].Equals(_selectSlot))
+            {
+                _selectSlot = null;
+            }
+        }
+    }
+    #region 함수 설명 :
+    /// <summary>
+    /// 마우스가 선택한 아이템 슬롯에서 벗어났는지를 판단하여, 선택한 슬롯의 값을 조정하는 함수.
+    /// </summary>
+    /// <param name="collider">
+    /// 벗어난 오브젝트의 인스턴스 아이디
+    /// </param>
+    #endregion
+    private void OutItemSlot(int instanceID)
+    {
+        if (MouseRepeater.Instance.ActionObj.ContainsKey(instanceID))
+        {
+            if (MouseRepeater.Instance.ActionObj[instanceID].Equals(_selectSlot))
             {
                 _selectSlot = null;
             }

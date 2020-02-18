@@ -17,7 +17,7 @@ public class MainCamera : MonoBehaviour
             yield return null;
             Vector3 playerPos = player.transform.position;
                     playerPos.y += 3.75f;
-                    playerPos.z -= 4;
+                    playerPos.z -= 7.4f;
 
             transform.position = Vector3.Lerp(transform.position, playerPos, Time.deltaTime * 3);
 
