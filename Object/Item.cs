@@ -37,8 +37,8 @@ public abstract class Item : MonoBehaviour
 
         gameObject.SetActive(true);
         TryGetComponent<SpriteRenderer> (out slotSprite.Spr);
-        TryGetComponent<Rigidbody>    (out slotSprite.Rigidbody);
-        TryGetComponent<BoxCollider>  (out slotSprite.Box);
+        TryGetComponent<Rigidbody2D>    (out slotSprite.Rigidbody);
+        TryGetComponent<BoxCollider2D>  (out slotSprite.Box);
 
         slotSprite.Rigidbody.isKinematic = true;
 
