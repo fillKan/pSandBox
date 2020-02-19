@@ -344,6 +344,14 @@ public class Player : MonoBehaviour
 
                 // 이동!
                 vDir.x += moveAmount * Time.deltaTime * 3.5f;
+
+                if (CheckBrakeOper(Vector2.right))
+                {
+                    yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
+
+                    DiscontinueInstr();
+                }
+
                 transform.position = vDir;
 
                 yield return null;
@@ -377,6 +385,14 @@ public class Player : MonoBehaviour
 
                 // 이동!
                 vDir.x += moveAmount * Time.deltaTime * 3.5f;
+
+                if (CheckBrakeOper(Vector2.left))
+                {
+                    yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
+
+                    DiscontinueInstr();
+                }
+
                 transform.position = vDir;
 
                 yield return null;
@@ -419,6 +435,14 @@ public class Player : MonoBehaviour
                     fMoveAmount += 0.06f;
                 }
                 vDir.x += fMoveAmount * Time.deltaTime * 3.5f;
+
+                if (CheckBrakeOper(Vector2.right))
+                {
+                    yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
+
+                    DiscontinueInstr();
+                }
+
                 transform.position = vDir;
 
                 yield return null;
@@ -445,6 +469,14 @@ public class Player : MonoBehaviour
                     fMoveAmount += 0.06f;
                 }
                 vDir.x -= fMoveAmount * Time.deltaTime * 3.5f;
+
+                if (CheckBrakeOper(Vector2.left))
+                {
+                    yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
+
+                    DiscontinueInstr();
+                }
+
                 transform.position = vDir;
 
                 yield return null;
