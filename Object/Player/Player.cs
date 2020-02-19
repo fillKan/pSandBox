@@ -225,13 +225,24 @@ public class Player : MonoBehaviour
         }
     }
 
-    public bool BrakeChk()
+    #region 함수 설명 : 
+    /// <summary>
+    /// 플레이어가 가진 브레이크를 통해, 이동하려는 방향으로 나아갈 수 있는지를 판단하는 함수.
+    /// </summary>
+    /// <param name="moveDir">
+    /// 플레이어가 움직이려는 방향. 
+    /// <para>
+    /// ※ Vector2.left와 같이 방향을 나타내는 벡터를 하십시오 ※
+    /// </para>
+    /// </param>
+    #endregion 
+    public bool CheckBrakeOper(Vector2 moveDir)
     {
-        if (LeftBrake.Exit && sprite.flipX)
+        if (LeftBrake.Exit && moveDir.Equals(Vector2.left))
         {
             return true;
         }
-        else if (RightBrake.Exit && !sprite.flipX)
+        else if (RightBrake.Exit && moveDir.Equals(Vector2.right))
         {
             return true;
         }
@@ -270,10 +281,27 @@ public class Player : MonoBehaviour
             {
                 DiscontinueInstr();
 
-                vDir.x += Time.deltaTime * 3.5f * Input.GetAxis("Horizontal");
+                if (Input.GetAxis("Horizontal") > 0)
+                {
+                    if(CheckBrakeOper(Vector2.right))
+                    {
+                        yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
+                        continue;
+                    }
 
-                if (Input.GetAxis("Horizontal") > 0) sprite.flipX = false;
-                if (Input.GetAxis("Horizontal") < 0) sprite.flipX = true;
+                    sprite.flipX = false;
+                }
+                else if (Input.GetAxis("Horizontal") < 0)
+                {
+                    if (CheckBrakeOper(Vector2.left))
+                    {
+                        yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
+                        continue;
+                    }
+
+                    sprite.flipX = true;
+                }
+                vDir.x += Time.deltaTime * 3.5f * Input.GetAxis("Horizontal");
 
                 transform.position = vDir;
             }
