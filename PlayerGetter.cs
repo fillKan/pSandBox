@@ -28,7 +28,7 @@ public class PlayerGetter : Singleton<PlayerGetter>
 
     public void AddInteractObj(int instanceID, Interaction interaction)
     {
-        player.AddInteractObj(instanceID, interaction);
+        _player.AddInteractObj(instanceID, interaction);
     }
 
     public Dictionary<int,Interaction> GetInteractObj()
