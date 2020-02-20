@@ -12,20 +12,7 @@ using UnityEngine;
 #endregion
 public class ItemSlotSprt : MonoBehaviour
 {
-    public  SpriteRenderer  Renderer
-    {
-        get { return _renderer; }
-    }
-    private SpriteRenderer _renderer;
-
-    private void Start()
-    {
-        // _renderer에 자신의 스프라이트 렌더러를 담는다.
-        if (_renderer == null)
-        {
-            TryGetComponent<SpriteRenderer>(out _renderer);
-        }
-    }
+    public SpriteRenderer Renderer;
 
     #region 함수 설명 : 
     /// <summary>
@@ -37,7 +24,7 @@ public class ItemSlotSprt : MonoBehaviour
     #endregion
     public void ShowItemSprt(int itemCode)
     {
-        _renderer.sprite = ItemMaster.Instance.GetItemSpr(itemCode);
+        Renderer.sprite = ItemMaster.Instance.GetItemSpr(itemCode);
     }
 
     #region 함수 설명 : 
@@ -50,7 +37,7 @@ public class ItemSlotSprt : MonoBehaviour
     #endregion
     public void ShowItemSprt(ItemMaster.ItemList item)
     {
-        _renderer.sprite = ItemMaster.Instance.GetItemSpr(item);
+        Renderer.sprite = ItemMaster.Instance.GetItemSpr(item);
     }
 
     #region 함수 설명 : 
@@ -60,6 +47,6 @@ public class ItemSlotSprt : MonoBehaviour
     #endregion
     public void HideItemSprt()
     {
-        _renderer.sprite = null;
+        Renderer.sprite = null;
     }
 }

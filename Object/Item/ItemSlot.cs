@@ -92,13 +92,11 @@ public class ItemSlot : MonoBehaviour, MouseAction
     }
 
     public Text text;
-    public SlotSpriteInfo SlotSprite;
+    public ItemSlotSprt SlotSprt;
 
     private void Awake()
     {
         RegisterAction();
-
-        SlotSprite = new SlotSpriteInfo(GetComponent<SpriteRenderer>().sortingLayerID);
     }
 
     private void OnEnable()
@@ -148,24 +146,12 @@ public class ItemSlot : MonoBehaviour, MouseAction
 
         if (ContainItem == null)
         {
+            SlotSprt.HideItemSprt();
             IsSlotEmpty = true;
         }
         else if (IsSlotEmpty)
         {
-            //_itemContainer.First.Value.EnterContainer(transform, SlotSprite);
-
-            Debug.Log(ItemMaster.Instance.GetItemSpr(_itemContainer.First.Value.itemCode));
-
-            GameObject @object = new GameObject("Spr",typeof(SpriteRenderer));
-            @object.transform.parent = transform;
-            @object.transform.localPosition = Vector2.zero;
-            @object.TryGetComponent<SpriteRenderer>(out SpriteRenderer renderer);
-
-            renderer.sprite         = ItemMaster.Instance.GetItemSpr(_itemContainer.First.Value.itemCode);
-            renderer.sortingLayerID = SlotSprite.SortingLayerID;
-            renderer.sortingOrder   = 1;
-
-
+            SlotSprt.ShowItemSprt(ContainItem.itemCode);
             IsSlotEmpty = false;
         }
     }
@@ -205,7 +191,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
 
                         if (ContainItem.Equals(_itemContainer.Last.Value))
                         {
-                            _itemContainer.Last.Value.ExitContainer(SlotSprite);
+                            //SlotSprt.HideItemSprt();
                         }
 
                         _itemContainer.RemoveLast();
@@ -217,7 +203,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
 
                         if (ContainItem.Equals(_itemContainer.Last.Value))
                         {
-                            _itemContainer.Last.Value.ExitContainer(SlotSprite);
+                            //SlotSprt.HideItemSprt();
                         }
 
                         _itemContainer.RemoveLast();
