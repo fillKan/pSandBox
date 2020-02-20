@@ -23,9 +23,9 @@ public abstract class Item : MonoBehaviour
     {
         Init();
 
-        TryGetComponent<Sprite>(out Sprite sprite);
+        TryGetComponent<SpriteRenderer>(out SpriteRenderer sprite);
 
-        ItemMaster.Instance.Registration(this, sprite);
+        ItemMaster.Instance.Registration(this, sprite.sprite);
     }
 
     #region 함수 설명 : 

@@ -152,7 +152,20 @@ public class ItemSlot : MonoBehaviour, MouseAction
         }
         else if (IsSlotEmpty)
         {
-            _itemContainer.First.Value.EnterContainer(transform, SlotSprite);
+            //_itemContainer.First.Value.EnterContainer(transform, SlotSprite);
+
+            Debug.Log(ItemMaster.Instance.GetItemSpr(_itemContainer.First.Value.itemCode));
+
+            GameObject @object = new GameObject("Spr",typeof(SpriteRenderer));
+            @object.transform.parent = transform;
+            @object.transform.localPosition = Vector2.zero;
+            @object.TryGetComponent<SpriteRenderer>(out SpriteRenderer renderer);
+
+            renderer.sprite         = ItemMaster.Instance.GetItemSpr(_itemContainer.First.Value.itemCode);
+            renderer.sortingLayerID = SlotSprite.SortingLayerID;
+            renderer.sortingOrder   = 1;
+
+
             IsSlotEmpty = false;
         }
     }
