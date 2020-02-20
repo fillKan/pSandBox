@@ -21,6 +21,8 @@ public class Oak_seed : Item, Interaction
     protected override void Init()
     {
         RegisterInteraction();
+
         _itemCode = (int)ItemMaster.ItemList.SEED_OAK;
+        TryGetComponent<Rigidbody2D>(out _rigidbody);
     }
 }

@@ -22,6 +22,8 @@ public class Oak_log : Item, Interaction
     protected override void Init()
     {
         RegisterInteraction();
+
         _itemCode = (int)ItemMaster.ItemList.LOG_OAK;
+        TryGetComponent<Rigidbody2D>(out _rigidbody);
     }
 }

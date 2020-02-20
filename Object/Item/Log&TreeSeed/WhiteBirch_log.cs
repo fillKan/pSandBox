@@ -21,6 +21,8 @@ public class WhiteBirch_log : Item, Interaction
     protected override void Init()
     {
         RegisterInteraction();
+
         _itemCode = (int)ItemMaster.ItemList.LOG_WHITEBIRCH;
+        TryGetComponent<Rigidbody2D>(out _rigidbody);
     }
 }

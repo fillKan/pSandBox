@@ -5,11 +5,17 @@ using UnityEngine;
 public abstract class Item : MonoBehaviour
 {
     [HideInInspector]
-    public int itemCode
+    public    int  itemCode
     {
         get { return _itemCode; }
     }
     protected int _itemCode;
+
+    public    Rigidbody2D  Rigidbody
+    {
+        get { return _rigidbody; }
+    }
+    protected Rigidbody2D _rigidbody;
 
     protected abstract void Init();
 
@@ -37,9 +43,9 @@ public abstract class Item : MonoBehaviour
 
         gameObject.SetActive(true);
         TryGetComponent<SpriteRenderer> (out slotSprite.Spr);
-        TryGetComponent<Rigidbody2D>    (out slotSprite.Rigidbody);
         TryGetComponent<BoxCollider2D>  (out slotSprite.Box);
 
+        slotSprite.Rigidbody             = _rigidbody;
         slotSprite.Rigidbody.isKinematic = true;
 
         slotSprite.Box.enabled = false;

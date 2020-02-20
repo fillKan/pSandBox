@@ -22,6 +22,8 @@ public class Wool : Item, Interaction
     protected override void Init()
     {
         RegisterInteraction();
+
         _itemCode = (int)ItemMaster.ItemList.WOOL;
+        TryGetComponent<Rigidbody2D>(out _rigidbody);
     }
 }
