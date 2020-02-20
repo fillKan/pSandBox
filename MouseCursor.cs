@@ -29,7 +29,8 @@ public class MouseCursor : Singleton<MouseCursor>
             return _carryItems.Peek(); 
         } 
     }
-   
+    public ItemSlotSprt SlotSprt;
+
     #region 함수 설명 :
     /// <summary>
     /// 마우스로 들고있는 아이템의 갯수를 더하는 함수 
@@ -75,6 +76,14 @@ public class MouseCursor : Singleton<MouseCursor>
     {
         while(true)
         {
+            if(CarryItem != null)
+            {
+                SlotSprt.ShowItemSprt(CarryItem.itemCode);
+            }
+            else
+            {
+                SlotSprt.HideItemSprt();
+            }
             if (Input.GetMouseButtonDown(0))
             {
                 // 마우스로 취할 수 있는 동작이 없다면, 마우스로 클릭한 지점으로 이동한다.
@@ -116,7 +125,7 @@ public class MouseCursor : Singleton<MouseCursor>
                 #endregion
             }
 
-            transform.position = MainCamera.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = (Vector2)MainCamera.ScreenToWorldPoint(Input.mousePosition);
 
             yield return null;
         }
