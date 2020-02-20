@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fish_poollack : Item, Interaction
+public class Fish_pollack : Item, Interaction
 {
     public GameObject InteractObject()
     {
