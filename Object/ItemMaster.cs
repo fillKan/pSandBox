@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ItemMaster : Singleton<ItemMaster>
 {
-    private Dictionary<int, Item> items = new Dictionary<int, Item>();
+    private Dictionary<int, Item>   Items    = new Dictionary<int, Item>();
+    private Dictionary<int, Sprite> ItemSprs = new Dictionary<int, Sprite>();
 
     public enum ItemList
     {
@@ -22,28 +23,51 @@ public class ItemMaster : Singleton<ItemMaster>
         FISH_SALMON
     };
 
-    public void Registration(Item item)
+    public void Registration(Item item, Sprite sprite)
     {
-        if (!items.ContainsKey(item.itemCode))
+        if (!Items.ContainsKey(item.itemCode))
         {
-            items.Add(item.itemCode, item);
+            Items.Add(item.itemCode, item);
+        }
+        if (!ItemSprs.ContainsKey(item.itemCode))
+        {
+            ItemSprs.Add(item.itemCode, sprite);
         }
     }
 
     public Item GetItem(int itemCode)
     {
-        if (items.ContainsKey(itemCode))
+        if (Items.ContainsKey(itemCode))
         {
-            return items[itemCode];
+            return Items[itemCode];
         }
         return null;
     }
     public Item GetItem(ItemList item)
     {
-        if (items.ContainsKey((int)item))
+        if (Items.ContainsKey((int)item))
         {
-            return items[(int)item];
+            return Items[(int)item];
         }
         return null;
     }
+
+    public Sprite GetItemSpr(int itemCode)
+    {
+        if (ItemSprs.ContainsKey(itemCode))
+        {
+            return ItemSprs[itemCode];
+        }
+        return null;
+    }
+
+    public Sprite GetItemSpr(ItemList item)
+    {
+        if (ItemSprs.ContainsKey((int)item))
+        {
+            return ItemSprs[(int)item];
+        }
+        return null;
+    }
+
 }
