@@ -342,16 +342,14 @@ public class Player : MonoBehaviour
                 // moveAmount는 서서히 증가한다.
                 if (moveAmount < 1) moveAmount += 0.06f;
 
-                // 이동!
-                vDir.x += moveAmount * Time.deltaTime * 3.5f;
-
                 if (CheckBrakeOper(Vector2.right))
                 {
                     yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
 
                     DiscontinueInstr();
                 }
-
+                // 이동!
+                vDir.x += moveAmount * Time.deltaTime * 3.5f;
                 transform.position = vDir;
 
                 yield return null;
@@ -383,16 +381,14 @@ public class Player : MonoBehaviour
                 // 서서히 가속...
                 if (moveAmount > -1) moveAmount -= 0.06f;
 
-                // 이동!
-                vDir.x += moveAmount * Time.deltaTime * 3.5f;
-
                 if (CheckBrakeOper(Vector2.left))
                 {
                     yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
 
                     DiscontinueInstr();
                 }
-
+                // 이동!
+                vDir.x += moveAmount * Time.deltaTime * 3.5f;
                 transform.position = vDir;
 
                 yield return null;
@@ -434,14 +430,13 @@ public class Player : MonoBehaviour
                 {
                     fMoveAmount += 0.06f;
                 }
-                vDir.x += fMoveAmount * Time.deltaTime * 3.5f;
-
                 if (CheckBrakeOper(Vector2.right))
                 {
                     yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
 
                     DiscontinueInstr();
                 }
+                vDir.x += fMoveAmount * Time.deltaTime * 3.5f;
 
                 transform.position = vDir;
 
@@ -468,14 +463,13 @@ public class Player : MonoBehaviour
                 {
                     fMoveAmount += 0.06f;
                 }
-                vDir.x -= fMoveAmount * Time.deltaTime * 3.5f;
-
                 if (CheckBrakeOper(Vector2.left))
                 {
                     yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
 
                     DiscontinueInstr();
                 }
+                vDir.x -= fMoveAmount * Time.deltaTime * 3.5f;
 
                 transform.position = vDir;
 
