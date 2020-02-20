@@ -11,8 +11,6 @@ public class Inventory : MonoBehaviour
     {
         int emptySlotIndex = empty;
 
-        item.gameObject.SetActive(false);
-
         for(int i = 0; i < itemSlots.Length; i++)
         {
             if (itemSlots[i].ContainItem == null)
@@ -26,16 +24,20 @@ public class Inventory : MonoBehaviour
 
             if(itemSlots[i].ContainItem.itemCode == item.itemCode)
             {
+                item.gameObject.SetActive(false);
+
                 itemSlots[i].AddItem(item);
                 return;
             }
         }
         if(!emptySlotIndex.Equals(empty))
         {
+            item.gameObject.SetActive(false);
+
             itemSlots[emptySlotIndex].AddItem(item);
             return;
         }
-        Debug.LogError("인벤토리가 가득 차 있습니다");
+        Debug.LogWarning("인벤토리가 가득 차 있습니다");
     }
 
 
