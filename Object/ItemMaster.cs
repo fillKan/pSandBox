@@ -13,7 +13,13 @@ public class ItemMaster : Singleton<ItemMaster>
         SEED_WHITEBIRCH,
         SEED_OAK,
         WOOL,
-        EGG
+        EGG,
+        Fish_BUTTERFISH,
+        Fish_CUTLASSFISH,
+        FISH_MACKEREL,
+        FISH_POOLLACK,
+        FISH_PUFFERFISH,
+        FISH_SALMON
     };
 
     public void Registration(Item item)

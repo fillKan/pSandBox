@@ -4,7 +4,7 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -8463869947660738434
-    second: pollack
+    second: Pollack
   - first:
       213: -6534163077260431230
     second: Mackerel
@@ -116,7 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pollack
+      name: Pollack
       rect:
         serializedVersion: 2
         x: 0
