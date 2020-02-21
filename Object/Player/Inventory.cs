@@ -5,6 +5,8 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public ItemSlot[] itemSlots;
+    public ItemSlot CarryItemSlot;
+
     private sbyte empty = -1;
 
     public void AddItemInventory(Item item)
