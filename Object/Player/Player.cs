@@ -88,6 +88,7 @@ public class Player : MonoBehaviour
         DO_INTERACT
     }
     public Inventory Inventory;
+    public PlayerCarryItem CarryItem;
 
     public Brake  LeftBrake;
     public Brake RightBrake;
@@ -305,6 +306,8 @@ public class Player : MonoBehaviour
 
                 transform.position = vDir;
             }
+
+            CarryItem.Patch(sprite.flipX);
 
             yield return null;
         }
