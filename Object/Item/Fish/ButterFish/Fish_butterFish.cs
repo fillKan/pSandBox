@@ -24,6 +24,5 @@ public class Fish_butterFish : Item, Interaction
         RegisterInteraction();
 
         _itemCode = (int)ItemMaster.ItemList.Fish_BUTTERFISH;
-        TryGetComponent<Rigidbody2D>(out _rigidbody);
     }
 }

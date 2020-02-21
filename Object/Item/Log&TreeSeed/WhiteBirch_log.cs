@@ -23,6 +23,5 @@ public class WhiteBirch_log : Item, Interaction
         RegisterInteraction();
 
         _itemCode = (int)ItemMaster.ItemList.LOG_WHITEBIRCH;
-        TryGetComponent<Rigidbody2D>(out _rigidbody);
     }
 }

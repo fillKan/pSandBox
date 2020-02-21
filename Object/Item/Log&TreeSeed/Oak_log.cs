@@ -24,6 +24,5 @@ public class Oak_log : Item, Interaction
         RegisterInteraction();
 
         _itemCode = (int)ItemMaster.ItemList.LOG_OAK;
-        TryGetComponent<Rigidbody2D>(out _rigidbody);
     }
 }

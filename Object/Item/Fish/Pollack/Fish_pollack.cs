@@ -24,6 +24,5 @@ public class Fish_pollack : Item, Interaction
         RegisterInteraction();
 
         _itemCode = (int)ItemMaster.ItemList.FISH_POOLLACK;
-        TryGetComponent<Rigidbody2D>(out _rigidbody);
     }
 }

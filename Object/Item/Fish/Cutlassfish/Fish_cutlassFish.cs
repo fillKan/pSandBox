@@ -24,6 +24,5 @@ public class Fish_cutlassFish : Item, Interaction
         RegisterInteraction();
 
         _itemCode = (int)ItemMaster.ItemList.Fish_CUTLASSFISH;
-        TryGetComponent<Rigidbody2D>(out _rigidbody);
     }
 }

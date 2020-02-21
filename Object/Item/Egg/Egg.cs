@@ -24,6 +24,5 @@ public class Egg : Item, Interaction
         RegisterInteraction();
 
         _itemCode = (int)ItemMaster.ItemList.EGG;
-        TryGetComponent<Rigidbody2D>(out _rigidbody);
     }
 }

@@ -23,6 +23,5 @@ public class WhiteBirch_seed : Item, Interaction
         RegisterInteraction();
 
         _itemCode = (int)ItemMaster.ItemList.SEED_WHITEBIRCH;
-        TryGetComponent<Rigidbody2D>(out _rigidbody);
     }
 }

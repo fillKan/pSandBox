@@ -24,6 +24,5 @@ public class Wool : Item, Interaction
         RegisterInteraction();
 
         _itemCode = (int)ItemMaster.ItemList.WOOL;
-        TryGetComponent<Rigidbody2D>(out _rigidbody);
     }
 }

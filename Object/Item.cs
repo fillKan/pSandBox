@@ -11,12 +11,6 @@ public abstract class Item : MonoBehaviour
     }
     protected int _itemCode;
 
-    public    Rigidbody2D  Rigidbody
-    {
-        get { return _rigidbody; }
-    }
-    protected Rigidbody2D _rigidbody;
-
     protected abstract void Init();
 
     private void Awake()

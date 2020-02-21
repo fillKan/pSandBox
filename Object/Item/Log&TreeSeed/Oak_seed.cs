@@ -23,6 +23,5 @@ public class Oak_seed : Item, Interaction
         RegisterInteraction();
 
         _itemCode = (int)ItemMaster.ItemList.SEED_OAK;
-        TryGetComponent<Rigidbody2D>(out _rigidbody);
     }
 }
