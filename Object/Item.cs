@@ -23,8 +23,6 @@ public abstract class Item : MonoBehaviour
     {
         Init();
 
-        TryGetComponent<SpriteRenderer>(out SpriteRenderer sprite);
-
-        ItemMaster.Instance.Registration(this, sprite.sprite);
+        ItemMaster.Instance.Registration(this);
     }
 }

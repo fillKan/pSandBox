@@ -23,15 +23,15 @@ public class ItemMaster : Singleton<ItemMaster>
         FISH_SALMON
     };
 
-    public void Registration(Item item, Sprite sprite)
+    public void Registration(Item item)
     {
         if (!Items.ContainsKey(item.itemCode))
         {
             Items.Add(item.itemCode, item);
-        }
-        if (!ItemSprs.ContainsKey(item.itemCode))
-        {
-            ItemSprs.Add(item.itemCode, sprite);
+
+            item.TryGetComponent<SpriteRenderer>(out SpriteRenderer renderer);
+
+            ItemSprs.Add(item.itemCode, renderer.sprite);
         }
     }
 
