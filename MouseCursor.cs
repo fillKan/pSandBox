@@ -136,6 +136,12 @@ public class MouseCursor : Singleton<MouseCursor>
     }
     private void OnTriggerStay2D(Collider2D other)
     {
+        if(_selectSlot)
+        {
+            if(targetSprite) ExitObject();
+            return;
+        }
+
         if (PlayerGetter.Instance.GetInteractObj().ContainsKey(other.gameObject.GetInstanceID()))
         {
             if(other.TryGetComponent<SpriteRenderer>(out SpriteRenderer spr))
