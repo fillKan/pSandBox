@@ -20,7 +20,8 @@ public class ItemMaster : Singleton<ItemMaster>
         FISH_MACKEREL,
         FISH_POOLLACK,
         FISH_PUFFERFISH,
-        FISH_SALMON
+        FISH_SALMON,
+        AXE
     };
 
     public void Registration(Item item)
