@@ -48,7 +48,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
 
         for (; i < items.Length; i++)
         {
-            if (_itemContainer.First.Value.itemCode == items[i].itemCode)
+            if (_itemContainer.First.Value.ItemCode == items[i].ItemCode)
             {
                 _itemContainer.AddLast(items[i]);
             }
@@ -63,7 +63,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
             _itemContainer.AddLast(item);
         }
 
-        else if (item.itemCode == _itemContainer.First.Value.itemCode)
+        else if (item.ItemCode == _itemContainer.First.Value.ItemCode)
         {
             _itemContainer.AddLast(item);
         }
@@ -81,7 +81,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
         }
         else if (IsSlotEmpty)
         {
-            SlotSprt.ShowItemSprt(ContainItem.itemCode);
+            SlotSprt.ShowItemSprt(ContainItem.ItemCode);
             IsSlotEmpty = false;
         }
     }
@@ -103,7 +103,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
                         MouseCursor.Instance.DelCarryItem();
                         UpdateSlotInfo();
                     }
-                    else if (MouseCursor.Instance.CarryItem.itemCode == ContainItem.itemCode)
+                    else if (MouseCursor.Instance.CarryItem.ItemCode == ContainItem.ItemCode)
                     {
                         _itemContainer.AddLast(MouseCursor.Instance.CarryItem);
                         MouseCursor.Instance.DelCarryItem();
@@ -119,22 +119,12 @@ public class ItemSlot : MonoBehaviour, MouseAction
                     {
                         MouseCursor.Instance.AddCarryItem(_itemContainer.Last.Value);
 
-                        if (ContainItem.Equals(_itemContainer.Last.Value))
-                        {
-                            //SlotSprt.HideItemSprt();
-                        }
-
                         _itemContainer.RemoveLast();
                         UpdateSlotInfo();
                     }
-                    else if (MouseCursor.Instance.CarryItem.itemCode == ContainItem.itemCode)
+                    else if (MouseCursor.Instance.CarryItem.ItemCode == ContainItem.ItemCode)
                     {
                         MouseCursor.Instance.AddCarryItem(_itemContainer.Last.Value);
-
-                        if (ContainItem.Equals(_itemContainer.Last.Value))
-                        {
-                            //SlotSprt.HideItemSprt();
-                        }
 
                         _itemContainer.RemoveLast();
                         UpdateSlotInfo();

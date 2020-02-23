@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Item : MonoBehaviour
 {
     [HideInInspector]
-    public    int  itemCode
+    public    int  ItemCode
     {
         get { return _itemCode; }
     }
