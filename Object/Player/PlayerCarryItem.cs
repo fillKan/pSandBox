@@ -52,7 +52,7 @@ public class PlayerCarryItem : MonoBehaviour
             // 현재 띄워지고 있는 스프라이트가 없다면?
             if(SlotSprt.Renderer.sprite == null)
             {
-                SlotSprt.ShowItemSprt(CarryItemSlot.ContainItem.itemCode);
+                SlotSprt.ShowItemSprt(CarryItemSlot.ContainItem.ItemCode);
             }
 
             // 현재 띄워지고 있는 스프라이트와 들고있는 아이템의 스프라이트를 비교하는 이유는,
@@ -60,7 +60,7 @@ public class PlayerCarryItem : MonoBehaviour
 
             else if (!SlotSprt.Renderer.sprite.Equals(CarryItemSlot.SlotSprt.Renderer.sprite))
             {
-                SlotSprt.ShowItemSprt(CarryItemSlot.ContainItem.itemCode);
+                SlotSprt.ShowItemSprt(CarryItemSlot.ContainItem.ItemCode);
             }
 
         }

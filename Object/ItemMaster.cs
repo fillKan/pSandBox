@@ -7,6 +7,8 @@ public class ItemMaster : Singleton<ItemMaster>
     private Dictionary<int, Item>   Items    = new Dictionary<int, Item>();
     private Dictionary<int, Sprite> ItemSprs = new Dictionary<int, Sprite>();
 
+    private Dictionary<int, Stack<ItemSprt>> ItemSprts = new Dictionary<int, Stack<ItemSprt>>();
+
     public enum ItemList
     {
         LOG_WHITEBIRCH = 1,
@@ -26,13 +28,13 @@ public class ItemMaster : Singleton<ItemMaster>
 
     public void Registration(Item item)
     {
-        if (!Items.ContainsKey(item.itemCode))
+        if (!Items.ContainsKey(item.ItemCode))
         {
-            Items.Add(item.itemCode, item);
+            Items.Add(item.ItemCode, item);
 
             item.TryGetComponent<SpriteRenderer>(out SpriteRenderer renderer);
 
-            ItemSprs.Add(item.itemCode, renderer.sprite);
+            ItemSprs.Add(item.ItemCode, renderer.sprite);
         }
     }
 
@@ -71,4 +73,29 @@ public class ItemMaster : Singleton<ItemMaster>
         return null;
     }
 
+    public ItemSprt DropItem(ItemList item)
+    {
+        if(ItemSprts.ContainsKey((int)item))
+        {
+            if (ItemSprts[(int)item].Count > 0)
+            {
+                return ItemSprts[(int)item].Pop();
+            }
+        }
+        Debug.LogError("Not Found the Value or Key");
+        return null;
+    }
+
+    public void LoadItem(ItemSprt item)
+    {
+        if(ItemSprts.ContainsKey(item.ItemCode))
+        {
+            ItemSprts[item.ItemCode].Push(item);
+        }
+        else
+        {
+            ItemSprts.Add(item.ItemCode, new Stack<ItemSprt>());
+            ItemSprts[item.ItemCode].Push(item);
+        }
+    }
 }

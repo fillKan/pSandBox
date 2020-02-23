@@ -45,7 +45,7 @@ public class MouseCursor : Singleton<MouseCursor>
         {
             _carryItems.Push(item);
         }
-        else if(_carryItems.Peek().itemCode == item.itemCode)
+        else if(_carryItems.Peek().ItemCode == item.ItemCode)
         {
             _carryItems.Push(item);
         }
@@ -78,7 +78,7 @@ public class MouseCursor : Singleton<MouseCursor>
         {
             if(CarryItem != null)
             {
-                SlotSprt.ShowItemSprt(CarryItem.itemCode);
+                SlotSprt.ShowItemSprt(CarryItem.ItemCode);
             }
             else
             {

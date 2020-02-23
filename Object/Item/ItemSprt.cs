@@ -12,7 +12,7 @@ using UnityEngine;
 #endregion
 public class ItemSprt : MonoBehaviour, Interaction
 {
-    private int ItemCode = 0;
+    public int ItemCode = 0;
     
     public void SetItemData(int xItemCode)
     {

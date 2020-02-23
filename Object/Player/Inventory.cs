@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
                 continue;
             }
 
-            if(itemSlots[i].ContainItem.itemCode == item.itemCode)
+            if(itemSlots[i].ContainItem.ItemCode == item.ItemCode)
             {
                 item.gameObject.SetActive(false);
 
