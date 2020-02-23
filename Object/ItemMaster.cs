@@ -9,7 +9,7 @@ public class ItemMaster : Singleton<ItemMaster>
 
     public enum ItemList
     {
-        LOG_WHITEBIRCH,
+        LOG_WHITEBIRCH = 1,
         LOG_OAK,
         SEED_WHITEBIRCH,
         SEED_OAK,
