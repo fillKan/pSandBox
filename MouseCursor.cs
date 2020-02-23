@@ -13,19 +13,13 @@ public class MouseCursor : Singleton<MouseCursor>
         get { return _selectSlot; }
     }
     private ItemSlot _selectSlot;
-    public  Stack<Item>  CarryItems 
-    {
-        get 
-        {
-            return _carryItems; 
-        }
-    }
-    private Stack<Item> _carryItems = new Stack<Item>();
 
-    public Item CarryItem {
+    private Stack<ItemMaster.ItemList> _carryItems = new Stack<ItemMaster.ItemList>();
+
+    public ItemMaster.ItemList CarryItem {
         get 
         {
-            if (_carryItems.Count == 0) return null;
+            if (_carryItems.Count == 0) return ItemMaster.ItemList.NONE;
             return _carryItems.Peek(); 
         } 
     }
@@ -39,13 +33,13 @@ public class MouseCursor : Singleton<MouseCursor>
     ///더할 아이템
     /// </param>
     #endregion
-    public void AddCarryItem(Item item)
+    public void AddCarryItem(ItemMaster.ItemList item)
     {
         if(_carryItems.Count == 0)
         {
             _carryItems.Push(item);
         }
-        else if(_carryItems.Peek().ItemCode == item.ItemCode)
+        else if(_carryItems.Peek() == item)
         {
             _carryItems.Push(item);
         }
@@ -76,9 +70,9 @@ public class MouseCursor : Singleton<MouseCursor>
     {
         while(true)
         {
-            if(CarryItem != null)
+            if(CarryItem != ItemMaster.ItemList.NONE)
             {
-                SlotSprt.ShowItemSprt(CarryItem.ItemCode);
+                SlotSprt.ShowItemSprt(CarryItem);
             }
             else
             {
@@ -87,7 +81,7 @@ public class MouseCursor : Singleton<MouseCursor>
             if (Input.GetMouseButtonDown(0))
             {
                 // 마우스로 취할 수 있는 동작이 없다면, 마우스로 클릭한 지점으로 이동한다.
-                if (targetSprite == null && _selectSlot == null && CarryItem == null)
+                if (targetSprite == null && _selectSlot == null && CarryItem == ItemMaster.ItemList.NONE)
                 {
                     PlayerGetter.Instance.MovementCommend(transform.position);
                 }
@@ -97,10 +91,12 @@ public class MouseCursor : Singleton<MouseCursor>
                 {
                     _selectSlot.OperateAction(0);
                 }
-                else if(CarryItem != null)
+                else if(CarryItem != ItemMaster.ItemList.NONE)
                 {
-                    _carryItems.Peek().transform.position = (Vector2)transform.position;
-                    _carryItems.Peek().gameObject.SetActive(true);
+                    ItemSprt item = ItemMaster.Instance.DropItem(CarryItem);
+
+                    item.transform.position = (Vector2)transform.position;
+                    item.gameObject.SetActive(true);
                     _carryItems.Pop();
                 }
                 #endregion

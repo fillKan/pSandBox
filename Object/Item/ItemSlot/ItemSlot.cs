@@ -5,17 +5,17 @@ using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour, MouseAction
 {
-    private LinkedList<Item> _itemContainer = new LinkedList<Item>();
+    private LinkedList<ItemMaster.ItemList> _itemContainer = new LinkedList<ItemMaster.ItemList>();
     private bool IsSlotEmpty = true;
     public int ItemCount
     {
         get { return _itemContainer.Count; }
     }
-    public Item ContainItem
+    public ItemMaster.ItemList ContainItem
     {
         get
         {
-            if (_itemContainer.Count == 0) return null;
+            if (_itemContainer.Count == 0) return ItemMaster.ItemList.NONE;
 
             return _itemContainer.First.Value;
         }
@@ -37,7 +37,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
     /***************************************
            ItemSlot를 관리하는 함수들
     ****************************************/
-    public void AddItem(params Item[] items)
+    public void AddItem(params ItemMaster.ItemList[] items)
     {
         int i = 0;
 
@@ -48,7 +48,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
 
         for (; i < items.Length; i++)
         {
-            if (_itemContainer.First.Value.ItemCode == items[i].ItemCode)
+            if (_itemContainer.First.Value == items[i])
             {
                 _itemContainer.AddLast(items[i]);
             }
@@ -56,14 +56,14 @@ public class ItemSlot : MonoBehaviour, MouseAction
         }
         UpdateSlotInfo();
     }
-    public void AddItem(Item item)
+    public void AddItem(ItemMaster.ItemList item)
     {
         if (_itemContainer.Count == 0)
         {
             _itemContainer.AddLast(item);
         }
 
-        else if (item.ItemCode == _itemContainer.First.Value.ItemCode)
+        else if (item == _itemContainer.First.Value)
         {
             _itemContainer.AddLast(item);
         }
@@ -74,14 +74,14 @@ public class ItemSlot : MonoBehaviour, MouseAction
     {
         text.text = ItemCount.ToString();
 
-        if (ContainItem == null)
+        if (ContainItem == ItemMaster.ItemList.NONE)
         {
             SlotSprt.HideItemSprt();
             IsSlotEmpty = true;
         }
         else if (IsSlotEmpty)
         {
-            SlotSprt.ShowItemSprt(ContainItem.ItemCode);
+            SlotSprt.ShowItemSprt(ContainItem);
             IsSlotEmpty = false;
         }
     }
@@ -95,15 +95,15 @@ public class ItemSlot : MonoBehaviour, MouseAction
         switch (input)
         {
             case 0:
-                if (MouseCursor.Instance.CarryItem != null)
+                if (MouseCursor.Instance.CarryItem != ItemMaster.ItemList.NONE)
                 {
-                    if (ContainItem == null)
+                    if (ContainItem == ItemMaster.ItemList.NONE)
                     {
                         _itemContainer.AddLast(MouseCursor.Instance.CarryItem);
                         MouseCursor.Instance.DelCarryItem();
                         UpdateSlotInfo();
                     }
-                    else if (MouseCursor.Instance.CarryItem.ItemCode == ContainItem.ItemCode)
+                    else if (MouseCursor.Instance.CarryItem == ContainItem)
                     {
                         _itemContainer.AddLast(MouseCursor.Instance.CarryItem);
                         MouseCursor.Instance.DelCarryItem();
@@ -115,14 +115,14 @@ public class ItemSlot : MonoBehaviour, MouseAction
             case 1:
                 if (ItemCount > 0)
                 {
-                    if (MouseCursor.Instance.CarryItem == null)
+                    if (MouseCursor.Instance.CarryItem == ItemMaster.ItemList.NONE)
                     {
                         MouseCursor.Instance.AddCarryItem(_itemContainer.Last.Value);
 
                         _itemContainer.RemoveLast();
                         UpdateSlotInfo();
                     }
-                    else if (MouseCursor.Instance.CarryItem.ItemCode == ContainItem.ItemCode)
+                    else if (MouseCursor.Instance.CarryItem == ContainItem)
                     {
                         MouseCursor.Instance.AddCarryItem(_itemContainer.Last.Value);
 

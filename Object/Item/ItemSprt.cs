@@ -12,17 +12,7 @@ using UnityEngine;
 #endregion
 public class ItemSprt : MonoBehaviour, Interaction
 {
-    public int ItemCode = 0;
-    
-    public void SetItemData(int xItemCode)
-    {
-        ItemCode = xItemCode;
-    }
-
-    public void SetItemData(ItemMaster.ItemList xItem)
-    {
-        ItemCode = (int)xItem;
-    }
+    public ItemMaster.ItemList ItemCode;
 
     public GameObject InteractObject()
     {
@@ -31,7 +21,7 @@ public class ItemSprt : MonoBehaviour, Interaction
 
     public void OperateAction()
     {
-        //PlayerGetter.Instance.Inventory.AddItemInventory(ItemCode);
+        PlayerGetter.Instance.Inventory.AddItemInventory(this);
     }
 
     public void RegisterInteraction()

@@ -7,11 +7,12 @@ public class ItemMaster : Singleton<ItemMaster>
     private Dictionary<int, Item>   Items    = new Dictionary<int, Item>();
     private Dictionary<int, Sprite> ItemSprs = new Dictionary<int, Sprite>();
 
-    private Dictionary<int, Stack<ItemSprt>> ItemSprts = new Dictionary<int, Stack<ItemSprt>>();
+    private Dictionary<ItemList, Stack<ItemSprt>> ItemSprts = new Dictionary<ItemList, Stack<ItemSprt>>();
 
     public enum ItemList
     {
-        LOG_WHITEBIRCH = 1,
+        NONE,
+        LOG_WHITEBIRCH,
         LOG_OAK,
         SEED_WHITEBIRCH,
         SEED_OAK,
@@ -75,11 +76,11 @@ public class ItemMaster : Singleton<ItemMaster>
 
     public ItemSprt DropItem(ItemList item)
     {
-        if(ItemSprts.ContainsKey((int)item))
+        if(ItemSprts.ContainsKey(item))
         {
-            if (ItemSprts[(int)item].Count > 0)
+            if (ItemSprts[item].Count > 0)
             {
-                return ItemSprts[(int)item].Pop();
+                return ItemSprts[item].Pop();
             }
         }
         Debug.LogError("Not Found the Value or Key");
