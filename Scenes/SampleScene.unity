@@ -3955,7 +3955,7 @@ GameObject:
   - component: {fileID: 1742276341}
   - component: {fileID: 1742276340}
   m_Layer: 0
-  m_Name: Axe
+  m_Name: sAxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4617,7 +4617,7 @@ PrefabInstance:
     - target: {fileID: 857161838707218581, guid: fc7c86c1eeab59443bfe496776f2818a,
         type: 3}
       propertyPath: m_Name
-      value: Fish_Mackerel
+      value: sFish_Mackerel
       objectReference: {fileID: 0}
     - target: {fileID: 857161838707218583, guid: fc7c86c1eeab59443bfe496776f2818a,
         type: 3}
@@ -4696,7 +4696,7 @@ PrefabInstance:
     - target: {fileID: 1892154163268618005, guid: 4ce3868468f8b5c4680d66c88a4e8454,
         type: 3}
       propertyPath: m_Name
-      value: WhiteBirch_seed
+      value: sWhiteBirch_seed
       objectReference: {fileID: 0}
     - target: {fileID: 1892154163268618007, guid: 4ce3868468f8b5c4680d66c88a4e8454,
         type: 3}
@@ -4765,7 +4765,7 @@ PrefabInstance:
     - target: {fileID: 2063010513597447666, guid: e64fc755f2f7f064e805089ded6036dc,
         type: 3}
       propertyPath: m_Name
-      value: Oak_log
+      value: sOak_log
       objectReference: {fileID: 0}
     - target: {fileID: 2063010513597447666, guid: e64fc755f2f7f064e805089ded6036dc,
         type: 3}
@@ -4904,7 +4904,7 @@ PrefabInstance:
     - target: {fileID: 2465152200534712752, guid: e4a7c3cb68e113148a9773fad9862683,
         type: 3}
       propertyPath: m_Name
-      value: Fish_Cutlassfish
+      value: sFish_Cutlassfish
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4a7c3cb68e113148a9773fad9862683, type: 3}
@@ -4918,7 +4918,7 @@ PrefabInstance:
     - target: {fileID: 2778243033363838994, guid: a8ecc25d8d03d10438de2358600153d9,
         type: 3}
       propertyPath: m_Name
-      value: Oak_seed
+      value: sOak_seed
       objectReference: {fileID: 0}
     - target: {fileID: 2778243033363838995, guid: a8ecc25d8d03d10438de2358600153d9,
         type: 3}
@@ -4997,7 +4997,7 @@ PrefabInstance:
     - target: {fileID: 3218884083481818115, guid: 6e4b5a19658b0eb4ca415ccb6e6c1f83,
         type: 3}
       propertyPath: m_Name
-      value: Fish_ButterFish
+      value: sFish_ButterFish
       objectReference: {fileID: 0}
     - target: {fileID: 3218884083481818136, guid: 6e4b5a19658b0eb4ca415ccb6e6c1f83,
         type: 3}
@@ -5140,7 +5140,7 @@ PrefabInstance:
     - target: {fileID: 3648679970874400120, guid: 25c286c2509467b4bb578d52ced52c43,
         type: 3}
       propertyPath: m_Name
-      value: WhiteBirch_log
+      value: sWhiteBirch_log
       objectReference: {fileID: 0}
     - target: {fileID: 3648679970874400124, guid: 25c286c2509467b4bb578d52ced52c43,
         type: 3}
@@ -5512,7 +5512,7 @@ PrefabInstance:
     - target: {fileID: 8973031321837952859, guid: 37d3f78584cc6994faf2675d3478b8f3,
         type: 3}
       propertyPath: m_Name
-      value: Egg
+      value: sEgg
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37d3f78584cc6994faf2675d3478b8f3, type: 3}
@@ -5655,7 +5655,7 @@ PrefabInstance:
     - target: {fileID: 7021521209860035894, guid: cfa82b316cfb1584ab5cd8fe208d6452,
         type: 3}
       propertyPath: m_Name
-      value: Wool
+      value: sWool
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfa82b316cfb1584ab5cd8fe208d6452, type: 3}
@@ -5724,7 +5724,7 @@ PrefabInstance:
     - target: {fileID: 7309580113863917582, guid: 85041dfc5da19c242bac0bf917a2a702,
         type: 3}
       propertyPath: m_Name
-      value: Fish_Pollack
+      value: sFish_Pollack
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85041dfc5da19c242bac0bf917a2a702, type: 3}
@@ -5793,7 +5793,7 @@ PrefabInstance:
     - target: {fileID: 7614111498482607501, guid: 9445a80d718b19d458a72ae36c203728,
         type: 3}
       propertyPath: m_Name
-      value: Fish_PufferFish
+      value: sFish_PufferFish
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9445a80d718b19d458a72ae36c203728, type: 3}
@@ -5881,7 +5881,7 @@ PrefabInstance:
     - target: {fileID: 7880172341998503059, guid: e45652fa51afae24f8546b2b596af095,
         type: 3}
       propertyPath: m_Name
-      value: Fish_Salmon
+      value: sFish_Salmon
       objectReference: {fileID: 0}
     - target: {fileID: 7880172341998503070, guid: e45652fa51afae24f8546b2b596af095,
         type: 3}
