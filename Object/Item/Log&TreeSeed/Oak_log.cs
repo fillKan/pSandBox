@@ -11,7 +11,7 @@ public class Oak_log : Item, Interaction
 
     public void OperateAction()
     {
-        PlayerGetter.Instance.Inventory.AddItemInventory(this);
+        //PlayerGetter.Instance.Inventory.AddItemInventory(this);
     }
 
     public void RegisterInteraction()

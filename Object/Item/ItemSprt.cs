@@ -28,4 +28,11 @@ public class ItemSprt : MonoBehaviour, Interaction
     {
         PlayerGetter.Instance.AddInteractObj(gameObject.GetInstanceID(), this);
     }
+
+    private void Awake()
+    {
+        RegisterInteraction();
+
+        ItemMaster.Instance.Registration(this);
+    }
 }

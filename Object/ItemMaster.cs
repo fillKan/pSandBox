@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ItemMaster : Singleton<ItemMaster>
 {
-    private Dictionary<int, Item>   Items    = new Dictionary<int, Item>();
-    private Dictionary<int, Sprite> ItemSprs = new Dictionary<int, Sprite>();
+    private Dictionary<int, ItemSprt>   Items = new Dictionary<int, ItemSprt>();
+    private Dictionary<int, Sprite> ItemSprs  = new Dictionary<int, Sprite>();
 
     private Dictionary<ItemList, Stack<ItemSprt>> ItemSprts = new Dictionary<ItemList, Stack<ItemSprt>>();
 
@@ -27,19 +27,19 @@ public class ItemMaster : Singleton<ItemMaster>
         AXE
     };
 
-    public void Registration(Item item)
+    public void Registration(ItemSprt item)
     {
-        if (!Items.ContainsKey(item.ItemCode))
+        if (!Items.ContainsKey((int)item.ItemCode))
         {
-            Items.Add(item.ItemCode, item);
+            Items.Add((int)item.ItemCode, item);
 
             item.TryGetComponent<SpriteRenderer>(out SpriteRenderer renderer);
 
-            ItemSprs.Add(item.ItemCode, renderer.sprite);
+            ItemSprs.Add((int)item.ItemCode, renderer.sprite);
         }
     }
 
-    public Item GetItem(int itemCode)
+    public ItemSprt GetItem(int itemCode)
     {
         if (Items.ContainsKey(itemCode))
         {
@@ -47,7 +47,7 @@ public class ItemMaster : Singleton<ItemMaster>
         }
         return null;
     }
-    public Item GetItem(ItemList item)
+    public ItemSprt GetItem(ItemList item)
     {
         if (Items.ContainsKey((int)item))
         {

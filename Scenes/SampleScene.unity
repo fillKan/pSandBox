@@ -477,6 +477,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sheep (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3673258038059211687, guid: 7a381a8688a81654889820dd8536eccf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3673258038059211691, guid: 7a381a8688a81654889820dd8536eccf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -703,7 +708,7 @@ PrefabInstance:
     - target: {fileID: 8822178320297807048, guid: 7bad272acc573a24bb8e138ec07808cc,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8822178320297807049, guid: 7bad272acc573a24bb8e138ec07808cc,
         type: 3}
@@ -2367,7 +2372,7 @@ PrefabInstance:
     - target: {fileID: 8822178320297807048, guid: 7bad272acc573a24bb8e138ec07808cc,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8822178320297807050, guid: 7bad272acc573a24bb8e138ec07808cc,
         type: 3}
@@ -2512,6 +2517,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sheep (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673258038059211687, guid: 7a381a8688a81654889820dd8536eccf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3673258038059211688, guid: 7a381a8688a81654889820dd8536eccf,
         type: 3}
@@ -4102,7 +4112,7 @@ PrefabInstance:
     - target: {fileID: 8822178320297807048, guid: 7bad272acc573a24bb8e138ec07808cc,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8822178320297807049, guid: 7bad272acc573a24bb8e138ec07808cc,
         type: 3}
@@ -5210,6 +5220,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sheep
       objectReference: {fileID: 0}
+    - target: {fileID: 3673258038059211687, guid: 7a381a8688a81654889820dd8536eccf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3673258038059211691, guid: 7a381a8688a81654889820dd8536eccf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5369,6 +5384,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree_Oak
       objectReference: {fileID: 0}
+    - target: {fileID: 3727555888068603049, guid: 0a35f28349fdf674ea5ebd0d78052a46,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3727555888068603051, guid: 0a35f28349fdf674ea5ebd0d78052a46,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5506,6 +5526,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Chicken_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6744861747894498386, guid: b72b063414dc8414d8a855840128f450,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6744861747894498388, guid: b72b063414dc8414d8a855840128f450,
         type: 3}
@@ -5783,6 +5808,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chicken_1
       objectReference: {fileID: 0}
+    - target: {fileID: 7697733799748203810, guid: 1207ba9daafc6f143b602730e674e3c1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7697733799748203812, guid: 1207ba9daafc6f143b602730e674e3c1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5920,6 +5950,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree_WhiteBirch
+      objectReference: {fileID: 0}
+    - target: {fileID: 8822178320297807048, guid: 7bad272acc573a24bb8e138ec07808cc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8822178320297807050, guid: 7bad272acc573a24bb8e138ec07808cc,
         type: 3}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TreeOak : Tree, Interaction
 {
-    private Stack<Item> dropItems = new Stack<Item>();
+    private Stack<ItemSprt> dropItems = new Stack<ItemSprt>();
 
     public GameObject InteractObject()
     {
@@ -38,7 +38,7 @@ public class TreeOak : Tree, Interaction
     {
         fDurability = 20;
         int repeat = Random.Range(8, 14);
-        Item tItem;
+        ItemSprt tItem;
 
         RegisterInteraction();
 

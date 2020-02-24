@@ -38,6 +38,7 @@ public class Inventory : MonoBehaviour
             item.gameObject.SetActive(false);
 
             itemSlots[emptySlotIndex].AddItem(item.ItemCode);
+            ItemMaster.Instance.LoadItem(item);
             return;
         }
         Debug.LogWarning("인벤토리가 가득 차 있습니다");

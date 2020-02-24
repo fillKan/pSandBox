@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4552224141191339781}
   - component: {fileID: 6745866146194624453}
   - component: {fileID: 6126131231367055479}
-  - component: {fileID: 2004083931322407622}
+  - component: {fileID: 1580548683054594824}
   m_Layer: 8
   m_Name: Egg
   m_TagString: Untagged
@@ -131,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.4}
   m_EdgeRadius: 0
---- !u!114 &2004083931322407622
+--- !u!114 &1580548683054594824
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,6 +140,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8973031321837952859}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a55c9b9803586d04882d93bc700a0588, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c73d8f630abecc4bac386afd72d0d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemCode: 6
