@@ -117,6 +117,14 @@ public class ItemMaster : Singleton<ItemMaster>
             Items[itemCode].UseItem();
         }
     }
+    public void UseItem(ItemList item)
+    {
+        if (Items.ContainsKey((int)item))
+        {
+            Items[(int)item].UseItem();
+        }
+    }
+
 
     public Sprite GetItemSprt(int itemCode)
     {

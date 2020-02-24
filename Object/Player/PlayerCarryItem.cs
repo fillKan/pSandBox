@@ -12,6 +12,11 @@ public class PlayerCarryItem : MonoBehaviour
     public ItemSlotSprt SlotSprt;
     public ItemSlot CarryItemSlot;
 
+    public ItemMaster.ItemList ItemData
+    {
+        get { return CarryItemSlot.ContainItem; }
+    }
+
     #region 함수 설명 :
     /// <summary>
     /// 들고있는 아이템 스프라이트의 정보를 업데이트하는 함수.

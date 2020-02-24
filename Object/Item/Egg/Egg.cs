@@ -2,27 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Egg : Item, Interaction
+public class Egg : Item
 {
-    public GameObject InteractObject()
-    {
-        return gameObject;
-    }
-
-    public void OperateAction()
-    {
-        //PlayerGetter.Instance.Inventory.AddItemInventory(this);
-    }
-
-    public void RegisterInteraction()
-    {
-        PlayerGetter.Instance.AddInteractObj(gameObject.GetInstanceID(), this);
-    }
-
     protected override void Init()
     {
-        RegisterInteraction();
-
         _itemCode = (int)ItemMaster.ItemList.EGG;
+    }
+    public override void UseItem()
+    {
+        Debug.Log((ItemMaster.ItemList)_itemCode);
     }
 }
