@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7614111498482607497}
   - component: {fileID: 7614111498482607496}
   - component: {fileID: 7614111498482607503}
-  - component: {fileID: 7614111498482607502}
+  - component: {fileID: 729603708458568749}
   m_Layer: 0
   m_Name: Fish_PufferFish
   m_TagString: Untagged
@@ -132,7 +132,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
---- !u!114 &7614111498482607502
+--- !u!114 &729603708458568749
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,6 +141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7614111498482607501}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b85f7ada525d79b48b345a3813aa0545, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c73d8f630abecc4bac386afd72d0d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemCode: 11

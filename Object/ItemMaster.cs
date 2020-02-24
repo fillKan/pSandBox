@@ -21,7 +21,7 @@ public class ItemMaster : Singleton<ItemMaster>
         Fish_BUTTERFISH,
         Fish_CUTLASSFISH,
         FISH_MACKEREL,
-        FISH_POOLLACK,
+        FISH_POLLACK,
         FISH_PUFFERFISH,
         FISH_SALMON,
         AXE

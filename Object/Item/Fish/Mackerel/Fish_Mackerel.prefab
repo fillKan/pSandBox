@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 857161838707218580}
   - component: {fileID: 857161838707218576}
   - component: {fileID: 857161838707218577}
-  - component: {fileID: 857161838707218582}
+  - component: {fileID: 2438559223567680745}
   m_Layer: 0
   m_Name: Fish_Mackerel
   m_TagString: Untagged
@@ -132,7 +132,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.28, y: 1.28}
   m_EdgeRadius: 0
---- !u!114 &857161838707218582
+--- !u!114 &2438559223567680745
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,6 +141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 857161838707218581}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f89f461224020a41aae874b96bb8e5d, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c73d8f630abecc4bac386afd72d0d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemCode: 9

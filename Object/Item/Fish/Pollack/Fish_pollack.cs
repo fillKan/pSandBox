@@ -23,6 +23,6 @@ public class Fish_pollack : Item, Interaction
     {
         RegisterInteraction();
 
-        _itemCode = (int)ItemMaster.ItemList.FISH_POOLLACK;
+        _itemCode = (int)ItemMaster.ItemList.FISH_POLLACK;
     }
 }
