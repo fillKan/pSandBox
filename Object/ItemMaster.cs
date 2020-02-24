@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ItemMaster : Singleton<ItemMaster>
 {
-    private Dictionary<int, ItemExisting>   Items = new Dictionary<int, ItemExisting>();
-    private Dictionary<int, Sprite> ItemSprs  = new Dictionary<int, Sprite>();
+    private Dictionary<int, Item>   Items    = new Dictionary<int, Item>();
+    private Dictionary<int, Sprite> ItemSprs = new Dictionary<int, Sprite>();
 
     private Dictionary<ItemList, Stack<ItemExisting>> ItemExistings = new Dictionary<ItemList, Stack<ItemExisting>>();
 
@@ -29,14 +29,22 @@ public class ItemMaster : Singleton<ItemMaster>
 
     public void Registration(ItemExisting item)
     {
-        if (!Items.ContainsKey((int)item.ItemCode))
+        if (!ItemExistings.ContainsKey(item.ItemCode))
         {
-            Items.Add((int)item.ItemCode, item);
-
             item.TryGetComponent<SpriteRenderer>(out SpriteRenderer renderer);
+
             ItemExistings.Add(item.ItemCode, new Stack<ItemExisting>());
             ItemExistings[item.ItemCode].Push(item);
+
             ItemSprs.Add((int)item.ItemCode, renderer.sprite);
+        }
+    }
+
+    public void Registration(Item item)
+    {
+        if (!Items.ContainsKey((int)item.ItemCode))
+        {
+            Items.Add(item.ItemCode, item);
         }
     }
 
@@ -102,6 +110,14 @@ public class ItemMaster : Singleton<ItemMaster>
         }
     }
     
+    public void UseItem(int itemCode)
+    {
+        if(Items.ContainsKey(itemCode))
+        {
+            Items[itemCode].UseItem();
+        }
+    }
+
     public Sprite GetItemSprt(int itemCode)
     {
         if (ItemSprs.ContainsKey(itemCode))

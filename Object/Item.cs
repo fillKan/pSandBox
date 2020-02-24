@@ -12,6 +12,7 @@ public abstract class Item : MonoBehaviour
     protected int _itemCode;
 
     protected abstract void Init();
+    public abstract void UseItem();
 
     private void Awake()
     {
@@ -20,6 +21,7 @@ public abstract class Item : MonoBehaviour
         TryGetComponent<Renderer>(out Renderer renderer);
                                                renderer.enabled = false;
 
-        //ItemMaster.Instance.Registration(this);
+        ItemMaster.Instance.Registration(this);
     }
+
 }
