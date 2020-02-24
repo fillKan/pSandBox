@@ -17,6 +17,9 @@ public abstract class Item : MonoBehaviour
     {
         Init();
 
+        TryGetComponent<Renderer>(out Renderer renderer);
+                                               renderer.enabled = false;
+
         //ItemMaster.Instance.Registration(this);
     }
 }
