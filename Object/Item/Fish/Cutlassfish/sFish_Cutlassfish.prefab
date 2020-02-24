@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2465152200534712748}
   - component: {fileID: 2465152200534712755}
   - component: {fileID: 2465152200534712754}
-  - component: {fileID: 9065048146903200806}
+  - component: {fileID: 536201291692650172}
   m_Layer: 0
   m_Name: sFish_Cutlassfish
   m_TagString: Untagged
@@ -132,7 +132,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
---- !u!114 &9065048146903200806
+--- !u!114 &536201291692650172
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2465152200534712752}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c73d8f630abecc4bac386afd72d0d16, type: 3}
+  m_Script: {fileID: 11500000, guid: 75b76470fb59897488e4089e95b1e01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ItemCode: 8

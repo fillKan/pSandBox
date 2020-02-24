@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TreeWhiteBirch : Tree, Interaction
 {
-    private Stack<ItemSprt> dropItems = new Stack<ItemSprt>();
+    private Stack<ItemExisting> TakeItemExistings = new Stack<ItemExisting>();
 
     public GameObject InteractObject()
     {
@@ -24,13 +24,13 @@ public class TreeWhiteBirch : Tree, Interaction
     }
 
 
-    protected override void DropItem()
+    protected override void TakeItemExisting()
     {
-        while (dropItems.Count != 0)
+        while (TakeItemExistings.Count != 0)
         {
-            dropItems.Peek().gameObject.SetActive(true);
+            TakeItemExistings.Peek().gameObject.SetActive(true);
 
-            dropItems.Pop();
+            TakeItemExistings.Pop();
         }
     }
 
@@ -38,7 +38,7 @@ public class TreeWhiteBirch : Tree, Interaction
     {
         fDurability = 20;
         int repeat = Random.Range(8, 14);
-        ItemSprt tItem;
+        ItemExisting tItem;
 
         RegisterInteraction();
 
@@ -46,13 +46,13 @@ public class TreeWhiteBirch : Tree, Interaction
         {
             if(Random.Range(0,4) == 0)
             {
-                 tItem = Instantiate(ItemMaster.Instance.GetItem(ItemMaster.ItemList.SEED_WHITEBIRCH), transform.position, Quaternion.identity);             
+                 tItem = Instantiate(ItemMaster.Instance.GetItemExisting(ItemMaster.ItemList.SEED_WHITEBIRCH), transform.position, Quaternion.identity);             
             }
-            else tItem = Instantiate(ItemMaster.Instance.GetItem(ItemMaster.ItemList.LOG_WHITEBIRCH), transform.position, Quaternion.identity);
+            else tItem = Instantiate(ItemMaster.Instance.GetItemExisting(ItemMaster.ItemList.LOG_WHITEBIRCH), transform.position, Quaternion.identity);
 
             tItem.gameObject.SetActive(false);
 
-            dropItems.Push(tItem);
+            TakeItemExistings.Push(tItem);
         }
 
         sprite = gameObject.GetComponent<SpriteRenderer>();

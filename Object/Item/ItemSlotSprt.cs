@@ -22,9 +22,9 @@ public class ItemSlotSprt : MonoBehaviour
     /// 띄울 아이템 스프라이트의 아이템 코드.
     /// </param>
     #endregion
-    public void ShowItemSprt(int itemCode)
+    public void ShowItemExisting(int itemCode)
     {
-        Renderer.sprite = ItemMaster.Instance.GetItemSpr(itemCode);
+        Renderer.sprite = ItemMaster.Instance.GetItemSprt(itemCode);
     }
 
     #region 함수 설명 : 
@@ -35,9 +35,9 @@ public class ItemSlotSprt : MonoBehaviour
     /// 띄울 아이템의 ItemMaster.ItemList의 열거자.
     /// </param>
     #endregion
-    public void ShowItemSprt(ItemMaster.ItemList item)
+    public void ShowItemExisting(ItemMaster.ItemList item)
     {
-        Renderer.sprite = ItemMaster.Instance.GetItemSpr(item);
+        Renderer.sprite = ItemMaster.Instance.GetItemSprt(item);
     }
 
     #region 함수 설명 : 
@@ -45,7 +45,7 @@ public class ItemSlotSprt : MonoBehaviour
     /// 더 이상 스프라이트 띄우지 마!
     /// </summary>
     #endregion
-    public void HideItemSprt()
+    public void HideItemExisting()
     {
         Renderer.sprite = null;
     }

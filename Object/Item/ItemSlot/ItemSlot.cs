@@ -76,12 +76,12 @@ public class ItemSlot : MonoBehaviour, MouseAction
 
         if (ContainItem == ItemMaster.ItemList.NONE)
         {
-            SlotSprt.HideItemSprt();
+            SlotSprt.HideItemExisting();
             IsSlotEmpty = true;
         }
         else if (IsSlotEmpty)
         {
-            SlotSprt.ShowItemSprt(ContainItem);
+            SlotSprt.ShowItemExisting(ContainItem);
             IsSlotEmpty = false;
         }
     }

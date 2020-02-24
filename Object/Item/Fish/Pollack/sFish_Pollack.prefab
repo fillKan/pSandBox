@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7309580113863917578}
   - component: {fileID: 7309580113863917581}
   - component: {fileID: 7309580113863917580}
-  - component: {fileID: 6477100149742699476}
+  - component: {fileID: 5759460426228960191}
   m_Layer: 0
   m_Name: sFish_Pollack
   m_TagString: Untagged
@@ -132,7 +132,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.28, y: 1.28}
   m_EdgeRadius: 0
---- !u!114 &6477100149742699476
+--- !u!114 &5759460426228960191
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7309580113863917582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c73d8f630abecc4bac386afd72d0d16, type: 3}
+  m_Script: {fileID: 11500000, guid: 75b76470fb59897488e4089e95b1e01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ItemCode: 10

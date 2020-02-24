@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7880172341998503071}
   - component: {fileID: 7880172341998503056}
   - component: {fileID: 7880172341998503057}
-  - component: {fileID: 393232961933399379}
+  - component: {fileID: 3257067742211604118}
   m_Layer: 0
   m_Name: sFish_Salmon
   m_TagString: Untagged
@@ -132,7 +132,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
---- !u!114 &393232961933399379
+--- !u!114 &3257067742211604118
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7880172341998503059}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c73d8f630abecc4bac386afd72d0d16, type: 3}
+  m_Script: {fileID: 11500000, guid: 75b76470fb59897488e4089e95b1e01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ItemCode: 12

@@ -72,11 +72,11 @@ public class MouseCursor : Singleton<MouseCursor>
         {
             if(CarryItem != ItemMaster.ItemList.NONE)
             {
-                SlotSprt.ShowItemSprt(CarryItem);
+                SlotSprt.ShowItemExisting(CarryItem);
             }
             else
             {
-                SlotSprt.HideItemSprt();
+                SlotSprt.HideItemExisting();
             }
             if (Input.GetMouseButtonDown(0))
             {
@@ -93,7 +93,7 @@ public class MouseCursor : Singleton<MouseCursor>
                 }
                 else if(CarryItem != ItemMaster.ItemList.NONE)
                 {
-                    ItemSprt item = ItemMaster.Instance.DropItem(CarryItem);
+                    ItemExisting item = ItemMaster.Instance.TakeItemExisting(CarryItem);
 
                     item.transform.position = (Vector2)transform.position;
                     item.gameObject.SetActive(true);

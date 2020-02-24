@@ -26,9 +26,9 @@ public class PlayerCarryItem : MonoBehaviour
     public void Patch(bool playerFlipX)
     {
         // 들고있는 아이템이 없다면 스프라이트를 띄우지 않는다.
-        if(CarryItemSlot.ContainItem == null)
+        if(CarryItemSlot.ContainItem == ItemMaster.ItemList.NONE)
         {
-            SlotSprt.HideItemSprt();
+            SlotSprt.HideItemExisting();
         }
 
         else
@@ -52,15 +52,15 @@ public class PlayerCarryItem : MonoBehaviour
             // 현재 띄워지고 있는 스프라이트가 없다면?
             if(SlotSprt.Renderer.sprite == null)
             {
-                SlotSprt.ShowItemSprt(CarryItemSlot.ContainItem);
+                SlotSprt.ShowItemExisting(CarryItemSlot.ContainItem);
             }
 
             // 현재 띄워지고 있는 스프라이트와 들고있는 아이템의 스프라이트를 비교하는 이유는,
-            // ShowItemSprt함수의 중복 실행을 막기 위해서다. 그런데 만약 비교하는 이 과정이 더 소모가 심하다면..
+            // ShowItemExisting함수의 중복 실행을 막기 위해서다. 그런데 만약 비교하는 이 과정이 더 소모가 심하다면..
 
             else if (!SlotSprt.Renderer.sprite.Equals(CarryItemSlot.SlotSprt.Renderer.sprite))
             {
-                SlotSprt.ShowItemSprt(CarryItemSlot.ContainItem);
+                SlotSprt.ShowItemExisting(CarryItemSlot.ContainItem);
             }
 
         }

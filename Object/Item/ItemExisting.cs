@@ -10,7 +10,7 @@ using UnityEngine;
 /// </para>
 /// </summary>
 #endregion
-public class ItemSprt : MonoBehaviour, Interaction
+public class ItemExisting : MonoBehaviour, Interaction
 {
     public ItemMaster.ItemList ItemCode;
 

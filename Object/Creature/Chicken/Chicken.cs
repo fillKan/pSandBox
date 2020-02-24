@@ -47,7 +47,7 @@ public class Chicken : MonoBehaviour
                 if (fTimer >= fSpawnEggTime)
                 {
                     fTimer = 0;
-                    Instantiate(ItemMaster.Instance.GetItem(ItemMaster.ItemList.EGG), transform.position, Quaternion.identity);
+                    Instantiate(ItemMaster.Instance.GetItemExisting(ItemMaster.ItemList.EGG), transform.position, Quaternion.identity);
 
                     fSpawnEggTime = Random.Range(50, 70);
                 }

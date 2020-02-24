@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ItemMaster : Singleton<ItemMaster>
 {
-    private Dictionary<int, ItemSprt>   Items = new Dictionary<int, ItemSprt>();
+    private Dictionary<int, ItemExisting>   Items = new Dictionary<int, ItemExisting>();
     private Dictionary<int, Sprite> ItemSprs  = new Dictionary<int, Sprite>();
 
-    private Dictionary<ItemList, Stack<ItemSprt>> ItemSprts = new Dictionary<ItemList, Stack<ItemSprt>>();
+    private Dictionary<ItemList, Stack<ItemExisting>> ItemExistings = new Dictionary<ItemList, Stack<ItemExisting>>();
 
     public enum ItemList
     {
@@ -27,36 +27,82 @@ public class ItemMaster : Singleton<ItemMaster>
         AXE
     };
 
-    public void Registration(ItemSprt item)
+    public void Registration(ItemExisting item)
     {
         if (!Items.ContainsKey((int)item.ItemCode))
         {
             Items.Add((int)item.ItemCode, item);
 
             item.TryGetComponent<SpriteRenderer>(out SpriteRenderer renderer);
-
+            ItemExistings.Add(item.ItemCode, new Stack<ItemExisting>());
+            ItemExistings[item.ItemCode].Push(item);
             ItemSprs.Add((int)item.ItemCode, renderer.sprite);
         }
     }
 
-    public ItemSprt GetItem(int itemCode)
+    public ItemExisting GetItemExisting(int itemCode)
     {
-        if (Items.ContainsKey(itemCode))
+        ItemList item = (ItemList)itemCode;
+
+        if (ItemExistings.ContainsKey(item))
         {
-            return Items[itemCode];
+            if (ItemExistings[item].Count > 0)
+            {
+                return ItemExistings[item].Peek();
+            }
         }
         return null;
     }
-    public ItemSprt GetItem(ItemList item)
+    public ItemExisting GetItemExisting(ItemList item)
     {
-        if (Items.ContainsKey((int)item))
+        if (ItemExistings.ContainsKey(item))
         {
-            return Items[(int)item];
+            if (ItemExistings[item].Count > 0)
+            {
+                return ItemExistings[item].Peek();
+            }
         }
         return null;
     }
 
-    public Sprite GetItemSpr(int itemCode)
+    public ItemExisting TakeItemExisting(int itemCode)
+    {
+        ItemList item = (ItemList)itemCode;
+
+        if (ItemExistings.ContainsKey(item))
+        {
+            if (ItemExistings[item].Count > 0)
+            {
+                return ItemExistings[item].Pop();
+            }
+        }
+        return null;
+    }
+    public ItemExisting TakeItemExisting(ItemList item)
+    {
+        if (ItemExistings.ContainsKey(item))
+        {
+            if (ItemExistings[item].Count > 0)
+            {
+                return ItemExistings[item].Pop();
+            }
+        }
+        return null;
+    }
+    public void StoreItemExisting(ItemExisting item)
+    {
+        if (ItemExistings.ContainsKey(item.ItemCode))
+        {
+            ItemExistings[item.ItemCode].Push(item);
+        }
+        else
+        {
+            ItemExistings.Add(item.ItemCode, new Stack<ItemExisting>());
+            ItemExistings[item.ItemCode].Push(item);
+        }
+    }
+    
+    public Sprite GetItemSprt(int itemCode)
     {
         if (ItemSprs.ContainsKey(itemCode))
         {
@@ -65,38 +111,12 @@ public class ItemMaster : Singleton<ItemMaster>
         return null;
     }
 
-    public Sprite GetItemSpr(ItemList item)
+    public Sprite GetItemSprt(ItemList item)
     {
         if (ItemSprs.ContainsKey((int)item))
         {
             return ItemSprs[(int)item];
         }
         return null;
-    }
-
-    public ItemSprt DropItem(ItemList item)
-    {
-        if(ItemSprts.ContainsKey(item))
-        {
-            if (ItemSprts[item].Count > 0)
-            {
-                return ItemSprts[item].Pop();
-            }
-        }
-        Debug.LogError("Not Found the Value or Key");
-        return null;
-    }
-
-    public void LoadItem(ItemSprt item)
-    {
-        if(ItemSprts.ContainsKey(item.ItemCode))
-        {
-            ItemSprts[item.ItemCode].Push(item);
-        }
-        else
-        {
-            ItemSprts.Add(item.ItemCode, new Stack<ItemSprt>());
-            ItemSprts[item.ItemCode].Push(item);
-        }
     }
 }

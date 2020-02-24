@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3218884083481818119}
   - component: {fileID: 3218884083481818118}
   - component: {fileID: 3218884083481818117}
-  - component: {fileID: 8532474553103207272}
+  - component: {fileID: 5443336999129159504}
   m_Layer: 0
   m_Name: sFish_ButterFish
   m_TagString: Untagged
@@ -132,7 +132,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
---- !u!114 &8532474553103207272
+--- !u!114 &5443336999129159504
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3218884083481818115}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c73d8f630abecc4bac386afd72d0d16, type: 3}
+  m_Script: {fileID: 11500000, guid: 75b76470fb59897488e4089e95b1e01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ItemCode: 7

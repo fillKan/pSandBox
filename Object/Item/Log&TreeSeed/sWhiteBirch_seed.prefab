@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1892154163268618004}
   - component: {fileID: 1892154163268618006}
   - component: {fileID: 1892154163268618001}
-  - component: {fileID: 922376083063713392}
+  - component: {fileID: 2826298842501674290}
   m_Layer: 0
   m_Name: sWhiteBirch_seed
   m_TagString: Untagged
@@ -132,7 +132,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &922376083063713392
+--- !u!114 &2826298842501674290
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1892154163268618005}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c73d8f630abecc4bac386afd72d0d16, type: 3}
+  m_Script: {fileID: 11500000, guid: 75b76470fb59897488e4089e95b1e01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ItemCode: 3

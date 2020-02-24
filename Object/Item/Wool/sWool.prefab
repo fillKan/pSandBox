@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7021521209860035893}
   - component: {fileID: 7021521209860035882}
   - component: {fileID: 7021521209860035883}
-  - component: {fileID: 8280395062458973081}
+  - component: {fileID: 7602302874750942815}
   m_Layer: 0
   m_Name: sWool
   m_TagString: Untagged
@@ -131,7 +131,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8280395062458973081
+--- !u!114 &7602302874750942815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7021521209860035894}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c73d8f630abecc4bac386afd72d0d16, type: 3}
+  m_Script: {fileID: 11500000, guid: 75b76470fb59897488e4089e95b1e01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ItemCode: 5

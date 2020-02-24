@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
 
     private sbyte empty = -1;
 
-    public void AddItemInventory(ItemSprt item)
+    public void AddItemInventory(ItemExisting item)
     {
         int emptySlotIndex = empty;
 
@@ -29,7 +29,7 @@ public class Inventory : MonoBehaviour
                 item.gameObject.SetActive(false);
 
                 itemSlots[i].AddItem(item.ItemCode);
-                ItemMaster.Instance.LoadItem(item);
+                ItemMaster.Instance.StoreItemExisting(item);
                 return;
             }
         }
@@ -38,7 +38,7 @@ public class Inventory : MonoBehaviour
             item.gameObject.SetActive(false);
 
             itemSlots[emptySlotIndex].AddItem(item.ItemCode);
-            ItemMaster.Instance.LoadItem(item);
+            ItemMaster.Instance.StoreItemExisting(item);
             return;
         }
         Debug.LogWarning("인벤토리가 가득 차 있습니다");
