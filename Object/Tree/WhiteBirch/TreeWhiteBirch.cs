@@ -24,7 +24,7 @@ public class TreeWhiteBirch : Tree, Interaction
     }
 
 
-    protected override void TakeItemExisting()
+    protected override void DropItem()
     {
         while (TakeItemExistings.Count != 0)
         {

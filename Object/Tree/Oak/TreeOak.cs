@@ -24,7 +24,7 @@ public class TreeOak : Tree, Interaction
         PlayerGetter.Instance.AddInteractObj(gameObject.GetInstanceID(), this);
     }
 
-    protected override void TakeItemExisting()
+    protected override void DropItem()
     {
         while (TakeItemExistings.Count != 0)
         {

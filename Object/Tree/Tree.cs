@@ -71,7 +71,7 @@ public abstract class Tree : MonoBehaviour
     protected virtual IEnumerator CR_chopDownTree()
     {
         float alpha = 1;
-        TakeItemExisting();
+        DropItem();
         // Fade . . .
         while (sprite.color.a > 0)
         {
@@ -89,7 +89,7 @@ public abstract class Tree : MonoBehaviour
     /// 나무를 베고나서 드롭되는 아이템을 담는다.
     /// </summary>
     #endregion
-    protected abstract void TakeItemExisting();
+    protected abstract void DropItem();
 
     #region 설명 :
     /// <summary>
