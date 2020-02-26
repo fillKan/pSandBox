@@ -135,6 +135,23 @@ public class ItemMaster : Singleton<ItemMaster>
         return null;
     }
 
+    public Item GetItem(int itemCode)
+    {
+        if(Items.ContainsKey(itemCode))
+        {
+            return Items[itemCode];
+        }
+        return null;
+    }
+    public Item GetItem(ItemList item)
+    {
+        if (Items.ContainsKey((int)item))
+        {
+            return Items[(int)item];
+        }
+        return null;
+    }
+
     public void UseItem(int itemCode)
     {
         if(Items.ContainsKey(itemCode))

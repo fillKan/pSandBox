@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour
 
         for(int i = 0; i < itemSlots.Length; i++)
         {
-            if (itemSlots[i].ContainItem == ItemMaster.ItemList.NONE)
+            if (itemSlots[i].ContainItem == null)
             {
                 if (emptySlotIndex.Equals(empty))
                 {
@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
                 continue;
             }
 
-            if(itemSlots[i].ContainItem == item.ItemCode)
+            if(itemSlots[i].ContainItem.ItemData == item.ItemCode)
             {
                 item.gameObject.SetActive(false);
 

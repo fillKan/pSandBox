@@ -427,9 +427,12 @@ public class Player : MonoBehaviour
         {
             if(EquippedItemSlots[i])
             {
-                if(ItemMaster.Instance.GetItemFunction(EquippedItemSlots[i].ContainItem) != null)
+                if(EquippedItemSlots[i].ContainItem)
                 {
-                    StartCoroutine(ItemMaster.Instance.GetItemFunction(EquippedItemSlots[i].ContainItem).UseItem());
+                    if (EquippedItemSlots[i].ContainItem.TryGetComponent(out ItemFunction function))
+                    {
+                        StartCoroutine(function.UseItem());
+                    }
                 }
             }
         }

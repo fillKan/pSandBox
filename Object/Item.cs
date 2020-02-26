@@ -48,6 +48,11 @@ public abstract class Item : MonoBehaviour
     }
     protected int _itemCode;
 
+    public ItemMaster.ItemList ItemData
+    {
+        get { return (ItemMaster.ItemList)_itemCode; }
+    }
+
     protected abstract void Init();
 
     private void Awake()
