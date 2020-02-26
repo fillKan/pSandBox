@@ -98,6 +98,9 @@ public class Player : MonoBehaviour
 
     private ProgressInstr progressInstr;
 
+    [Tooltip("플레이어가 장비한 아이템 슬롯들을 담는 배열")]
+    public ItemSlot[] EquippedItemSlots = new ItemSlot[1];
+
     #region 설명 :
     /// <summary>
     /// 플레이어가 상호작용 대상으로 이동하는 코루틴을 담는다.
@@ -419,6 +422,18 @@ public class Player : MonoBehaviour
         moveInteractionPoint = null;
 
         StartCoroutine(CR_Vibration(0.06f, 0.25f));
+
+        for(int i = 0; i < EquippedItemSlots.Length; ++i)
+        {
+            if(EquippedItemSlots[i])
+            {
+                if(ItemMaster.Instance.GetItemFunction(EquippedItemSlots[i].ContainItem) != null)
+                {
+                    StartCoroutine(ItemMaster.Instance.GetItemFunction(EquippedItemSlots[i].ContainItem).UseItem());
+                }
+            }
+        }
+
         _interactObj[interactObj].OperateAction();
 
         yield break;

@@ -6,6 +6,7 @@ public class ItemMaster : Singleton<ItemMaster>
 {
     private Dictionary<int, Item>   Items    = new Dictionary<int, Item>();
     private Dictionary<int, Sprite> ItemSprs = new Dictionary<int, Sprite>();
+    private Dictionary<int, ItemFunction> ItemFunctions = new Dictionary<int, ItemFunction>();
 
     private Dictionary<ItemList, Stack<ItemExisting>> ItemExistings = new Dictionary<ItemList, Stack<ItemExisting>>();
 
@@ -45,6 +46,13 @@ public class ItemMaster : Singleton<ItemMaster>
         if (!Items.ContainsKey((int)item.ItemCode))
         {
             Items.Add(item.ItemCode, item);
+        }
+        if(!ItemFunctions.ContainsKey(item.ItemCode))
+        {
+            if(item.TryGetComponent<ItemFunction>(out ItemFunction function))
+            {
+                ItemFunctions.Add(item.ItemCode, function);
+            }
         }
     }
 
@@ -110,6 +118,23 @@ public class ItemMaster : Singleton<ItemMaster>
         }
     }
     
+    public ItemFunction GetItemFunction(int itemCode)
+    {
+        if(ItemFunctions.ContainsKey(itemCode))
+        {
+            return ItemFunctions[itemCode];
+        }
+        return null;
+    }
+    public ItemFunction GetItemFunction(ItemList item)
+    {
+        if (ItemFunctions.ContainsKey((int)item))
+        {
+            return ItemFunctions[(int)item];
+        }
+        return null;
+    }
+
     public void UseItem(int itemCode)
     {
         if(Items.ContainsKey(itemCode))

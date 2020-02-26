@@ -3313,6 +3313,8 @@ MonoBehaviour:
   CarryItem: {fileID: 1431632406}
   LeftBrake: {fileID: 1206729773}
   RightBrake: {fileID: 779659336}
+  EquippedItemSlots:
+  - {fileID: 2145352705}
 --- !u!61 &1421140143
 BoxCollider2D:
   m_ObjectHideFlags: 0
