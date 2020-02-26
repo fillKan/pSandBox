@@ -15,28 +15,28 @@ public interface ItemFunction
     /// 플레이어가 해당 아이템을 들고, 오브젝트와 상호작용 했을 경우의 행동.
     /// </summary>
     #endregion
-    public IEnumerator UseItem();
+    IEnumerator UseItem();
 
     #region 코루틴 설명
     /// <summary>
     /// 플레이어가 해당 아이템을 들고 있을경우의 행동.
     /// </summary>
     #endregion
-    public IEnumerator CarryItem();
+    IEnumerator CarryItem();
 
     #region 코루틴 설명
     /// <summary>
     /// 플레이어가 이 아이템을 장비하고 있을때에 행동.
     /// </summary>
     #endregion
-    public IEnumerator EquipItem();
+    IEnumerator EquipItem();
 
     #region 코루틴 설명
     /// <summary>
     /// 해당 아이템이 인벤토리에 존재할 경우의 행동.
     /// </summary>
     #endregion
-    public IEnumerator InSlotItem();
+    IEnumerator InSlotItem();
 }
 
 public abstract class Item : MonoBehaviour
@@ -49,7 +49,6 @@ public abstract class Item : MonoBehaviour
     protected int _itemCode;
 
     protected abstract void Init();
-    public abstract void UseItem();
 
     private void Awake()
     {

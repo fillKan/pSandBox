@@ -114,14 +114,14 @@ public class ItemMaster : Singleton<ItemMaster>
     {
         if(Items.ContainsKey(itemCode))
         {
-            Items[itemCode].UseItem();
+            //Items[itemCode].UseItem();
         }
     }
     public void UseItem(ItemList item)
     {
         if (Items.ContainsKey((int)item))
         {
-            Items[(int)item].UseItem();
+           // Items[(int)item].UseItem();
         }
     }
 

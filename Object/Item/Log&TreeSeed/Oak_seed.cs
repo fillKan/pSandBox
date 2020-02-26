@@ -8,8 +8,4 @@ public class Oak_seed : Item
     {
         _itemCode = (int)ItemMaster.ItemList.SEED_OAK;
     }
-    public override void UseItem()
-    {
-        Debug.Log((ItemMaster.ItemList)_itemCode);
-    }
 }

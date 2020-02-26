@@ -8,8 +8,4 @@ public class WhiteBirch_log : Item
     {
         _itemCode = (int)ItemMaster.ItemList.LOG_WHITEBIRCH;
     }
-    public override void UseItem()
-    {
-        Debug.Log((ItemMaster.ItemList)_itemCode);
-    }
 }

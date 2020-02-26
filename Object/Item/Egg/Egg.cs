@@ -8,8 +8,4 @@ public class Egg : Item
     {
         _itemCode = (int)ItemMaster.ItemList.EGG;
     }
-    public override void UseItem()
-    {
-        Debug.Log((ItemMaster.ItemList)_itemCode);
-    }
 }

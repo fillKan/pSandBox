@@ -8,8 +8,4 @@ public class WhiteBirch_seed : Item
     {
         _itemCode = (int)ItemMaster.ItemList.SEED_WHITEBIRCH;
     }
-    public override void UseItem()
-    {
-        Debug.Log((ItemMaster.ItemList)_itemCode);
-    }
 }

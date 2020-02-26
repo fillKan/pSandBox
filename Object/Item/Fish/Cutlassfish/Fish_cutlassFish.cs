@@ -8,8 +8,4 @@ public class Fish_cutlassFish : Item
     {
         _itemCode = (int)ItemMaster.ItemList.Fish_CUTLASSFISH;
     }
-    public override void UseItem()
-    {
-        Debug.Log((ItemMaster.ItemList)_itemCode);
-    }
 }

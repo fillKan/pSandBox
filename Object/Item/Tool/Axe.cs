@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Axe : Item
+public class Axe : Item, ItemFunction
 {
     private AxeModule axeModule;
 
@@ -10,8 +10,26 @@ public class Axe : Item
     {
         _itemCode = (int)ItemMaster.ItemList.AXE;
     }
-    public override void UseItem()
+
+    public IEnumerator UseItem()
     {
-        Debug.Log("AXE!!!");
+        Debug.Log((ItemMaster.ItemList)_itemCode);
+
+        yield break;
+    }
+
+    public IEnumerator CarryItem()
+    {
+        yield break;
+    }
+
+    public IEnumerator EquipItem()
+    {
+        yield break;
+    }
+
+    public IEnumerator InSlotItem()
+    {
+        yield break;
     }
 }

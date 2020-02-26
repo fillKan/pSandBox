@@ -8,8 +8,4 @@ public class Fish_pollack : Item
     {
         _itemCode = (int)ItemMaster.ItemList.FISH_POLLACK;
     }
-    public override void UseItem()
-    {
-        Debug.Log((ItemMaster.ItemList)_itemCode);
-    }
 }

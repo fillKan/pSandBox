@@ -8,8 +8,4 @@ public class Wool : Item
     {
         _itemCode = (int)ItemMaster.ItemList.WOOL;
     }
-    public override void UseItem()
-    {
-        Debug.Log((ItemMaster.ItemList)_itemCode);
-    }
 }

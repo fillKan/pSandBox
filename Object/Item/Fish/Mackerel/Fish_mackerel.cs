@@ -8,8 +8,4 @@ public class Fish_mackerel : Item
     {
         _itemCode = (int)ItemMaster.ItemList.FISH_MACKEREL;
     }
-    public override void UseItem()
-    {
-        Debug.Log((ItemMaster.ItemList)_itemCode);
-    }
 }

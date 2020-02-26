@@ -8,8 +8,4 @@ public class Oak_log : Item
     {
         _itemCode = (int)ItemMaster.ItemList.LOG_OAK;
     }
-    public override void UseItem()
-    {
-        Debug.Log((ItemMaster.ItemList)_itemCode);
-    }
 }
