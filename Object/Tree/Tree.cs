@@ -4,14 +4,23 @@ using UnityEngine;
 
 public abstract class Tree : MonoBehaviour
 {
-    public SpriteRenderer SprtRenderer;
-    //protected SpriteRenderer _sprtRenderer;
+    public   SpriteRenderer SprtRenderer
+    {
+        get { return _sprtRenderer; }
+    }
+    protected SpriteRenderer _sprtRenderer;
 
-    public bool DoingChopTree = false;
-    //protected bool _doingChopTree = false;
+    public    bool  DoingChopTree
+    {
+        get { return _doingChopTree; }
+    }
+    protected bool _doingChopTree = false;
 
-    public float fDurability = 0;
-    //protected float _fDurability;
+    public    float  fDurability
+    {
+        get { return _fDurability; }
+    }
+    protected float _fDurability;
 
     private void Start()
     {
@@ -48,6 +57,13 @@ public abstract class Tree : MonoBehaviour
         }
 
         yield break;
+    }
+
+    public bool ChopTree(float amount)
+    {
+        _fDurability -= amount;
+
+        return _fDurability <= 0;
     }
 
     #region 설명 :
