@@ -13,9 +13,22 @@ public class Axe : Item, ItemFunction
 
     public IEnumerator UseItem<T> (T xValue) where T : Interaction
     {
-        if (xValue.InteractObject().TryGetComponent<Tree>(out Tree value))
+        if (xValue.InteractObject().TryGetComponent<Tree>(out Tree tree))
         {
-            yield return StartCoroutine(value.CR_vibration(0.4f, 0.1f));
+            if (tree.DoingChopTree) yield break;
+
+            tree.DoingChopTree = true;
+            tree.fDurability -= 4;
+
+            yield return StartCoroutine(tree.CR_vibration(0.4f, 0.1f));
+
+            if(tree.fDurability <= 0)
+            {
+                tree.DropItem();
+                yield return StartCoroutine(tree.CR_fade());
+                tree.gameObject.SetActive(false);
+            }
+            tree.DoingChopTree = false;
         }
         yield break;
     }

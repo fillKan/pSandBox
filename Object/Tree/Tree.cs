@@ -4,23 +4,14 @@ using UnityEngine;
 
 public abstract class Tree : MonoBehaviour
 {
-    public    SpriteRenderer  SprtRenderer
-    {
-        get { return _sprtRenderer; }
-    }
-    protected SpriteRenderer _sprtRenderer;
+    public SpriteRenderer SprtRenderer;
+    //protected SpriteRenderer _sprtRenderer;
 
-    public    bool  DoingChopTree
-    {
-        get { return _doingChopTree; }
-    }
-    protected bool _doingChopTree = false;
-    
-    public    float  fDurability
-    {
-        get { return _fDurability; }
-    }
-    protected float _fDurability;
+    public bool DoingChopTree = false;
+    //protected bool _doingChopTree = false;
+
+    public float fDurability = 0;
+    //protected float _fDurability;
 
     private void Start()
     {
@@ -48,10 +39,10 @@ public abstract class Tree : MonoBehaviour
     {
         float alpha = 1;
 
-        while (_sprtRenderer.color.a > 0)
+        while (SprtRenderer.color.a > 0)
         {
             alpha -= 0.02f;
-            _sprtRenderer.color = new Color(1, 1, 1, alpha);
+            SprtRenderer.color = new Color(1, 1, 1, alpha);
 
             yield return null;
         }
@@ -64,7 +55,7 @@ public abstract class Tree : MonoBehaviour
     /// 나무를 베고나서 드롭되는 아이템을 담는다.
     /// </summary>
     #endregion
-    protected abstract void DropItem();
+    public abstract void DropItem();
 
     #region 설명 :
     /// <summary>

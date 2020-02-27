@@ -21,7 +21,7 @@ public class TreeWhiteBirch : Tree, Interaction
     }
 
 
-    protected override void DropItem()
+    public override void DropItem()
     {
         int repeat = Random.Range(8, 14);
 
@@ -41,10 +41,10 @@ public class TreeWhiteBirch : Tree, Interaction
 
     protected override void InitTree()
     {
-        _fDurability = 20;
+        fDurability = 20;
 
         RegisterInteraction();
 
-        TryGetComponent<SpriteRenderer>(out _sprtRenderer);
+        TryGetComponent<SpriteRenderer>(out SprtRenderer);
     }
 }
