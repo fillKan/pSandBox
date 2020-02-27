@@ -171,7 +171,10 @@ public class Sheep : MonoBehaviour, Interaction
 
         for (int i = 0; i < nCount; i++)
         {
-            Instantiate(ItemMaster.Instance.GetItemExisting(ItemMaster.ItemList.WOOL), transform.position, Quaternion.identity);
+            ItemExisting item = ItemMaster.Instance.TakeItemExisting(ItemMaster.ItemList.WOOL);
+
+            item.transform.position = transform.position;
+            item.gameObject.SetActive(true);
         }
         sprite.sprite = sheepSprite;
     }

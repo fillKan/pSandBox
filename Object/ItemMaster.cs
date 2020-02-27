@@ -79,7 +79,10 @@ public class ItemMaster : Singleton<ItemMaster>
                 return ItemPool[itemCode].Pop();
             }
         }
-        else
+
+        // 만약 ItemPool에 키 값이 없거나, ItemPool이 비어있다면 여기로 오게된다.
+
+        if (ItemExistings.ContainsKey(itemCode))
         {
             return Instantiate(ItemExistings[itemCode], Vector2.zero, Quaternion.identity);
         }
@@ -96,7 +99,10 @@ public class ItemMaster : Singleton<ItemMaster>
                 return ItemPool[itemCode].Pop();
             }
         }
-        else
+
+        // 만약 ItemPool에 키 값이 없거나, ItemPool이 비어있다면 여기로 오게된다.
+
+        if (ItemExistings.ContainsKey(itemCode))
         {
             return Instantiate(ItemExistings[itemCode], Vector2.zero, Quaternion.identity);
         }
