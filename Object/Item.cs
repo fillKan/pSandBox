@@ -15,7 +15,7 @@ public interface ItemFunction
     /// 플레이어가 해당 아이템을 들고, 오브젝트와 상호작용 했을 경우의 행동.
     /// </summary>
     #endregion
-    IEnumerator UseItem<T>(T xValue) where T : MonoBehaviour;
+    IEnumerator UseItem<T>(T xValue) where T : Interaction;
 
     #region 코루틴 설명
     /// <summary>

@@ -433,9 +433,7 @@ public class Player : MonoBehaviour
                     {
                         if(_interactObj.TryGetValue(interactObj,out Interaction value))
                         {
-                            if(value.InteractObject().TryGetComponent<Tree>(out Tree tree))
-
-                            StartCoroutine(function.UseItem(tree));
+                            StartCoroutine(function.UseItem(value));
                         }
                     }
                 }
