@@ -5212,7 +5212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b76470fb59897488e4089e95b1e01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemCode: 13
+  ItemData: 13
 --- !u!50 &1742276341
 Rigidbody2D:
   serializedVersion: 4
@@ -6132,8 +6132,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2438559223567680745, guid: fc7c86c1eeab59443bfe496776f2818a, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc7c86c1eeab59443bfe496776f2818a, type: 3}
 --- !u!1001 &1892154163962607085
 PrefabInstance:
@@ -6142,16 +6141,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1246573681}
     m_Modifications:
-    - target: {fileID: 1892154163268618004, guid: 4ce3868468f8b5c4680d66c88a4e8454,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1868210305
-      objectReference: {fileID: 0}
-    - target: {fileID: 1892154163268618004, guid: 4ce3868468f8b5c4680d66c88a4e8454,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 1892154163268618005, guid: 4ce3868468f8b5c4680d66c88a4e8454,
         type: 3}
       propertyPath: m_Name
@@ -6212,8 +6201,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 922376083063713392, guid: 4ce3868468f8b5c4680d66c88a4e8454, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ce3868468f8b5c4680d66c88a4e8454, type: 3}
 --- !u!1001 &2063010514274102440
 PrefabInstance:
@@ -6226,21 +6214,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: sOak_log
-      objectReference: {fileID: 0}
-    - target: {fileID: 2063010513597447666, guid: e64fc755f2f7f064e805089ded6036dc,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2063010513597447669, guid: e64fc755f2f7f064e805089ded6036dc,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1868210305
-      objectReference: {fileID: 0}
-    - target: {fileID: 2063010513597447669, guid: e64fc755f2f7f064e805089ded6036dc,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2063010513597447670, guid: e64fc755f2f7f064e805089ded6036dc,
         type: 3}
@@ -6297,8 +6270,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5564551670914913310, guid: e64fc755f2f7f064e805089ded6036dc, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e64fc755f2f7f064e805089ded6036dc, type: 3}
 --- !u!1001 &2465152200817686300
 PrefabInstance:
@@ -6367,8 +6339,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: sFish_Cutlassfish
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 9065048146903200806, guid: e4a7c3cb68e113148a9773fad9862683, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4a7c3cb68e113148a9773fad9862683, type: 3}
 --- !u!1001 &2778243033133701476
 PrefabInstance:
@@ -6381,16 +6352,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: sOak_seed
-      objectReference: {fileID: 0}
-    - target: {fileID: 2778243033363838995, guid: a8ecc25d8d03d10438de2358600153d9,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1868210305
-      objectReference: {fileID: 0}
-    - target: {fileID: 2778243033363838995, guid: a8ecc25d8d03d10438de2358600153d9,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2778243033363839004, guid: a8ecc25d8d03d10438de2358600153d9,
         type: 3}
@@ -6447,8 +6408,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3062257723025231742, guid: a8ecc25d8d03d10438de2358600153d9, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8ecc25d8d03d10438de2358600153d9, type: 3}
 --- !u!1001 &3218884084129133608
 PrefabInstance:
@@ -6517,8 +6477,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8532474553103207272, guid: 6e4b5a19658b0eb4ca415ccb6e6c1f83, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e4b5a19658b0eb4ca415ccb6e6c1f83, type: 3}
 --- !u!1001 &3331430854582493361
 PrefabInstance:
@@ -6661,18 +6620,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3648679970874400127, guid: 25c286c2509467b4bb578d52ced52c43,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1868210305
-      objectReference: {fileID: 0}
-    - target: {fileID: 3648679970874400127, guid: 25c286c2509467b4bb578d52ced52c43,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 4
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 9216660934067720247, guid: 25c286c2509467b4bb578d52ced52c43, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25c286c2509467b4bb578d52ced52c43, type: 3}
 --- !u!1001 &3673258037906151537
 PrefabInstance:
@@ -6979,8 +6927,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: sEgg
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1580548683054594824, guid: 37d3f78584cc6994faf2675d3478b8f3, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37d3f78584cc6994faf2675d3478b8f3, type: 3}
 --- !u!1001 &6744861747558873961
 PrefabInstance:
@@ -7123,8 +7070,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: sWool
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8280395062458973081, guid: cfa82b316cfb1584ab5cd8fe208d6452, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfa82b316cfb1584ab5cd8fe208d6452, type: 3}
 --- !u!1001 &7309580114109966950
 PrefabInstance:
@@ -7193,8 +7139,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: sFish_Pollack
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6477100149742699476, guid: 85041dfc5da19c242bac0bf917a2a702, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85041dfc5da19c242bac0bf917a2a702, type: 3}
 --- !u!1001 &7614111500157447964
 PrefabInstance:
@@ -7263,8 +7208,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: sFish_PufferFish
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 729603708458568749, guid: 9445a80d718b19d458a72ae36c203728, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9445a80d718b19d458a72ae36c203728, type: 3}
 --- !u!1001 &7697733800624677872
 PrefabInstance:
@@ -7407,8 +7351,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 393232961933399379, guid: e45652fa51afae24f8546b2b596af095, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e45652fa51afae24f8546b2b596af095, type: 3}
 --- !u!1001 &8822178321002539996
 PrefabInstance:

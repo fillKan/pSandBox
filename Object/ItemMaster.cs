@@ -6,9 +6,9 @@ public class ItemMaster : Singleton<ItemMaster>
 {
     private Dictionary<int, Item>   Items    = new Dictionary<int, Item>();
     private Dictionary<int, Sprite> ItemSprs = new Dictionary<int, Sprite>();
-    private Dictionary<int, ItemFunction> ItemFunctions = new Dictionary<int, ItemFunction>();
 
-    private Dictionary<ItemList, Stack<ItemExisting>> ItemExistings = new Dictionary<ItemList, Stack<ItemExisting>>();
+    private Dictionary<int, ItemExisting> ItemExistings = new Dictionary<int, ItemExisting>();
+    private Dictionary<int, Stack<ItemExisting>> ItemPool = new Dictionary<int, Stack<ItemExisting>>();
 
     public enum ItemList
     {
@@ -32,12 +32,7 @@ public class ItemMaster : Singleton<ItemMaster>
     {
         if (!ItemExistings.ContainsKey(item.ItemCode))
         {
-            item.TryGetComponent<SpriteRenderer>(out SpriteRenderer renderer);
-
-            ItemExistings.Add(item.ItemCode, new Stack<ItemExisting>());
-            ItemExistings[item.ItemCode].Push(item);
-
-            ItemSprs.Add((int)item.ItemCode, renderer.sprite);
+            ItemExistings.Add(item.ItemCode, item);
         }
     }
 
@@ -47,92 +42,78 @@ public class ItemMaster : Singleton<ItemMaster>
         {
             Items.Add(item.ItemCode, item);
         }
-        if(!ItemFunctions.ContainsKey(item.ItemCode))
+        
+        if(!ItemSprs.ContainsKey(item.ItemCode))
         {
-            if(item.TryGetComponent<ItemFunction>(out ItemFunction function))
-            {
-                ItemFunctions.Add(item.ItemCode, function);
-            }
+            item.TryGetComponent<SpriteRenderer>(out SpriteRenderer renderer);
+
+            ItemSprs.Add((int)item.ItemCode, renderer.sprite);
         }
     }
 
     public ItemExisting GetItemExisting(int itemCode)
     {
-        ItemList item = (ItemList)itemCode;
-
-        if (ItemExistings.ContainsKey(item))
+        if (ItemExistings.ContainsKey(itemCode))
         {
-            if (ItemExistings[item].Count > 0)
-            {
-                return ItemExistings[item].Peek();
-            }
+            return ItemExistings[itemCode];
         }
         return null;
     }
     public ItemExisting GetItemExisting(ItemList item)
     {
-        if (ItemExistings.ContainsKey(item))
+        int itemCode = (int)item;
+
+        if (ItemExistings.ContainsKey(itemCode))
         {
-            if (ItemExistings[item].Count > 0)
-            {
-                return ItemExistings[item].Peek();
-            }
+            return ItemExistings[itemCode];
         }
         return null;
     }
 
     public ItemExisting TakeItemExisting(int itemCode)
     {
-        ItemList item = (ItemList)itemCode;
-
-        if (ItemExistings.ContainsKey(item))
+        if (ItemPool.ContainsKey(itemCode))
         {
-            if (ItemExistings[item].Count > 0)
+            if (ItemPool[itemCode].Count > 0)
             {
-                return ItemExistings[item].Pop();
+                return ItemPool[itemCode].Pop();
             }
+        }
+        else
+        {
+            return Instantiate(ItemExistings[itemCode], Vector2.zero, Quaternion.identity);
         }
         return null;
     }
     public ItemExisting TakeItemExisting(ItemList item)
     {
-        if (ItemExistings.ContainsKey(item))
+        int itemCode = (int)item;
+
+        if (ItemPool.ContainsKey(itemCode))
         {
-            if (ItemExistings[item].Count > 0)
+            if (ItemPool[itemCode].Count > 0)
             {
-                return ItemExistings[item].Pop();
+                return ItemPool[itemCode].Pop();
             }
+        }
+        else
+        {
+            return Instantiate(ItemExistings[itemCode], Vector2.zero, Quaternion.identity);
         }
         return null;
     }
     public void StoreItemExisting(ItemExisting item)
     {
-        if (ItemExistings.ContainsKey(item.ItemCode))
+        if (ItemPool.ContainsKey(item.ItemCode))
         {
-            ItemExistings[item.ItemCode].Push(item);
+            ItemPool[item.ItemCode].Push(item);
         }
         else
         {
-            ItemExistings.Add(item.ItemCode, new Stack<ItemExisting>());
-            ItemExistings[item.ItemCode].Push(item);
+            ItemPool.Add(item.ItemCode, new Stack<ItemExisting>());
+
+            ItemPool[item.ItemCode].Push(item);
         }
-    }
-    
-    public ItemFunction GetItemFunction(int itemCode)
-    {
-        if(ItemFunctions.ContainsKey(itemCode))
-        {
-            return ItemFunctions[itemCode];
-        }
-        return null;
-    }
-    public ItemFunction GetItemFunction(ItemList item)
-    {
-        if (ItemFunctions.ContainsKey((int)item))
-        {
-            return ItemFunctions[(int)item];
-        }
-        return null;
     }
 
     public Item GetItem(int itemCode)
@@ -151,22 +132,6 @@ public class ItemMaster : Singleton<ItemMaster>
         }
         return null;
     }
-
-    public void UseItem(int itemCode)
-    {
-        if(Items.ContainsKey(itemCode))
-        {
-            //Items[itemCode].UseItem();
-        }
-    }
-    public void UseItem(ItemList item)
-    {
-        if (Items.ContainsKey((int)item))
-        {
-           // Items[(int)item].UseItem();
-        }
-    }
-
 
     public Sprite GetItemSprt(int itemCode)
     {

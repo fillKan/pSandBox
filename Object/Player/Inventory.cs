@@ -24,11 +24,11 @@ public class Inventory : MonoBehaviour
                 continue;
             }
 
-            if(itemSlots[i].ContainItem.ItemData == item.ItemCode)
+            if(itemSlots[i].ContainItem.ItemData == item.ItemData)
             {
                 item.gameObject.SetActive(false);
 
-                itemSlots[i].AddItem(item.ItemCode);
+                itemSlots[i].AddItem(item.ItemData);
                 ItemMaster.Instance.StoreItemExisting(item);
                 return;
             }
@@ -37,7 +37,7 @@ public class Inventory : MonoBehaviour
         {
             item.gameObject.SetActive(false);
 
-            itemSlots[emptySlotIndex].AddItem(item.ItemCode);
+            itemSlots[emptySlotIndex].AddItem(item.ItemData);
             ItemMaster.Instance.StoreItemExisting(item);
             return;
         }

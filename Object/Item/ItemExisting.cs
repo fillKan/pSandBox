@@ -12,7 +12,11 @@ using UnityEngine;
 #endregion
 public class ItemExisting : MonoBehaviour, Interaction
 {
-    public ItemMaster.ItemList ItemCode;
+    public int                 ItemCode
+    {
+        get { return (int)ItemData; }
+    }
+    public ItemMaster.ItemList ItemData;
 
     public GameObject InteractObject()
     {

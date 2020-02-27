@@ -312,11 +312,6 @@ public class Player : MonoBehaviour
 
             CarryItem.Patch(sprite.flipX);
 
-            if(CarryItem.ItemData != ItemMaster.ItemList.NONE)
-            {
-                ItemMaster.Instance.UseItem(CarryItem.ItemData);
-            }
-
             yield return null;
         }
 
