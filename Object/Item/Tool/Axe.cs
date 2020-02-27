@@ -8,25 +8,20 @@ public class Axe : Item, ItemFunction
     {
         _itemCode = (int)ItemMaster.ItemList.AXE;
     }
-    // 아이템한테 이렇게 많은 권한을 주어도 되는가 싶다
+
     public IEnumerator UseItem<T> (T xValue) where T : Interaction
     {
         if (xValue.InteractObject().TryGetComponent<Tree>(out Tree tree))
         {
-            if (tree.DoingChopTree) yield break;
+            if (tree.DoingChopTree || tree.IsCutDown) yield break;
 
-            tree.DoingChopTree = true;
-            tree.fDurability -= 4;
-
-            yield return StartCoroutine(tree.CR_vibration(0.4f, 0.1f));
+            yield return StartCoroutine(tree.CR_chopTree(4, 0.4f, 0.1f));
 
             if(tree.fDurability <= 0)
             {
                 tree.DropItem();
-                yield return StartCoroutine(tree.CR_fade());
-                tree.gameObject.SetActive(false);
+                yield return StartCoroutine(tree.CR_cutDown());
             }
-            tree.DoingChopTree = false;
         }
         yield break;
     }

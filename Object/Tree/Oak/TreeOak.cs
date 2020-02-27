@@ -42,10 +42,10 @@ public class TreeOak : Tree, Interaction
 
     protected override void InitTree()
     {
-        fDurability = 20;
+        _fDurability = 20;
 
         RegisterInteraction();
 
-        TryGetComponent<SpriteRenderer>(out SprtRenderer);
+        TryGetComponent<SpriteRenderer>(out _sprtRenderer);
     }
 }
