@@ -19,7 +19,7 @@ public class ItemExisting : MonoBehaviour, Interaction
         return gameObject;
     }
 
-    public void OperateAction()
+    public void OperateAction<T>(T xValue) where T : ItemFunction
     {
         PlayerGetter.Instance.Inventory.AddItemInventory(this);
     }

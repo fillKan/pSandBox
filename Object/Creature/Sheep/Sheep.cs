@@ -163,7 +163,7 @@ public class Sheep : MonoBehaviour, Interaction
         return gameObject;
     }
 
-    public void OperateAction()
+    public void OperateAction<T>(T xValue) where T : ItemFunction
     {
         if (sprite.sprite.Equals(sheepSprite)) return;
 

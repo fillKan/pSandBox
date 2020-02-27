@@ -15,7 +15,7 @@ public interface Interaction
     /// 플레이어와의 상호작용을 하는 함수
     /// </summary>
     #endregion
-    void OperateAction();
+    void OperateAction<T>(T xValue) where T : ItemFunction;
 
     #region 설명 :
     /// <summary>
@@ -423,6 +423,8 @@ public class Player : MonoBehaviour
 
         StartCoroutine(CR_Vibration(0.06f, 0.25f));
 
+        bool usedItem = false;
+
         for(int i = 0; i < EquippedItemSlots.Length; ++i)
         {
             if(EquippedItemSlots[i])
@@ -431,17 +433,17 @@ public class Player : MonoBehaviour
                 {
                     if (EquippedItemSlots[i].ContainItem.TryGetComponent(out ItemFunction function))
                     {
-                        if(_interactObj.TryGetValue(interactObj,out Interaction value))
-                        {
-                            StartCoroutine(function.UseItem(value));
-                        }
+                        usedItem = true;
+                        _interactObj[interactObj].OperateAction(function);
                     }
                 }
             }
         }
-
-        _interactObj[interactObj].OperateAction();
-
+        if(!usedItem)
+        {
+            ItemFunction itemFunction = null;
+            _interactObj[interactObj].OperateAction(itemFunction);
+        }
         yield break;
     }
 

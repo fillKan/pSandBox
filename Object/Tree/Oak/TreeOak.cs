@@ -8,9 +8,11 @@ public class TreeOak : Tree, Interaction
     {
         return gameObject;
     }
-    public void OperateAction()
+    public void OperateAction<T>(T xValue) where T : ItemFunction
     {
+        if (xValue == null) return;
 
+        StartCoroutine(xValue.UseItem(this));
     }
 
     public void RegisterInteraction()

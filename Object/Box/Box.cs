@@ -25,7 +25,7 @@ public class Box : MonoBehaviour, Interaction
         return gameObject;
     }
 
-    public void OperateAction()
+    public void OperateAction<T>(T xValue) where T : ItemFunction
     {
         if(Renderer.sprite.Equals(sprClosed))
         {
