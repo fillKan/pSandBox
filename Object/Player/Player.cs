@@ -431,7 +431,12 @@ public class Player : MonoBehaviour
                 {
                     if (EquippedItemSlots[i].ContainItem.TryGetComponent(out ItemFunction function))
                     {
-                        StartCoroutine(function.UseItem());
+                        if(_interactObj.TryGetValue(interactObj,out Interaction value))
+                        {
+                            if(value.InteractObject().TryGetComponent<Tree>(out Tree tree))
+
+                            StartCoroutine(function.UseItem(tree));
+                        }
                     }
                 }
             }

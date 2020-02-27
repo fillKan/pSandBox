@@ -11,10 +11,12 @@ public class Axe : Item, ItemFunction
         _itemCode = (int)ItemMaster.ItemList.AXE;
     }
 
-    public IEnumerator UseItem()
+    public IEnumerator UseItem<T> (T xValue) where T : MonoBehaviour
     {
-        Debug.Log((ItemMaster.ItemList)_itemCode);
-
+        if (xValue.TryGetComponent<Tree>(out Tree value))
+        {
+            yield return StartCoroutine(value.CR_vibration(0.4f, 0.1f));
+        }
         yield break;
     }
 
