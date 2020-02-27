@@ -31,11 +31,12 @@ public class TreeOak : Tree, Interaction
         {
             if (Random.Range(0, 4) == 0)
             {
-                 tItem = Instantiate(ItemMaster.Instance.GetItemExisting(ItemMaster.ItemList.SEED_OAK), transform.position, Quaternion.identity);
+                 tItem = ItemMaster.Instance.TakeItemExisting(ItemMaster.ItemList.SEED_OAK);
             }
-            else tItem = Instantiate(ItemMaster.Instance.GetItemExisting(ItemMaster.ItemList.LOG_OAK), transform.position, Quaternion.identity);
+            else tItem = ItemMaster.Instance.TakeItemExisting(ItemMaster.ItemList.LOG_OAK);
 
             tItem.gameObject.SetActive(true);
+            tItem.transform.position = transform.position;
         }
     }
 

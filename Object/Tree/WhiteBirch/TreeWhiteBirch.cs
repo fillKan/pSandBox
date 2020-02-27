@@ -31,11 +31,12 @@ public class TreeWhiteBirch : Tree, Interaction
         {
             if (Random.Range(0, 4) == 0)
             {
-                 tItem = Instantiate(ItemMaster.Instance.GetItemExisting(ItemMaster.ItemList.SEED_WHITEBIRCH), transform.position, Quaternion.identity);
+                 tItem = ItemMaster.Instance.TakeItemExisting(ItemMaster.ItemList.SEED_WHITEBIRCH);
             }
-            else tItem = Instantiate(ItemMaster.Instance.GetItemExisting(ItemMaster.ItemList.LOG_WHITEBIRCH), transform.position, Quaternion.identity);
+            else tItem = ItemMaster.Instance.TakeItemExisting(ItemMaster.ItemList.LOG_WHITEBIRCH);
 
             tItem.gameObject.SetActive(true);
+            tItem.transform.position = transform.position;
         }
     }
 
