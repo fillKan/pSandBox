@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Axe : Item, ItemFunction
 {
-    private AxeModule axeModule;
-
     protected override void Init()
     {
         _itemCode = (int)ItemMaster.ItemList.AXE;
     }
-
+    // 아이템한테 이렇게 많은 권한을 주어도 되는가 싶다
     public IEnumerator UseItem<T> (T xValue) where T : Interaction
     {
         if (xValue.InteractObject().TryGetComponent<Tree>(out Tree tree))
