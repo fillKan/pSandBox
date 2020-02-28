@@ -59,7 +59,8 @@ public class ItemMaster : Singleton<ItemMaster>
         FISH_PUFFERFISH,
         FISH_SALMON,
         AXE,
-        FISHING_ROD
+        FISHING_ROD,
+        FISHING_ROD_USED
     };
 
     #region 함수 설명 : 
