@@ -7,13 +7,36 @@ public class FishingRod : Item, ItemFunction
     [Tooltip("낚시찌 오브젝트")]
     public Bobber bobber;
 
+                      public Sprite UnTiedSprt;
+    [HideInInspector] public Sprite   TiedSprt;
+    [HideInInspector] public SpriteRenderer Renderer;
+
+    private void Reset()
+    {
+        TryGetComponent<SpriteRenderer>(out Renderer);
+
+        TiedSprt = Renderer.sprite;
+
+        Debug.Log(Renderer);
+        Debug.Log(TiedSprt);
+    }
+
     public IEnumerator CarryItem()
     {
         if (!StartWorking(ref _isCarryItem)) yield break;
 
         if(MouseCursor.Instance.ClickVoid)
         {
-            Debug.Log("AAA");
+            Debug.Log(Renderer.sprite.Equals(TiedSprt));
+            
+            if(Renderer.sprite.Equals(TiedSprt))
+            {
+                Renderer.sprite = UnTiedSprt;
+            }
+            else
+            {
+                Renderer.sprite = TiedSprt;
+            }
         }
 
         StopWorking(ref _isCarryItem);

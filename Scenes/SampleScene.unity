@@ -3284,6 +3284,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07e6c234073718348b9d43cf336f8f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bobber: {fileID: 0}
+  UnTiedSprt: {fileID: -4545326657391616655, guid: a114677ce6eb5a349b04190f2d345308,
+    type: 3}
 --- !u!212 &1157829142
 SpriteRenderer:
   m_ObjectHideFlags: 0
