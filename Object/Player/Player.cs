@@ -281,6 +281,17 @@ public class Player : MonoBehaviour
             // 이동 방향은 현재 플레이어의 위치로 계속해서 초기화한다.
             vDir = transform.position;
 
+            for(int i = 0; i < EquippedItemSlots.Length; i++)
+            {
+                if(EquippedItemSlots[i].ContainItem)
+                {
+                    if (EquippedItemSlots[i].ContainItem.TryGetComponent(out ItemFunction function))
+                    {
+                        StartCoroutine(function.CarryItem());
+                    }
+                }
+            }
+
             if (Input.GetAxis("Horizontal") != 0)
             {
                 DiscontinueInstr();
