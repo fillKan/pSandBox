@@ -11,7 +11,10 @@ public class FishingRod : Item, ItemFunction
     {
         if (!StartWorking(ref _isCarryItem)) yield break;
 
-        // TODO . . .
+        if(MouseCursor.Instance.ClickVoid)
+        {
+            Debug.Log("AAA");
+        }
 
         StopWorking(ref _isCarryItem);
         yield break;

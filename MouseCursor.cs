@@ -14,6 +14,23 @@ public class MouseCursor : Singleton<MouseCursor>
     }
     private ItemSlot _selectSlot;
 
+    #region 변수 설명 : 
+    /// <summary>
+    /// 현재 마우스로 허공을 클릭했는지의 여부를 반환합니다.
+    /// </summary>
+    #endregion
+    public bool ClickVoid
+    {
+        get 
+        {
+            if(Input.GetMouseButtonDown(0))
+            {
+                return (targetSprite == null && _selectSlot == null && CarryItem == ItemMaster.ItemList.NONE);
+            }
+            return false; 
+        }
+    }
+
     private Stack<ItemMaster.ItemList> _carryItems = new Stack<ItemMaster.ItemList>();
 
     public ItemMaster.ItemList CarryItem {
@@ -81,7 +98,7 @@ public class MouseCursor : Singleton<MouseCursor>
             if (Input.GetMouseButtonDown(0))
             {
                 // 마우스로 취할 수 있는 동작이 없다면, 마우스로 클릭한 지점으로 이동한다.
-                if (targetSprite == null && _selectSlot == null && CarryItem == ItemMaster.ItemList.NONE)
+                if (ClickVoid)
                 {
                     PlayerGetter.Instance.MovementCommend(transform.position);
                 }
