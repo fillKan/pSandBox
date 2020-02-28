@@ -6,41 +6,41 @@ public class FishingRod : Item, ItemFunction
 {
     public IEnumerator CarryItem()
     {
-        if (!StartFunction(ref _isCarryItem)) yield break;
+        if (!StartWorking(ref _isCarryItem)) yield break;
 
         // TODO . . .
 
-        OverFunction(ref _isCarryItem);
+        StopWorking(ref _isCarryItem);
         yield break;
     }
 
     public IEnumerator EquipItem()
     {
-        if (!StartFunction(ref _isEquipItem)) yield break;
+        if (!StartWorking(ref _isEquipItem)) yield break;
 
         // TODO . . .
 
-        OverFunction(ref _isEquipItem);
+        StopWorking(ref _isEquipItem);
         yield break;
     }
 
     public IEnumerator InSlotItem()
     {
-        if (!StartFunction(ref _isInSlotItem)) yield break;
+        if (!StartWorking(ref _isInSlotItem)) yield break;
 
         // TODO . . .
 
-        OverFunction(ref _isInSlotItem);
+        StopWorking(ref _isInSlotItem);
         yield break;
     }
 
     public IEnumerator UseItem<T>(T xValue) where T : Interaction
     {
-        if (!StartFunction(ref _isUseItem)) yield break;
+        if (!StartWorking(ref _isUseItem)) yield break;
 
         // TODO . . .
 
-        OverFunction(ref _isUseItem);
+        StopWorking(ref _isUseItem);
         yield break;
     }
 

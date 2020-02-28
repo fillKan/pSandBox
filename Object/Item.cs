@@ -115,7 +115,7 @@ public abstract class Item : MonoBehaviour
     /// 조정에 성공했다면, 인자값과 대치되는 기능이 실행중이 아니었다는 것 입니다. 이러한 의도로 함수를 사용하고, 이러한 의도의 함수라고 생각해주시길 바랍니다.
     /// </para>
     /// <para> 
-    /// ※ 인터페이스 ItemFunction이 구현된 객체에서만 해당 함수의 사용이 유효하며, 해당 함수가 사용된 특정 기능이 종료될 때에는 OverFunction함수를 실행할 것을 권장함. ※
+    /// ※ 인터페이스 ItemFunction이 구현된 객체에서만 해당 함수의 사용이 유효하며, 해당 함수가 사용된 특정 기능이 종료될 때에는 StopWorking함수를 실행할 것을 권장함. ※
     /// </para>
     /// </summary>
     /// <param name="function">
@@ -125,7 +125,7 @@ public abstract class Item : MonoBehaviour
     /// 실행여부를 판단할 값이 조정에 성공했는지의 여부
     /// </returns>
     #endregion
-    protected bool StartFunction(ref bool function)
+    protected bool StartWorking(ref bool function)
     {
         if (function)
         {
@@ -139,14 +139,14 @@ public abstract class Item : MonoBehaviour
     /// <summary>
     /// 인터페이스 ItemFunction의 특정 기능의 실행 여부를 '종료'로 조정하는 함수.
     /// <para> 
-    /// ※ 인터페이스 ItemFunction이 구현된 객체에서만 해당 함수의 사용이 유효하며, 해당 함수가 사용되기 이전에 StartFunction함수를 실행할 것을 권장함. ※
+    /// ※ 인터페이스 ItemFunction이 구현된 객체에서만 해당 함수의 사용이 유효하며, 해당 함수가 사용되기 이전에 StartWorking함수를 실행할 것을 권장함. ※
     /// </para>
     /// </summary>
     /// <param name="function">
     /// 실행여부를 '종료'로 조정할 값
     /// </param>
     #endregion
-    protected void  OverFunction(ref bool function)
+    protected void  StopWorking(ref bool function)
     {       
         function = false;
     }
