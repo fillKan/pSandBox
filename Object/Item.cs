@@ -53,6 +53,61 @@ public abstract class Item : MonoBehaviour
         get { return (ItemMaster.ItemList)_itemCode; }
     }
 
+    #region 변수 설명
+    /// <summary>
+    /// 인터페이스 ItemFunction의 UseItem코루틴의 실행 여부를 반환하는 변수.
+    /// <para>
+    /// ※ 인터페이스 ItemFunction가 구현된 객체에서만 해당 값이 유효함 ※
+    /// </para>
+    /// </summary>
+    #endregion
+    public    bool  IsUseItem
+    {
+        get { return _isUseItem; }
+    }
+    protected bool _isUseItem    = false;
+    #region 변수 설명
+    /// <summary>
+    /// 인터페이스 ItemFunction의 CarryItem코루틴의 실행 여부를 반환하는 변수.
+    /// <para>
+    /// ※ 인터페이스 ItemFunction가 구현된 객체에서만 해당 값이 유효함 ※
+    /// </para>
+    /// </summary>
+    #endregion 
+    public    bool  IsCarryItem
+    {
+        get { return _isCarryItem; }
+    }
+    protected bool _isCarryItem  = false;
+
+    #region 변수 설명
+    /// <summary>
+    /// 인터페이스 ItemFunction의 EquipItem코루틴의 실행 여부를 반환하는 변수.
+    /// <para>
+    /// ※ 인터페이스 ItemFunction가 구현된 객체에서만 해당 값이 유효함 ※
+    /// </para>
+    /// </summary>
+    #endregion
+    public    bool  IsEquipItem
+    {
+        get { return _isEquipItem; }
+    }
+    protected bool _isEquipItem  = false;
+
+    #region 변수 설명
+    /// <summary>
+    /// 인터페이스 ItemFunction의 InSlotItem코루틴의 실행 여부를 반환하는 변수.
+    /// <para>
+    /// ※ 인터페이스 ItemFunction가 구현된 객체에서만 해당 값이 유효함 ※
+    /// </para>
+    /// </summary>
+    #endregion
+    public    bool  IsInSlotItem
+    {
+        get { return _isInSlotItem; }
+    }
+    protected bool _isInSlotItem = false;
+
     protected abstract void Init();
 
     private void Awake()
