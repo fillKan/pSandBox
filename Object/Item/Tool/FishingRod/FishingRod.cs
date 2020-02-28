@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class FishingRod : Item, ItemFunction
 {
+    [Tooltip("낚시찌 오브젝트")]
+    public Bobber bobber;
+
     public IEnumerator CarryItem()
     {
         if (!StartWorking(ref _isCarryItem)) yield break;
