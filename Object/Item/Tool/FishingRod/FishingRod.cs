@@ -25,18 +25,9 @@ public class FishingRod : Item, ItemFunction
     {
         if (!StartWorking(ref _isCarryItem)) yield break;
 
-        if(MouseCursor.Instance.ClickVoid)
+        if (MouseCursor.Instance.ClickVoid)
         {
-            Debug.Log(Renderer.sprite.Equals(TiedSprt));
-            
-            if(Renderer.sprite.Equals(TiedSprt))
-            {
-                Renderer.sprite = UnTiedSprt;
-            }
-            else
-            {
-                Renderer.sprite = TiedSprt;
-            }
+            itemSlot.SetItem(ItemMaster.ItemList.FISHING_ROD_USED);
         }
 
         StopWorking(ref _isCarryItem);

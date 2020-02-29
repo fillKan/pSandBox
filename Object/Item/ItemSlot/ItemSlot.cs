@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour, MouseAction
 {
     private LinkedList<ItemMaster.ItemList> _itemContainer = new LinkedList<ItemMaster.ItemList>();
-    private bool IsSlotEmpty = true;
     public int ItemCount
     {
         get { return _itemContainer.Count; }
@@ -101,12 +100,10 @@ public class ItemSlot : MonoBehaviour, MouseAction
         if (ContainItem == null)
         {
             SlotSprt.HideItemExisting();
-            IsSlotEmpty = true;
         }
-        else if (IsSlotEmpty)
+        else 
         {
             SlotSprt.ShowItemExisting(ContainItem.ItemData);
-            IsSlotEmpty = false;
         }
     }
 
