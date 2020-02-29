@@ -21,7 +21,7 @@ public class FishingRod : Item, ItemFunction
         Debug.Log(TiedSprt);
     }
 
-    public IEnumerator CarryItem()
+    public IEnumerator CarryItem(ItemSlot itemSlot)
     {
         if (!StartWorking(ref _isCarryItem)) yield break;
 

@@ -22,7 +22,7 @@ public interface ItemFunction
     /// 플레이어가 해당 아이템을 들고 있을경우의 행동.
     /// </summary>
     #endregion
-    IEnumerator CarryItem();
+    IEnumerator CarryItem(ItemSlot itemSlot);
 
     #region 코루틴 설명
     /// <summary>

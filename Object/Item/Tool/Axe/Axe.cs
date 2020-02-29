@@ -26,7 +26,7 @@ public class Axe : Item, ItemFunction
         yield break;
     }
 
-    public IEnumerator CarryItem()
+    public IEnumerator CarryItem(ItemSlot itemSlot)
     {
         yield break;
     }

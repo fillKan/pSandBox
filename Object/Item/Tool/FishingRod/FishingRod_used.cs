@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FishingRod_used : Item, ItemFunction
 {
-    public IEnumerator CarryItem()
+    public IEnumerator CarryItem(ItemSlot itemSlot)
     {
 
 

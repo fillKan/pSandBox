@@ -72,6 +72,28 @@ public class ItemSlot : MonoBehaviour, MouseAction
         UpdateSlotInfo();
     }
 
+    #region 함수 설명 : 
+    /// <summary>
+    /// 해당하는 아이템 슬롯이 포함하는 아이템 종류와 갯수를 설정합니다.
+    /// </summary>
+    /// <param name="item">
+    /// 해당 아이템슬롯이 포함할 아이템의 종류
+    /// </param>
+    /// <param name="number">
+    /// 해당 아이템 슬롯이 포함할 아이템의 갯수
+    /// </param>
+    #endregion
+    public void SetItem(ItemMaster.ItemList item, int number = 1)
+    {
+        _itemContainer.Clear();
+
+        for(int i = 0; i < number; i++)
+        {
+            _itemContainer.AddLast(item);
+        }
+        UpdateSlotInfo();
+    }
+
     public void UpdateSlotInfo()
     {
         text.text = ItemCount.ToString();

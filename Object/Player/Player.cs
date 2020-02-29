@@ -287,7 +287,7 @@ public class Player : MonoBehaviour
                 {
                     if (EquippedItemSlots[i].ContainItem.TryGetComponent(out ItemFunction function))
                     {
-                        StartCoroutine(function.CarryItem());
+                        StartCoroutine(function.CarryItem(EquippedItemSlots[i]));
                     }
                 }
             }
