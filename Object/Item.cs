@@ -48,6 +48,17 @@ public abstract class Item : MonoBehaviour
     }
     protected int _itemCode;
 
+    #region 변수 설명
+    /// <summary>
+    /// 해당 아이템의 아이템 유형을 반환하는 변수. 기본값 : NONE
+    /// </summary>
+    #endregion
+    public    ItemMaster.ItemType  ItemType
+    {
+        get { return _itemType; }
+    }
+    protected ItemMaster.ItemType _itemType = ItemMaster.ItemType.NONE;
+
     public ItemMaster.ItemList ItemData
     {
         get { return (ItemMaster.ItemList)_itemCode; }

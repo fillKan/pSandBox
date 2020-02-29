@@ -63,6 +63,20 @@ public class ItemMaster : Singleton<ItemMaster>
         FISHING_ROD_USED
     };
 
+    #region 열거체 설명 : 
+    /// <summary>
+    /// 아이템들의 유형들을 열거하는 열거체.
+    /// <para>
+    /// 해당 열거체를 통해 아이템의 유형이 구분된다.
+    /// </para>
+    /// </summary>
+    #endregion
+    public enum ItemType
+    {
+        NONE,
+        TOOL
+    }
+
     #region 함수 설명 : 
     /// <summary>
     /// '게임에서 보여지는' 아이템을 ItemMaster에 등록시키는 함수.

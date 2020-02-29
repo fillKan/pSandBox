@@ -45,22 +45,46 @@ public class PlayerCarryItem : MonoBehaviour
 
         else
         {
-            // 플레이어의 flipX값과 자신의 flipX값이 다르다면, 플레이어의 flipX값에 맞춘다.
-            if (SlotSprt.Renderer.flipX != playerFlipX)
+            // 들고있는 아이템의 유형에 따라, 들고있는 아이템의 형태를 변형한다.
+            switch (CarryItemSlot.ContainItem.ItemType)
             {
-                SlotSprt.Renderer.flipX  = playerFlipX;
+                case ItemMaster.ItemType.NONE:
 
-                // 플레이어의 flipX값에 따라 스프라이트의 방향을 맞춘다.
-                if (playerFlipX)
-                {
-                    transform.localRotation = Quaternion.Euler(0, 0, -22.5f);
-                }
-                else
-                {
-                    transform.localRotation = Quaternion.Euler(0, 0,  22.5f);
-                }
+                    if (SlotSprt.Renderer.flipX == playerFlipX)
+                    {
+                        SlotSprt.Renderer.flipX = !playerFlipX;
+
+                        if (playerFlipX)
+                        {
+                            transform.localRotation = Quaternion.Euler(0, 0, 22.5f);
+                        }
+                        else
+                        {
+                            transform.localRotation = Quaternion.Euler(0, 0, -22.5f);
+                        }
+
+                    }
+                    break;
+
+                case ItemMaster.ItemType.TOOL:
+
+                    if (SlotSprt.Renderer.flipX != playerFlipX)
+                    {
+                        SlotSprt.Renderer.flipX  = playerFlipX;
+
+                        if (playerFlipX)
+                        {
+                            transform.localRotation = Quaternion.Euler(0, 0, -22.5f);
+                        }
+                        else
+                        {
+                            transform.localRotation = Quaternion.Euler(0, 0, 22.5f);
+                        }
+
+                    }
+                    break;
             }
-            
+
             // 현재 띄워지고 있는 스프라이트가 없다면?
             if(SlotSprt.Renderer.sprite == null)
             {

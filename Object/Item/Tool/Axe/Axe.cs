@@ -7,6 +7,8 @@ public class Axe : Item, ItemFunction
     protected override void Init()
     {
         _itemCode = (int)ItemMaster.ItemList.AXE;
+
+        _itemType = ItemMaster.ItemType.TOOL;
     }
 
     public IEnumerator UseItem<T> (T xValue) where T : Interaction

@@ -35,5 +35,7 @@ public class FishingRod_used : Item, ItemFunction
     protected override void Init()
     {
         _itemCode = (int)ItemMaster.ItemList.FISHING_ROD_USED;
+
+        _itemType = ItemMaster.ItemType.TOOL;
     }
 }
