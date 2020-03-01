@@ -4,10 +4,44 @@ using UnityEngine;
 
 public class FishingRod_used : Item, ItemFunction
 {
+    [Tooltip("현재 낚시대의 낚시줄을 지정합니다.")]
     public LineRenderer FishingLine;
 
-    private bool   isThrowBobber;
+    [Tooltip("현재 낚시대의 낚시찌를 지정합니다.")]
     public Bobber bobber;
+
+    #region 변수 설명 : 
+    /// <summary>
+    /// 현재 낚시찌를 던졌는지의 여부를 저장합니다.
+    /// </summary>
+    #endregion
+    private bool isThrowBobber;
+    #region 변수 설명 : 
+    /// <summary>
+    /// 낚시찌가 나아갈 방향을 저장합니다.
+    /// </summary>
+    #endregion
+    private Vector2 vDir = Vector2.zero;
+    #region 변수 설명 : 
+    /// <summary>
+    /// 현재 낚시대의 맨 끝 지점을 반환합니다.
+    /// </summary>
+    #endregion
+    private Vector2 vRodTopPoint
+    {
+        get
+        {
+            Vector2 pos = PlayerGetter.Instance.player.CarryItem.transform.position;
+
+            if (PlayerGetter.Instance.player.FlipX)
+            {
+                 pos.Set(pos.x - 1.3f, pos.y + 0.525f);
+            }
+            else pos.Set(pos.x + 1.3f, pos.y + 0.525f);
+
+            return pos;
+        }
+    }
 
     public IEnumerator CarryItem(ItemSlot itemSlot)
     {
@@ -18,15 +52,14 @@ public class FishingRod_used : Item, ItemFunction
             FishingLine.enabled = true;
             isThrowBobber       = true;
 
-            Vector2 vDir = (Vector2)MouseCursor.Instance.transform.position - PlayerGetter.Instance.GetPos();
-                    vDir.Normalize();
+            vDir = (Vector2)MouseCursor.Instance.transform.position - PlayerGetter.Instance.GetPos();
 
             bobber.gameObject.SetActive(true);
 
             bobber.GetRigidbody2D.velocity = Vector2.zero;
-            bobber.GetRigidbody2D.AddForce(vDir * vDir.magnitude * 45);
+            bobber.GetRigidbody2D.AddForce(vDir.normalized * vDir.magnitude * 4.5f);
 
-            bobber.transform.position = PlayerGetter.Instance.player.CarryItem.transform.position;
+            bobber.transform.position = vRodTopPoint;
 
             FishingLine.SetWidth(0.05f, 0.05f);
         }
@@ -34,22 +67,17 @@ public class FishingRod_used : Item, ItemFunction
         {
             itemSlot.SetItem(ItemMaster.ItemList.FISHING_ROD);
 
-            FishingLine.enabled = false;
-            isThrowBobber       = false;
+            vDir = vRodTopPoint - (Vector2)bobber.transform.position;
 
-            bobber.gameObject.SetActive(false);
+            bobber.GetRigidbody2D.velocity = Vector2.zero;
+            bobber.GetRigidbody2D.AddForce(vDir.normalized * vDir.magnitude * 4.5f);
+
+            FishingLine.enabled = false;
+            isThrowBobber       = false;         
         }
         if (isThrowBobber)
         {
-            Vector2 pos = PlayerGetter.Instance.player.CarryItem.transform.position;
-
-            if (PlayerGetter.Instance.player.FlipX)
-            {
-                 pos.Set(pos.x - 1.15f, pos.y + 0.5f);
-            }
-            else pos.Set(pos.x + 1.15f, pos.y + 0.5f);
-
-            FishingLine.SetPosition(0, pos);
+            FishingLine.SetPosition(0, vRodTopPoint);
             FishingLine.SetPosition(1, bobber.transform.position);
         }
         
