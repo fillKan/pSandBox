@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class Bobber : MonoBehaviour
 {
-    
+    public Rigidbody2D GetRigidbody2D;
+
 }
