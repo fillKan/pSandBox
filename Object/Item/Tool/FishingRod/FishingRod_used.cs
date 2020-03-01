@@ -41,7 +41,15 @@ public class FishingRod_used : Item, ItemFunction
         }
         if (isThrowBobber)
         {
-            FishingLine.SetPosition(0, PlayerGetter.Instance.GetPos());
+            Vector2 pos = PlayerGetter.Instance.player.CarryItem.transform.position;
+
+            if (PlayerGetter.Instance.player.FlipX)
+            {
+                 pos.Set(pos.x - 1.15f, pos.y + 0.5f);
+            }
+            else pos.Set(pos.x + 1.15f, pos.y + 0.5f);
+
+            FishingLine.SetPosition(0, pos);
             FishingLine.SetPosition(1, bobber.transform.position);
         }
         

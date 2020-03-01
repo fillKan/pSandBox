@@ -90,6 +90,11 @@ public class Player : MonoBehaviour
     public Inventory Inventory;
     public PlayerCarryItem CarryItem;
 
+    public bool FlipX
+    {
+        get { return sprite.flipX; }
+    }
+
     public Brake  LeftBrake;
     public Brake RightBrake;
 
