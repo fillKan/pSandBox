@@ -11,26 +11,33 @@ public class FishingRod_used : Item, ItemFunction
 
     public IEnumerator CarryItem(ItemSlot itemSlot)
     {
-        Debug.Log(MouseCursor.Instance.transform.position.normalized);
         if (!StartWorking(ref _isCarryItem)) yield break;
 
         if(!isThrowBobber && MouseCursor.Instance.ClickVoid)
         {
-            Debug.Log("Throw!");
-            isThrowBobber = true;
+            FishingLine.enabled = true;
+            isThrowBobber       = true;
 
             Vector2 vDir = (Vector2)MouseCursor.Instance.transform.position - PlayerGetter.Instance.GetPos();
                     vDir.Normalize();
 
-            bobber.transform.position = PlayerGetter.Instance.GetPos();
-            bobber.GetRigidbody2D.AddForce(vDir * 20);
-            Debug.Log(MouseCursor.Instance.transform.position.normalized);
-            FishingLine.SetWidth(0.06f, 0.06f);
+            bobber.gameObject.SetActive(true);
+
+            bobber.GetRigidbody2D.velocity = Vector2.zero;
+            bobber.GetRigidbody2D.AddForce(vDir * vDir.magnitude * 45);
+
+            bobber.transform.position = PlayerGetter.Instance.player.CarryItem.transform.position;
+
+            FishingLine.SetWidth(0.05f, 0.05f);
         }
         else if (isThrowBobber && MouseCursor.Instance.ClickVoid)
         {
             itemSlot.SetItem(ItemMaster.ItemList.FISHING_ROD);
-            isThrowBobber = false;
+
+            FishingLine.enabled = false;
+            isThrowBobber       = false;
+
+            bobber.gameObject.SetActive(false);
         }
         if (isThrowBobber)
         {
@@ -38,7 +45,6 @@ public class FishingRod_used : Item, ItemFunction
             FishingLine.SetPosition(1, bobber.transform.position);
         }
         
-
         StopWorking(ref _isCarryItem);
         yield break;
     }
