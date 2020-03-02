@@ -3081,7 +3081,7 @@ GameObject:
   - component: {fileID: 956527873}
   - component: {fileID: 956527872}
   - component: {fileID: 956527875}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: sFishingRod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4360,7 +4360,7 @@ GameObject:
   - component: {fileID: 1350236409}
   - component: {fileID: 1350236408}
   - component: {fileID: 1350236407}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: sFishingRod_used
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5975,7 +5975,7 @@ GameObject:
   - component: {fileID: 1742276342}
   - component: {fileID: 1742276341}
   - component: {fileID: 1742276340}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: sAxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}

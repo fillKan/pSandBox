@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3648679970874400126}
   - component: {fileID: 3648679970874400121}
   - component: {fileID: 6904354191510115502}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: sWhiteBirch_log
   m_TagString: Untagged
   m_Icon: {fileID: 0}

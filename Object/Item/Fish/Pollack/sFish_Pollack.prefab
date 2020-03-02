@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7309580113863917581}
   - component: {fileID: 7309580113863917580}
   - component: {fileID: 5759460426228960191}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: sFish_Pollack
   m_TagString: Untagged
   m_Icon: {fileID: 0}

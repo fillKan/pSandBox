@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2465152200534712755}
   - component: {fileID: 2465152200534712754}
   - component: {fileID: 536201291692650172}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: sFish_Cutlassfish
   m_TagString: Untagged
   m_Icon: {fileID: 0}

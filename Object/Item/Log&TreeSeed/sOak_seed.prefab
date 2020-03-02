@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2778243033363839006}
   - component: {fileID: 2778243033363839005}
   - component: {fileID: 5907906533548289652}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: sOak_seed
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,6 +10,8 @@ public class Bobber : MonoBehaviour
 
     private bool Catch;
 
+    private ItemExisting item;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("Water"))
@@ -56,12 +58,20 @@ public class Bobber : MonoBehaviour
     /// 잡힌 물고기를 낚습니다. *휙!*
     /// </summary>
     #endregion
-    public void CatchFish()
+    public void CatchFish(Vector2 force)
     {
         if(Catch)
         {
             Debug.Log("Catch !");
 
+            GetRigidbody2D.AddForce(force);
+
+            item = ItemMaster.Instance.TakeItemExisting(Random.Range(7, 13));
+            
+            item.transform.position = transform.position;
+            item.TryGetComponent<Rigidbody2D>(out Rigidbody2D rigidbody2D);
+
+            rigidbody2D.AddForce(force);
 
             Catch = false;
         }
@@ -72,5 +82,16 @@ public class Bobber : MonoBehaviour
 
             WaitBiting = null;
         }     
+    }
+
+    private void OnDisable()
+    {
+        if(item)
+        {
+            
+            item.TryGetComponent<Rigidbody2D>(out Rigidbody2D rigidbody2D);
+
+            rigidbody2D.velocity = Vector2.zero;
+        }  
     }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7614111498482607496}
   - component: {fileID: 7614111498482607503}
   - component: {fileID: 7340450390915011941}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: sFish_PufferFish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
