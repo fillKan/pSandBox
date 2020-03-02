@@ -8,6 +8,8 @@ public class Bobber : MonoBehaviour
 
     private IEnumerator WaitBiting;
 
+    private bool Catch;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("Water"))
@@ -23,25 +25,49 @@ public class Bobber : MonoBehaviour
 
     private IEnumerator CR_waitBiting()
     {
-        float waitTime = Random.Range(5.0f, 10.0f);
-
-        for(float i = 0; i < waitTime; i += Time.deltaTime)
+        while (gameObject.activeSelf)
         {
-            yield return null;
+            float waitTime = Random.Range(5.0f, 10.0f);
+
+            for (float i = 0; i < waitTime; i += Time.deltaTime)
+            {
+                yield return null;
+            }
+
+            Vector2 InitPos = transform.position;
+
+            Catch = true;
+
+            for (float i = 0; i < 0.6f; i += Time.deltaTime)
+            {
+                transform.position = InitPos + (Random.insideUnitCircle * 0.05f);
+
+                yield return null;
+            }
+            Catch = false;
+
+            transform.position = InitPos;
+            WaitBiting = null;
         }
-
-        Vector2 InitPos = transform.position;
-
-        for (float i = 0; i < 0.6f; i += Time.deltaTime)
-        {
-            transform.position = InitPos + (Random.insideUnitCircle * 0.05f);
-
-            yield return null;
-        }
-
-        transform.position = InitPos;
-        WaitBiting         = null;
-
         yield break;
+    }
+
+    #region 함수 설명 : 
+    /// <summary>
+    /// 잡힌 물고기를 낚습니다. *휙!*
+    /// </summary>
+    #endregion
+    public void CatchFish()
+    {
+        if(Catch)
+        {
+            Debug.Log("Catch !");
+
+
+            Catch = false;
+        }
+        StopCoroutine(WaitBiting);
+
+        WaitBiting = null;
     }
 }

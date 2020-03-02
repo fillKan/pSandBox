@@ -67,6 +67,8 @@ public class FishingRod_used : Item, ItemFunction
         {
             itemSlot.SetItem(ItemMaster.ItemList.FISHING_ROD);
 
+            bobber.CatchFish();
+
             vDir = vRodTopPoint - (Vector2)bobber.transform.position;
 
             bobber.GetRigidbody2D.velocity = Vector2.zero;
