@@ -47,7 +47,6 @@ public class Bobber : MonoBehaviour
             Catch = false;
 
             transform.position = InitPos;
-            WaitBiting = null;
         }
         yield break;
     }
@@ -66,8 +65,12 @@ public class Bobber : MonoBehaviour
 
             Catch = false;
         }
-        StopCoroutine(WaitBiting);
 
-        WaitBiting = null;
+        if(WaitBiting != null)
+        {
+            StopCoroutine(WaitBiting);
+
+            WaitBiting = null;
+        }     
     }
 }
