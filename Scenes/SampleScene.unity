@@ -2050,6 +2050,7 @@ GameObject:
   - component: {fileID: 674306944}
   - component: {fileID: 674306946}
   - component: {fileID: 674306947}
+  - component: {fileID: 674306948}
   - component: {fileID: 674306945}
   m_Layer: 0
   m_Name: IFishingRod_used
@@ -2066,7 +2067,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 674306943}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 14.17, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 757081993}
@@ -2086,6 +2087,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FishingLine: {fileID: 674306947}
   bobber: {fileID: 357399397}
+  boxCollider: {fileID: 674306948}
 --- !u!212 &674306946
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2234,6 +2236,32 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!61 &674306948
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674306943}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.56, y: 2.56}
+    newSize: {x: 2.56, y: 2.56}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.2, y: 0.2}
+  m_EdgeRadius: 0
 --- !u!1 &728305350
 GameObject:
   m_ObjectHideFlags: 0

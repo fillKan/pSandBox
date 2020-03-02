@@ -10,6 +10,9 @@ public class FishingRod_used : Item, ItemFunction
     [Tooltip("현재 낚시대의 낚시찌를 지정합니다.")]
     public Bobber bobber;
 
+    [Tooltip("낚시찌를 회수할 때, 낚시찌의 회수를 감지할 콜라이더를 지정합니다.")]
+    public BoxCollider2D boxCollider;
+
     #region 변수 설명 : 
     /// <summary>
     /// 현재 낚시찌를 던졌는지의 여부를 저장합니다.
@@ -47,7 +50,7 @@ public class FishingRod_used : Item, ItemFunction
     {
         if (!StartWorking(ref _isCarryItem)) yield break;
 
-        if(!isThrowBobber && MouseCursor.Instance.ClickVoid)
+        if (!isThrowBobber && MouseCursor.Instance.ClickVoid)
         {
             FishingLine.enabled = true;
             isThrowBobber       = true;
@@ -72,16 +75,15 @@ public class FishingRod_used : Item, ItemFunction
             vDir = vRodTopPoint - (Vector2)bobber.transform.position;
 
             bobber.GetRigidbody2D.velocity = Vector2.zero;
-            bobber.GetRigidbody2D.AddForce(vDir.normalized * vDir.magnitude * 4.5f);
+            bobber.GetRigidbody2D.AddForce(vDir.normalized * vDir.sqrMagnitude * 4.5f);
 
-            FishingLine.enabled = false;
             isThrowBobber       = false;         
         }
-        if (isThrowBobber)
-        {
-            FishingLine.SetPosition(0, vRodTopPoint);
-            FishingLine.SetPosition(1, bobber.transform.position);
-        }
+        //if (isThrowBobber)
+        //{
+        //    FishingLine.SetPosition(0, vRodTopPoint);
+        //    FishingLine.SetPosition(1, bobber.transform.position);
+        //}
         
         StopWorking(ref _isCarryItem);
         yield break;
@@ -107,5 +109,37 @@ public class FishingRod_used : Item, ItemFunction
         _itemCode = (int)ItemMaster.ItemList.FISHING_ROD_USED;
 
         _itemType = ItemMaster.ItemType.TOOL;
+    }
+
+    private void Start()
+    {
+        StartCoroutine(CR_update());
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(!isThrowBobber)
+        {
+            if(other.gameObject.Equals(bobber.gameObject))
+            {
+                bobber.GetRigidbody2D.velocity = Vector2.zero;
+                bobber.gameObject.SetActive(false);
+
+                FishingLine.enabled = false;
+            }
+        }
+    }
+
+    private IEnumerator CR_update()
+    {
+        while(true)
+        {
+            FishingLine.SetPosition(0, vRodTopPoint);
+            FishingLine.SetPosition(1, bobber.transform.position);
+
+            boxCollider.transform.position = vRodTopPoint;
+
+            yield return null;
+        }
     }
 }
