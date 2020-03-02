@@ -6,11 +6,18 @@ public class Bobber : MonoBehaviour
 {
     public Rigidbody2D GetRigidbody2D;
 
+    private IEnumerator WaitBiting;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("Water"))
         {
-            StartCoroutine(CR_waitBiting());
+            if(WaitBiting == null)
+            {
+                WaitBiting = CR_waitBiting();
+
+                StartCoroutine(WaitBiting);
+            }
         }
     }
 
@@ -31,7 +38,9 @@ public class Bobber : MonoBehaviour
 
             yield return null;
         }
+
         transform.position = InitPos;
+        WaitBiting         = null;
 
         yield break;
     }
