@@ -52,11 +52,13 @@ public class FishingRod_used : Item, ItemFunction
         }
     }
 
+    private ItemSlot slot;
+
     public IEnumerator CarryItem(ItemSlot itemSlot)
     {
         if (!StartWorking(ref _isCarryItem)) yield break;
 
-        if (!isThrowBobber && MouseCursor.Instance.ClickVoid)
+        if (!isThrowBobber && MouseCursor.Instance.RightClickVoid)
         {
             isThrowBobber       = true;
 
@@ -70,10 +72,9 @@ public class FishingRod_used : Item, ItemFunction
             bobber.transform.position = vRodTopPoint;
         }
 
-        else if (isThrowBobber && MouseCursor.Instance.ClickVoid)
+        else if (isThrowBobber && MouseCursor.Instance.RightClickVoid)
         {
-            itemSlot.SetItem(ItemMaster.ItemList.FISHING_ROD);
-
+            slot = itemSlot;
             vDir = vRodTopPoint - (Vector2)bobber.transform.position;
             bobber.GetRigidbody2D.velocity = Vector2.zero;
 
@@ -81,12 +82,7 @@ public class FishingRod_used : Item, ItemFunction
 
             tryRetrieve = true;
         }
-        //if (isThrowBobber)
-        //{
-        //    FishingLine.SetPosition(0, vRodTopPoint);
-        //    FishingLine.SetPosition(1, bobber.transform.position);
-        //}
-        
+       
         StopWorking(ref _isCarryItem);
         yield break;
     }
@@ -126,6 +122,8 @@ public class FishingRod_used : Item, ItemFunction
         {
             if(other.gameObject.Equals(bobber.gameObject))
             {
+                slot.SetItem(ItemMaster.ItemList.FISHING_ROD);
+
                 bobber.GetRigidbody2D.velocity = Vector2.zero;
                 bobber.gameObject.SetActive(false);
 

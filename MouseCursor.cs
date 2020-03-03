@@ -16,7 +16,7 @@ public class MouseCursor : Singleton<MouseCursor>
 
     #region 변수 설명 : 
     /// <summary>
-    /// 현재 마우스로 허공을 클릭했는지의 여부를 반환합니다.
+    /// 현재 마우스 좌클릭으로 허공을 클릭했는지의 여부를 반환합니다.
     /// </summary>
     #endregion
     public bool ClickVoid
@@ -28,6 +28,23 @@ public class MouseCursor : Singleton<MouseCursor>
                 return (targetSprite == null && _selectSlot == null && CarryItem == ItemMaster.ItemList.NONE);
             }
             return false; 
+        }
+    }
+
+    #region 변수 설명 : 
+    /// <summary>
+    /// 현재 마우스 우클릭으로 허공을 클릭했는지의 여부를 반환합니다.
+    /// </summary>
+    #endregion
+    public bool RightClickVoid
+    {
+        get
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+                return (targetSprite == null && _selectSlot == null && CarryItem == ItemMaster.ItemList.NONE);
+            }
+            return false;
         }
     }
 
