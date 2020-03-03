@@ -63,20 +63,18 @@ public class Bobber : MonoBehaviour
         if(Catch)
         {
             Debug.Log("Catch !");
-
-            GetRigidbody2D.AddForce(force);
-
-            item = ItemMaster.Instance.TakeItemExisting(Random.Range(7, 13));
-            
-            item.transform.position = transform.position;
-            item.TryGetComponent<Rigidbody2D>(out Rigidbody2D rigidbody2D);
-
-            rigidbody2D.AddForce(force);
+            //item = ItemMaster.Instance.TakeItemExisting(Random.Range(7, 13));
+            //
+            //item.transform.position = transform.position;
+            //item.TryGetComponent<Rigidbody2D>(out Rigidbody2D rigidbody2D);
+            //
+            //rigidbody2D.AddForce(force);
 
             Catch = false;
         }
+        GetRigidbody2D.AddForce(force);
 
-        if(WaitBiting != null)
+        if (WaitBiting != null)
         {
             StopCoroutine(WaitBiting);
 

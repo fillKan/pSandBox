@@ -21,6 +21,12 @@ public class FishingRod_used : Item, ItemFunction
     private bool isThrowBobber;
     #region 변수 설명 : 
     /// <summary>
+    /// 현재 낚시찌를 회수했는지의 여부를 저장합니다.
+    /// </summary>
+    #endregion
+    private bool tryRetrieve;
+    #region 변수 설명 : 
+    /// <summary>
     /// 낚시찌가 나아갈 방향을 저장합니다.
     /// </summary>
     #endregion
@@ -52,7 +58,6 @@ public class FishingRod_used : Item, ItemFunction
 
         if (!isThrowBobber && MouseCursor.Instance.ClickVoid)
         {
-            FishingLine.enabled = true;
             isThrowBobber       = true;
 
             vDir = (Vector2)MouseCursor.Instance.transform.position - PlayerGetter.Instance.GetPos();
@@ -63,9 +68,8 @@ public class FishingRod_used : Item, ItemFunction
             bobber.GetRigidbody2D.AddForce(vDir.normalized * vDir.magnitude * 4.5f);
 
             bobber.transform.position = vRodTopPoint;
-
-            FishingLine.SetWidth(0.05f, 0.05f);
         }
+
         else if (isThrowBobber && MouseCursor.Instance.ClickVoid)
         {
             itemSlot.SetItem(ItemMaster.ItemList.FISHING_ROD);
@@ -75,7 +79,7 @@ public class FishingRod_used : Item, ItemFunction
 
             bobber.CatchFish(vDir.normalized * vDir.sqrMagnitude * 4.5f);
 
-            isThrowBobber = false;         
+            tryRetrieve = true;
         }
         //if (isThrowBobber)
         //{
@@ -112,17 +116,21 @@ public class FishingRod_used : Item, ItemFunction
     private void Start()
     {
         StartCoroutine(CR_update());
+
+        FishingLine.SetWidth(0.05f, 0.05f);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(!isThrowBobber)
+        if(tryRetrieve)
         {
             if(other.gameObject.Equals(bobber.gameObject))
             {
                 bobber.GetRigidbody2D.velocity = Vector2.zero;
                 bobber.gameObject.SetActive(false);
 
+                isThrowBobber       = false;
+                tryRetrieve         = false;
                 FishingLine.enabled = false;
             }
         }
@@ -132,11 +140,18 @@ public class FishingRod_used : Item, ItemFunction
     {
         while(true)
         {
-            FishingLine.SetPosition(0, vRodTopPoint);
-            FishingLine.SetPosition(1, bobber.transform.position);
+            if(isThrowBobber)
+            {
+                if(!FishingLine.enabled)
+                {
+                    FishingLine.enabled = true;
+                }
 
-            boxCollider.transform.position = vRodTopPoint;
+                FishingLine.SetPosition(0, vRodTopPoint);
+                FishingLine.SetPosition(1, bobber.transform.position);
 
+                boxCollider.transform.position = vRodTopPoint;
+            }
             yield return null;
         }
     }

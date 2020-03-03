@@ -1129,7 +1129,7 @@ GameObject:
   - component: {fileID: 357399399}
   - component: {fileID: 357399398}
   - component: {fileID: 357399397}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bobber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
