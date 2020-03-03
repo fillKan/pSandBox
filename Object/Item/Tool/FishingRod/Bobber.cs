@@ -95,7 +95,11 @@ public class Bobber : MonoBehaviour
 
         if (sprt.ItemData != ItemMaster.ItemList.NONE)
         {
-            PlayerGetter.Instance.Inventory.AddItemInventory(ItemMaster.Instance.TakeItemExisting(sprt.ItemData));
+            item = ItemMaster.Instance.TakeItemExisting(sprt.ItemData);
+            item.transform.position = transform.position;
+            item.gameObject.SetActive(true);
+
+            //PlayerGetter.Instance.Inventory.AddItemInventory(ItemMaster.Instance.TakeItemExisting(sprt.ItemData));
 
             sprt.HideItemExisting();
         }
