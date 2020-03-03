@@ -11,6 +11,12 @@ public class Bobber : MonoBehaviour
     private bool Catch;
 
     private ItemExisting item;
+    private ItemSlotSprt sprt;
+
+    private void Start()
+    {
+        transform.GetChild(0).TryGetComponent(out sprt);
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -63,12 +69,8 @@ public class Bobber : MonoBehaviour
         if(Catch)
         {
             Debug.Log("Catch !");
-            //item = ItemMaster.Instance.TakeItemExisting(Random.Range(7, 13));
-            //
-            //item.transform.position = transform.position;
-            //item.TryGetComponent<Rigidbody2D>(out Rigidbody2D rigidbody2D);
-            //
-            //rigidbody2D.AddForce(force);
+
+            sprt.ShowItemExisting(Random.Range(7, 13));
 
             Catch = false;
         }
@@ -84,12 +86,18 @@ public class Bobber : MonoBehaviour
 
     private void OnDisable()
     {
-        if(item)
+        if (WaitBiting != null)
         {
-            
-            item.TryGetComponent<Rigidbody2D>(out Rigidbody2D rigidbody2D);
+            StopCoroutine(WaitBiting);
 
-            rigidbody2D.velocity = Vector2.zero;
-        }  
+            WaitBiting = null;
+        }
+
+        if (sprt.ItemData != ItemMaster.ItemList.NONE)
+        {
+            PlayerGetter.Instance.Inventory.AddItemInventory(ItemMaster.Instance.TakeItemExisting(sprt.ItemData));
+
+            sprt.HideItemExisting();
+        }
     }
 }

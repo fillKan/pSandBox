@@ -14,6 +14,16 @@ public class ItemSlotSprt : MonoBehaviour
 {
     public SpriteRenderer Renderer;
 
+    public int ItemCode
+    {
+        get { return (int)_itemData; }
+    }
+    public  ItemMaster.ItemList  ItemData
+    {
+        get { return _itemData; }
+    }
+    private ItemMaster.ItemList _itemData;
+
     #region 함수 설명 : 
     /// <summary>
     /// 특정 아이템의 스프라이트를 띄우게 하는 함수.
@@ -24,6 +34,8 @@ public class ItemSlotSprt : MonoBehaviour
     #endregion
     public void ShowItemExisting(int itemCode)
     {
+        _itemData = (ItemMaster.ItemList)itemCode;
+
         Renderer.sprite = ItemMaster.Instance.GetItemSprt(itemCode);
     }
 
@@ -37,6 +49,8 @@ public class ItemSlotSprt : MonoBehaviour
     #endregion
     public void ShowItemExisting(ItemMaster.ItemList item)
     {
+        _itemData = item;
+
         Renderer.sprite = ItemMaster.Instance.GetItemSprt(item);
     }
 
@@ -47,6 +61,8 @@ public class ItemSlotSprt : MonoBehaviour
     #endregion
     public void HideItemExisting()
     {
+        _itemData = ItemMaster.ItemList.NONE;
+
         Renderer.sprite = null;
     }
 }
