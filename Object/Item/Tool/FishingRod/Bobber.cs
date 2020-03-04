@@ -70,7 +70,7 @@ public class Bobber : MonoBehaviour
         {
             Debug.Log("Catch !");
 
-            sprt.ShowItemExisting(Random.Range(7, 13));
+            sprt.ShowItemExisting(ItemMaster.Instance.RandomFish());
 
             Catch = false;
         }
