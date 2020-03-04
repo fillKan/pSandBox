@@ -7,5 +7,7 @@ public class Fish_pollack : Item
     protected override void Init()
     {
         _itemCode = (int)ItemMaster.ItemList.FISH_POLLACK;
+
+        _itemType = ItemMaster.ItemType.FISH;
     }
 }

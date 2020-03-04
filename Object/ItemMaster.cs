@@ -35,6 +35,10 @@ public class ItemMaster : Singleton<ItemMaster>
     #endregion
     private Dictionary<int, Stack<ItemExisting>> ItemPool = new Dictionary<int, Stack<ItemExisting>>();
 
+    private Dictionary<int, Item>.ValueCollection ItemValues;
+
+    private List<int> FishItems = new List<int>();
+
     #region 열거체 설명 : 
     /// <summary>
     /// 아이템들의 종류를 열거하는 열거체.
@@ -74,7 +78,8 @@ public class ItemMaster : Singleton<ItemMaster>
     public enum ItemType
     {
         NONE,
-        TOOL
+        TOOL,
+        FISH
     }
 
     #region 함수 설명 : 
@@ -289,6 +294,16 @@ public class ItemMaster : Singleton<ItemMaster>
 
     #region 함수 설명 : 
     /// <summary>
+    /// 무작위 물고기아이템의 아이템 코드를 반환하는 함수.
+    /// </summary>
+    #endregion
+    public int RandomFish()
+    {
+        return FishItems[Random.Range(0, FishItems.Count + 1)];
+    }
+
+    #region 함수 설명 : 
+    /// <summary>
     /// 특정 아이템의 스프라이트를 반환하는 함수.
     /// </summary>
     /// <param name="itemCode">
@@ -324,5 +339,20 @@ public class ItemMaster : Singleton<ItemMaster>
             return ItemSprs[(int)item];
         }
         return null;
+    }
+
+
+    private void Start()
+    {
+        ItemValues = Items.Values;
+
+        foreach (Item item in ItemValues)
+        {
+            if(item.ItemType.Equals(ItemType.FISH))
+            {
+                FishItems.Add(item.ItemCode);
+            }
+        }
+
     }
 }
