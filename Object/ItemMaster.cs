@@ -299,7 +299,7 @@ public class ItemMaster : Singleton<ItemMaster>
     #endregion
     public int RandomFish()
     {
-        return FishItems[Random.Range(0, FishItems.Count + 1)];
+        return FishItems[Random.Range(0, FishItems.Count)];
     }
 
     #region 함수 설명 : 
