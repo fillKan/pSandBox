@@ -578,11 +578,11 @@ public class Player : MonoBehaviour
         float fMoveAmount = 0;
         Transform IntractObj = InteractObj[interactionID].InteractObject().transform;
 
-        if (IntractObj.position.x > transform.position.x)
+        if (IntractObj.position.x > transform.position.x + InteractionRange)
         {
             sprite.flipX = false;
 
-            while (IntractObj.position.x > transform.position.x)
+            while (IntractObj.position.x > transform.position.x + InteractionRange)
             {
                 if (fMoveAmount < 1)
                 {
@@ -611,11 +611,11 @@ public class Player : MonoBehaviour
             }
         }
 
-        else if (IntractObj.position.x < transform.position.x)
+        else if (IntractObj.position.x < transform.position.x - InteractionRange)
         {
             sprite.flipX = true;
 
-            while (IntractObj.position.x < transform.position.x)
+            while (IntractObj.position.x < transform.position.x - InteractionRange)
             {
                 if (fMoveAmount < 1)
                 {
