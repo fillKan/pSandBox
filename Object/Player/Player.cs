@@ -458,6 +458,14 @@ public class Player : MonoBehaviour
         yield break;
     }
 
+    #region 코루틴 설명
+    /// <summary>
+    /// 플레이어가 지정한 위치로 이동하는 코루틴입니다.
+    /// </summary>
+    /// <param name="targetPoint">
+    /// 이동할 지점을 지정합니다
+    /// </param>
+    #endregion
     private IEnumerator CR_moveMovementPoint(Vector2 targetPoint)
     {
         float fMoveAmount = 0;
@@ -530,6 +538,174 @@ public class Player : MonoBehaviour
 
         moveMovementPoint = null;
         
+        yield break;
+    }
+
+    #region 코루틴 설명
+    /// <summary>
+    /// 플레이어가 지정한 오브젝트를 추적하는 코루틴입니다.
+    /// </summary>
+    /// <param name="target">
+    /// 추적할 오브젝트를 지정합니다.
+    /// </param>
+    #endregion
+    private IEnumerator CR_moveMovementPoint(GameObject target)
+    {
+        float fMoveAmount = 0;
+        Transform Target  = target.transform;
+
+        if (Target.position.x > transform.position.x)
+        {
+            sprite.flipX = false;
+
+            while (Target.position.x > transform.position.x)
+            {
+                if (fMoveAmount < 1)
+                {
+                    fMoveAmount += 0.06f;
+                }
+                if (CheckBrakeOper(Vector2.right))
+                {
+                    yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
+
+                    DiscontinueInstr();
+                }
+                vDir.x += fMoveAmount * Time.deltaTime * 3.5f;
+
+                transform.position = vDir;
+
+                yield return null;
+            }
+            while (fMoveAmount > 0)
+            {
+                fMoveAmount -= 0.16f;
+
+                vDir.x += fMoveAmount * Time.deltaTime * 3.5f;
+                transform.position = vDir;
+
+                yield return null;
+            }
+        }
+
+        else if (Target.position.x < transform.position.x)
+        {
+            sprite.flipX = true;
+
+            while (Target.position.x < transform.position.x)
+            {
+                if (fMoveAmount < 1)
+                {
+                    fMoveAmount += 0.06f;
+                }
+                if (CheckBrakeOper(Vector2.left))
+                {
+                    yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
+
+                    DiscontinueInstr();
+                }
+                vDir.x -= fMoveAmount * Time.deltaTime * 3.5f;
+
+                transform.position = vDir;
+
+                yield return null;
+            }
+            while (fMoveAmount > 0)
+            {
+                fMoveAmount -= 0.16f;
+
+                vDir.x -= fMoveAmount * Time.deltaTime * 3.5f;
+                transform.position = vDir;
+
+                yield return null;
+            }
+        }
+
+        moveMovementPoint = null;
+
+        yield break;
+    }
+
+    #region 코루틴 설명
+    /// <summary>
+    /// 플레이어가 지정한 상호작용 대상을 향해 이동하는 코루틴입니다.
+    /// </summary>
+    /// <param name="interactionID">
+    /// 상호작용할 대상의 GetInstanceID()를 지정합니다
+    /// </param>
+    #endregion
+    private IEnumerator CR_moveMovementPoint(int interactionID)
+    {
+        float fMoveAmount = 0;
+        Transform IntractObj = InteractObj[interactionID].InteractObject().transform;
+
+        if (IntractObj.position.x > transform.position.x)
+        {
+            sprite.flipX = false;
+
+            while (IntractObj.position.x > transform.position.x)
+            {
+                if (fMoveAmount < 1)
+                {
+                    fMoveAmount += 0.06f;
+                }
+                if (CheckBrakeOper(Vector2.right))
+                {
+                    yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
+
+                    DiscontinueInstr();
+                }
+                vDir.x += fMoveAmount * Time.deltaTime * 3.5f;
+
+                transform.position = vDir;
+
+                yield return null;
+            }
+            while (fMoveAmount > 0)
+            {
+                fMoveAmount -= 0.16f;
+
+                vDir.x += fMoveAmount * Time.deltaTime * 3.5f;
+                transform.position = vDir;
+
+                yield return null;
+            }
+        }
+
+        else if (IntractObj.position.x < transform.position.x)
+        {
+            sprite.flipX = true;
+
+            while (IntractObj.position.x < transform.position.x)
+            {
+                if (fMoveAmount < 1)
+                {
+                    fMoveAmount += 0.06f;
+                }
+                if (CheckBrakeOper(Vector2.left))
+                {
+                    yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
+
+                    DiscontinueInstr();
+                }
+                vDir.x -= fMoveAmount * Time.deltaTime * 3.5f;
+
+                transform.position = vDir;
+
+                yield return null;
+            }
+            while (fMoveAmount > 0)
+            {
+                fMoveAmount -= 0.16f;
+
+                vDir.x -= fMoveAmount * Time.deltaTime * 3.5f;
+                transform.position = vDir;
+
+                yield return null;
+            }
+        }
+
+        moveMovementPoint = null;
+
         yield break;
     }
 
