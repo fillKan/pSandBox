@@ -270,6 +270,39 @@ public class Player : MonoBehaviour
         }
     }
 
+    #region 함수 설명 : 
+    /// <summary>
+    /// 플레이어가 들고있는 아이템들을 모두 사용하는 함수입니다.
+    /// </summary>
+    /// <param name="interactionID">
+    /// 플레이어가 상호작용한 대상의 GetInstanceID를 지정합니다   
+    /// </param>
+    #endregion
+    private void UseItem(int interactionID)
+    {
+        bool usedItem = false;
+
+        for (int i = 0; i < EquippedItemSlots.Length; ++i)
+        {
+            if (EquippedItemSlots[i])
+            {
+                if (EquippedItemSlots[i].ContainItem)
+                {
+                    if (EquippedItemSlots[i].ContainItem.TryGetComponent(out ItemFunction function))
+                    {
+                        usedItem = true;
+                        _interactObj[interactionID].OperateAction(function);
+                    }
+                }
+            }
+        }
+        if (!usedItem)
+        {
+            ItemFunction itemFunction = null;
+            _interactObj[interactionID].OperateAction(itemFunction);
+        }
+    }
+
     private void OnEnable()
     {
         vDir = transform.position;
@@ -348,27 +381,8 @@ public class Player : MonoBehaviour
 
         StartCoroutine(CR_Vibration(0.06f, 0.25f));
 
-        bool usedItem = false;
+        UseItem(interactObj);
 
-        for(int i = 0; i < EquippedItemSlots.Length; ++i)
-        {
-            if(EquippedItemSlots[i])
-            {
-                if(EquippedItemSlots[i].ContainItem)
-                {
-                    if (EquippedItemSlots[i].ContainItem.TryGetComponent(out ItemFunction function))
-                    {
-                        usedItem = true;
-                        _interactObj[interactObj].OperateAction(function);
-                    }
-                }
-            }
-        }
-        if(!usedItem)
-        {
-            ItemFunction itemFunction = null;
-            _interactObj[interactObj].OperateAction(itemFunction);
-        }
         yield break;
     }
 
