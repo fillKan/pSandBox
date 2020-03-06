@@ -95,6 +95,14 @@ public class Player : MonoBehaviour
         get { return sprite.flipX; }
     }
 
+    #region 변수 설명 : 
+    /// <summary>
+    /// 플레이어의 상호작용 범위를 지정합니다.
+    /// </summary>
+    #endregion
+    [Tooltip("플레이어의 상호작용 범위를 지정합니다.")]
+    public float InteractionRange = 1;
+
     public Brake  LeftBrake;
     public Brake RightBrake;
 
@@ -146,7 +154,7 @@ public class Player : MonoBehaviour
     {
         if(_interactObj.ContainsKey(instanceID))
         {
-            progressInstr.progress = CR_moveInteractionPoint(instanceID);
+            progressInstr.progress = CR_Interaction(instanceID);
 
             StartCoroutine(progressInstr.progress);
         }
@@ -375,9 +383,13 @@ public class Player : MonoBehaviour
     /// 상호작용할 오브젝트의 GetInstanceID()를 담느다.
     /// </param>
     #endregion
-    private IEnumerator CR_moveInteractionPoint(int interactObj)
+    private IEnumerator CR_Interaction(int interactObj)
     {
-        yield return StartCoroutine(CR_moveMovementPoint(interactObj));
+        // 플레이어와 상호작용 대상과의 거리가 InteractionRange보다 작다면, 상호작용 대상을 향해 이동한다.
+        if (Vector2.Distance(transform.position, _interactObj[interactObj].InteractObject().transform.position) > InteractionRange)
+        {
+            yield return StartCoroutine(CR_moveMovementPoint(interactObj));
+        }
 
         StartCoroutine(CR_Vibration(0.06f, 0.25f));
 

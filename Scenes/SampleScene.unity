@@ -5043,6 +5043,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Inventory: {fileID: 1393031041}
   CarryItem: {fileID: 1431632406}
+  InteractionRange: 1
   LeftBrake: {fileID: 1206729773}
   RightBrake: {fileID: 779659336}
   EquippedItemSlots:
@@ -7719,6 +7720,16 @@ PrefabInstance:
       propertyPath: m_CompositePaths.m_Paths.Array.data[1].Array.data[3].y
       value: -5.3
       objectReference: {fileID: 0}
+    - target: {fileID: 3671350322227578553, guid: 0a35f28349fdf674ea5ebd0d78052a46,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 8.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 3671350322227578553, guid: 0a35f28349fdf674ea5ebd0d78052a46,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.drawMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3727555888068603049, guid: 0a35f28349fdf674ea5ebd0d78052a46,
         type: 3}
       propertyPath: m_Name
@@ -7783,6 +7794,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3727555888068603051, guid: 0a35f28349fdf674ea5ebd0d78052a46,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a35f28349fdf674ea5ebd0d78052a46, type: 3}
