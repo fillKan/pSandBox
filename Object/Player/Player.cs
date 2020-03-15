@@ -92,8 +92,6 @@ public class Player : MonoBehaviour
 
     private ProgressInstr progressInstr;
 
-    private Player_Interaction PlayerInFunc;
-
     [Tooltip("플레이어가 장비한 아이템 슬롯들을 담는 배열")]
     public ItemSlot[] EquippedItemSlots = new ItemSlot[1];
 

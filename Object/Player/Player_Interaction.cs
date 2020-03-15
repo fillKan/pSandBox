@@ -33,7 +33,7 @@ public interface Interaction
     GameObject InteractObject();
 }
 
-public class Player_Interaction : MonoBehaviour
+public class Player_Interaction : Singleton<Player_Interaction>
 {
     private Dictionary<int, Interaction> InObjDirectory = new Dictionary<int, Interaction>();
 
