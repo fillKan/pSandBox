@@ -3,37 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-#region 인터페이스 설명 :
-/// <summary>
-/// 플레이어와의 상호작용 인터페이스 
-/// </summary>
-#endregion
-public interface Interaction
-{
-    #region 설명 :
-    /// <summary>
-    /// 플레이어와의 상호작용을 하는 함수
-    /// </summary>
-    #endregion
-    void OperateAction<T>(T xValue) where T : ItemFunction;
-
-    #region 설명 :
-    /// <summary>
-    /// 플레이어와 상호작용할 오브젝트임을 플레이어에게 알려주는 함수.
-    /// 고정된 형식 사용 : PlayerGetter.Instance.AddInteractObj(gameObject.GetInstanceID(),this);
-    /// </summary>
-    #endregion
-    void RegisterInteraction();
-
-    #region 설명 :
-    /// <summary>
-    /// 상호작용의 대상으로 지정된 오브젝트를 반환하는 함수
-    /// 고정된 형식 사용 : return gameObject;
-    /// </summary>
-    #endregion
-    GameObject InteractObject();
-}
-
 #region 구조체 설명 :
 /// <summary>
 /// 플레이어가 수행중인 지시와, 지시의 코루틴을 포함하는 구조체. 
@@ -122,6 +91,8 @@ public class Player : MonoBehaviour
     private SpriteRenderer sprite;
 
     private ProgressInstr progressInstr;
+
+    private Player_Interaction PlayerInFunc;
 
     [Tooltip("플레이어가 장비한 아이템 슬롯들을 담는 배열")]
     public ItemSlot[] EquippedItemSlots = new ItemSlot[1];
