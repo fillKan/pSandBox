@@ -126,20 +126,6 @@ public class Player : MonoBehaviour
     [Tooltip("플레이어가 장비한 아이템 슬롯들을 담는 배열")]
     public ItemSlot[] EquippedItemSlots = new ItemSlot[1];
 
-    #region 설명 :
-    /// <summary>
-    /// 플레이어가 상호작용 대상으로 이동하는 코루틴을 담는다.
-    /// </summary>
-    #endregion
-    private IEnumerator moveInteractionPoint;
-
-    #region 설명 :
-    /// <summary>
-    /// 플레이어가 특정 지점으로 이동하게끔 하는 코루틴을 담는 열거체. 
-    /// </summary>
-    #endregion
-    private IEnumerator moveMovementPoint;
-
     private Dictionary<int, Interaction> _interactObj = new Dictionary<int, Interaction>();
     public Dictionary<int, Interaction> InteractObj
     {
@@ -238,22 +224,7 @@ public class Player : MonoBehaviour
                 break;
         }
     }
-    #region 함수 설명 : 
-    /// <summary>
-    /// 외부에서 플레이어에게 수행중인 지시를 중단시키는 함수.
-    /// </summary>
-    /// <param name="directions">
-    /// 인자로 NONE를 사용한다.
-    /// </param>
-    #endregion 
-    public void FollowInstr(Instructions instructions)
-    {
-        if(instructions.Equals(Instructions.NONE))
-        {
-            DiscontinueInstr();
-        }
-    }
-
+    
     #region 함수 설명 : 
     /// <summary>
     /// 플레이어가 가진 브레이크를 통해, 이동하려는 방향으로 나아갈 수 있는지를 판단하는 함수.
@@ -491,10 +462,7 @@ public class Player : MonoBehaviour
 
                 yield return null;
             }
-        }
-
-        moveMovementPoint = null;
-        
+        }        
         yield break;
     }
 
@@ -577,8 +545,6 @@ public class Player : MonoBehaviour
             }
         }
 
-        moveMovementPoint = null;
-
         yield break;
     }
 
@@ -660,8 +626,6 @@ public class Player : MonoBehaviour
                 yield return null;
             }
         }
-
-        moveMovementPoint = null;
 
         yield break;
     }
