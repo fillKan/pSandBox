@@ -82,6 +82,18 @@ public class Player : MonoBehaviour
         GOTO_POINT,
         #region 설명 : 
         /// <summary>
+        /// 특정 오브젝트를 추적하라는 지시. 필요한 인자 : gameObject
+        /// </summary>
+        #endregion
+        GOTO_OBJECT,
+        #region 설명 : 
+        /// <summary>
+        /// 상호작용 대상을 향해 이동하라는 지시. 필요한 인자 : GetInstanceID()
+        /// </summary>
+        #endregion
+        GOTO_INSTR,
+        #region 설명 : 
+        /// <summary>
         /// 특정 오브젝트와 상호작용 하라는 지시. 필요한 인자 : GetInstanceID()
         /// </summary>
         #endregion
@@ -388,7 +400,12 @@ public class Player : MonoBehaviour
         // 플레이어와 상호작용 대상과의 거리가 InteractionRange보다 작다면, 상호작용 대상을 향해 이동한다.
         if (Vector2.Distance(transform.position, _interactObj[interactObj].InteractObject().transform.position) > InteractionRange)
         {
-            yield return StartCoroutine(CR_moveMovementPoint(interactObj));
+            DiscontinueInstr();
+
+            progressInstr.instructions = Instructions.GOTO_INSTR;
+            progressInstr.progress = CR_moveMovementPoint(interactObj);
+
+            yield return StartCoroutine(progressInstr.progress);
         }
 
         StartCoroutine(CR_Vibration(0.06f, 0.25f));
