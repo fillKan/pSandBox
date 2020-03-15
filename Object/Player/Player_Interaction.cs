@@ -19,7 +19,7 @@ public interface Interaction
     #region 설명 :
     /// <summary>
     /// 플레이어와 상호작용할 오브젝트임을 플레이어에게 알려주는 함수.
-    /// 고정된 형식 사용 : PlayerGetter.Instance.AddInteractObj(gameObject.GetInstanceID(),this);
+    /// 고정된 형식 사용 : Player_Interaction.Instance.InObjRegister(gameObject.GetInstanceID(), this);
     /// </summary>
     #endregion
     void RegisterInteraction();

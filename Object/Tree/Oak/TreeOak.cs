@@ -17,7 +17,7 @@ public class TreeOak : Tree, Interaction
 
     public void RegisterInteraction()
     {
-        PlayerGetter.Instance.AddInteractObj(gameObject.GetInstanceID(), this);
+        Player_Interaction.Instance.InObjRegister(gameObject.GetInstanceID(), this);
     }
 
 

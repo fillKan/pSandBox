@@ -30,7 +30,7 @@ public class ItemExisting : MonoBehaviour, Interaction
 
     public void RegisterInteraction()
     {
-        PlayerGetter.Instance.AddInteractObj(gameObject.GetInstanceID(), this);
+        Player_Interaction.Instance.InObjRegister(gameObject.GetInstanceID(), this);
     }
 
     private void Awake()

@@ -95,20 +95,6 @@ public class Player : MonoBehaviour
     [Tooltip("플레이어가 장비한 아이템 슬롯들을 담는 배열")]
     public ItemSlot[] EquippedItemSlots = new ItemSlot[1];
 
-    private Dictionary<int, Interaction> _interactObj = new Dictionary<int, Interaction>();
-    public Dictionary<int, Interaction> InteractObj
-    {
-        get { return _interactObj; }
-    }
-
-    public void AddInteractObj(int instanceID, Interaction interaction)
-    {
-        if(!_interactObj.ContainsKey(instanceID))
-        {
-            _interactObj.Add(instanceID, interaction);
-        }
-    }
-
     #region 함수 설명 :
     /// <summary>
     /// 플레이어에게 상호작용을 지시하는 함수.
@@ -119,7 +105,7 @@ public class Player : MonoBehaviour
     #endregion
     private void InteractCommend(int instanceID)
     {
-        if(_interactObj.ContainsKey(instanceID))
+        if(Player_Interaction.Instance.InObjCheck(instanceID))
         {
             progressInstr.progress = CR_Interaction(instanceID);
 
@@ -251,7 +237,7 @@ public class Player : MonoBehaviour
                     if (EquippedItemSlots[i].ContainItem.TryGetComponent(out ItemFunction function))
                     {
                         usedItem = true;
-                        _interactObj[interactionID].OperateAction(function);
+                        Player_Interaction.Instance.InObjGetValue(interactionID).OperateAction(function);
                     }
                 }
             }
@@ -259,7 +245,7 @@ public class Player : MonoBehaviour
         if (!usedItem)
         {
             ItemFunction itemFunction = null;
-            _interactObj[interactionID].OperateAction(itemFunction);
+            Player_Interaction.Instance.InObjGetValue(interactionID).OperateAction(itemFunction);
         }
     }
 
@@ -338,7 +324,7 @@ public class Player : MonoBehaviour
     private IEnumerator CR_Interaction(int interactObj)
     {
         // 플레이어와 상호작용 대상과의 거리가 InteractionRange보다 작다면, 상호작용 대상을 향해 이동한다.
-        if (Vector2.Distance(transform.position, _interactObj[interactObj].InteractObject().transform.position) > InteractionRange)
+        if (Vector2.Distance(transform.position, Player_Interaction.Instance.InObjGetValue(interactObj).InteractObject().transform.position) > InteractionRange)
         {
             DiscontinueInstr();
 
@@ -528,7 +514,7 @@ public class Player : MonoBehaviour
     private IEnumerator CR_moveMovementPoint(int interactionID)
     {
         float fMoveAmount = 0;
-        Transform IntractObj = InteractObj[interactionID].InteractObject().transform;
+        Transform IntractObj = Player_Interaction.Instance.InObjGetValue(interactionID).InteractObject().transform;
 
         if (IntractObj.position.x > transform.position.x + InteractionRange)
         {

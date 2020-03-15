@@ -17,7 +17,7 @@ public class TreeWhiteBirch : Tree, Interaction
 
     public void RegisterInteraction()
     {
-        PlayerGetter.Instance.AddInteractObj(gameObject.GetInstanceID(), this);
+        Player_Interaction.Instance.InObjRegister(gameObject.GetInstanceID(), this);
     }
 
 

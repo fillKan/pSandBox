@@ -26,16 +26,6 @@ public class PlayerGetter : Singleton<PlayerGetter>
         return player.transform.position;
     }
 
-    public void AddInteractObj(int instanceID, Interaction interaction)
-    {
-        _player.AddInteractObj(instanceID, interaction);
-    }
-
-    public Dictionary<int,Interaction> GetInteractObj()
-    {
-        return player.InteractObj;
-    }
-
     public void InteractCommend(int xInstanceID)
     {
         _player.FollowInstr<int>(Player.Instructions.DO_INTERACT,xInstanceID);

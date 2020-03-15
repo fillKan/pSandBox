@@ -172,7 +172,7 @@ public class MouseCursor : Singleton<MouseCursor>
             return;
         }
 
-        if (PlayerGetter.Instance.GetInteractObj().ContainsKey(other.gameObject.GetInstanceID()))
+        if (Player_Interaction.Instance.InObjCheck(other.gameObject.GetInstanceID()))
         {
             if(other.TryGetComponent<SpriteRenderer>(out SpriteRenderer spr))
             {
