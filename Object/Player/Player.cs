@@ -258,7 +258,7 @@ public class Player : MonoBehaviour
     /// 상호작용할 오브젝트의 GetInstanceID()를 담느다.
     /// </param>
     #endregion
-    private IEnumerator CR_Interaction(int interactObj)
+    public IEnumerator CR_Interaction(int interactObj)
     {
         // 플레이어와 상호작용 대상과의 거리가 InteractionRange보다 작다면, 상호작용 대상을 향해 이동한다.
         if (Vector2.Distance(transform.position, Player_Interaction.Instance.InObjGetValue(interactObj).InteractObject().transform.position) > InteractionRange)
@@ -286,7 +286,7 @@ public class Player : MonoBehaviour
     /// 이동할 지점을 지정합니다
     /// </param>
     #endregion
-    private IEnumerator CR_moveMovementPoint(Vector2 targetPoint)
+    public IEnumerator CR_moveMovementPoint(Vector2 targetPoint)
     {
         float fMoveAmount = 0;
 
@@ -366,7 +366,7 @@ public class Player : MonoBehaviour
     /// 추적할 오브젝트를 지정합니다.
     /// </param>
     #endregion
-    private IEnumerator CR_moveMovementPoint(GameObject target)
+    public IEnumerator CR_moveMovementPoint(GameObject target)
     {
         float fMoveAmount = 0;
         Transform Target  = target.transform;
@@ -448,7 +448,7 @@ public class Player : MonoBehaviour
     /// 상호작용할 대상의 GetInstanceID()를 지정합니다
     /// </param>
     #endregion
-    private IEnumerator CR_moveMovementPoint(int interactionID)
+    public IEnumerator CR_moveMovementPoint(int interactionID)
     {
         float fMoveAmount = 0;
         Transform IntractObj = Player_Interaction.Instance.InObjGetValue(interactionID).InteractObject().transform;

@@ -106,7 +106,8 @@ public class Player_Instructions : Singleton<Player_Instructions>
                     Vector2 value;
                             value = (Vector2)Convert.ChangeType(xValue, typeof(Vector2));
 
-                    //MovementCommend(value);
+                                   progressInstr.progress = player.CR_moveMovementPoint(value);
+                    StartCoroutine(progressInstr.progress);
                 }
                 break;
 
@@ -120,7 +121,22 @@ public class Player_Instructions : Singleton<Player_Instructions>
                     int value;
                         value = (int)Convert.ChangeType(xValue, typeof(int));
 
-                    //InteractCommend(value);
+                                   progressInstr.progress = player.CR_Interaction(value);
+                    StartCoroutine(progressInstr.progress);
+                }
+                break;
+
+            case Instructions.GOTO_OBJECT:
+                if (typeof(T).Equals(typeof(GameObject)))
+                {
+                    DiscontinueInstr();
+                    progressInstr.instructions = Instructions.GOTO_OBJECT;
+
+                    GameObject value;
+                               value = (GameObject)Convert.ChangeType(xValue, typeof(GameObject));
+
+                                   progressInstr.progress = player.CR_moveMovementPoint(value);
+                    StartCoroutine(progressInstr.progress);
                 }
                 break;
 
