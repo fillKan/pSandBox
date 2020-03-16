@@ -73,7 +73,7 @@ public class Player_Instructions : Singleton<Player_Instructions>
 
     private Player player;
 
-    private void Start()
+    private void Awake()
     {
         GameObject.FindGameObjectWithTag("Player").TryGetComponent(out player);
     }

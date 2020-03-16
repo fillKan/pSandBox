@@ -28,11 +28,11 @@ public class PlayerGetter : Singleton<PlayerGetter>
 
     public void InteractCommend(int xInstanceID)
     {
-        _player.FollowInstr<int>(Instructions.DO_INTERACT,xInstanceID);
+        Player_Instructions.Instance.FollowInstr(Instructions.DO_INTERACT, xInstanceID);
     }
 
     public void MovementCommend(Vector2 targetPoint)
     {
-        _player.FollowInstr<Vector2>(Instructions.GOTO_POINT, targetPoint);
+        Player_Instructions.Instance.FollowInstr(Instructions.GOTO_POINT, targetPoint);
     }
 }
