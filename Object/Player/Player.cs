@@ -27,8 +27,6 @@ public class Player : MonoBehaviour
     private Vector3 vDir;
     private SpriteRenderer sprite;
 
-    private ProgressInstr progressInstr;
-
     [Tooltip("플레이어가 장비한 아이템 슬롯들을 담는 배열")]
     public ItemSlot[] EquippedItemSlots = new ItemSlot[1];
 
@@ -54,18 +52,6 @@ public class Player : MonoBehaviour
             return true;
         }
         return false;
-    }
-
-    private void DiscontinueInstr()
-    {
-        progressInstr.instructions = Instructions.NONE;
-
-        if (progressInstr.progress != null)
-        {
-            StopCoroutine(progressInstr.progress);
-
-            progressInstr.progress = null;
-        }
     }
 
     #region 함수 설명 : 
@@ -130,7 +116,7 @@ public class Player : MonoBehaviour
 
             if (Input.GetAxis("Horizontal") != 0)
             {
-                DiscontinueInstr();
+                Player_Instructions.Instance.DiscontinueInstr();
 
                 if (Input.GetAxis("Horizontal") > 0)
                 {
@@ -178,12 +164,9 @@ public class Player : MonoBehaviour
         // 플레이어와 상호작용 대상과의 거리가 InteractionRange보다 작다면, 상호작용 대상을 향해 이동한다.
         if (Vector2.Distance(transform.position, Player_Interaction.Instance.InObjGetValue(interactObj).InteractObject().transform.position) > InteractionRange)
         {
-            DiscontinueInstr();
+            Player_Instructions.Instance.FollowInstr(Instructions.GOTO_INSTR, interactObj);
 
-            progressInstr.instructions = Instructions.GOTO_INSTR;
-            progressInstr.progress = CR_moveMovementPoint(interactObj);
-
-            yield return StartCoroutine(progressInstr.progress);
+            yield return new WaitUntil(() => Player_Instructions.Instance.IsInstrDone);
         }
 
         StartCoroutine(CR_Vibration(0.06f, 0.25f));
@@ -219,7 +202,7 @@ public class Player : MonoBehaviour
                 {
                     yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
 
-                    DiscontinueInstr();
+                    Player_Instructions.Instance.DiscontinueInstr();
                 }
                 vDir.x += fMoveAmount * Time.deltaTime * 3.5f;
 
@@ -252,7 +235,7 @@ public class Player : MonoBehaviour
                 {
                     yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
 
-                    DiscontinueInstr();
+                    Player_Instructions.Instance.DiscontinueInstr();
                 }
                 vDir.x -= fMoveAmount * Time.deltaTime * 3.5f;
 
@@ -300,7 +283,7 @@ public class Player : MonoBehaviour
                 {
                     yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
 
-                    DiscontinueInstr();
+                    Player_Instructions.Instance.DiscontinueInstr();
                 }
                 vDir.x += fMoveAmount * Time.deltaTime * 3.5f;
 
@@ -333,7 +316,7 @@ public class Player : MonoBehaviour
                 {
                     yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
 
-                    DiscontinueInstr();
+                    Player_Instructions.Instance.DiscontinueInstr();
                 }
                 vDir.x -= fMoveAmount * Time.deltaTime * 3.5f;
 
@@ -382,7 +365,7 @@ public class Player : MonoBehaviour
                 {
                     yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
 
-                    DiscontinueInstr();
+                    Player_Instructions.Instance.DiscontinueInstr();
                 }
                 vDir.x += fMoveAmount * Time.deltaTime * 3.5f;
 
@@ -415,7 +398,7 @@ public class Player : MonoBehaviour
                 {
                     yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
 
-                    DiscontinueInstr();
+                    Player_Instructions.Instance.DiscontinueInstr();
                 }
                 vDir.x -= fMoveAmount * Time.deltaTime * 3.5f;
 
