@@ -3,71 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-#region 구조체 설명 :
-/// <summary>
-/// 플레이어가 수행중인 지시와, 지시의 코루틴을 포함하는 구조체. 
-/// </summary>
-#endregion
-public struct ProgressInstr
-{
-    #region 설명 : 
-    /// <summary>
-    /// 현재 수행하고 있는 지시를 담는 변수.
-    /// <para>만약 값이 NONE이라면, 수행중인 지시가 없다는 의미이다.</para>
-    /// </summary>
-    #endregion
-    public Player.Instructions instructions;
-    #region 설명 : 
-    /// <summary>
-    /// 현재 플레이어가 수행중인 지시의 코루틴을 담는 변수.
-    /// </summary>
-    #endregion
-    public IEnumerator progress;
-}
-
 public class Player : MonoBehaviour
 {
-    #region 열거체 설명 : 
-    /// <summary>
-    /// 플레이어에게 지시하는 행동들의 종류를 담는다.
-    /// <para>
-    /// 구성되는 열거자들의 설명은 FollowInstr함수를 사용할 때에 필요한 설명이다.
-    /// </para>
-    /// </summary>
-    #endregion
-    public enum Instructions
-    {
-        #region 설명 : 
-        /// <summary>
-        /// 이행중인 지시를 중단하라는 지시. 또는 그런 상태.
-        /// </summary>
-        #endregion
-        NONE,
-        #region 설명 : 
-        /// <summary>
-        /// 특정 지점으로 이동하라는 지시. 필요한 인자 : Vector2
-        /// </summary>
-        #endregion
-        GOTO_POINT,
-        #region 설명 : 
-        /// <summary>
-        /// 특정 오브젝트를 추적하라는 지시. 필요한 인자 : gameObject
-        /// </summary>
-        #endregion
-        GOTO_OBJECT,
-        #region 설명 : 
-        /// <summary>
-        /// 상호작용 대상을 향해 이동하라는 지시. 필요한 인자 : GetInstanceID()
-        /// </summary>
-        #endregion
-        GOTO_INSTR,
-        #region 설명 : 
-        /// <summary>
-        /// 특정 오브젝트와 상호작용 하라는 지시. 필요한 인자 : GetInstanceID()
-        /// </summary>
-        #endregion
-        DO_INTERACT
-    }
     public Inventory Inventory;
     public PlayerCarryItem CarryItem;
 
