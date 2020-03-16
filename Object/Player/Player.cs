@@ -190,7 +190,7 @@ public class Player : MonoBehaviour
 
         UseItem(interactObj);
 
-        yield break;
+        Player_Instructions.Instance.DiscontinueInstr();
     }
 
     #region 코루틴 설명
@@ -269,8 +269,8 @@ public class Player : MonoBehaviour
 
                 yield return null;
             }
-        }        
-        yield break;
+        }
+        Player_Instructions.Instance.DiscontinueInstr();
     }
 
     #region 코루틴 설명
@@ -352,7 +352,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        yield break;
+        Player_Instructions.Instance.DiscontinueInstr();
     }
 
     #region 코루틴 설명
@@ -434,7 +434,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        yield break;
+        Player_Instructions.Instance.DiscontinueInstr();
     }
 
     private IEnumerator CR_Vibration(float amount, float time)
