@@ -69,6 +69,14 @@ public struct ProgressInstr
 
 public class Player_Instructions : Singleton<Player_Instructions>
 {
+    public bool IsInstrDone
+    {
+        get
+        {
+            return progressInstr.instructions == Instructions.NONE;
+        }
+    }
+
     private ProgressInstr progressInstr;
 
     private Player player;
@@ -134,6 +142,20 @@ public class Player_Instructions : Singleton<Player_Instructions>
 
                     GameObject value;
                                value = (GameObject)Convert.ChangeType(xValue, typeof(GameObject));
+
+                                   progressInstr.progress = player.CR_moveMovementPoint(value);
+                    StartCoroutine(progressInstr.progress);
+                }
+                break;
+
+            case Instructions.GOTO_INSTR:
+                if (typeof(T).Equals(typeof(int)))
+                {
+                    DiscontinueInstr();
+                    progressInstr.instructions = Instructions.GOTO_INSTR;
+
+                    int value;
+                        value = (int)Convert.ChangeType(xValue, typeof(int));
 
                                    progressInstr.progress = player.CR_moveMovementPoint(value);
                     StartCoroutine(progressInstr.progress);
