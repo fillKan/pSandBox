@@ -120,7 +120,6 @@ public class Player_Instructions : Singleton<Player_Instructions>
         switch (instructions)
         {
             case Instructions.GOTO_POINT:
-
                 if (typeof(T).Equals(type))
                 {
                     DiscontinueInstr();
@@ -135,7 +134,6 @@ public class Player_Instructions : Singleton<Player_Instructions>
                 break;
 
             case Instructions.DO_INTERACT:
-
                 if (typeof(T).Equals(type))
                 {
                     DiscontinueInstr();
@@ -226,13 +224,13 @@ public class Player_Instructions : Singleton<Player_Instructions>
             case Instructions.NONE:
                 return null;
 
-            case Instructions.GOTO_INSTR:
             case Instructions.GOTO_POINT:
                 return typeof(Vector2);
 
             case Instructions.GOTO_OBJECT:
                 return typeof(GameObject);
 
+            case Instructions.GOTO_INSTR:
             case Instructions.DO_INTERACT:
                 return typeof(int);
         }
