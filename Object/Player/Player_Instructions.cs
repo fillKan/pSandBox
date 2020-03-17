@@ -115,11 +115,13 @@ public class Player_Instructions : Singleton<Player_Instructions>
     #endregion 
     public void FollowInstr<T>(Instructions instructions, T xValue)
     {
+        Type type = InstrToType(instructions);
+
         switch (instructions)
         {
             case Instructions.GOTO_POINT:
 
-                if (typeof(T).Equals(typeof(Vector2)))
+                if (typeof(T).Equals(type))
                 {
                     DiscontinueInstr();
                     progressInstr.instructions = Instructions.GOTO_POINT;
@@ -134,7 +136,7 @@ public class Player_Instructions : Singleton<Player_Instructions>
 
             case Instructions.DO_INTERACT:
 
-                if (typeof(T).Equals(typeof(int)))
+                if (typeof(T).Equals(type))
                 {
                     DiscontinueInstr();
                     progressInstr.instructions = Instructions.DO_INTERACT;
@@ -148,7 +150,7 @@ public class Player_Instructions : Singleton<Player_Instructions>
                 break;
 
             case Instructions.GOTO_OBJECT:
-                if (typeof(T).Equals(typeof(GameObject)))
+                if (typeof(T).Equals(type))
                 {
                     DiscontinueInstr();
                     progressInstr.instructions = Instructions.GOTO_OBJECT;
@@ -162,7 +164,7 @@ public class Player_Instructions : Singleton<Player_Instructions>
                 break;
 
             case Instructions.GOTO_INSTR:
-                if (typeof(T).Equals(typeof(int)))
+                if (typeof(T).Equals(type))
                 {
                     DiscontinueInstr();
                     progressInstr.instructions = Instructions.GOTO_INSTR;
@@ -217,7 +219,7 @@ public class Player_Instructions : Singleton<Player_Instructions>
 
     }
 
-    public dynamic InstrToType(Instructions instructions)
+    public Type InstrToType(Instructions instructions)
     {
         switch (instructions)
         {
