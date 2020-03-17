@@ -216,4 +216,25 @@ public class Player_Instructions : Singleton<Player_Instructions>
     {
 
     }
+
+    public dynamic InstrToType(Instructions instructions)
+    {
+        switch (instructions)
+        {
+            case Instructions.NONE:
+                return null;
+
+            case Instructions.GOTO_INSTR:
+            case Instructions.GOTO_POINT:
+                return typeof(Vector2);
+
+            case Instructions.GOTO_OBJECT:
+                return typeof(GameObject);
+
+            case Instructions.DO_INTERACT:
+                return typeof(int);
+        }
+
+        return null;
+    }
 }
