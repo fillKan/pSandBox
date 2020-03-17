@@ -45,6 +45,19 @@ public enum Instructions
     DO_INTERACT
 }
 
+#region 열거체 설명 : 
+/// <summary>
+/// 지시를 수행하게되는 트리거들을 열거합니다.
+/// <para>
+/// 구성되는 각 열거자들의 설명은 ScheduleRunInstr함수를 사용할 때에 필요한 설명입니다.
+/// </para>
+/// </summary>
+#endregion
+public enum InstrTrigger
+{
+
+}
+
 #region 구조체 설명 :
 /// <summary>
 /// 플레이어가 수행중인 지시와, 지시의 코루틴을 포함하는 구조입니다.
@@ -183,5 +196,24 @@ public class Player_Instructions : Singleton<Player_Instructions>
 
             progressInstr.progress = null;
         }
+    }
+
+    #region 함수 설명 :
+    /// <summary>
+    /// 플레이어가 특정 조건에서 특정 지시를 수행하도록 설정합니다.
+    /// </summary>
+    /// <param name="trigger">
+    /// 지시가 수행되는 특정 조건을 지정합니다
+    /// </param>
+    /// <param name="instructions">
+    /// 수행할 지시를 지정합니다
+    /// </param>
+    /// <param name="xValue">
+    /// 수행할 지시에 필요한 값입니다
+    /// </param>
+    #endregion
+    public void ScheduleRunInstr<T>(InstrTrigger trigger, Instructions instructions, T xValue)
+    {
+
     }
 }
