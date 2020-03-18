@@ -55,7 +55,12 @@ public enum Instructions
 #endregion
 public enum InstrTrigger
 {
-
+    #region 열거자 설명 :
+    /// <summary>
+    /// 다음에 수행될 지시가 중단되지 않고서 종료되었을 때
+    /// </summary>
+    #endregion
+    NEXT_INSTR_UNINTERRUPTED_DONE
 }
 
 #region 구조체 설명 :
@@ -93,6 +98,8 @@ public class Player_Instructions : Singleton<Player_Instructions>
     private ProgressInstr progressInstr;
 
     private Player player;
+
+    private bool isCompletionInstr;
 
     private void Awake()
     {
@@ -196,6 +203,11 @@ public class Player_Instructions : Singleton<Player_Instructions>
 
             progressInstr.progress = null;
         }
+    }
+
+    public void CompletionInstr()
+    {
+        isCompletionInstr = true;
     }
 
     #region 함수 설명 :
