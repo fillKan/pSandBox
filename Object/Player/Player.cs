@@ -461,7 +461,7 @@ public class Player : MonoBehaviour
         }
         else if (pointA < pointB)
         {
-            return pointA - pointB;
+            return pointB - pointA;
         }
 
         return 0;
