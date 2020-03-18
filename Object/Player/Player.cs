@@ -162,11 +162,14 @@ public class Player : MonoBehaviour
     public IEnumerator CR_Interaction(int interactObj)
     {
         // 플레이어와 상호작용 대상과의 거리가 InteractionRange보다 작다면, 상호작용 대상을 향해 이동한다.
-        if (Vector2.Distance(transform.position, Player_Interaction.Instance.InObjGetValue(interactObj).InteractObject().transform.position) > InteractionRange)
+        if (Distance(Player_Interaction.Instance.InObjGetValue(interactObj).InteractObject().transform.position.x, transform.position.x) > InteractionRange)
         {
             Player_Instructions.Instance.FollowInstr(Instructions.GOTO_INSTR, interactObj);
+            Debug.Log(Vector2.Distance(transform.position, Player_Interaction.Instance.InObjGetValue(interactObj).InteractObject().transform.position));
+            Debug.Log("schedule");
+            StartCoroutine(Player_Instructions.Instance.ScheduleRunInstr(InstrTrigger.NEXT_INSTR_UNINTERRUPTED_DONE, Instructions.DO_INTERACT, interactObj));
 
-            yield return StartCoroutine(Player_Instructions.Instance.ScheduleRunInstr(InstrTrigger.NEXT_INSTR_UNINTERRUPTED_DONE, Instructions.DO_INTERACT, interactObj));
+            yield break;
         }
 
         StartCoroutine(CR_Vibration(0.06f, 0.25f));
@@ -418,7 +421,7 @@ public class Player : MonoBehaviour
                 yield return null;
             }
         }
-
+        Debug.Log("얘ㅜㄸ");
         Player_Instructions.Instance.CompletionInstr();
         yield break;
     }
@@ -438,5 +441,19 @@ public class Player : MonoBehaviour
         transform.position = vInitPos;
 
         yield break;
+    }
+
+    private float Distance(float A, float B)
+    {
+        if(A > B)
+        {
+            return A - B;
+        }
+        else if (A < B)
+        {
+            return B - A;
+        }
+
+        return 0;
     }
 }

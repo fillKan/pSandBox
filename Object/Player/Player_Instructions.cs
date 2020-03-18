@@ -252,7 +252,7 @@ public class Player_Instructions : Singleton<Player_Instructions>
                     }
                     yield return null; 
                 }
-                
+                Debug.Log("B");
                 FollowInstr(instructions, xValue);
                 Debug.Log("BBBBBBB");
                 break;
