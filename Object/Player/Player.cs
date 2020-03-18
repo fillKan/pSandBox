@@ -162,11 +162,10 @@ public class Player : MonoBehaviour
     public IEnumerator CR_Interaction(int interactObj)
     {
         // 플레이어와 상호작용 대상과의 거리가 InteractionRange보다 작다면, 상호작용 대상을 향해 이동한다.
-        if (Distance(Player_Interaction.Instance.InObjGetValue(interactObj).InteractObject().transform.position.x, transform.position.x) > InteractionRange)
+        if (AbsDistance(Player_Interaction.Instance.InObjGetValue(interactObj).InteractObject().transform.position.x, transform.position.x) > InteractionRange)
         {
             Player_Instructions.Instance.FollowInstr(Instructions.GOTO_INSTR, interactObj);
-            Debug.Log(Vector2.Distance(transform.position, Player_Interaction.Instance.InObjGetValue(interactObj).InteractObject().transform.position));
-            Debug.Log("schedule");
+            
             StartCoroutine(Player_Instructions.Instance.ScheduleRunInstr(InstrTrigger.NEXT_INSTR_UNINTERRUPTED_DONE, Instructions.DO_INTERACT, interactObj));
 
             yield break;
@@ -176,7 +175,6 @@ public class Player : MonoBehaviour
 
         UseItem(interactObj);
 
-        Debug.Log("DDDD");
         Player_Instructions.Instance.CompletionInstr();
         yield break;
     }
@@ -443,15 +441,27 @@ public class Player : MonoBehaviour
         yield break;
     }
 
-    private float Distance(float A, float B)
+    #region 함수 설명 :
+    /// <summary>
+    /// 수직선상 두 점 사이 거리의 절댓값을 반환합니다.
+    /// </summary>
+    /// <param name="pointA">
+    /// 수직선상에 위치한 한 점입니다.
+    /// </param>
+    /// <param name="pointB">
+    /// 수직선상에 위치한 한 점입니다.
+    /// </param>
+    /// <returns></returns>
+    #endregion
+    private float AbsDistance(float pointA, float pointB)
     {
-        if(A > B)
+        if(pointA > pointB)
         {
-            return A - B;
+            return pointA - pointB;
         }
-        else if (A < B)
+        else if (pointA < pointB)
         {
-            return B - A;
+            return pointA - pointB;
         }
 
         return 0;

@@ -218,6 +218,14 @@ public class Player_Instructions : Singleton<Player_Instructions>
         }
     }
 
+    #region 함수 설명 : 
+    /// <summary>
+    /// 플레이어가 수행한 지시가 중단(DiscontinueInstr의 호출)없이 종료되었다면, 해당 함수를 호출합니다.
+    /// <para>
+    /// Player_Instructions에게 지시가 중단없이 종료되었다고 전달하는 기능입니다.
+    /// </para>
+    /// </summary>
+    #endregion
     public void CompletionInstr()
     {
         isCompletionInstr = Boolean3.TRUE;
@@ -247,14 +255,11 @@ public class Player_Instructions : Singleton<Player_Instructions>
                 {
                     if (progressInstr.instructions.Equals(instructions) && isDisContinueInstr.Equals(Boolean3.TRUE))
                     {
-                        Debug.Log("AAA");
                         yield break;
                     }
                     yield return null; 
                 }
-                Debug.Log("B");
                 FollowInstr(instructions, xValue);
-                Debug.Log("BBBBBBB");
                 break;
 
             default:
