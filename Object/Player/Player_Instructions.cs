@@ -224,9 +224,22 @@ public class Player_Instructions : Singleton<Player_Instructions>
     /// 수행할 지시에 필요한 값입니다
     /// </param>
     #endregion
-    public void ScheduleRunInstr<T>(InstrTrigger trigger, Instructions instructions, T xValue)
+    public IEnumerator ScheduleRunInstr<T>(InstrTrigger trigger, Instructions instructions, T xValue)
     {
+        switch (trigger)
+        {
+            case InstrTrigger.NEXT_INSTR_UNINTERRUPTED_DONE:
 
+                while(!isCompletionInstr) { yield return null; }
+
+                FollowInstr(instructions, xValue);
+
+                break;
+
+            default:
+                break;
+        }
+        yield break;
     }
 
     public Type InstrToType(Instructions instructions)
