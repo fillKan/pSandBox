@@ -166,14 +166,16 @@ public class Player : MonoBehaviour
         {
             Player_Instructions.Instance.FollowInstr(Instructions.GOTO_INSTR, interactObj);
 
-            yield return new WaitUntil(() => Player_Instructions.Instance.IsInstrDone);
+            yield return StartCoroutine(Player_Instructions.Instance.ScheduleRunInstr(InstrTrigger.NEXT_INSTR_UNINTERRUPTED_DONE, Instructions.DO_INTERACT, interactObj));
         }
 
         StartCoroutine(CR_Vibration(0.06f, 0.25f));
 
         UseItem(interactObj);
 
-        Player_Instructions.Instance.DiscontinueInstr();
+        Debug.Log("DDDD");
+        Player_Instructions.Instance.CompletionInstr();
+        yield break;
     }
 
     #region 코루틴 설명
@@ -417,7 +419,8 @@ public class Player : MonoBehaviour
             }
         }
 
-        Player_Instructions.Instance.DiscontinueInstr();
+        Player_Instructions.Instance.CompletionInstr();
+        yield break;
     }
 
     private IEnumerator CR_Vibration(float amount, float time)

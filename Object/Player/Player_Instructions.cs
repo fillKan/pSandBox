@@ -63,6 +63,13 @@ public enum InstrTrigger
     NEXT_INSTR_UNINTERRUPTED_DONE
 }
 
+public enum Boolean3
+{
+    DEFAULT,
+    FALSE,
+    TRUE
+}
+
 #region 구조체 설명 :
 /// <summary>
 /// 플레이어가 수행중인 지시와, 지시의 코루틴을 포함하는 구조입니다.
@@ -99,7 +106,8 @@ public class Player_Instructions : Singleton<Player_Instructions>
 
     private Player player;
 
-    private bool isCompletionInstr;
+    private Boolean3 isCompletionInstr  = Boolean3.DEFAULT;
+    private Boolean3 isDisContinueInstr = Boolean3.DEFAULT;
 
     private void Awake()
     {
@@ -122,6 +130,9 @@ public class Player_Instructions : Singleton<Player_Instructions>
     #endregion 
     public void FollowInstr<T>(Instructions instructions, T xValue)
     {
+        isCompletionInstr  = Boolean3.DEFAULT;
+        isDisContinueInstr = Boolean3.DEFAULT;
+
         Type type = InstrToType(instructions);
 
         switch (instructions)
@@ -195,6 +206,8 @@ public class Player_Instructions : Singleton<Player_Instructions>
     #endregion
     public void DiscontinueInstr()
     {
+        isDisContinueInstr = Boolean3.TRUE;
+
         progressInstr.instructions = Instructions.NONE;
 
         if (progressInstr.progress != null)
@@ -207,7 +220,7 @@ public class Player_Instructions : Singleton<Player_Instructions>
 
     public void CompletionInstr()
     {
-        isCompletionInstr = true;
+        isCompletionInstr = Boolean3.TRUE;
     }
 
     #region 함수 설명 :
@@ -230,10 +243,18 @@ public class Player_Instructions : Singleton<Player_Instructions>
         {
             case InstrTrigger.NEXT_INSTR_UNINTERRUPTED_DONE:
 
-                while(!isCompletionInstr) { yield return null; }
-
+                while(!isCompletionInstr.Equals(Boolean3.TRUE)) 
+                {
+                    if (progressInstr.instructions.Equals(instructions) && isDisContinueInstr.Equals(Boolean3.TRUE))
+                    {
+                        Debug.Log("AAA");
+                        yield break;
+                    }
+                    yield return null; 
+                }
+                
                 FollowInstr(instructions, xValue);
-
+                Debug.Log("BBBBBBB");
                 break;
 
             default:
