@@ -232,9 +232,9 @@ public class Player_Instructions : Singleton<Player_Instructions>
         isCompletionInstr = Boolean3.TRUE;
     }
 
-    #region 함수 설명 :
+    #region 코루틴 설명 :
     /// <summary>
-    /// 플레이어가 특정 조건에서 특정 지시를 수행하도록 설정합니다.
+    /// 특정 조건이 이루어 지게되면, 설정된 지시를 수행하도록 합니다.
     /// </summary>
     /// <param name="trigger">
     /// 지시가 수행되는 특정 조건을 지정합니다
@@ -246,7 +246,7 @@ public class Player_Instructions : Singleton<Player_Instructions>
     /// 수행할 지시에 필요한 값입니다
     /// </param>
     #endregion
-    public IEnumerator ScheduleRunInstr<T>(InstrTrigger trigger, Instructions instructions, T xValue)
+    private IEnumerator ScheduleRunInstr<T>(InstrTrigger trigger, Instructions instructions, T xValue)
     {
         switch (trigger)
         {
@@ -268,7 +268,20 @@ public class Player_Instructions : Singleton<Player_Instructions>
         }
         yield break;
     }
-
+    #region 함수 설명 :
+    /// <summary>
+    /// 플레이어가 특정 조건에서 특정 지시를 수행하도록 설정합니다.
+    /// </summary>
+    /// <param name="trigger">
+    /// 지시가 수행되는 특정 조건을 지정합니다
+    /// </param>
+    /// <param name="instructions">
+    /// 수행할 지시를 지정합니다
+    /// </param>
+    /// <param name="xValue">
+    /// 수행할 지시에 필요한 값입니다
+    /// </param>
+    #endregion
     public void ScheduleInstr<T>(InstrTrigger trigger, Instructions instructions, T xValue)
     {
         switch (trigger)
@@ -289,7 +302,18 @@ public class Player_Instructions : Singleton<Player_Instructions>
                 break;
         }
     }
-
+    #region
+    /// <summary>
+    /// 인자값의 지시에 필요한 자료형의 Type을 반환합니다.
+    /// </summary>
+    /// <param name="instructions">
+    /// 지시를 지정합니다.
+    /// <para>
+    /// 해당 값에따라 반환되는 값이 달라집니다.
+    /// </para>
+    /// </param>
+    /// <returns></returns>
+    #endregion
     public Type InstrToType(Instructions instructions)
     {
         switch (instructions)

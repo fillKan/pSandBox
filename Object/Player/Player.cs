@@ -165,8 +165,8 @@ public class Player : MonoBehaviour
         if (AbsDistance(Player_Interaction.Instance.InObjGetValue(interactObj).InteractObject().transform.position.x, transform.position.x) > InteractionRange)
         {
             Player_Instructions.Instance.FollowInstr(Instructions.GOTO_INSTR, interactObj);
-            
-            StartCoroutine(Player_Instructions.Instance.ScheduleRunInstr(InstrTrigger.NEXT_INSTR_UNINTERRUPTED_DONE, Instructions.DO_INTERACT, interactObj));
+
+            Player_Instructions.Instance.ScheduleInstr(InstrTrigger.NEXT_INSTR_UNINTERRUPTED_DONE, Instructions.DO_INTERACT, interactObj);
 
             yield break;
         }
@@ -419,7 +419,6 @@ public class Player : MonoBehaviour
                 yield return null;
             }
         }
-        Debug.Log("얘ㅜㄸ");
         Player_Instructions.Instance.CompletionInstr();
         yield break;
     }
