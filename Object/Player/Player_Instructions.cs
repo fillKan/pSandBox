@@ -57,17 +57,29 @@ public enum InstrTrigger
 {
     #region 열거자 설명 :
     /// <summary>
+    /// 해당 열거체의 첫 부분을 가리킵니다.
+    /// <para>
+    /// 실제로 하는 기능은 없습니다 ㄹㅇ
+    /// </para>
+    /// </summary>
+    #endregion
+    BEGIN,
+    #region 열거자 설명 :
+    /// <summary>
     /// 다음에 수행될 지시가 중단되지 않고서 종료되었을 때
     /// </summary>
     #endregion
-    NEXT_INSTR_UNINTERRUPTED_DONE
-}
+    NEXT_INSTR_UNINTERRUPTED_DONE,
 
-public enum Boolean3
-{
-    DEFAULT,
-    FALSE,
-    TRUE
+    #region 열거자 설명 :
+    /// <summary>
+    /// 해당 열거체의 끝 부분을 가리킵니다.
+    /// <para>
+    /// 실제로 하는 기능은 없습니다 진짜
+    /// </para>
+    /// </summary>
+    #endregion
+    END
 }
 
 #region 구조체 설명 :
@@ -75,7 +87,7 @@ public enum Boolean3
 /// 플레이어가 수행중인 지시와, 지시의 코루틴을 포함하는 구조입니다.
 /// </summary>
 #endregion
-public struct ProgressInstr
+public struct InstructionManager
 {
     #region 설명 : 
     /// <summary>
@@ -94,21 +106,13 @@ public struct ProgressInstr
 
 public class Player_Instructions : Singleton<Player_Instructions>
 {
-    public bool IsInstrDone
-    {
-        get
-        {
-            return progressInstr.instructions == Instructions.NONE;
-        }
-    }
-
-    private ProgressInstr progressInstr;
-    private ProgressInstr scheduleInstr;
+    private InstructionManager progressInstr;
+    private InstructionManager scheduleInstr;
 
     private Player player;
 
-    private Boolean3 isCompletionInstr  = Boolean3.DEFAULT;
-    private Boolean3 isDisContinueInstr = Boolean3.DEFAULT;
+    private Boolean isCompletionInstr  = false;
+    private Boolean isDisContinueInstr = false;
 
     private void Awake()
     {
@@ -131,8 +135,8 @@ public class Player_Instructions : Singleton<Player_Instructions>
     #endregion 
     public void FollowInstr<T>(Instructions instructions, T xValue)
     {
-        isCompletionInstr  = Boolean3.DEFAULT;
-        isDisContinueInstr = Boolean3.DEFAULT;
+        isCompletionInstr  = false;
+        isDisContinueInstr = false;
 
         Type type = InstrToType(instructions);
 
@@ -207,7 +211,7 @@ public class Player_Instructions : Singleton<Player_Instructions>
     #endregion
     public void DiscontinueInstr()
     {
-        isDisContinueInstr = Boolean3.TRUE;
+        isDisContinueInstr = true;
 
         progressInstr.instructions = Instructions.NONE;
 
@@ -229,7 +233,7 @@ public class Player_Instructions : Singleton<Player_Instructions>
     #endregion
     public void CompletionInstr()
     {
-        isCompletionInstr = Boolean3.TRUE;
+        isCompletionInstr = true;
     }
 
     #region 함수 설명 :
@@ -248,23 +252,17 @@ public class Player_Instructions : Singleton<Player_Instructions>
     #endregion
     public void ScheduleInstr<T>(InstrTrigger trigger, Instructions instructions, T xValue)
     {
-        switch (trigger)
+        if(trigger > InstrTrigger.BEGIN && trigger < InstrTrigger.END)
         {
-            case InstrTrigger.NEXT_INSTR_UNINTERRUPTED_DONE:
+            if (!scheduleInstr.instructions.Equals(Instructions.NONE))
+            {
+                StopCoroutine(scheduleInstr.progress);
+            }
+            scheduleInstr.instructions = instructions;
+            scheduleInstr.progress = ScheduleRunInstr(trigger, instructions, xValue);
 
-                if(!scheduleInstr.instructions.Equals(Instructions.NONE))
-                {
-                    StopCoroutine(scheduleInstr.progress);
-                }
-                scheduleInstr.instructions = instructions;
-                scheduleInstr.progress = ScheduleRunInstr(InstrTrigger.NEXT_INSTR_UNINTERRUPTED_DONE, instructions, xValue);
-
-                StartCoroutine(scheduleInstr.progress);
-                break;
-
-            default:
-                break;
-        }
+            StartCoroutine(scheduleInstr.progress);
+        }       
     }
 
     #region 함수 설명 :
@@ -320,10 +318,13 @@ public class Player_Instructions : Singleton<Player_Instructions>
         {
             case InstrTrigger.NEXT_INSTR_UNINTERRUPTED_DONE:
 
-                while (!isCompletionInstr.Equals(Boolean3.TRUE))
+                while (!isCompletionInstr)
                 {
-                    if (progressInstr.instructions.Equals(instructions) && isDisContinueInstr.Equals(Boolean3.TRUE))
+                    if (progressInstr.instructions.Equals(instructions) && isDisContinueInstr)
                     {
+                        scheduleInstr.instructions = Instructions.NONE;
+                        scheduleInstr.progress = null;
+
                         yield break;
                     }
                     yield return null;

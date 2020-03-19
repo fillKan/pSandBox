@@ -256,7 +256,8 @@ public class Player : MonoBehaviour
                 yield return null;
             }
         }
-        Player_Instructions.Instance.DiscontinueInstr();
+        Player_Instructions.Instance.CompletionInstr();
+        yield break;
     }
 
     #region 코루틴 설명
@@ -338,7 +339,8 @@ public class Player : MonoBehaviour
             }
         }
 
-        Player_Instructions.Instance.DiscontinueInstr();
+        Player_Instructions.Instance.CompletionInstr();
+        yield break;
     }
 
     #region 코루틴 설명
