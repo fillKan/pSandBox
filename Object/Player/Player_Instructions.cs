@@ -103,6 +103,7 @@ public class Player_Instructions : Singleton<Player_Instructions>
     }
 
     private ProgressInstr progressInstr;
+    private ProgressInstr scheduleInstr;
 
     private Player player;
 
@@ -266,6 +267,27 @@ public class Player_Instructions : Singleton<Player_Instructions>
                 break;
         }
         yield break;
+    }
+
+    public void ScheduleInstr<T>(InstrTrigger trigger, Instructions instructions, T xValue)
+    {
+        switch (trigger)
+        {
+            case InstrTrigger.NEXT_INSTR_UNINTERRUPTED_DONE:
+
+                if(!scheduleInstr.instructions.Equals(Instructions.NONE))
+                {
+                    StopCoroutine(scheduleInstr.progress);
+                }
+                scheduleInstr.instructions = instructions;
+                scheduleInstr.progress = ScheduleRunInstr(InstrTrigger.NEXT_INSTR_UNINTERRUPTED_DONE, instructions, xValue);
+
+                StartCoroutine(scheduleInstr.progress);
+                break;
+
+            default:
+                break;
+        }
     }
 
     public Type InstrToType(Instructions instructions)
