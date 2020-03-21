@@ -27,8 +27,10 @@ public class Player : MonoBehaviour
     private Vector3 vDir;
     private SpriteRenderer sprite;
 
-    [Tooltip("플레이어가 장비한 아이템 슬롯들을 담는 배열")]
-    public ItemSlot[] EquippedItemSlots = new ItemSlot[1];
+    [Tooltip("플레이어가 현재 프레임에 장비한 아이템 슬롯들을 담는 배열")]
+    public  List<ItemSlot> EquipItemSlots    = new List<ItemSlot>();
+    [Tooltip("플레이어가 이전 프레임에 장비한 아이템 슬롯들을 담는 배열")]
+    private List<ItemSlot> EquippedItemSlots = new List<ItemSlot>();
 
     #region 함수 설명 : 
     /// <summary>
@@ -66,13 +68,13 @@ public class Player : MonoBehaviour
     {
         bool usedItem = false;
 
-        for (int i = 0; i < EquippedItemSlots.Length; ++i)
+        for (int i = 0; i < EquipItemSlots.Count; ++i)
         {
-            if (EquippedItemSlots[i])
+            if (EquipItemSlots[i])
             {
-                if (EquippedItemSlots[i].ContainItem)
+                if (EquipItemSlots[i].ContainItem)
                 {
-                    if (EquippedItemSlots[i].ContainItem.TryGetComponent(out ItemFunction function))
+                    if (EquipItemSlots[i].ContainItem.TryGetComponent(out ItemFunction function))
                     {
                         usedItem = true;
                         Player_Interaction.Instance.InObjGetValue(interactionID).OperateAction(function);
@@ -103,13 +105,13 @@ public class Player : MonoBehaviour
             // 이동 방향은 현재 플레이어의 위치로 계속해서 초기화한다.
             vDir = transform.position;
 
-            for(int i = 0; i < EquippedItemSlots.Length; i++)
+            for(int i = 0; i < EquipItemSlots.Count; i++)
             {
-                if(EquippedItemSlots[i].ContainItem)
+                if(EquipItemSlots[i].ContainItem)
                 {
-                    if (EquippedItemSlots[i].ContainItem.TryGetComponent(out ItemFunction function))
+                    if (EquipItemSlots[i].ContainItem.TryGetComponent(out ItemFunction function))
                     {
-                        StartCoroutine(function.CarryItem(EquippedItemSlots[i]));
+                        StartCoroutine(function.CarryItem(EquipItemSlots[i]));
                     }
                 }
             }
