@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Axe : Item, ItemFunction
 {
+    private float loggingValue = 3;
+
     protected override void Init()
     {
         _itemCode = (int)ItemMaster.ItemList.AXE;
@@ -13,18 +15,6 @@ public class Axe : Item, ItemFunction
 
     public IEnumerator UseItem<T> (T xValue) where T : Interaction
     {
-        if (xValue.InteractObject().TryGetComponent<Tree>(out Tree tree))
-        {
-            if (tree.DoingChopTree || tree.IsCutDown) yield break;
-
-            yield return StartCoroutine(tree.CR_chopTree(4, 0.4f, 0.1f));
-
-            if(tree.fDurability <= 0)
-            {
-                tree.DropItem();
-                yield return StartCoroutine(tree.CR_cutDown());
-            }
-        }
         yield break;
     }
 
@@ -35,6 +25,7 @@ public class Axe : Item, ItemFunction
 
     public IEnumerator MountItem()
     {
+        StateStorage.Instance.IncreaseState(States.TREE_LOGGING, loggingValue);
         yield break;
     }
 
@@ -45,6 +36,7 @@ public class Axe : Item, ItemFunction
 
     public IEnumerator UnmountItem()
     {
+        StateStorage.Instance.DecreaseState(States.TREE_LOGGING, loggingValue);
         yield break;
     }
 }
