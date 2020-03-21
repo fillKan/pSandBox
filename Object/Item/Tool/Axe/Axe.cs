@@ -33,12 +33,17 @@ public class Axe : Item, ItemFunction
         yield break;
     }
 
-    public IEnumerator EquipItem()
+    public IEnumerator MountItem()
     {
         yield break;
     }
 
     public IEnumerator InSlotItem()
+    {
+        yield break;
+    }
+
+    public IEnumerator UnmountItem()
     {
         yield break;
     }

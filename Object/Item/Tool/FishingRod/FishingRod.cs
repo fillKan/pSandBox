@@ -17,7 +17,7 @@ public class FishingRod : Item, ItemFunction
         yield break;
     }
 
-    public IEnumerator EquipItem()
+    public IEnumerator MountItem()
     {
         yield break;
     }
@@ -37,5 +37,10 @@ public class FishingRod : Item, ItemFunction
         _itemCode = (int)ItemMaster.ItemList.FISHING_ROD;
 
         _itemType = ItemMaster.ItemType.TOOL;
+    }
+
+    public IEnumerator UnmountItem()
+    {
+        yield break;
     }
 }

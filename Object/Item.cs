@@ -26,10 +26,17 @@ public interface ItemFunction
 
     #region 코루틴 설명
     /// <summary>
-    /// 플레이어가 이 아이템을 장비하고 있을때에 행동.
+    /// 플레이어가 이 아이템을 장착했을때의 행동입니다.
     /// </summary>
     #endregion
-    IEnumerator EquipItem();
+    IEnumerator MountItem();
+
+    #region 코루틴 설명
+    /// <summary>
+    /// 플레이어가 이 아이템의 장착을 해제했을때의 행동입니다.
+    /// </summary>
+    #endregion
+    IEnumerator UnmountItem();
 
     #region 코루틴 설명
     /// <summary>

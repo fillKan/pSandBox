@@ -87,7 +87,7 @@ public class FishingRod_used : Item, ItemFunction
         yield break;
     }
 
-    public IEnumerator EquipItem()
+    public IEnumerator MountItem()
     {
         yield break;
     }
@@ -98,6 +98,11 @@ public class FishingRod_used : Item, ItemFunction
     }
 
     public IEnumerator UseItem<T>(T xValue) where T : Interaction
+    {
+        yield break;
+    }
+
+    public IEnumerator UnmountItem()
     {
         yield break;
     }
