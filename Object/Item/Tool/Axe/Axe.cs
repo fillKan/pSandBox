@@ -25,6 +25,7 @@ public class Axe : Item, ItemFunction
 
     public IEnumerator MountItem()
     {
+        Debug.Log("Mount");
         StateStorage.Instance.IncreaseState(States.TREE_LOGGING, loggingValue);
         yield break;
     }
@@ -36,6 +37,7 @@ public class Axe : Item, ItemFunction
 
     public IEnumerator UnmountItem()
     {
+        Debug.Log("Unmount");
         StateStorage.Instance.DecreaseState(States.TREE_LOGGING, loggingValue);
         yield break;
     }

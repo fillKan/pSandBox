@@ -89,9 +89,52 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void EquipSlotsUpdate()
+    {
+        ItemFunction function;
+
+        for (int i = 0; i < EquipItemSlots.Count; i++)
+        {
+            if (!EquipItemSlots[i].ContainItem)
+            {
+                Debug.Log("A");
+                if (EquippedItemSlots[i].ContainItem)
+                {
+                    Debug.Log("B");
+                    if (EquippedItemSlots[i].ContainItem.TryGetComponent(out function))
+                    {
+                        Debug.Log("C");
+                        StartCoroutine(function.UnmountItem());
+                        Debug.Log("D");
+                    }
+                }
+                continue;
+            }
+
+            else if (!EquippedItemSlots[i].ContainItem)
+            {
+                Debug.Log("a");
+                if (EquipItemSlots[i].ContainItem)
+                {
+                    Debug.Log("b");
+                    if (EquipItemSlots[i].ContainItem.TryGetComponent(out function))
+                    {
+                        Debug.Log("c");
+                        StartCoroutine(function.MountItem());
+                        Debug.Log("d");
+                    }
+                }
+                continue;
+            }
+        }
+        EquippedItemSlots = EquipItemSlots;
+    }
+
     private void OnEnable()
     {
         vDir = transform.position;
+
+        EquippedItemSlots = EquipItemSlots;
 
         sprite = gameObject.GetComponent<SpriteRenderer>();
 
@@ -105,7 +148,9 @@ public class Player : MonoBehaviour
             // 이동 방향은 현재 플레이어의 위치로 계속해서 초기화한다.
             vDir = transform.position;
 
-            for(int i = 0; i < EquipItemSlots.Count; i++)
+            EquipSlotsUpdate();
+
+            for (int i = 0; i < EquipItemSlots.Count; i++)
             {
                 if(EquipItemSlots[i].ContainItem)
                 {
