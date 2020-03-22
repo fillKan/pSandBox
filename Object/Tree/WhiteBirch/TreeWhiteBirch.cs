@@ -10,8 +10,10 @@ public class TreeWhiteBirch : Tree, Interaction
     }
     public void OperateAction<T>(T xValue) where T : IItemFunction
     {
-        if (xValue == null)
+        if (xValue == null && !_doingChopTree)
         {
+            StartCoroutine(CR_logging());
+
             Debug.Log(xValue);
         }
 
@@ -50,5 +52,19 @@ public class TreeWhiteBirch : Tree, Interaction
         RegisterInteraction();
 
         TryGetComponent<SpriteRenderer>(out _sprtRenderer);
+    }
+
+    private IEnumerator CR_logging()
+    {
+        yield return StartCoroutine(CR_chopTree(StateStorage.Instance.TreeLogging, 0.4f, 0.06f));
+
+        if(_fDurability <= 0)
+        {
+            DropItem();
+
+            yield return StartCoroutine(CR_cutDown());
+        }
+
+        yield break;
     }
 }

@@ -10,9 +10,14 @@ public class TreeOak : Tree, Interaction
     }
     public void OperateAction<T>(T xValue) where T : IItemFunction
     {
-        if (xValue == null) return;
+        if (xValue == null && !_doingChopTree)
+        {
+            StartCoroutine(CR_logging());
 
-        StartCoroutine(xValue.UseItem(this));
+            Debug.Log(xValue);
+        }
+
+        else StartCoroutine(xValue.UseItem(this));
     }
 
     public void RegisterInteraction()
@@ -47,5 +52,19 @@ public class TreeOak : Tree, Interaction
         RegisterInteraction();
 
         TryGetComponent<SpriteRenderer>(out _sprtRenderer);
+    }
+
+    private IEnumerator CR_logging()
+    {
+        yield return StartCoroutine(CR_chopTree(StateStorage.Instance.TreeLogging, 0.4f, 0.06f));
+
+        if (_fDurability <= 0)
+        {
+            DropItem();
+
+            yield return StartCoroutine(CR_cutDown());
+        }
+
+        yield break;
     }
 }
