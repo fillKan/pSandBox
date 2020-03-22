@@ -28,16 +28,15 @@ public class StateStorage : Singleton<StateStorage>
     {
         get
         {
-            return _treeLogging;
+            return storage[States.TREE_LOGGING];
         }
     }
-    private float _treeLogging;
 
     private Dictionary<States, float> storage = new Dictionary<States, float>();
 
     private void Awake()
     {
-        storage.Add(States.TREE_LOGGING, _treeLogging);
+        storage.Add(States.TREE_LOGGING, 0);
     }
 
     #region 함수 설명 :
