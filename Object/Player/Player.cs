@@ -95,46 +95,42 @@ public class Player : MonoBehaviour
 
         for (int i = 0; i < EquipItemSlots.Count; i++)
         {
-            if (!EquipItemSlots[i].ContainItem)
+            // 새로운 아이템이 들어왓을 때
+            if(EquippedItemSlots[i].ContainItem == null && EquipItemSlots[i].ContainItem != null)
             {
-                Debug.Log("A");
-                if (EquippedItemSlots[i].ContainItem)
+                Debug.Log("AAAA");
+                if (EquipItemSlots[i].ContainItem.TryGetComponent(out function))
                 {
-                    Debug.Log("B");
-                    if (EquippedItemSlots[i].ContainItem.TryGetComponent(out function))
-                    {
-                        Debug.Log("C");
-                        StartCoroutine(function.UnmountItem());
-                        Debug.Log("D");
-                    }
-                }
-                continue;
-            }
+                    StartCoroutine(function.MountItem());
 
-            else if (!EquippedItemSlots[i].ContainItem)
-            {
-                Debug.Log("a");
-                if (EquipItemSlots[i].ContainItem)
-                {
-                    Debug.Log("b");
-                    if (EquipItemSlots[i].ContainItem.TryGetComponent(out function))
-                    {
-                        Debug.Log("c");
-                        StartCoroutine(function.MountItem());
-                        Debug.Log("d");
-                    }
+                    EquippedItemSlots[i].AddItem(EquipItemSlots[i].ContainItem.ItemData);
                 }
-                continue;
+            }
+            // 아이템이 나갔을 때
+            if (EquippedItemSlots[i].ContainItem != null && EquipItemSlots[i].ContainItem == null)
+            {
+                Debug.Log("BBBB");
+                if (EquippedItemSlots[i].ContainItem.TryGetComponent(out function))
+                {
+                    StartCoroutine(function.UnmountItem());
+
+                    EquippedItemSlots[i] = EquipItemSlots[i];
+                }               
             }
         }
-        EquippedItemSlots = EquipItemSlots;
+
     }
 
     private void OnEnable()
     {
         vDir = transform.position;
 
-        EquippedItemSlots = EquipItemSlots;
+        for(int i = 0; i < EquipItemSlots.Count; i++)
+        {
+            ItemSlot item = new ItemSlot();
+
+            EquippedItemSlots.Add(item);
+        }
 
         sprite = gameObject.GetComponent<SpriteRenderer>();
 
