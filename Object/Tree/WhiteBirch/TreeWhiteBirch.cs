@@ -10,9 +10,12 @@ public class TreeWhiteBirch : Tree, Interaction
     }
     public void OperateAction<T>(T xValue) where T : ItemFunction
     {
-        if (xValue == null) return;
+        if (xValue == null)
+        {
+            Debug.Log(xValue);
+        }
 
-        StartCoroutine(xValue.UseItem(this));
+        else StartCoroutine(xValue.UseItem(this));
     }
 
     public void RegisterInteraction()

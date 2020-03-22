@@ -84,8 +84,7 @@ public class Player : MonoBehaviour
         }
         if (!usedItem)
         {
-            ItemFunction itemFunction = null;
-            Player_Interaction.Instance.InObjGetValue(interactionID).OperateAction(itemFunction);
+            Player_Interaction.Instance.InObjGetValue(interactionID).OperateAction<ItemFunction>(null);
         }
     }
 
