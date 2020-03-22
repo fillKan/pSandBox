@@ -158,4 +158,14 @@ public class FishingRod_used : Item, IItemFunction
             yield return null;
         }
     }
+
+    public bool HasFunction(ItemFunc func)
+    {
+        switch (func)
+        {
+            case ItemFunc.CARRY:
+                return true;
+        }
+        return false;
+    }
 }

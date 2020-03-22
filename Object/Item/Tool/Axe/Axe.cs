@@ -41,4 +41,17 @@ public class Axe : Item, IItemFunction
         StateStorage.Instance.DecreaseState(States.TREE_LOGGING, loggingValue);
         yield break;
     }
+
+    public bool HasFunction(ItemFunc func)
+    {
+        switch (func)
+        {           
+            case ItemFunc.MOUNT:
+                return true;
+
+            case ItemFunc.UNMOUNT:
+                return true;            
+        }
+        return false;
+    }
 }

@@ -53,6 +53,8 @@ public interface IItemFunction
     /// </summary>
     #endregion
     IEnumerator InSlotItem();
+
+    bool HasFunction(ItemFunc func);
 }
 
 public abstract class Item : MonoBehaviour
