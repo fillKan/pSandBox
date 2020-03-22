@@ -66,8 +66,6 @@ public class Player : MonoBehaviour
     #endregion
     private void UseItem(int interactionID)
     {
-        bool usedItem = false;
-
         for (int i = 0; i < EquipItemSlots.Count; ++i)
         {
             if (EquipItemSlots[i])
@@ -76,16 +74,19 @@ public class Player : MonoBehaviour
                 {
                     if (EquipItemSlots[i].ContainItem.TryGetComponent(out IItemFunction function))
                     {
-                        usedItem = true;
-                        Player_Interaction.Instance.InObjGetValue(interactionID).OperateAction(function);
+                        if(function.HasFunction(ItemFunc.USE))
+                        {
+                            Player_Interaction.Instance.InObjGetValue(interactionID).OperateAction(function);
+                        }
+                        else
+                        {
+                            Player_Interaction.Instance.InObjGetValue(interactionID).OperateAction<IItemFunction>(null);
+                        }
                     }
                 }
             }
         }
-        if (!usedItem)
-        {
-            Player_Interaction.Instance.InObjGetValue(interactionID).OperateAction<IItemFunction>(null);
-        }
+       
     }
 
     private void EquipSlotsUpdate()
@@ -147,7 +148,10 @@ public class Player : MonoBehaviour
                 {
                     if (EquipItemSlots[i].ContainItem.TryGetComponent(out IItemFunction function))
                     {
-                        StartCoroutine(function.CarryItem(EquipItemSlots[i]));
+                        if(function.HasFunction(ItemFunc.CARRY))
+                        {
+                            StartCoroutine(function.CarryItem(EquipItemSlots[i]));
+                        }
                     }
                 }
             }
@@ -211,7 +215,24 @@ public class Player : MonoBehaviour
 
         StartCoroutine(CR_Vibration(0.06f, 0.25f));
 
-        UseItem(interactObj);
+        bool isSlotEmpty = true;
+
+        for(int i = 0; i < EquipItemSlots.Count; i++)
+        {
+            if(EquipItemSlots[i].ContainItem)
+            {
+                UseItem(interactObj);
+
+                isSlotEmpty = false;
+
+                break;
+            }
+        }
+        if(isSlotEmpty)
+        {
+            Player_Interaction.Instance.InObjGetValue(interactObj).OperateAction<IItemFunction>(null);
+        }
+        
 
         Player_Instructions.Instance.CompletionInstr();
         yield break;
