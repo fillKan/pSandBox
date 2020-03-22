@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     [Tooltip("플레이어가 현재 프레임에 장비한 아이템 슬롯들을 담는 배열")]
     public  List<ItemSlot> EquipItemSlots    = new List<ItemSlot>();
     [Tooltip("플레이어가 이전 프레임에 장비한 아이템 슬롯들을 담는 배열")]
-    private List<ItemSlot> EquippedItemSlots = new List<ItemSlot>();
+    private List<ItemMaster.ItemList> EquippedItemSlots = new List<ItemMaster.ItemList>();
 
     #region 함수 설명 : 
     /// <summary>
@@ -96,25 +96,23 @@ public class Player : MonoBehaviour
         for (int i = 0; i < EquipItemSlots.Count; i++)
         {
             // 새로운 아이템이 들어왓을 때
-            if(EquippedItemSlots[i].ContainItem == null && EquipItemSlots[i].ContainItem != null)
+            if(EquippedItemSlots[i] == ItemMaster.ItemList.NONE && EquipItemSlots[i].ContainItem != null)
             {
-                Debug.Log("AAAA");
                 if (EquipItemSlots[i].ContainItem.TryGetComponent(out function))
                 {
                     StartCoroutine(function.MountItem());
 
-                    EquippedItemSlots[i].AddItem(EquipItemSlots[i].ContainItem.ItemData);
+                    EquippedItemSlots[i] = EquipItemSlots[i].ContainItem.ItemData;
                 }
             }
             // 아이템이 나갔을 때
-            if (EquippedItemSlots[i].ContainItem != null && EquipItemSlots[i].ContainItem == null)
+            if (EquippedItemSlots[i] != ItemMaster.ItemList.NONE && EquipItemSlots[i].ContainItem == null)
             {
-                Debug.Log("BBBB");
-                if (EquippedItemSlots[i].ContainItem.TryGetComponent(out function))
+                if (ItemMaster.Instance.GetItem(EquippedItemSlots[i]).TryGetComponent(out function))
                 {
                     StartCoroutine(function.UnmountItem());
 
-                    EquippedItemSlots[i] = EquipItemSlots[i];
+                    EquippedItemSlots[i] = ItemMaster.ItemList.NONE;
                 }               
             }
         }
@@ -127,9 +125,7 @@ public class Player : MonoBehaviour
 
         for(int i = 0; i < EquipItemSlots.Count; i++)
         {
-            ItemSlot item = new ItemSlot();
-
-            EquippedItemSlots.Add(item);
+            EquippedItemSlots.Add(ItemMaster.ItemList.NONE);
         }
 
         sprite = gameObject.GetComponent<SpriteRenderer>();
