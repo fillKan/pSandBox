@@ -89,7 +89,24 @@ public class Player : MonoBehaviour
        
     }
 
-    private void EquipSlotsUpdate()
+    private void OperateCarryItem()
+    {
+        for (int i = 0; i < EquipItemSlots.Count; i++)
+        {
+            if (EquipItemSlots[i].ContainItem)
+            {
+                if (EquipItemSlots[i].ContainItem.TryGetComponent(out IItemFunction function))
+                {
+                    if (function.HasFunction(ItemFunc.CARRY))
+                    {
+                        StartCoroutine(function.CarryItem(EquipItemSlots[i]));
+                    }
+                }
+            }
+        }
+    }
+
+    private void OperateMountAndUnmountItem()
     {
         IItemFunction function;
 
@@ -100,8 +117,10 @@ public class Player : MonoBehaviour
             {
                 if (EquipItemSlots[i].ContainItem.TryGetComponent(out function))
                 {
-                    StartCoroutine(function.MountItem());
-
+                    if(function.HasFunction(ItemFunc.MOUNT))
+                    {
+                        StartCoroutine(function.MountItem());
+                    }
                     EquippedItemSlots[i] = EquipItemSlots[i].ContainItem.ItemData;
                 }
             }
@@ -110,8 +129,10 @@ public class Player : MonoBehaviour
             {
                 if (ItemMaster.Instance.GetItem(EquippedItemSlots[i]).TryGetComponent(out function))
                 {
-                    StartCoroutine(function.UnmountItem());
-
+                    if(function.HasFunction(ItemFunc.UNMOUNT))
+                    {
+                        StartCoroutine(function.UnmountItem());
+                    }
                     EquippedItemSlots[i] = ItemMaster.ItemList.NONE;
                 }               
             }
@@ -130,6 +151,8 @@ public class Player : MonoBehaviour
 
         sprite = gameObject.GetComponent<SpriteRenderer>();
 
+        StateStorage.Instance.IncreaseState(States.TREE_LOGGING, 1);
+
         StartCoroutine(CR_update());
     }
 
@@ -140,21 +163,9 @@ public class Player : MonoBehaviour
             // 이동 방향은 현재 플레이어의 위치로 계속해서 초기화한다.
             vDir = transform.position;
 
-            EquipSlotsUpdate();
+            OperateMountAndUnmountItem();
 
-            for (int i = 0; i < EquipItemSlots.Count; i++)
-            {
-                if(EquipItemSlots[i].ContainItem)
-                {
-                    if (EquipItemSlots[i].ContainItem.TryGetComponent(out IItemFunction function))
-                    {
-                        if(function.HasFunction(ItemFunc.CARRY))
-                        {
-                            StartCoroutine(function.CarryItem(EquipItemSlots[i]));
-                        }
-                    }
-                }
-            }
+            OperateCarryItem();
 
             if (Input.GetAxis("Horizontal") != 0)
             {
