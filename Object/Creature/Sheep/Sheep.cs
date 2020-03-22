@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sheep : MonoBehaviour, Interaction
+public class Sheep : MonoBehaviour, IInteraction
 {
     public float fMaxSpeed;
     public Sprite sheepSprite;
@@ -171,7 +171,7 @@ public class Sheep : MonoBehaviour, Interaction
 
         for (int i = 0; i < nCount; i++)
         {
-            ItemExisting item = ItemMaster.Instance.TakeItemExisting(ItemMaster.ItemList.WOOL);
+            ItemExisting item = ItemMaster.Instance.TakeItemExisting(ItemList.WOOL);
 
             item.transform.position = transform.position;
             item.gameObject.SetActive(true);

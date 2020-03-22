@@ -2,6 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#region 열거체 설명 : 
+/// <summary>
+/// 아이템들의 종류를 열거하는 열거체.
+/// <para>
+/// 해당 열거체를 통해 아이템을 구분한다.
+/// </para>
+/// </summary>
+#endregion
+public enum ItemList
+{
+    NONE,
+    LOG_WHITEBIRCH,
+    LOG_OAK,
+    SEED_WHITEBIRCH,
+    SEED_OAK,
+    WOOL,
+    EGG,
+    FISH_BUTTERFISH,
+    FISH_CUTLASSFISH,
+    FISH_MACKEREL,
+    FISH_POLLACK,
+    FISH_PUFFERFISH,
+    FISH_SALMON,
+    AXE,
+    FISHING_ROD,
+    FISHING_ROD_USED
+};
+
+#region 열거체 설명 : 
+/// <summary>
+/// 아이템들의 유형들을 열거하는 열거체.
+/// <para>
+/// 해당 열거체를 통해 아이템의 유형이 구분된다.
+/// </para>
+/// </summary>
+#endregion
+public enum ItemTypeList
+{
+    NONE,
+    TOOL,
+    FISH
+}
+
 #region 클래스 설명 : 
 /// <summary>
 /// 아이템과 관련된 모든 정보를 다루는 싱글톤 객체.
@@ -38,49 +81,7 @@ public class ItemMaster : Singleton<ItemMaster>
     private Dictionary<int, Item>.ValueCollection ItemValues;
 
     private List<int> FishItems = new List<int>();
-
-    #region 열거체 설명 : 
-    /// <summary>
-    /// 아이템들의 종류를 열거하는 열거체.
-    /// <para>
-    /// 해당 열거체를 통해 아이템을 구분한다.
-    /// </para>
-    /// </summary>
-    #endregion
-    public enum ItemList
-    {
-        NONE,
-        LOG_WHITEBIRCH,
-        LOG_OAK,
-        SEED_WHITEBIRCH,
-        SEED_OAK,
-        WOOL,
-        EGG,
-        FISH_BUTTERFISH,
-        FISH_CUTLASSFISH,
-        FISH_MACKEREL,
-        FISH_POLLACK,
-        FISH_PUFFERFISH,
-        FISH_SALMON,
-        AXE,
-        FISHING_ROD,
-        FISHING_ROD_USED
-    };
-
-    #region 열거체 설명 : 
-    /// <summary>
-    /// 아이템들의 유형들을 열거하는 열거체.
-    /// <para>
-    /// 해당 열거체를 통해 아이템의 유형이 구분된다.
-    /// </para>
-    /// </summary>
-    #endregion
-    public enum ItemType
-    {
-        NONE,
-        TOOL,
-        FISH
-    }
+    
 
     #region 함수 설명 : 
     /// <summary>
@@ -348,7 +349,7 @@ public class ItemMaster : Singleton<ItemMaster>
 
         foreach (Item item in ItemValues)
         {
-            if(item.ItemType.Equals(ItemType.FISH))
+            if(item.ItemType.Equals(ItemTypeList.FISH))
             {
                 FishItems.Add(item.ItemCode);
             }

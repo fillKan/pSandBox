@@ -10,13 +10,13 @@ using UnityEngine;
 /// </para>
 /// </summary>
 #endregion
-public class ItemExisting : MonoBehaviour, Interaction
+public class ItemExisting : MonoBehaviour, IInteraction
 {
     public int                 ItemCode
     {
         get { return (int)ItemData; }
     }
-    public ItemMaster.ItemList ItemData;
+    public ItemList ItemData;
 
     public GameObject InteractObject()
     {

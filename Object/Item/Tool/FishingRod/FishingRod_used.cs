@@ -97,7 +97,7 @@ public class FishingRod_used : Item, IItemFunction
         yield break;
     }
 
-    public IEnumerator UseItem<T>(T xValue) where T : Interaction
+    public IEnumerator UseItem<T>(T xValue) where T : IInteraction
     {
         yield break;
     }
@@ -109,9 +109,9 @@ public class FishingRod_used : Item, IItemFunction
 
     protected override void Init()
     {
-        _itemCode = (int)ItemMaster.ItemList.FISHING_ROD_USED;
+        _itemCode = (int)ItemList.FISHING_ROD_USED;
 
-        _itemType = ItemMaster.ItemType.TOOL;
+        _itemType = ItemTypeList.TOOL;
     }
 
     private void Start()
@@ -127,7 +127,7 @@ public class FishingRod_used : Item, IItemFunction
         {
             if(other.gameObject.Equals(bobber.gameObject))
             {
-                slot.SetItem(ItemMaster.ItemList.FISHING_ROD);
+                slot.SetItem(ItemList.FISHING_ROD);
 
                 bobber.GetRigidbody2D.velocity = Vector2.zero;
                 bobber.gameObject.SetActive(false);

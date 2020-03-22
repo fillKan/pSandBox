@@ -6,8 +6,8 @@ public class Fish_mackerel : Item
 {
     protected override void Init()
     {
-        _itemCode = (int)ItemMaster.ItemList.FISH_MACKEREL;
+        _itemCode = (int)ItemList.FISH_MACKEREL;
 
-        _itemType = ItemMaster.ItemType.FISH;
+        _itemType = ItemTypeList.FISH;
     }
 }

@@ -6,8 +6,8 @@ public class Fish_pufferFish : Item
 {
     protected override void Init()
     {
-        _itemCode = (int)ItemMaster.ItemList.FISH_PUFFERFISH;
+        _itemCode = (int)ItemList.FISH_PUFFERFISH;
 
-        _itemType = ItemMaster.ItemType.FISH;
+        _itemType = ItemTypeList.FISH;
     }
 }

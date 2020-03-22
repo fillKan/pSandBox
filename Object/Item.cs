@@ -24,7 +24,7 @@ public interface IItemFunction
     /// 플레이어가 해당 아이템을 들고, 오브젝트와 상호작용 했을 경우의 행동.
     /// </summary>
     #endregion
-    IEnumerator UseItem<T>(T xValue) where T : Interaction;
+    IEnumerator UseItem<T>(T xValue) where T : IInteraction;
 
     #region 코루틴 설명
     /// <summary>
@@ -71,15 +71,15 @@ public abstract class Item : MonoBehaviour
     /// 해당 아이템의 아이템 유형을 반환하는 변수. 기본값 : NONE
     /// </summary>
     #endregion
-    public    ItemMaster.ItemType  ItemType
+    public    ItemTypeList  ItemType
     {
         get { return _itemType; }
     }
-    protected ItemMaster.ItemType _itemType = ItemMaster.ItemType.NONE;
+    protected ItemTypeList _itemType = ItemTypeList.NONE;
 
-    public ItemMaster.ItemList ItemData
+    public ItemList ItemData
     {
-        get { return (ItemMaster.ItemList)_itemCode; }
+        get { return (ItemList)_itemCode; }
     }
 
     #region 변수 설명

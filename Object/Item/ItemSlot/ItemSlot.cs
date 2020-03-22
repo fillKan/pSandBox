@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemSlot : MonoBehaviour, MouseAction
+public class ItemSlot : MonoBehaviour, IMouseAction
 {
-    private LinkedList<ItemMaster.ItemList> _itemContainer = new LinkedList<ItemMaster.ItemList>();
+    private LinkedList<ItemList> _itemContainer = new LinkedList<ItemList>();
     public int ItemCount
     {
         get { return _itemContainer.Count; }
@@ -38,7 +38,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
     /***************************************
            ItemSlot를 관리하는 함수들
     ****************************************/
-    public void AddItem(params ItemMaster.ItemList[] items)
+    public void AddItem(params ItemList[] items)
     {
         int i = 0;
 
@@ -57,7 +57,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
         }
         UpdateSlotInfo();
     }
-    public void AddItem(ItemMaster.ItemList item)
+    public void AddItem(ItemList item)
     {
         if (_itemContainer.Count == 0)
         {
@@ -82,7 +82,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
     /// 해당 아이템 슬롯이 포함할 아이템의 갯수
     /// </param>
     #endregion
-    public void SetItem(ItemMaster.ItemList item, int number = 1)
+    public void SetItem(ItemList item, int number = 1)
     {
         _itemContainer.Clear();
 
@@ -109,14 +109,14 @@ public class ItemSlot : MonoBehaviour, MouseAction
 
 
     /******************************************
-            MouseAction 인터페이스 함수들
+            IMouseAction 인터페이스 함수들
      ******************************************/
     public void OperateAction(byte input)
     {
         switch (input)
         {
             case 0:
-                if (MouseCursor.Instance.CarryItem != ItemMaster.ItemList.NONE)
+                if (MouseCursor.Instance.CarryItem != ItemList.NONE)
                 {
                     if (ContainItem == null)
                     {
@@ -136,7 +136,7 @@ public class ItemSlot : MonoBehaviour, MouseAction
             case 1:
                 if (ItemCount > 0)
                 {
-                    if (MouseCursor.Instance.CarryItem == ItemMaster.ItemList.NONE)
+                    if (MouseCursor.Instance.CarryItem == ItemList.NONE)
                     {
                         MouseCursor.Instance.AddCarryItem(_itemContainer.Last.Value);
 

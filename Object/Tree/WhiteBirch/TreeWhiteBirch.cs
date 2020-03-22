@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeWhiteBirch : Tree, Interaction
+public class TreeWhiteBirch : Tree, IInteraction
 {
     public GameObject InteractObject()
     {
@@ -36,9 +36,9 @@ public class TreeWhiteBirch : Tree, Interaction
         {
             if (Random.Range(0, 4) == 0)
             {
-                 tItem = ItemMaster.Instance.TakeItemExisting(ItemMaster.ItemList.SEED_WHITEBIRCH);
+                 tItem = ItemMaster.Instance.TakeItemExisting(ItemList.SEED_WHITEBIRCH);
             }
-            else tItem = ItemMaster.Instance.TakeItemExisting(ItemMaster.ItemList.LOG_WHITEBIRCH);
+            else tItem = ItemMaster.Instance.TakeItemExisting(ItemList.LOG_WHITEBIRCH);
 
             tItem.gameObject.SetActive(true);
             tItem.transform.position = transform.position;

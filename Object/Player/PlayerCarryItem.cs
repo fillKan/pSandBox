@@ -12,7 +12,7 @@ public class PlayerCarryItem : MonoBehaviour
     public ItemSlotSprt SlotSprt;
     public ItemSlot CarryItemSlot;
 
-    public ItemMaster.ItemList ItemData
+    public ItemList ItemData
     {
         get 
         { 
@@ -20,7 +20,7 @@ public class PlayerCarryItem : MonoBehaviour
             {
                 return CarryItemSlot.ContainItem.ItemData;
             }
-            return ItemMaster.ItemList.NONE;
+            return ItemList.NONE;
         }
     }
 
@@ -48,7 +48,7 @@ public class PlayerCarryItem : MonoBehaviour
             // 들고있는 아이템의 유형에 따라, 들고있는 아이템의 형태를 변형한다.
             switch (CarryItemSlot.ContainItem.ItemType)
             {
-                case ItemMaster.ItemType.TOOL:
+                case ItemTypeList.TOOL:
 
                     if (SlotSprt.Renderer.flipX == playerFlipX)
                     {
@@ -66,7 +66,7 @@ public class PlayerCarryItem : MonoBehaviour
                     }
                     break;
 
-                case ItemMaster.ItemType.NONE:
+                case ItemTypeList.NONE:
 
                     if (SlotSprt.Renderer.flipX != playerFlipX)
                     {

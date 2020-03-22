@@ -6,6 +6,6 @@ public class Oak_seed : Item
 {
     protected override void Init()
     {
-        _itemCode = (int)ItemMaster.ItemList.SEED_OAK;
+        _itemCode = (int)ItemList.SEED_OAK;
     }
 }

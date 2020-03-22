@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Box : MonoBehaviour, Interaction
+public class Box : MonoBehaviour, IInteraction
 {
     public  GameObject ItemContainer;
     public  GameObject ContainerText;

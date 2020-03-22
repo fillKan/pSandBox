@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface MouseAction
+public interface IMouseAction
 {
     #region 설명 :
     /// <summary>
@@ -30,13 +30,13 @@ public interface MouseAction
 
 public class MouseRepeater : Singleton<MouseRepeater>
 {
-    private Dictionary<int, MouseAction> _actionObj = new Dictionary<int, MouseAction>();
-    public Dictionary<int,MouseAction> ActionObj
+    private Dictionary<int, IMouseAction> _actionObj = new Dictionary<int, IMouseAction>();
+    public Dictionary<int,IMouseAction> ActionObj
     {
         get { return _actionObj; }
     }
 
-    public void AddActionObj(int instanceID, MouseAction action)
+    public void AddActionObj(int instanceID, IMouseAction action)
     {
         if(!_actionObj.ContainsKey(instanceID))
         {

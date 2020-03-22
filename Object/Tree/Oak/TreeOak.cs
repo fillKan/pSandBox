@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeOak : Tree, Interaction
+public class TreeOak : Tree, IInteraction
 {
     public GameObject InteractObject()
     {
@@ -36,9 +36,9 @@ public class TreeOak : Tree, Interaction
         {
             if (Random.Range(0, 4) == 0)
             {
-                 tItem = ItemMaster.Instance.TakeItemExisting(ItemMaster.ItemList.SEED_OAK);
+                 tItem = ItemMaster.Instance.TakeItemExisting(ItemList.SEED_OAK);
             }
-            else tItem = ItemMaster.Instance.TakeItemExisting(ItemMaster.ItemList.LOG_OAK);
+            else tItem = ItemMaster.Instance.TakeItemExisting(ItemList.LOG_OAK);
 
             tItem.gameObject.SetActive(true);
             tItem.transform.position = transform.position;

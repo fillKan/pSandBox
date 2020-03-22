@@ -10,7 +10,7 @@ public class FishingRod : Item, IItemFunction
 
         if (MouseCursor.Instance.RightClickVoid)
         {
-            itemSlot.SetItem(ItemMaster.ItemList.FISHING_ROD_USED);
+            itemSlot.SetItem(ItemList.FISHING_ROD_USED);
         }
 
         StopWorking(ref _isCarryItem);
@@ -27,16 +27,16 @@ public class FishingRod : Item, IItemFunction
         yield break;
     }
 
-    public IEnumerator UseItem<T>(T xValue) where T : Interaction
+    public IEnumerator UseItem<T>(T xValue) where T : IInteraction
     {
         yield break;
     }
 
     protected override void Init()
     {
-        _itemCode = (int)ItemMaster.ItemList.FISHING_ROD;
+        _itemCode = (int)ItemList.FISHING_ROD;
 
-        _itemType = ItemMaster.ItemType.TOOL;
+        _itemType = ItemTypeList.TOOL;
     }
 
     public IEnumerator UnmountItem()

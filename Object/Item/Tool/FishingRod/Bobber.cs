@@ -93,7 +93,7 @@ public class Bobber : MonoBehaviour
             WaitBiting = null;
         }
 
-        if (sprt.ItemData != ItemMaster.ItemList.NONE)
+        if (sprt.ItemData != ItemList.NONE)
         {
             item = ItemMaster.Instance.TakeItemExisting(sprt.ItemData);
             item.transform.position = transform.position;

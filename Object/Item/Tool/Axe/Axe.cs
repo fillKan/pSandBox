@@ -8,12 +8,12 @@ public class Axe : Item, IItemFunction
 
     protected override void Init()
     {
-        _itemCode = (int)ItemMaster.ItemList.AXE;
+        _itemCode = (int)ItemList.AXE;
 
-        _itemType = ItemMaster.ItemType.TOOL;
+        _itemType = ItemTypeList.TOOL;
     }
 
-    public IEnumerator UseItem<T> (T xValue) where T : Interaction
+    public IEnumerator UseItem<T> (T xValue) where T : IInteraction
     {
         yield break;
     }

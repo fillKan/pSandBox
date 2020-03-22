@@ -47,7 +47,7 @@ public class Chicken : MonoBehaviour
                 if (fTimer >= fSpawnEggTime)
                 {
                     fTimer = 0;
-                    ItemExisting item = ItemMaster.Instance.TakeItemExisting(ItemMaster.ItemList.EGG);
+                    ItemExisting item = ItemMaster.Instance.TakeItemExisting(ItemList.EGG);
 
                     item.transform.position = transform.position;
                     item.gameObject.SetActive(true);

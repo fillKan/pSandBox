@@ -7,7 +7,7 @@ using UnityEngine;
 /// 플레이어와 상호작용하는 인터페이스입니다. 
 /// </summary>
 #endregion
-public interface Interaction
+public interface IInteraction
 {
     #region 설명 :
     /// <summary>
@@ -35,7 +35,7 @@ public interface Interaction
 
 public class Player_Interaction : Singleton<Player_Interaction>
 {
-    private Dictionary<int, Interaction> InObjDirectory = new Dictionary<int, Interaction>();
+    private Dictionary<int, IInteraction> InObjDirectory = new Dictionary<int, IInteraction>();
 
     #region 함수 설명 : 
     /// <summary>
@@ -48,7 +48,7 @@ public class Player_Interaction : Singleton<Player_Interaction>
     /// 등록할 오브젝트의 Interaction인터페이스를 지정합니다
     /// </param>
     #endregion
-    public void InObjRegister(int key, Interaction interaction)
+    public void InObjRegister(int key, IInteraction interaction)
     {
         if(!InObjDirectory.ContainsKey(key))
         {
@@ -77,7 +77,7 @@ public class Player_Interaction : Singleton<Player_Interaction>
     /// 반환할 오브젝트의 GetInstanceID를 지정합니다.   
     /// </param>
     #endregion
-    public Interaction InObjGetValue(int key)
+    public IInteraction InObjGetValue(int key)
     {
         return InObjDirectory[key];
     }

@@ -25,7 +25,7 @@ public class MouseCursor : Singleton<MouseCursor>
         {
             if(Input.GetMouseButtonDown(0))
             {
-                return (targetSprite == null && _selectSlot == null && CarryItem == ItemMaster.ItemList.NONE);
+                return (targetSprite == null && _selectSlot == null && CarryItem == ItemList.NONE);
             }
             return false; 
         }
@@ -42,18 +42,18 @@ public class MouseCursor : Singleton<MouseCursor>
         {
             if (Input.GetMouseButtonDown(1))
             {
-                return (targetSprite == null && _selectSlot == null && CarryItem == ItemMaster.ItemList.NONE);
+                return (targetSprite == null && _selectSlot == null && CarryItem == ItemList.NONE);
             }
             return false;
         }
     }
 
-    private Stack<ItemMaster.ItemList> _carryItems = new Stack<ItemMaster.ItemList>();
+    private Stack<ItemList> _carryItems = new Stack<ItemList>();
 
-    public ItemMaster.ItemList CarryItem {
+    public ItemList CarryItem {
         get 
         {
-            if (_carryItems.Count == 0) return ItemMaster.ItemList.NONE;
+            if (_carryItems.Count == 0) return ItemList.NONE;
             return _carryItems.Peek(); 
         } 
     }
@@ -67,7 +67,7 @@ public class MouseCursor : Singleton<MouseCursor>
     ///더할 아이템
     /// </param>
     #endregion
-    public void AddCarryItem(ItemMaster.ItemList item)
+    public void AddCarryItem(ItemList item)
     {
         if(_carryItems.Count == 0)
         {
@@ -104,7 +104,7 @@ public class MouseCursor : Singleton<MouseCursor>
     {
         while(true)
         {
-            if(CarryItem != ItemMaster.ItemList.NONE)
+            if(CarryItem != ItemList.NONE)
             {
                 SlotSprt.ShowItemExisting(CarryItem);
             }
@@ -125,7 +125,7 @@ public class MouseCursor : Singleton<MouseCursor>
                 {
                     _selectSlot.OperateAction(0);
                 }
-                else if(CarryItem != ItemMaster.ItemList.NONE)
+                else if(CarryItem != ItemList.NONE)
                 {
                     ItemExisting item = ItemMaster.Instance.TakeItemExisting(CarryItem);
 
