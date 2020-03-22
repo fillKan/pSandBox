@@ -8,7 +8,7 @@ public class TreeOak : Tree, Interaction
     {
         return gameObject;
     }
-    public void OperateAction<T>(T xValue) where T : ItemFunction
+    public void OperateAction<T>(T xValue) where T : IItemFunction
     {
         if (xValue == null) return;
 

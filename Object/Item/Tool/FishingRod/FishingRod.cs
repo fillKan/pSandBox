@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishingRod : Item, ItemFunction
+public class FishingRod : Item, IItemFunction
 {
     public IEnumerator CarryItem(ItemSlot itemSlot)
     {

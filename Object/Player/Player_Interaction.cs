@@ -14,7 +14,7 @@ public interface Interaction
     /// 플레이어와의 상호작용을 하는 함수
     /// </summary>
     #endregion
-    void OperateAction<T>(T xValue) where T : ItemFunction;
+    void OperateAction<T>(T xValue) where T : IItemFunction;
 
     #region 설명 :
     /// <summary>

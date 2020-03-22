@@ -2,13 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ItemFunc
+{
+    USE,
+    CARRY,
+    MOUNT,
+    UNMOUNT,
+    INSLOT
+}
+
 #region 인터페이스 설명
 /// <summary>
 /// 아이템들의 기능하는 동작 코루틴들을 담는 인터페이스.
 /// <para>※ 기능을 하는 아이템 클래스는 해당 인터페이스를 사용해야함. ※</para> 
 /// </summary>
 #endregion
-public interface ItemFunction
+public interface IItemFunction
 {
     #region 코루틴 설명
     /// <summary>
@@ -73,9 +82,9 @@ public abstract class Item : MonoBehaviour
 
     #region 변수 설명
     /// <summary>
-    /// 인터페이스 ItemFunction의 UseItem코루틴의 실행 여부를 반환하는 변수.
+    /// 인터페이스 IItemFunction의 UseItem코루틴의 실행 여부를 반환하는 변수.
     /// <para>
-    /// ※ 인터페이스 ItemFunction가 구현된 객체에서만 해당 값이 유효함 ※
+    /// ※ 인터페이스 IItemFunction가 구현된 객체에서만 해당 값이 유효함 ※
     /// </para>
     /// </summary>
     #endregion
@@ -86,9 +95,9 @@ public abstract class Item : MonoBehaviour
     protected bool _isUseItem    = false;
     #region 변수 설명
     /// <summary>
-    /// 인터페이스 ItemFunction의 CarryItem코루틴의 실행 여부를 반환하는 변수.
+    /// 인터페이스 IItemFunction의 CarryItem코루틴의 실행 여부를 반환하는 변수.
     /// <para>
-    /// ※ 인터페이스 ItemFunction가 구현된 객체에서만 해당 값이 유효함 ※
+    /// ※ 인터페이스 IItemFunction가 구현된 객체에서만 해당 값이 유효함 ※
     /// </para>
     /// </summary>
     #endregion 
@@ -100,9 +109,9 @@ public abstract class Item : MonoBehaviour
 
     #region 변수 설명
     /// <summary>
-    /// 인터페이스 ItemFunction의 EquipItem코루틴의 실행 여부를 반환하는 변수.
+    /// 인터페이스 IItemFunction의 EquipItem코루틴의 실행 여부를 반환하는 변수.
     /// <para>
-    /// ※ 인터페이스 ItemFunction가 구현된 객체에서만 해당 값이 유효함 ※
+    /// ※ 인터페이스 IItemFunction가 구현된 객체에서만 해당 값이 유효함 ※
     /// </para>
     /// </summary>
     #endregion
@@ -114,9 +123,9 @@ public abstract class Item : MonoBehaviour
 
     #region 변수 설명
     /// <summary>
-    /// 인터페이스 ItemFunction의 InSlotItem코루틴의 실행 여부를 반환하는 변수.
+    /// 인터페이스 IItemFunction의 InSlotItem코루틴의 실행 여부를 반환하는 변수.
     /// <para>
-    /// ※ 인터페이스 ItemFunction가 구현된 객체에서만 해당 값이 유효함 ※
+    /// ※ 인터페이스 IItemFunction가 구현된 객체에서만 해당 값이 유효함 ※
     /// </para>
     /// </summary>
     #endregion
@@ -128,12 +137,12 @@ public abstract class Item : MonoBehaviour
 
     #region 함수 설명 : 
     /// <summary>
-    /// 인터페이스 ItemFunction의 특정 기능의 실행 여부의 값을 조정하여, 조정에 성공했는지의 여부를 반환하는 함수.
+    /// 인터페이스 IItemFunction의 특정 기능의 실행 여부의 값을 조정하여, 조정에 성공했는지의 여부를 반환하는 함수.
     /// <para>
     /// 조정에 성공했다면, 인자값과 대치되는 기능이 실행중이 아니었다는 것 입니다. 이러한 의도로 함수를 사용하고, 이러한 의도의 함수라고 생각해주시길 바랍니다.
     /// </para>
     /// <para> 
-    /// ※ 인터페이스 ItemFunction이 구현된 객체에서만 해당 함수의 사용이 유효하며, 해당 함수가 사용된 특정 기능이 종료될 때에는 StopWorking함수를 실행할 것을 권장함. ※
+    /// ※ 인터페이스 IItemFunction이 구현된 객체에서만 해당 함수의 사용이 유효하며, 해당 함수가 사용된 특정 기능이 종료될 때에는 StopWorking함수를 실행할 것을 권장함. ※
     /// </para>
     /// </summary>
     /// <param name="function">
@@ -155,9 +164,9 @@ public abstract class Item : MonoBehaviour
     }
     #region 함수 설명 : 
     /// <summary>
-    /// 인터페이스 ItemFunction의 특정 기능의 실행 여부를 '종료'로 조정하는 함수.
+    /// 인터페이스 IItemFunction의 특정 기능의 실행 여부를 '종료'로 조정하는 함수.
     /// <para> 
-    /// ※ 인터페이스 ItemFunction이 구현된 객체에서만 해당 함수의 사용이 유효하며, 해당 함수가 사용되기 이전에 StartWorking함수를 실행할 것을 권장함. ※
+    /// ※ 인터페이스 IItemFunction이 구현된 객체에서만 해당 함수의 사용이 유효하며, 해당 함수가 사용되기 이전에 StartWorking함수를 실행할 것을 권장함. ※
     /// </para>
     /// </summary>
     /// <param name="function">

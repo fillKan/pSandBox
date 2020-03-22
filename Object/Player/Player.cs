@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
             {
                 if (EquipItemSlots[i].ContainItem)
                 {
-                    if (EquipItemSlots[i].ContainItem.TryGetComponent(out ItemFunction function))
+                    if (EquipItemSlots[i].ContainItem.TryGetComponent(out IItemFunction function))
                     {
                         usedItem = true;
                         Player_Interaction.Instance.InObjGetValue(interactionID).OperateAction(function);
@@ -84,13 +84,13 @@ public class Player : MonoBehaviour
         }
         if (!usedItem)
         {
-            Player_Interaction.Instance.InObjGetValue(interactionID).OperateAction<ItemFunction>(null);
+            Player_Interaction.Instance.InObjGetValue(interactionID).OperateAction<IItemFunction>(null);
         }
     }
 
     private void EquipSlotsUpdate()
     {
-        ItemFunction function;
+        IItemFunction function;
 
         for (int i = 0; i < EquipItemSlots.Count; i++)
         {
@@ -145,7 +145,7 @@ public class Player : MonoBehaviour
             {
                 if(EquipItemSlots[i].ContainItem)
                 {
-                    if (EquipItemSlots[i].ContainItem.TryGetComponent(out ItemFunction function))
+                    if (EquipItemSlots[i].ContainItem.TryGetComponent(out IItemFunction function))
                     {
                         StartCoroutine(function.CarryItem(EquipItemSlots[i]));
                     }

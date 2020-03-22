@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Axe : Item, ItemFunction
+public class Axe : Item, IItemFunction
 {
     private float loggingValue = 3;
 

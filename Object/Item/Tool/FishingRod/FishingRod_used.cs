@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishingRod_used : Item, ItemFunction
+public class FishingRod_used : Item, IItemFunction
 {
     [Tooltip("현재 낚시대의 낚시줄을 지정합니다.")]
     public LineRenderer FishingLine;
