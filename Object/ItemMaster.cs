@@ -27,7 +27,9 @@ public enum ItemList
     FISH_SALMON,
     AXE,
     FISHING_ROD,
-    FISHING_ROD_USED
+    FISHING_ROD_USED,
+    AXE_ELECTRIC_SAW,
+    AXE_ORC_HANDAXE
 };
 
 #region 열거체 설명 : 
