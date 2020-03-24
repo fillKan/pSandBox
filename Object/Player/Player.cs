@@ -168,6 +168,14 @@ public class Player : MonoBehaviour
 
             OperateCarryItem();
 
+            if(Input.GetKeyDown(KeyCode.Z))
+            {
+                if(Radar.GetCloseItem() != null)
+                {
+                    Player_Instructions.Instance.FollowInstr(Instructions.DO_INTERACT, Radar.GetCloseItemID());
+                }
+            }
+
             if (Input.GetAxis("Horizontal") != 0)
             {
                 Player_Instructions.Instance.DiscontinueInstr();

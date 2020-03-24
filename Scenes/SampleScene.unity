@@ -500,7 +500,7 @@ GameObject:
   - component: {fileID: 112416527}
   - component: {fileID: 112416529}
   - component: {fileID: 112416528}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Radar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -533,6 +533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1271cd590c54c214585f064e9416a683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Radius: 7
 --- !u!58 &112416529
 CircleCollider2D:
   m_ObjectHideFlags: 0
