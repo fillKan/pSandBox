@@ -56,8 +56,6 @@ public class FishingRod_used : Item, IItemFunction
 
     public IEnumerator CarryItem(ItemSlot itemSlot)
     {
-        if (!StartWorking(ref _isCarryItem)) yield break;
-
         if (!isThrowBobber && MouseCursor.Instance.RightClickVoid)
         {
             isThrowBobber       = true;
@@ -82,8 +80,6 @@ public class FishingRod_used : Item, IItemFunction
 
             tryRetrieve = true;
         }
-       
-        StopWorking(ref _isCarryItem);
         yield break;
     }
 

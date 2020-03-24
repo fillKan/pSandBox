@@ -317,10 +317,11 @@ public class Player_Instructions : Singleton<Player_Instructions>
         switch (trigger)
         {
             case InstrTrigger.NEXT_INSTR_UNINTERRUPTED_DONE:
+                Instructions nowProgressInstr = progressInstr.instructions;
 
                 while (!isCompletionInstr)
                 {
-                    if (progressInstr.instructions.Equals(instructions) && isDisContinueInstr)
+                    if (!progressInstr.instructions.Equals(nowProgressInstr) && isDisContinueInstr)
                     {
                         scheduleInstr.instructions = Instructions.NONE;
                         scheduleInstr.progress = null;

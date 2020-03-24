@@ -6,14 +6,10 @@ public class FishingRod : Item, IItemFunction
 {
     public IEnumerator CarryItem(ItemSlot itemSlot)
     {
-        if (!StartWorking(ref _isCarryItem)) yield break;
-
         if (MouseCursor.Instance.RightClickVoid)
         {
             itemSlot.SetItem(ItemList.FISHING_ROD_USED);
         }
-
-        StopWorking(ref _isCarryItem);
         yield break;
     }
 
