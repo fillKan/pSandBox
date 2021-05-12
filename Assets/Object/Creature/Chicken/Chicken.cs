@@ -12,6 +12,10 @@ public class Chicken : MonoBehaviour
     private readonly Vector3 LookAtLeftVector = new Vector3(1, 1, 1);
     private readonly Vector3 LookAtRightVector = new Vector3(-1, 1, 1);
 
+    [Header("# Sprite Property")]
+    [SerializeField] private Animator _Animator;
+    private int _AnimControlKey;
+
     [Header("# Chicken Property")]
     public bool IsHen;
     [SerializeField] private float _EggTimeMin;
@@ -32,6 +36,8 @@ public class Chicken : MonoBehaviour
 
     private void OnEnable()
     {
+        _AnimControlKey = _Animator.GetParameter(0).nameHash;
+
         StartCoroutine(MovementPeriod());
         if (IsHen)
         {
@@ -48,6 +54,7 @@ public class Chicken : MonoBehaviour
             for (float i = 0f; i < waiting; i += Time.deltaTime * Time.timeScale)
                 yield return null;
 
+            _Animator.SetInteger(_AnimControlKey, Move);
             yield return StartCoroutine(_MovementRoutine = MovementRoutine());
         }
     }
@@ -76,6 +83,7 @@ public class Chicken : MonoBehaviour
             deltaTime = Time.deltaTime * Time.timeScale;
         }
         _MovementRoutine = null;
+        _Animator.SetInteger(_AnimControlKey, Idle);
     }
     private IEnumerator EggDropRoutine()
     {
