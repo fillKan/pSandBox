@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Sheep : MonoBehaviour, IInteraction
 {
+    #region Animation Transition
+    private const int Idle = 0;
+    private const int Move = 1;
+    private const int Shave = 2;
+    private const int FurGrow = 3;
+    #endregion
+
     private readonly Vector3 LookAtLeftVector = new Vector3(1, 1, 1);
     private readonly Vector3 LookAtRightVector = new Vector3(-1, 1, 1);
 
@@ -11,6 +18,8 @@ public class Sheep : MonoBehaviour, IInteraction
     [SerializeField] private Sprite _SheepSprite;
     [SerializeField] private Sprite _FurrySprite;
     [SerializeField] private SpriteRenderer _Renderer;
+    [SerializeField] private Animator _Animator;
+    private int _AnimControlKey;
 
     [Header("# Fur Property")]
     [SerializeField][Min(1)] private int _ShaveWoolMin;
@@ -29,11 +38,25 @@ public class Sheep : MonoBehaviour, IInteraction
     [SerializeField] private float _WaitingTimeMax;
 
     private bool _IsShaved = false;
+    private IEnumerator _MovementRoutine;
 
     private void OnEnable()
     {
         StartCoroutine(MovementPeriod());
         RegisterInteraction();
+
+        _AnimControlKey = _Animator.GetParameter(0).nameHash;
+    }
+    private void SetNaturalAnimState()
+    {
+        if (_MovementRoutine != null)
+        {
+            _Animator.SetInteger(_AnimControlKey, Move);
+        }
+        else
+        {
+            _Animator.SetInteger(_AnimControlKey, Idle);
+        }
     }
     private IEnumerator MovementPeriod()
     {
@@ -44,7 +67,8 @@ public class Sheep : MonoBehaviour, IInteraction
             for (float i = 0f; i < waiting; i += Time.deltaTime * Time.timeScale)
                 yield return null;
 
-            yield return StartCoroutine(MovementRoutine());
+            _Animator.SetInteger(_AnimControlKey, Move);
+            yield return StartCoroutine(_MovementRoutine = MovementRoutine());
         }
     }
     private IEnumerator MovementRoutine()
@@ -71,14 +95,15 @@ public class Sheep : MonoBehaviour, IInteraction
 
             deltaTime = Time.deltaTime * Time.timeScale;
         }
+        _MovementRoutine = null;
+        _Animator.SetInteger(_AnimControlKey, Idle);
     }
     private IEnumerator FurGrowRoutine()
     {
         for (float i = 0f; i < _FurGrowTime; i += Time.deltaTime * Time.timeScale)
             yield return null;
 
-        _IsShaved = false;
-        _Renderer.sprite = _FurrySprite;
+        _Animator.SetInteger(_AnimControlKey, FurGrow);
     }
 
     // ========== IInteraction ========== //
@@ -90,6 +115,16 @@ public class Sheep : MonoBehaviour, IInteraction
     {
         if (_IsShaved) return;
 
+        _Animator.SetInteger(_AnimControlKey, Shave);
+    }
+    public void RegisterInteraction()
+    {
+        Player_Interaction.Instance.InObjRegister(gameObject.GetInstanceID(), this);
+    }
+    // ========== IInteraction ========== //
+
+    private void AE_Shave()
+    {
         int dropItemCount = Random.Range(_ShaveWoolMin, _ShaveWoolMax);
         for (int i = 0; i < dropItemCount; i++)
         {
@@ -102,10 +137,13 @@ public class Sheep : MonoBehaviour, IInteraction
         _IsShaved = true;
 
         StartCoroutine(FurGrowRoutine());
+        SetNaturalAnimState();
     }
-    public void RegisterInteraction()
+    private void AE_FurGrow()
     {
-        Player_Interaction.Instance.InObjRegister(gameObject.GetInstanceID(), this);
+        _IsShaved = false;
+        _Renderer.sprite = _FurrySprite;
+
+        SetNaturalAnimState();
     }
-    // ========== IInteraction ========== //
 }
