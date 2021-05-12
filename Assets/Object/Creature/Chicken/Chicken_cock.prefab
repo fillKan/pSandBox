@@ -94,5 +94,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ea02dfecb1c7d4d8381f7670333577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fMaxSpeed: 1.5
-  isHen: 0
+  _Animator: {fileID: 0}
+  IsHen: 0
+  _EggTimeMin: 15
+  _EggTimeMax: 30
+  _MoveSpeed: 16
+  _MovingTimeMin: 0.5
+  _MovingTimeMax: 3.5
+  _WaitingTimeMin: 1.5
+  _WaitingTimeMax: 5.5
