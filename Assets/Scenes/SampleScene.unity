@@ -268,6 +268,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -602,6 +603,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -753,6 +755,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -830,6 +833,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -968,7 +972,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &300923609
 Transform:
   m_ObjectHideFlags: 0
@@ -1033,7 +1037,7 @@ BoxCollider2D:
   m_Offset: {x: -0.5, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5059843, y: 0.51595837}
     oldSize: {x: 5.12, y: 5.12}
     newSize: {x: 5.12, y: 5.12}
     adaptiveTilingThreshold: 0.5
@@ -1146,6 +1150,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1223,6 +1228,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1795,6 +1801,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2215,6 +2222,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3391,7 +3399,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &956527871
 Transform:
   m_ObjectHideFlags: 0
@@ -3569,6 +3577,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4032,7 +4041,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1180687925
 Transform:
   m_ObjectHideFlags: 0
@@ -4767,7 +4776,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1350236406
 Transform:
   m_ObjectHideFlags: 0
@@ -5044,6 +5053,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5171,6 +5181,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5984,6 +5995,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6458,6 +6470,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6535,6 +6548,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -7379,6 +7393,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -7551,6 +7566,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: sFish_Mackerel
       objectReference: {fileID: 0}
+    - target: {fileID: 857161838707218581, guid: fc7c86c1eeab59443bfe496776f2818a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 857161838707218583, guid: fc7c86c1eeab59443bfe496776f2818a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7620,6 +7640,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: sWhiteBirch_seed
       objectReference: {fileID: 0}
+    - target: {fileID: 1892154163268618005, guid: 4ce3868468f8b5c4680d66c88a4e8454,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1892154163268618007, guid: 4ce3868468f8b5c4680d66c88a4e8454,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7688,6 +7713,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: sOak_log
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063010513597447666, guid: e64fc755f2f7f064e805089ded6036dc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2063010513597447670, guid: e64fc755f2f7f064e805089ded6036dc,
         type: 3}
@@ -7813,6 +7843,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: sFish_Cutlassfish
       objectReference: {fileID: 0}
+    - target: {fileID: 2465152200534712752, guid: e4a7c3cb68e113148a9773fad9862683,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4a7c3cb68e113148a9773fad9862683, type: 3}
 --- !u!1001 &2778243033133701476
@@ -7826,6 +7861,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: sOak_seed
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778243033363838994, guid: a8ecc25d8d03d10438de2358600153d9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2778243033363839004, guid: a8ecc25d8d03d10438de2358600153d9,
         type: 3}
@@ -7895,6 +7935,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: sFish_ButterFish
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218884083481818115, guid: 6e4b5a19658b0eb4ca415ccb6e6c1f83,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3218884083481818136, guid: 6e4b5a19658b0eb4ca415ccb6e6c1f83,
         type: 3}
@@ -8038,6 +8083,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: sWhiteBirch_log
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648679970874400120, guid: 25c286c2509467b4bb578d52ced52c43,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3648679970874400124, guid: 25c286c2509467b4bb578d52ced52c43,
         type: 3}
@@ -8628,6 +8678,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: sFish_Pollack
       objectReference: {fileID: 0}
+    - target: {fileID: 7309580113863917582, guid: 85041dfc5da19c242bac0bf917a2a702,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85041dfc5da19c242bac0bf917a2a702, type: 3}
 --- !u!1001 &7614111500157447964
@@ -8696,6 +8751,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: sFish_PufferFish
+      objectReference: {fileID: 0}
+    - target: {fileID: 7614111498482607501, guid: 9445a80d718b19d458a72ae36c203728,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9445a80d718b19d458a72ae36c203728, type: 3}
@@ -8784,6 +8844,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: sFish_Salmon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7880172341998503059, guid: e45652fa51afae24f8546b2b596af095,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7880172341998503070, guid: e45652fa51afae24f8546b2b596af095,
         type: 3}

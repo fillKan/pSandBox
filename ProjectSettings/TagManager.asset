@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Ground
+  - Water
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Player Interaction
+  - ExistingItem
+  - NoneItemCollion
+  - SenseItem
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 1159850569
+    locked: 0
+  - name: BackObject
+    uniqueID: 1070823771
+    locked: 0
+  - name: FrontObject
+    uniqueID: 3465510677
+    locked: 0
+  - name: Item
+    uniqueID: 1868210305
+    locked: 0
+  - name: UI
+    uniqueID: 1549189471
+    locked: 0
+  - name: Front
+    uniqueID: 4170096415
+    locked: 0
