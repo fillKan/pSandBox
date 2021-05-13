@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public const float MoveSpeed = 3.5f;
+
     public Inventory Inventory;
     public PlayerCarryItem CarryItem;
     [Tooltip("플레이어가 근처 아이템을 감지할 때 사용되는 레이더입니다.")]
@@ -574,17 +576,43 @@ public class Player : MonoBehaviour
             target.Interaction();
         }
     }
+    public void MoveToPointOrder(Vector2 point)
+    {
+        OrderCancel();
+
+        StartCoroutine(_CurrentOrderRoutine = MoveRoutine(point));
+    }
     private IEnumerator TraceRoutine(Transform target, Func<bool> canTracing, Action tracingDone = null)
     {
         while (canTracing.Invoke())
         {
             float direction = (target.position.x > transform.position.x ? 1f : -1f);
 
-            transform.position += Vector3.right * direction * Time.deltaTime * 3.5f;
+            transform.position += Vector3.right * direction * Time.deltaTime * MoveSpeed;
 
             yield return null;
         }
         _CurrentOrderRoutine = null;
         tracingDone?.Invoke();
+    }
+    private IEnumerator MoveRoutine(Vector2 point)
+    {
+        float direction = (point.x > transform.position.x ? 1f : -1f);
+
+        while (gameObject.activeInHierarchy)
+        {
+            transform.position += Vector3.right * direction * Time.deltaTime * MoveSpeed;
+
+            if ((direction < 0f && transform.position.x < point.x) ||
+                (direction > 0f && transform.position.x > point.x))
+            {
+                transform.position = new Vector3
+                    (point.x, transform.position.y, transform.position.z);
+
+                break;
+            }
+            yield return null;
+        }
+        _CurrentOrderRoutine = null;
     }
 }

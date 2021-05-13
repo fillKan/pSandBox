@@ -14,10 +14,15 @@ public class CursorPointer : Singleton<CursorPointer>
     }
     private void LateUpdate()
     {
-        if (Highlighted != null) {
-            if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Highlighted != null)
             {
                 PlayerController.Instance.Interaction(Highlighted);
+            }
+            else
+            {
+                PlayerController.Instance.MoveToPoint(transform.position);
             }
         }
         transform.position = _MainCamera.ScreenToWorldPoint(Input.mousePosition);
