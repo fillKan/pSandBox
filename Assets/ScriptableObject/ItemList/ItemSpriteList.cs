@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-struct ItemSpriteSet
+public struct ItemSpriteSet
 {
     public ItemName ItemName;
     public Sprite Sprite;
@@ -14,8 +14,14 @@ public class ItemSpriteList : ScriptableObject
 {
     [SerializeField] private List<ItemSpriteSet> SpriteList;
 
-    public Sprite this[ItemName itemName]
+    public Dictionary<ItemName, Sprite> GetKeyValuePairs()
     {
-        get => SpriteList[(int)itemName].Sprite;
+        var pairs = new Dictionary<ItemName, Sprite>();
+
+        foreach (var spriteSet in SpriteList)
+        {
+            pairs.Add(spriteSet.ItemName, spriteSet.Sprite);
+        }
+        return pairs;
     }
 }
