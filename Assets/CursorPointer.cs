@@ -15,9 +15,9 @@ public class CursorPointer : Singleton<CursorPointer>
     private void LateUpdate()
     {
         if (Highlighted != null) {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetMouseButtonDown(0))
             {
-                Highlighted.Interaction();
+                PlayerController.Instance.Interaction(Highlighted);
             }
         }
         transform.position = _MainCamera.ScreenToWorldPoint(Input.mousePosition);
