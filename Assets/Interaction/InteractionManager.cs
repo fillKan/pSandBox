@@ -6,16 +6,20 @@ public class InteractionManager : Singleton<InteractionManager>
 {
     private Dictionary<int, InteractableObject> _InteractionDic;
 
-    private void Awake()
+    private void LazyInit()
     {
-        _InteractionDic = new Dictionary<int, InteractableObject>();
+        _InteractionDic = _InteractionDic ?? new Dictionary<int, InteractableObject>();
     }
     public bool IsInteractable(GameObject instance, out InteractableObject interactableObject)
     {
+        LazyInit();
+        
         return _InteractionDic.TryGetValue(instance.GetInstanceID(), out interactableObject);
     }
     public void Register(InteractableObject interactableObject)
     {
+        LazyInit();
+
         int instanceID = interactableObject.gameObject.GetInstanceID();
         if (_InteractionDic.ContainsKey(instanceID))
         {
