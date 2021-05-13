@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e8cd74db566a2142b6eb9a75b2f1abb, type: 3}
+  m_Name: ItemSpriteList
+  m_EditorClassIdentifier: 
+  SpriteList:
+  - ItemName: 1
+    Sprite: {fileID: -2352323643797236792, guid: ce26ba09a7e4bbb4786c9ae0127472a7,
+      type: 3}
+  - ItemName: 2
+    Sprite: {fileID: 7461110563380638437, guid: ce26ba09a7e4bbb4786c9ae0127472a7,
+      type: 3}
+  - ItemName: 3
+    Sprite: {fileID: -7063444059139721763, guid: ce26ba09a7e4bbb4786c9ae0127472a7,
+      type: 3}
+  - ItemName: 4
+    Sprite: {fileID: 5432298513543012347, guid: ce26ba09a7e4bbb4786c9ae0127472a7,
+      type: 3}
+  - ItemName: 5
+    Sprite: {fileID: 21300000, guid: 133fa5240069e8f4b9f36a102d6609fe, type: 3}
+  - ItemName: 6
+    Sprite: {fileID: 21300000, guid: 1b4381c12c02122458feb5140af6e908, type: 3}
+  - ItemName: 7
+    Sprite: {fileID: -685624620332261008, guid: 759864257001b954e90cfaa3a3195a2f,
+      type: 3}
+  - ItemName: 8
+    Sprite: {fileID: 8483890588986722103, guid: 759864257001b954e90cfaa3a3195a2f,
+      type: 3}
+  - ItemName: 9
+    Sprite: {fileID: -6534163077260431230, guid: 759864257001b954e90cfaa3a3195a2f,
+      type: 3}
+  - ItemName: 10
+    Sprite: {fileID: -8463869947660738434, guid: 759864257001b954e90cfaa3a3195a2f,
+      type: 3}
+  - ItemName: 11
+    Sprite: {fileID: 7753655302110991390, guid: 759864257001b954e90cfaa3a3195a2f,
+      type: 3}
+  - ItemName: 12
+    Sprite: {fileID: -3161458189373138641, guid: 759864257001b954e90cfaa3a3195a2f,
+      type: 3}
+  - ItemName: 13
+    Sprite: {fileID: 21300000, guid: e3f3ae1481d9f934d857c99498754854, type: 3}
+  - ItemName: 14
+    Sprite: {fileID: 5268473884595868589, guid: a114677ce6eb5a349b04190f2d345308,
+      type: 3}
+  - ItemName: 15
+    Sprite: {fileID: 6529013871412237409, guid: a114677ce6eb5a349b04190f2d345308,
+      type: 3}
+  - ItemName: 16
+    Sprite: {fileID: -3865785328196960620, guid: 24f1a29f3c5206c43b22fa3eb0bf17bc,
+      type: 3}
+  - ItemName: 17
+    Sprite: {fileID: 3327589798292844758, guid: 24f1a29f3c5206c43b22fa3eb0bf17bc,
+      type: 3}
