@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public const float MoveSpeed = 3.5f;
+
     public Inventory Inventory;
     public PlayerCarryItem CarryItem;
     [Tooltip("플레이어가 근처 아이템을 감지할 때 사용되는 레이더입니다.")]
@@ -32,6 +34,11 @@ public class Player : MonoBehaviour
     public  List<ItemSlot> EquipItemSlots    = new List<ItemSlot>();
     [Tooltip("플레이어가 이전 프레임에 장비한 아이템 슬롯들을 담는 배열")]
     private List<ItemList> EquippedItemSlots = new List<ItemList>();
+
+
+    private IEnumerator _CurrentOrderRoutine;
+
+
 
     #region 함수 설명 : 
     /// <summary>
@@ -158,40 +165,36 @@ public class Player : MonoBehaviour
 
         StateStorage.Instance.IncreaseState(States.TREE_LOGGING, 1);
 
-        StartCoroutine(CR_update());
+        StartCoroutine(UpdateRoutine());
     }
 
-    private IEnumerator CR_update()
+    private IEnumerator UpdateRoutine()
     {
-        while (gameObject.activeSelf)
+        while (gameObject.activeInHierarchy)
         {
-            // 이동 방향은 현재 플레이어의 위치로 계속해서 초기화한다.
             vDir = transform.position;
 
             OperateMountAndUnmountItem();
 
             OperateCarryItem();
 
-            if(Input.GetKeyDown(KeyCode.Z))
+            if (Input.GetKeyDown(KeyCode.Z))
             {
                 if(Radar.GetCloseItem() != null)
                 {
                     Player_Instructions.Instance.FollowInstr(Instructions.DO_INTERACT, Radar.GetCloseItemID());
                 }
             }
-
-            if (Input.GetAxis("Horizontal") != 0)
             {
                 Player_Instructions.Instance.DiscontinueInstr();
 
                 if (Input.GetAxis("Horizontal") > 0)
                 {
-                    if(CheckBrakeOper(Vector2.right))
+                    if (CheckBrakeOper(Vector2.right))
                     {
                         yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
                         continue;
                     }
-
                     sprite.flipX = false;
                 }
                 else if (Input.GetAxis("Horizontal") < 0)
@@ -201,7 +204,6 @@ public class Player : MonoBehaviour
                         yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
                         continue;
                     }
-
                     sprite.flipX = true;
                 }
                 vDir.x += Time.deltaTime * 3.5f * Input.GetAxis("Horizontal");
@@ -549,5 +551,68 @@ public class Player : MonoBehaviour
         }
 
         return 0;
+    }
+
+    public void OrderCancel()
+    {
+        if (_CurrentOrderRoutine != null) {
+            StopCoroutine(_CurrentOrderRoutine);
+        }
+        _CurrentOrderRoutine = null;
+    }
+    public void InteractionOrder(InteractableObject target)
+    {
+        OrderCancel();
+
+        var distance = Mathf.Abs(target.transform.position.x - transform.position.x);
+        if (distance > InteractionRange)
+        {
+            StartCoroutine(_CurrentOrderRoutine = TraceRoutine(target.transform, 
+                () => { return Mathf.Abs(target.transform.position.x - transform.position.x) > InteractionRange; }, 
+                () => { target.Interaction(); }));
+        }
+        else
+        {
+            target.Interaction();
+        }
+    }
+    public void MoveToPointOrder(Vector2 point)
+    {
+        OrderCancel();
+
+        StartCoroutine(_CurrentOrderRoutine = MoveRoutine(point));
+    }
+    private IEnumerator TraceRoutine(Transform target, Func<bool> canTracing, Action tracingDone = null)
+    {
+        while (canTracing.Invoke())
+        {
+            float direction = (target.position.x > transform.position.x ? 1f : -1f);
+
+            transform.position += Vector3.right * direction * Time.deltaTime * MoveSpeed;
+
+            yield return null;
+        }
+        _CurrentOrderRoutine = null;
+        tracingDone?.Invoke();
+    }
+    private IEnumerator MoveRoutine(Vector2 point)
+    {
+        float direction = (point.x > transform.position.x ? 1f : -1f);
+
+        while (gameObject.activeInHierarchy)
+        {
+            transform.position += Vector3.right * direction * Time.deltaTime * MoveSpeed;
+
+            if ((direction < 0f && transform.position.x < point.x) ||
+                (direction > 0f && transform.position.x > point.x))
+            {
+                transform.position = new Vector3
+                    (point.x, transform.position.y, transform.position.z);
+
+                break;
+            }
+            yield return null;
+        }
+        _CurrentOrderRoutine = null;
     }
 }
