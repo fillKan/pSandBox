@@ -8,7 +8,7 @@ public class FishingRod : Item, IItemFunction
     {
         if (MouseCursor.Instance.RightClickVoid)
         {
-            itemSlot.SetItem(ItemList.FISHING_ROD_USED);
+            itemSlot.SetItem(ItemName.FISHING_ROD_USED);
         }
         yield break;
     }
@@ -30,7 +30,7 @@ public class FishingRod : Item, IItemFunction
 
     protected override void Init()
     {
-        _itemCode = (int)ItemList.FISHING_ROD;
+        _itemCode = (int)ItemName.FISHING_ROD;
 
         _itemType = ItemTypeList.TOOL;
     }

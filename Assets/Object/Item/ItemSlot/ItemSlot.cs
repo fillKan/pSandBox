@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour, IMouseAction
 {
-    private LinkedList<ItemList> _itemContainer = new LinkedList<ItemList>();
+    private LinkedList<ItemName> _itemContainer = new LinkedList<ItemName>();
     public int ItemCount
     {
         get { return _itemContainer.Count; }
@@ -38,7 +38,7 @@ public class ItemSlot : MonoBehaviour, IMouseAction
     /***************************************
            ItemSlot를 관리하는 함수들
     ****************************************/
-    public void AddItem(params ItemList[] items)
+    public void AddItem(params ItemName[] items)
     {
         int i = 0;
 
@@ -57,7 +57,7 @@ public class ItemSlot : MonoBehaviour, IMouseAction
         }
         UpdateSlotInfo();
     }
-    public void AddItem(ItemList item)
+    public void AddItem(ItemName item)
     {
         if (_itemContainer.Count == 0)
         {
@@ -82,7 +82,7 @@ public class ItemSlot : MonoBehaviour, IMouseAction
     /// 해당 아이템 슬롯이 포함할 아이템의 갯수
     /// </param>
     #endregion
-    public void SetItem(ItemList item, int number = 1)
+    public void SetItem(ItemName item, int number = 1)
     {
         _itemContainer.Clear();
 
@@ -116,7 +116,7 @@ public class ItemSlot : MonoBehaviour, IMouseAction
         switch (input)
         {
             case 0:
-                if (MouseCursor.Instance.CarryItem != ItemList.NONE)
+                if (MouseCursor.Instance.CarryItem != ItemName.NONE)
                 {
                     if (ContainItem == null)
                     {
@@ -136,7 +136,7 @@ public class ItemSlot : MonoBehaviour, IMouseAction
             case 1:
                 if (ItemCount > 0)
                 {
-                    if (MouseCursor.Instance.CarryItem == ItemList.NONE)
+                    if (MouseCursor.Instance.CarryItem == ItemName.NONE)
                     {
                         MouseCursor.Instance.AddCarryItem(_itemContainer.Last.Value);
 

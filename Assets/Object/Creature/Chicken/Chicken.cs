@@ -94,7 +94,7 @@ public class Chicken : MonoBehaviour
             for (float i = 0f; i < wait; i += Time.deltaTime * Time.timeScale) 
                 yield return null;
 
-            var egg = ItemMaster.Instance.GetItemExisting(ItemList.EGG);
+            var egg = ItemMaster.Instance.GetItemExisting(ItemName.EGG);
             
             egg.transform.position = transform.position;
             egg.gameObject.SetActive(true);

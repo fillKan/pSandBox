@@ -113,7 +113,7 @@ public class Sheep : InteractableObject
         int dropItemCount = Random.Range(_ShaveWoolMin, _ShaveWoolMax);
         for (int i = 0; i < dropItemCount; i++)
         {
-            DroppedItem item = ItemMaster.Instance.TakeItemExisting(ItemList.WOOL);
+            DroppedItem item = ItemMaster.Instance.TakeItemExisting(ItemName.WOOL);
 
             item.transform.position = transform.position;
             item.gameObject.SetActive(true);

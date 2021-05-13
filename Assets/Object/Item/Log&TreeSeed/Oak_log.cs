@@ -6,6 +6,6 @@ public class Oak_log : Item
 {
     protected override void Init()
     {
-        _itemCode = (int)ItemList.LOG_OAK;
+        _itemCode = (int)ItemName.LOG_OAK;
     }
 }

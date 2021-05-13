@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     [Tooltip("플레이어가 현재 프레임에 장비한 아이템 슬롯들을 담는 배열")]
     public  List<ItemSlot> EquipItemSlots    = new List<ItemSlot>();
     [Tooltip("플레이어가 이전 프레임에 장비한 아이템 슬롯들을 담는 배열")]
-    private List<ItemList> EquippedItemSlots = new List<ItemList>();
+    private List<ItemName> EquippedItemSlots = new List<ItemName>();
 
 
     private IEnumerator _CurrentOrderRoutine;
@@ -125,7 +125,7 @@ public class Player : MonoBehaviour
         for (int i = 0; i < EquipItemSlots.Count; i++)
         {
             // 새로운 아이템이 들어왓을 때
-            if(EquippedItemSlots[i] == ItemList.NONE && EquipItemSlots[i].ContainItem != null)
+            if(EquippedItemSlots[i] == ItemName.NONE && EquipItemSlots[i].ContainItem != null)
             {
                 if (EquipItemSlots[i].ContainItem.TryGetComponent(out function))
                 {
@@ -137,7 +137,7 @@ public class Player : MonoBehaviour
                 }
             }
             // 아이템이 나갔을 때
-            if (EquippedItemSlots[i] != ItemList.NONE && EquipItemSlots[i].ContainItem == null)
+            if (EquippedItemSlots[i] != ItemName.NONE && EquipItemSlots[i].ContainItem == null)
             {
                 if (ItemMaster.Instance.GetItem(EquippedItemSlots[i]).TryGetComponent(out function))
                 {
@@ -145,7 +145,7 @@ public class Player : MonoBehaviour
                     {
                         StartCoroutine(function.UnmountItem());
                     }
-                    EquippedItemSlots[i] = ItemList.NONE;
+                    EquippedItemSlots[i] = ItemName.NONE;
                 }               
             }
         }
@@ -158,7 +158,7 @@ public class Player : MonoBehaviour
 
         for(int i = 0; i < EquipItemSlots.Count; i++)
         {
-            EquippedItemSlots.Add(ItemList.NONE);
+            EquippedItemSlots.Add(ItemName.NONE);
         }
 
         sprite = gameObject.GetComponent<SpriteRenderer>();

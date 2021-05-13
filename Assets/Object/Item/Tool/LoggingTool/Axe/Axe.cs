@@ -8,7 +8,7 @@ public class Axe : Item, IItemFunction
 
     protected override void Init()
     {
-        _itemCode = (int)ItemList.AXE;
+        _itemCode = (int)ItemName.AXE;
 
         _itemType = ItemTypeList.TOOL;
     }

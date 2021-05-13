@@ -10,7 +10,7 @@ using UnityEngine;
 /// </para>
 /// </summary>
 #endregion
-public enum ItemList
+public enum ItemName
 {
     NONE,
     LOG_WHITEBIRCH,
@@ -153,7 +153,7 @@ public class ItemMaster : Singleton<ItemMaster>
     /// 인자와 일치하는 아이템 데이터를 가진 아이템을 반환한다.
     /// </returns>
     #endregion
-    public DroppedItem GetItemExisting(ItemList item)
+    public DroppedItem GetItemExisting(ItemName item)
     {
         int itemCode = (int)item;
 
@@ -210,7 +210,7 @@ public class ItemMaster : Singleton<ItemMaster>
     /// 인자와 일치하는 아이템 데이터를 가진 아이템을 반환한다.
     /// </returns>
     #endregion
-    public DroppedItem TakeItemExisting(ItemList item)
+    public DroppedItem TakeItemExisting(ItemName item)
     {
         int itemCode = (int)item;
 
@@ -286,7 +286,7 @@ public class ItemMaster : Singleton<ItemMaster>
     /// 인자와 일치하는 아이템 데이터를 가진 아이템을 반환한다.
     /// </returns>
     #endregion
-    public Item GetItem(ItemList item)
+    public Item GetItem(ItemName item)
     {
         if (Items.ContainsKey((int)item))
         {
@@ -335,7 +335,7 @@ public class ItemMaster : Singleton<ItemMaster>
     /// 인자와 일치하는 아이템 데이터를 가진 스프라이트를 반환한다.
     /// </returns>
     #endregion
-    public Sprite GetItemSprt(ItemList item)
+    public Sprite GetItemSprt(ItemName item)
     {
         if (ItemSprs.ContainsKey((int)item))
         {

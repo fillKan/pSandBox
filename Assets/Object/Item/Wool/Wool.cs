@@ -6,6 +6,6 @@ public class Wool : Item
 {
     protected override void Init()
     {
-        _itemCode = (int)ItemList.WOOL;
+        _itemCode = (int)ItemName.WOOL;
     }
 }

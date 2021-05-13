@@ -25,7 +25,7 @@ public class MouseCursor : Singleton<MouseCursor>
         {
             if(Input.GetMouseButtonDown(0))
             {
-                return (targetSprite == null && _selectSlot == null && CarryItem == ItemList.NONE);
+                return (targetSprite == null && _selectSlot == null && CarryItem == ItemName.NONE);
             }
             return false; 
         }
@@ -42,18 +42,18 @@ public class MouseCursor : Singleton<MouseCursor>
         {
             if (Input.GetMouseButtonDown(1))
             {
-                return (targetSprite == null && _selectSlot == null && CarryItem == ItemList.NONE);
+                return (targetSprite == null && _selectSlot == null && CarryItem == ItemName.NONE);
             }
             return false;
         }
     }
 
-    private Stack<ItemList> _carryItems = new Stack<ItemList>();
+    private Stack<ItemName> _carryItems = new Stack<ItemName>();
 
-    public ItemList CarryItem {
+    public ItemName CarryItem {
         get 
         {
-            if (_carryItems.Count == 0) return ItemList.NONE;
+            if (_carryItems.Count == 0) return ItemName.NONE;
             return _carryItems.Peek(); 
         } 
     }
@@ -67,7 +67,7 @@ public class MouseCursor : Singleton<MouseCursor>
     ///더할 아이템
     /// </param>
     #endregion
-    public void AddCarryItem(ItemList item)
+    public void AddCarryItem(ItemName item)
     {
         if(_carryItems.Count == 0)
         {
@@ -104,7 +104,7 @@ public class MouseCursor : Singleton<MouseCursor>
     {
         while(true)
         {
-            if(CarryItem != ItemList.NONE)
+            if(CarryItem != ItemName.NONE)
             {
                 SlotSprt.ShowItemExisting(CarryItem);
             }
@@ -125,7 +125,7 @@ public class MouseCursor : Singleton<MouseCursor>
                 {
                     _selectSlot.OperateAction(0);
                 }
-                else if(CarryItem != ItemList.NONE)
+                else if(CarryItem != ItemName.NONE)
                 {
                     DroppedItem item = ItemMaster.Instance.TakeItemExisting(CarryItem);
 

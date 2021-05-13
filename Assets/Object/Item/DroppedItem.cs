@@ -10,7 +10,7 @@ public class DroppedItem : InteractableObject
     }
 
     [Header("Dropped Property")]
-    public ItemList ItemData;
+    public ItemName ItemData;
 
     public override void Interaction()
     {

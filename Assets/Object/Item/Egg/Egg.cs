@@ -6,6 +6,6 @@ public class Egg : Item
 {
     protected override void Init()
     {
-        _itemCode = (int)ItemList.EGG;
+        _itemCode = (int)ItemName.EGG;
     }
 }

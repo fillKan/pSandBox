@@ -6,7 +6,7 @@ public class Fish_cutlassFish : Item
 {
     protected override void Init()
     {
-        _itemCode = (int)ItemList.FISH_CUTLASSFISH;
+        _itemCode = (int)ItemName.FISH_CUTLASSFISH;
 
         _itemType = ItemTypeList.FISH;
     }

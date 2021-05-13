@@ -12,7 +12,7 @@ public class PlayerCarryItem : MonoBehaviour
     public ItemSlotSprt SlotSprt;
     public ItemSlot CarryItemSlot;
 
-    public ItemList ItemData
+    public ItemName ItemData
     {
         get 
         { 
@@ -20,7 +20,7 @@ public class PlayerCarryItem : MonoBehaviour
             {
                 return CarryItemSlot.ContainItem.ItemData;
             }
-            return ItemList.NONE;
+            return ItemName.NONE;
         }
     }
 

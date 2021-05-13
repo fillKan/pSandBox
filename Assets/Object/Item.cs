@@ -77,9 +77,9 @@ public abstract class Item : MonoBehaviour
     }
     protected ItemTypeList _itemType = ItemTypeList.NONE;
 
-    public ItemList ItemData
+    public ItemName ItemData
     {
-        get { return (ItemList)_itemCode; }
+        get { return (ItemName)_itemCode; }
     }
 
     protected abstract void Init();

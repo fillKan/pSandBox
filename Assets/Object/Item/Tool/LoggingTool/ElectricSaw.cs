@@ -6,7 +6,7 @@ public class ElectricSaw : Item
 {
     protected override void Init()
     {
-        _itemCode = (int)ItemList.AXE_ELECTRIC_SAW;
+        _itemCode = (int)ItemName.AXE_ELECTRIC_SAW;
 
         _itemType = ItemTypeList.TOOL;
     }

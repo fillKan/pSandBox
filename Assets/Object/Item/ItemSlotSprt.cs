@@ -18,11 +18,11 @@ public class ItemSlotSprt : MonoBehaviour
     {
         get { return (int)_itemData; }
     }
-    public  ItemList  ItemData
+    public  ItemName  ItemData
     {
         get { return _itemData; }
     }
-    private ItemList _itemData;
+    private ItemName _itemData;
 
     #region 함수 설명 : 
     /// <summary>
@@ -34,7 +34,7 @@ public class ItemSlotSprt : MonoBehaviour
     #endregion
     public void ShowItemExisting(int itemCode)
     {
-        _itemData = (ItemList)itemCode;
+        _itemData = (ItemName)itemCode;
 
         Renderer.sprite = ItemMaster.Instance.GetItemSprt(itemCode);
     }
@@ -47,7 +47,7 @@ public class ItemSlotSprt : MonoBehaviour
     /// 띄울 아이템의 ItemList의 열거자.
     /// </param>
     #endregion
-    public void ShowItemExisting(ItemList item)
+    public void ShowItemExisting(ItemName item)
     {
         _itemData = item;
 
@@ -61,7 +61,7 @@ public class ItemSlotSprt : MonoBehaviour
     #endregion
     public void HideItemExisting()
     {
-        _itemData = ItemList.NONE;
+        _itemData = ItemName.NONE;
 
         Renderer.sprite = null;
     }
