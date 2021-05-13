@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Renderer: {fileID: 8060320587946941310}
+  _DefaultColor: {r: 1, g: 1, b: 1, a: 1}
   _SheepSprite: {fileID: 3184159518366690391, guid: 76d3079e62f05344d92ed1784c76e1cb,
     type: 3}
   _FurrySprite: {fileID: -94349284460663922, guid: 76d3079e62f05344d92ed1784c76e1cb,
