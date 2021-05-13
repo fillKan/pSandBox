@@ -54,18 +54,15 @@ public enum ItemTypeList
 #endregion
 public class ItemMaster : Singleton<ItemMaster>
 {
+    [SerializeField] private ItemSpriteList _ItemSpriteList;
+    private Dictionary<ItemName, Sprite> _SpriteDic;
+
     #region 딕셔너리 설명 : 
     /// <summary>
     /// '기능을 하는' 아이템들의 정보를 저장하는 딕셔너리.
     /// </summary>
     #endregion
     private Dictionary<int, Item>   Items    = new Dictionary<int, Item>();
-    #region 딕셔너리 설명 : 
-    /// <summary>
-    /// 아이템들의 스프라이트를 저장하는 딕셔너리.
-    /// </summary>
-    #endregion
-    private Dictionary<int, Sprite> ItemSprs = new Dictionary<int, Sprite>();
 
     #region 딕셔너리 설명 : 
     /// <summary>
@@ -113,13 +110,6 @@ public class ItemMaster : Singleton<ItemMaster>
         if (!Items.ContainsKey((int)item.ItemCode))
         {
             Items.Add(item.ItemCode, item);
-        }
-        
-        if(!ItemSprs.ContainsKey(item.ItemCode))
-        {
-            item.TryGetComponent<SpriteRenderer>(out SpriteRenderer renderer);
-
-            ItemSprs.Add((int)item.ItemCode, renderer.sprite);
         }
     }
 
@@ -318,9 +308,10 @@ public class ItemMaster : Singleton<ItemMaster>
     #endregion
     public Sprite GetItemSprt(int itemCode)
     {
-        if (ItemSprs.ContainsKey(itemCode))
+        ItemName key = (ItemName)itemCode;
+        if (_SpriteDic.ContainsKey(key))
         {
-            return ItemSprs[itemCode];
+            return _SpriteDic[key];
         }
         return null;
     }
@@ -337,9 +328,9 @@ public class ItemMaster : Singleton<ItemMaster>
     #endregion
     public Sprite GetItemSprt(ItemName item)
     {
-        if (ItemSprs.ContainsKey((int)item))
+        if (_SpriteDic.ContainsKey(item))
         {
-            return ItemSprs[(int)item];
+            return _SpriteDic[item];
         }
         return null;
     }
@@ -356,6 +347,6 @@ public class ItemMaster : Singleton<ItemMaster>
                 FishItems.Add(item.ItemCode);
             }
         }
-
+        _SpriteDic = _ItemSpriteList.GetKeyValuePairs();
     }
 }
