@@ -10,13 +10,13 @@ public class InteractionManager : Singleton<InteractionManager>
     {
         _InteractionDic = new Dictionary<int, InteractableObject>();
     }
-    public bool IsInteractable(int instanceID, out InteractableObject interactableObject)
+    public bool IsInteractable(GameObject instance, out InteractableObject interactableObject)
     {
-        return _InteractionDic.TryGetValue(instanceID, out interactableObject);
+        return _InteractionDic.TryGetValue(instance.GetInstanceID(), out interactableObject);
     }
     public void Register(InteractableObject interactableObject)
     {
-        int instanceID = interactableObject.GetInstanceID();
+        int instanceID = interactableObject.gameObject.GetInstanceID();
         if (_InteractionDic.ContainsKey(instanceID))
         {
             _InteractionDic[instanceID] = interactableObject;

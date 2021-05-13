@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sheep : MonoBehaviour, IInteraction
+public class Sheep : InteractableObject
 {
     #region Animation Transition
     private const int Idle = 0;
@@ -17,7 +17,6 @@ public class Sheep : MonoBehaviour, IInteraction
     [Header("# Sprite Property")]
     [SerializeField] private Sprite _SheepSprite;
     [SerializeField] private Sprite _FurrySprite;
-    [SerializeField] private SpriteRenderer _Renderer;
     [SerializeField] private Animator _Animator;
     private int _AnimControlKey;
 
@@ -40,13 +39,6 @@ public class Sheep : MonoBehaviour, IInteraction
     private bool _IsShaved = false;
     private IEnumerator _MovementRoutine;
 
-    private void OnEnable()
-    {
-        StartCoroutine(MovementPeriod());
-        RegisterInteraction();
-
-        _AnimControlKey = _Animator.GetParameter(0).nameHash;
-    }
     private void SetNaturalAnimState()
     {
         if (_MovementRoutine != null)
@@ -57,6 +49,17 @@ public class Sheep : MonoBehaviour, IInteraction
         {
             _Animator.SetInteger(_AnimControlKey, Idle);
         }
+    }
+    public override void OnActive()
+    {
+        StartCoroutine(MovementPeriod());
+        _AnimControlKey = _Animator.GetParameter(0).nameHash;
+    }
+    public override void Interaction()
+    {
+        if (_IsShaved) return;
+
+        _Animator.SetInteger(_AnimControlKey, Shave);
     }
     private IEnumerator MovementPeriod()
     {
@@ -105,24 +108,6 @@ public class Sheep : MonoBehaviour, IInteraction
 
         _Animator.SetInteger(_AnimControlKey, FurGrow);
     }
-
-    // ========== IInteraction ========== //
-    public GameObject InteractObject()
-    {
-        return gameObject;
-    }
-    public void OperateAction<T>(T xValue) where T : IItemFunction
-    {
-        if (_IsShaved) return;
-
-        _Animator.SetInteger(_AnimControlKey, Shave);
-    }
-    public void RegisterInteraction()
-    {
-        Player_Interaction.Instance.InObjRegister(gameObject.GetInstanceID(), this);
-    }
-    // ========== IInteraction ========== //
-
     private void AE_Shave()
     {
         int dropItemCount = Random.Range(_ShaveWoolMin, _ShaveWoolMax);
