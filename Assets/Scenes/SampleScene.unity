@@ -1068,6 +1068,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b76470fb59897488e4089e95b1e01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Renderer: {fileID: 300923613}
+  _DefaultColor: {r: 1, g: 1, b: 1, a: 1}
   ItemData: 17
 --- !u!50 &300923611
 Rigidbody2D:
@@ -3696,6 +3698,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b76470fb59897488e4089e95b1e01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Renderer: {fileID: 956527874}
+  _DefaultColor: {r: 1, g: 1, b: 1, a: 1}
   ItemData: 14
 --- !u!1 &963776019
 GameObject:
@@ -4245,6 +4249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b76470fb59897488e4089e95b1e01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Renderer: {fileID: 1180687929}
+  _DefaultColor: {r: 1, g: 1, b: 1, a: 1}
   ItemData: 16
 --- !u!50 &1180687927
 Rigidbody2D:
@@ -4982,6 +4988,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b76470fb59897488e4089e95b1e01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Renderer: {fileID: 1350236410}
+  _DefaultColor: {r: 1, g: 1, b: 1, a: 1}
   ItemData: 15
 --- !u!50 &1350236408
 Rigidbody2D:
@@ -6799,6 +6807,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b76470fb59897488e4089e95b1e01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Renderer: {fileID: 1742276343}
+  _DefaultColor: {r: 1, g: 1, b: 1, a: 1}
   ItemData: 13
 --- !u!50 &1742276341
 Rigidbody2D:

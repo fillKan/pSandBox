@@ -49,6 +49,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -144,4 +145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b76470fb59897488e4089e95b1e01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Renderer: {fileID: 3218884083481818119}
+  _DefaultColor: {r: 1, g: 1, b: 1, a: 1}
   ItemData: 7
