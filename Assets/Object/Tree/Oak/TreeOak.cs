@@ -36,9 +36,9 @@ public class TreeOak : Tree, IInteraction
         {
             if (Random.Range(0, 4) == 0)
             {
-                 tItem = ItemMaster.Instance.TakeItemExisting(ItemName.SEED_OAK);
+                 tItem = ItemMaster.Instance.GetDroppedItem(ItemName.SEED_OAK);
             }
-            else tItem = ItemMaster.Instance.TakeItemExisting(ItemName.LOG_OAK);
+            else tItem = ItemMaster.Instance.GetDroppedItem(ItemName.LOG_OAK);
 
             tItem.gameObject.SetActive(true);
             tItem.transform.position = transform.position;

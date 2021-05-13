@@ -95,7 +95,7 @@ public class Bobber : MonoBehaviour
 
         if (sprt.ItemData != ItemName.NONE)
         {
-            item = ItemMaster.Instance.TakeItemExisting(sprt.ItemData);
+            item = ItemMaster.Instance.GetDroppedItem(sprt.ItemData);
             item.transform.position = transform.position;
             item.gameObject.SetActive(true);
 

@@ -127,7 +127,7 @@ public class MouseCursor : Singleton<MouseCursor>
                 }
                 else if(CarryItem != ItemName.NONE)
                 {
-                    DroppedItem item = ItemMaster.Instance.TakeItemExisting(CarryItem);
+                    DroppedItem item = ItemMaster.Instance.GetDroppedItem(CarryItem);
 
                     item.transform.position = (Vector2)transform.position;
                     item.gameObject.SetActive(true);

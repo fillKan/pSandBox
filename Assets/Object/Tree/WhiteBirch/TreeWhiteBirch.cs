@@ -36,9 +36,9 @@ public class TreeWhiteBirch : Tree, IInteraction
         {
             if (Random.Range(0, 4) == 0)
             {
-                 tItem = ItemMaster.Instance.TakeItemExisting(ItemName.SEED_WHITEBIRCH);
+                 tItem = ItemMaster.Instance.GetDroppedItem(ItemName.SEED_WHITEBIRCH);
             }
-            else tItem = ItemMaster.Instance.TakeItemExisting(ItemName.LOG_WHITEBIRCH);
+            else tItem = ItemMaster.Instance.GetDroppedItem(ItemName.LOG_WHITEBIRCH);
 
             tItem.gameObject.SetActive(true);
             tItem.transform.position = transform.position;

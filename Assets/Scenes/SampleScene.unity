@@ -7896,6 +7896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ItemSpriteList: {fileID: 11400000, guid: 8fac7e11a6d5e934295be4d35210d366, type: 2}
+  _DroppedItemList: {fileID: 11400000, guid: a6b8f87fb3e0ed6469c5f5b5bcc75cc9, type: 2}
 --- !u!4 &2111204122
 Transform:
   m_ObjectHideFlags: 0
