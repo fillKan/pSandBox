@@ -17,4 +17,8 @@ public abstract class InteractableObject : MonoBehaviour
     {
         _Renderer.color = _HighLightColor;
     }
+    private void OnEnable()
+    {
+        InteractionManager.Instance.Register(this);
+    }
 }
