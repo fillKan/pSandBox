@@ -10,7 +10,7 @@ public class Bobber : MonoBehaviour
 
     private bool Catch;
 
-    private ItemExisting item;
+    private DroppedItem item;
     private ItemSlotSprt sprt;
 
     private void Start()

@@ -72,13 +72,13 @@ public class ItemMaster : Singleton<ItemMaster>
     /// '게임에서 보여지는' 아이템들의 정보를 저장하는 딕셔너리.
     /// </summary>
     #endregion
-    private Dictionary<int, ItemExisting> ItemExistings = new Dictionary<int, ItemExisting>();
+    private Dictionary<int, DroppedItem> ItemExistings = new Dictionary<int, DroppedItem>();
     #region 딕셔너리 설명 : 
     /// <summary>
     /// 생성된 '게임에서 보여지는' 아이템들을 풀링하는 딕셔너리.
     /// </summary>
     #endregion
-    private Dictionary<int, Stack<ItemExisting>> ItemPool = new Dictionary<int, Stack<ItemExisting>>();
+    private Dictionary<int, Stack<DroppedItem>> ItemPool = new Dictionary<int, Stack<DroppedItem>>();
 
     private Dictionary<int, Item>.ValueCollection ItemValues;
 
@@ -93,7 +93,7 @@ public class ItemMaster : Singleton<ItemMaster>
     /// 등록할 '게임에서 보여지는' 아이템 객체
     /// </param>
     #endregion
-    public void Registration(ItemExisting item)
+    public void Registration(DroppedItem item)
     {
         if (!ItemExistings.ContainsKey(item.ItemCode))
         {
@@ -134,7 +134,7 @@ public class ItemMaster : Singleton<ItemMaster>
     /// 인자와 일치하는 아이템 코드를 가진 아이템을 반환한다.
     /// </returns>
     #endregion
-    public ItemExisting GetItemExisting(int itemCode)
+    public DroppedItem GetItemExisting(int itemCode)
     {
         if (ItemExistings.ContainsKey(itemCode))
         {
@@ -153,7 +153,7 @@ public class ItemMaster : Singleton<ItemMaster>
     /// 인자와 일치하는 아이템 데이터를 가진 아이템을 반환한다.
     /// </returns>
     #endregion
-    public ItemExisting GetItemExisting(ItemList item)
+    public DroppedItem GetItemExisting(ItemList item)
     {
         int itemCode = (int)item;
 
@@ -178,7 +178,7 @@ public class ItemMaster : Singleton<ItemMaster>
     /// 인자와 일치하는 아이템 코드를 가진 아이템을 반환한다.
     /// </returns>
     #endregion
-    public ItemExisting TakeItemExisting(int itemCode)
+    public DroppedItem TakeItemExisting(int itemCode)
     {
         if (ItemPool.ContainsKey(itemCode))
         {
@@ -210,7 +210,7 @@ public class ItemMaster : Singleton<ItemMaster>
     /// 인자와 일치하는 아이템 데이터를 가진 아이템을 반환한다.
     /// </returns>
     #endregion
-    public ItemExisting TakeItemExisting(ItemList item)
+    public DroppedItem TakeItemExisting(ItemList item)
     {
         int itemCode = (int)item;
 
@@ -242,7 +242,7 @@ public class ItemMaster : Singleton<ItemMaster>
     /// '게임에서 보여지는' 아이템들의 풀에 추가할 요소
     /// </param>
     #endregion
-    public void StoreItemExisting(ItemExisting item)
+    public void StoreItemExisting(DroppedItem item)
     {
         if (ItemPool.ContainsKey(item.ItemCode))
         {
@@ -250,7 +250,7 @@ public class ItemMaster : Singleton<ItemMaster>
         }
         else
         {
-            ItemPool.Add(item.ItemCode, new Stack<ItemExisting>());
+            ItemPool.Add(item.ItemCode, new Stack<DroppedItem>());
 
             ItemPool[item.ItemCode].Push(item);
         }

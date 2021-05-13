@@ -30,7 +30,7 @@ public class TreeWhiteBirch : Tree, IInteraction
     {
         int repeat = Random.Range(8, 14);
 
-        ItemExisting tItem;
+        DroppedItem tItem;
 
         for (int i = 0; i < repeat; i++)
         {

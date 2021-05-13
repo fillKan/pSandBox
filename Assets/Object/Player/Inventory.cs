@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
 
     private sbyte empty = -1;
 
-    public void AddItemInventory(ItemExisting item)
+    public void AddItemInventory(DroppedItem item)
     {
         int emptySlotIndex = empty;
 
