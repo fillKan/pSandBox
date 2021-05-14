@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class DroppedItem : InteractableObject
 {
-    public int ItemCode
-    {
-        get { return (int)ItemData; }
-    }
+    public Rigidbody2D Rigidbody => _Rigidbody;
 
     [Header("Dropped Property")]
     public ItemName ItemData;
+    [SerializeField]
+    private Rigidbody2D _Rigidbody;
 
     public override void Interaction()
     {

@@ -24,10 +24,8 @@ public class Inventory : MonoBehaviour
                 continue;
             }
 
-            if(itemSlots[i].ContainItem.ItemData == item.ItemData)
+            if (itemSlots[i].ContainItem.ItemData == item.ItemData)
             {
-                item.gameObject.SetActive(false);
-
                 itemSlots[i].AddItem(item.ItemData);
                 ItemMaster.Instance.AddDroppedItem(item);
                 return;
@@ -35,8 +33,6 @@ public class Inventory : MonoBehaviour
         }
         if(!emptySlotIndex.Equals(empty))
         {
-            item.gameObject.SetActive(false);
-
             itemSlots[emptySlotIndex].AddItem(item.ItemData);
             ItemMaster.Instance.AddDroppedItem(item);
             return;

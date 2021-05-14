@@ -96,7 +96,10 @@ public class ItemMaster : Singleton<ItemMaster>
         {
             if (_DroppedItemPool[item].Count > 0)
             {
-                return _DroppedItemPool[item].Dequeue();
+                var dropped = _DroppedItemPool[item].Dequeue();
+                    dropped.gameObject.SetActive(true);
+
+                return dropped;
             }
         }
         return Instantiate(_DroppedItemCollection[item]);
@@ -119,6 +122,10 @@ public class ItemMaster : Singleton<ItemMaster>
             _DroppedItemPool.Add(item.ItemData, new Queue<DroppedItem>());
         }
         _DroppedItemPool[item.ItemData].Enqueue(item);
+
+        item.gameObject.SetActive(false);
+        item.transform.rotation = Quaternion.identity;
+        item.Rigidbody.velocity = Vector2.zero;
     }
 
     #region 함수 설명 : 
