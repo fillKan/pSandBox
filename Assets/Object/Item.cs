@@ -57,41 +57,34 @@ public interface IItemFunction
     bool HasFunction(ItemFunc func);
 }
 
-public abstract class Item : MonoBehaviour
+public class Item : MonoBehaviour
 {
-    [HideInInspector]
+    [SerializeField] private ItemName _Name;
+    [SerializeField] private Sprite _Sprite;
+
+    [Space()]
+    [SerializeField] private ItemCrystal _ItemCrystal;
+
+    public Sprite Sprite => _Sprite;
+    public ItemName Name => _Name;
+
+    public float this[ItemElement element] => _ItemCrystal[element];
+
+    [System.Obsolete]
     public    int  ItemCode
     {
         get { return _itemCode; }
     }
     protected int _itemCode;
 
-    #region 변수 설명
-    /// <summary>
-    /// 해당 아이템의 아이템 유형을 반환하는 변수. 기본값 : NONE
-    /// </summary>
-    #endregion
     public    ItemTypeList  ItemType
     {
         get { return _itemType; }
     }
     protected ItemTypeList _itemType = ItemTypeList.NONE;
 
-    public ItemName ItemData
-    {
-        get { return (ItemName)_itemCode; }
-    }
-
-    protected abstract void Init();
-
     private void Awake()
     {
-        Init();
-
-        TryGetComponent<Renderer>(out Renderer renderer);
-                                               renderer.enabled = false;
-
         ItemMaster.Instance.Registration(this);
     }
-
 }

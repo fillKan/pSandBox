@@ -18,7 +18,7 @@ public class PlayerCarryItem : MonoBehaviour
         { 
             if(CarryItemSlot.ContainItem != null)
             {
-                return CarryItemSlot.ContainItem.ItemData;
+                return CarryItemSlot.ContainItem.Name;
             }
             return ItemName.NONE;
         }

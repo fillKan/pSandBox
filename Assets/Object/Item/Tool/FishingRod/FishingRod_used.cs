@@ -103,7 +103,7 @@ public class FishingRod_used : Item, IItemFunction
         yield break;
     }
 
-    protected override void Init()
+    private void Awake()
     {
         _itemCode = (int)ItemName.FISHING_ROD_USED;
 

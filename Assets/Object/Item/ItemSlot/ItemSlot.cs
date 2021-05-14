@@ -103,7 +103,7 @@ public class ItemSlot : MonoBehaviour, IMouseAction
         }
         else 
         {
-            SlotSprt.ShowItemExisting(ContainItem.ItemData);
+            SlotSprt.ShowItemExisting(ContainItem.Name);
         }
     }
 
@@ -124,7 +124,7 @@ public class ItemSlot : MonoBehaviour, IMouseAction
                         MouseCursor.Instance.DelCarryItem();
                         UpdateSlotInfo();
                     }
-                    else if (MouseCursor.Instance.CarryItem == ContainItem.ItemData)
+                    else if (MouseCursor.Instance.CarryItem == ContainItem.Name)
                     {
                         _itemContainer.AddLast(MouseCursor.Instance.CarryItem);
                         MouseCursor.Instance.DelCarryItem();
@@ -145,7 +145,7 @@ public class ItemSlot : MonoBehaviour, IMouseAction
                     }
                     else if(ContainItem)
                     {
-                        if (MouseCursor.Instance.CarryItem == ContainItem.ItemData)
+                        if (MouseCursor.Instance.CarryItem == ContainItem.Name)
                         {
                             MouseCursor.Instance.AddCarryItem(_itemContainer.Last.Value);
 

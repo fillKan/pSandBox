@@ -6,7 +6,7 @@ public class Axe : Item, IItemFunction
 {
     private float loggingValue = 3;
 
-    protected override void Init()
+    private void Awake()
     {
         _itemCode = (int)ItemName.AXE;
 

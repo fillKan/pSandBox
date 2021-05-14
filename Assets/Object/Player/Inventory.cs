@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
                 continue;
             }
 
-            if (itemSlots[i].ContainItem.ItemData == item.ItemData)
+            if (itemSlots[i].ContainItem.Name == item.ItemData)
             {
                 itemSlots[i].AddItem(item.ItemData);
                 ItemMaster.Instance.AddDroppedItem(item);

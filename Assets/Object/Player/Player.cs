@@ -133,7 +133,7 @@ public class Player : MonoBehaviour
                     {
                         StartCoroutine(function.MountItem());
                     }
-                    EquippedItemSlots[i] = EquipItemSlots[i].ContainItem.ItemData;
+                    EquippedItemSlots[i] = EquipItemSlots[i].ContainItem.Name;
                 }
             }
             // 아이템이 나갔을 때
