@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3218884083481818117}
   - component: {fileID: 5443336999129159504}
   m_Layer: 9
-  m_Name: sFish_ButterFish
+  m_Name: Dropped_Fish_ButterFish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,3 +148,4 @@ MonoBehaviour:
   _Renderer: {fileID: 3218884083481818119}
   _DefaultColor: {r: 1, g: 1, b: 1, a: 1}
   ItemData: 7
+  _Rigidbody: {fileID: 3218884083481818118}
