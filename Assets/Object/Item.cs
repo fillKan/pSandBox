@@ -4,11 +4,7 @@ using UnityEngine;
 
 public enum ItemInterface
 {
-    Use,
-    Equip,
-    MOUNT,
-    UNMOUNT,
-    INSLOT
+    Use, Equip
 }
 
 #region 인터페이스 설명

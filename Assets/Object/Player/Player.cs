@@ -125,29 +125,29 @@ public class Player : MonoBehaviour
         for (int i = 0; i < EquipItemSlots.Count; i++)
         {
             // 새로운 아이템이 들어왓을 때
-            if(EquippedItemSlots[i] == ItemName.NONE && EquipItemSlots[i].ContainItem != null)
-            {
-                if (EquipItemSlots[i].ContainItem.TryGetComponent(out function))
-                {
-                    if(function.HasFunction(ItemInterface.MOUNT))
-                    {
-                        StartCoroutine(function.MountItem());
-                    }
-                    EquippedItemSlots[i] = EquipItemSlots[i].ContainItem.Name;
-                }
-            }
+            // if(EquippedItemSlots[i] == ItemName.NONE && EquipItemSlots[i].ContainItem != null)
+            // {
+            //     if (EquipItemSlots[i].ContainItem.TryGetComponent(out function))
+            //     {
+            //         if(function.HasFunction(ItemInterface.MOUNT))
+            //         {
+            //             StartCoroutine(function.MountItem());
+            //         }
+            //         EquippedItemSlots[i] = EquipItemSlots[i].ContainItem.Name;
+            //     }
+            // }
             // 아이템이 나갔을 때
-            if (EquippedItemSlots[i] != ItemName.NONE && EquipItemSlots[i].ContainItem == null)
-            {
-                if (ItemMaster.Instance.GetItem(EquippedItemSlots[i]).TryGetComponent(out function))
-                {
-                    if(function.HasFunction(ItemInterface.UNMOUNT))
-                    {
-                        StartCoroutine(function.UnmountItem());
-                    }
-                    EquippedItemSlots[i] = ItemName.NONE;
-                }               
-            }
+            // if (EquippedItemSlots[i] != ItemName.NONE && EquipItemSlots[i].ContainItem == null)
+            // {
+            //     if (ItemMaster.Instance.GetItem(EquippedItemSlots[i]).TryGetComponent(out function))
+            //     {
+            //         if(function.HasFunction(ItemInterface.UNMOUNT))
+            //         {
+            //             StartCoroutine(function.UnmountItem());
+            //         }
+            //         EquippedItemSlots[i] = ItemName.NONE;
+            //     }               
+            // }
         }
 
     }
