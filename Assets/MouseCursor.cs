@@ -123,7 +123,7 @@ public class MouseCursor : Singleton<MouseCursor>
                 #region 아이템 슬롯에게 작용
                 if (_selectSlot != null)
                 {
-                    _selectSlot.OperateAction(0);
+                    _selectSlot.AddItem(CarryItem);
                 }
                 else if(CarryItem != ItemName.NONE)
                 {
@@ -150,7 +150,7 @@ public class MouseCursor : Singleton<MouseCursor>
                 #region 아이템 슬롯에게 작용
                 if (_selectSlot != null)
                 {
-                    _selectSlot.OperateAction(1);
+                    _selectSlot.SubtractItem();
                 }
                 #endregion
             }
