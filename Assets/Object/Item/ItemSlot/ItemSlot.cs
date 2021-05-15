@@ -5,9 +5,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemSlot : MonoBehaviour, IPointerClickHandler
+public class ItemSlot : MonoBehaviour, IPointerDownHandler
 {
     private const string Zero = "0";
+    private const float ItemSpriteScaling = 0.8f;
 
     public event Action<ItemName> ExitItem;
     public event Action<ItemName> EnterItem;
@@ -25,7 +26,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public int ItemCount
     { get => _ItemCount; }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
         ItemName carrying = CursorPointer.Instance.CarryingItem;
 
@@ -45,12 +46,12 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
                 }
             }
         }
-        else if (Input.GetMouseButtonDown(1) && ItemCount != 0)
+        else if (Input.GetMouseButtonDown(1) && _ItemCount != 0)
         {
             if (carrying == ItemName.NONE || carrying == ContainItem)
             {
-                SubtractItem();
                 CursorPointer.Instance.AddCarryingItem(ContainItem);
+                SubtractItem();
             }
         }
     }
@@ -74,7 +75,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
             _ItemRenderer.sprite = sprite;
             _ItemRenderer.rectTransform.sizeDelta 
-                = new Vector2(sprite.rect.width, sprite.rect.height) * 0.7f;
+                = new Vector2(sprite.rect.width, sprite.rect.height) * ItemSpriteScaling;
 
             _ItemCount += count;
 

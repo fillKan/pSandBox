@@ -13,9 +13,9 @@ public class Inventory : MonoBehaviour
     {
         int emptySlotIndex = empty;
 
-        for(int i = 0; i < itemSlots.Length; i++)
+        for (int i = 0; i < itemSlots.Length; i++)
         {
-            if (itemSlots[i].ContainItem == null)
+            if (itemSlots[i].ContainItem == ItemName.NONE)
             {
                 if (emptySlotIndex.Equals(empty))
                 {

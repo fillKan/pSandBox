@@ -107,26 +107,26 @@ public class CursorPointer : Singleton<CursorPointer>
     }
     public void SubtractCarryingItem(int count = 1)
     {
-        if (CarryingCount == 0) return;
+        if (CarryingCount > 0) {
+            CarryingCount -= count;
 
-        CarryingCount -= count;
+            if (CarryingCount < 1) {
 
-        if (CarryingCount <= 0)
-        {
-            CarryingCount = 0;
-            CarryingItem = ItemName.NONE;
+                CarryingCount = 0;
+                CarryingItem = ItemName.NONE;
 
-            _Renderer.sprite = null;
+                _Renderer.sprite = null;
+            }
         }
     }
     public void DropCarryingItem()
     {
         if (CarryingCount > 0)
         {
-            CarryingCount--;
-
             ItemMaster.Instance.GetDroppedItem(CarryingItem)
                 .transform.position = transform.position;
+
+            SubtractCarryingItem();
         }
     }
 }
