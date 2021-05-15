@@ -6,6 +6,17 @@ public class InteractionManager : Singleton<InteractionManager>
 {
     private Dictionary<int, InteractableObject> _InteractionDic;
 
+    public InteractableObject this[int instanceID]
+    {
+        get
+        {
+            InteractableObject value;
+            _InteractionDic.TryGetValue(instanceID, out value);
+
+            return value;
+        }
+    }
+
     private void LazyInit()
     {
         _InteractionDic = _InteractionDic ?? new Dictionary<int, InteractableObject>();
