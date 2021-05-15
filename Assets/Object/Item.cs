@@ -92,4 +92,9 @@ public class Item : MonoBehaviour
         get { return _itemType; }
     }
     protected ItemTypeList _itemType = ItemTypeList.NONE;
+
+    public virtual bool IsUsing(ItemInterface itemInterface)
+    {
+        return false;
+    }
 }
