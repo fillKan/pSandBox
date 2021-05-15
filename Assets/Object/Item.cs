@@ -57,6 +57,16 @@ public interface IItemFunction
     bool HasFunction(ItemFunc func);
 }
 
+public interface IUseItem
+{
+    void UseItem(InteractableObject target);
+}
+public interface IEquipItem
+{
+    void OnEquipItem();
+    void DisEquipItem();
+}
+
 public class Item : MonoBehaviour
 {
     [SerializeField] private ItemName _Name;
