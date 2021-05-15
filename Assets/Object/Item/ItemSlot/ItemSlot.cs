@@ -12,10 +12,11 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public event Action<ItemName> ExitItem;
     public event Action<ItemName> EnterItem;
 
-    [SerializeField] private SpriteRenderer _Renderer;
+    [SerializeField] private Image _ItemRenderer;
     [SerializeField] private TMPro.TextMeshProUGUI _CountText;
     [SerializeField] private Sprite _EmptySprite;
 
+    [Space(10f)]
     [SerializeField] private ItemName _ContainItem;
     [SerializeField] private int _ItemCount;
 
@@ -68,7 +69,12 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
             ExitItem?.Invoke(itemName);
 
             _ContainItem = itemName;
-            _Renderer.sprite = ItemMaster.Instance.GetItemSprt(itemName);
+            
+            var sprite = ItemMaster.Instance.GetItemSprt(itemName);
+
+            _ItemRenderer.sprite = sprite;
+            _ItemRenderer.rectTransform.sizeDelta 
+                = new Vector2(sprite.rect.width, sprite.rect.height) * 0.7f;
 
             _ItemCount += count;
 
@@ -87,7 +93,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
             ExitItem?.Invoke(ContainItem);
 
             _CountText.text = Zero;
-            _Renderer.sprite = _EmptySprite;
+            _ItemRenderer.sprite = _EmptySprite;
 
             _ContainItem = ItemName.NONE;
             _ItemCount = 0;
