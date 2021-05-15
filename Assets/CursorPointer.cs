@@ -40,6 +40,10 @@ public class CursorPointer : Singleton<CursorPointer>
                 PlayerController.Instance.MoveToPoint(transform.position);
             }
         }
+        else if (Input.GetAxis("Mouse ScrollWheel") > 0.0f || Input.GetMouseButtonDown(2))
+        {
+            DropCarryingItem();
+        }
         transform.position = _MainCamera.ScreenToWorldPoint(Input.mousePosition);
         transform.Translate(0, 0, 10.0f);
     }
