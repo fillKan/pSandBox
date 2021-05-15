@@ -40,11 +40,11 @@ public class FishingRod : Item, IItemFunction
         yield break;
     }
 
-    public bool HasFunction(ItemFunc func)
+    public bool HasFunction(ItemInterface func)
     {
         switch (func)
         {
-            case ItemFunc.CARRY:
+            case ItemInterface.Equip:
                 return true;
         }
         return false;

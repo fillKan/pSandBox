@@ -42,14 +42,14 @@ public class Axe : Item, IItemFunction
         yield break;
     }
 
-    public bool HasFunction(ItemFunc func)
+    public bool HasFunction(ItemInterface func)
     {
         switch (func)
         {           
-            case ItemFunc.MOUNT:
+            case ItemInterface.MOUNT:
                 return true;
 
-            case ItemFunc.UNMOUNT:
+            case ItemInterface.UNMOUNT:
                 return true;            
         }
         return false;

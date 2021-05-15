@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
                 {
                     if (EquipItemSlots[i].ContainItem.TryGetComponent(out IItemFunction function))
                     {
-                        if(function.HasFunction(ItemFunc.USE))
+                        if(function.HasFunction(ItemInterface.Use))
                         {
                             Player_Interaction.Instance.InObjGetValue(interactionID).OperateAction(function);
                         }
@@ -109,7 +109,7 @@ public class Player : MonoBehaviour
             {
                 if (EquipItemSlots[i].ContainItem.TryGetComponent(out IItemFunction function))
                 {
-                    if (function.HasFunction(ItemFunc.CARRY))
+                    if (function.HasFunction(ItemInterface.Equip))
                     {
                         StartCoroutine(function.CarryItem(EquipItemSlots[i]));
                     }
@@ -129,7 +129,7 @@ public class Player : MonoBehaviour
             {
                 if (EquipItemSlots[i].ContainItem.TryGetComponent(out function))
                 {
-                    if(function.HasFunction(ItemFunc.MOUNT))
+                    if(function.HasFunction(ItemInterface.MOUNT))
                     {
                         StartCoroutine(function.MountItem());
                     }
@@ -141,7 +141,7 @@ public class Player : MonoBehaviour
             {
                 if (ItemMaster.Instance.GetItem(EquippedItemSlots[i]).TryGetComponent(out function))
                 {
-                    if(function.HasFunction(ItemFunc.UNMOUNT))
+                    if(function.HasFunction(ItemInterface.UNMOUNT))
                     {
                         StartCoroutine(function.UnmountItem());
                     }

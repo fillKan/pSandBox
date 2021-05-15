@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ItemFunc
+public enum ItemInterface
 {
-    USE,
-    CARRY,
+    Use,
+    Equip,
     MOUNT,
     UNMOUNT,
     INSLOT
@@ -54,7 +54,7 @@ public interface IItemFunction
     #endregion
     IEnumerator InSlotItem();
 
-    bool HasFunction(ItemFunc func);
+    bool HasFunction(ItemInterface func);
 }
 
 public interface IUseItem
