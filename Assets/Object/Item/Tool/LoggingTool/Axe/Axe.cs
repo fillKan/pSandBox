@@ -2,56 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Axe : Item, IItemFunction
+public class Axe : Item, IEquipItem
 {
-    private float loggingValue = 3;
+    [SerializeField] private float LoggingValue;
 
-    private void Awake()
+    public void DisEquipItem()
     {
-        _itemCode = (int)ItemName.AXE;
-
-        _itemType = ItemTypeList.TOOL;
+        StateStorage.Instance.DecreaseState(States.TREE_LOGGING, LoggingValue);
     }
-
-    public IEnumerator UseItem<T> (T xValue) where T : IInteraction
+    public void OnEquipItem()
     {
-        yield break;
+        StateStorage.Instance.IncreaseState(States.TREE_LOGGING, LoggingValue);
     }
-
-    public IEnumerator CarryItem(ItemSlot itemSlot)
+    public override bool IsUsing(ItemInterface itemInterface)
     {
-        yield break;
-    }
-
-    public IEnumerator MountItem()
-    {
-        Debug.Log("Mount");
-        StateStorage.Instance.IncreaseState(States.TREE_LOGGING, loggingValue);
-        yield break;
-    }
-
-    public IEnumerator InSlotItem()
-    {
-        yield break;
-    }
-
-    public IEnumerator UnmountItem()
-    {
-        Debug.Log("Unmount");
-        StateStorage.Instance.DecreaseState(States.TREE_LOGGING, loggingValue);
-        yield break;
-    }
-
-    public bool HasFunction(ItemInterface func)
-    {
-        switch (func)
-        {           
-            case ItemInterface.MOUNT:
-                return true;
-
-            case ItemInterface.UNMOUNT:
-                return true;            
-        }
-        return false;
+        return itemInterface == ItemInterface.Equip;
     }
 }
