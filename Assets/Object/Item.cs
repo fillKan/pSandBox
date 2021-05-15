@@ -82,9 +82,4 @@ public class Item : MonoBehaviour
         get { return _itemType; }
     }
     protected ItemTypeList _itemType = ItemTypeList.NONE;
-
-    private void Awake()
-    {
-        ItemMaster.Instance.Registration(this);
-    }
 }

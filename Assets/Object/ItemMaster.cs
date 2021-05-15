@@ -54,42 +54,19 @@ public enum ItemTypeList
 #endregion
 public class ItemMaster : Singleton<ItemMaster>
 {
-    [Header("ItemSprite Collection")]
-    [SerializeField] private ItemSpriteList _ItemSpriteList;
+    [Header("Item Collection")]
+    [SerializeField] private ItemList _ItemList;
+    [SerializeField] private ItemList _FishItemList;
 
     [Header("DroppedItem Collection")]
     [SerializeField] private DroppedItemList _DroppedItemList;
 
-    private Dictionary<ItemName, Sprite> _SpriteDic;
+    private Dictionary<ItemName, Item> _ItemDic;
     private Dictionary<ItemName, Queue<DroppedItem>> _DroppedItemPool;
     private Dictionary<ItemName, DroppedItem> _DroppedItemCollection;
 
-    #region 딕셔너리 설명 : 
-    /// <summary>
-    /// '기능을 하는' 아이템들의 정보를 저장하는 딕셔너리.
-    /// </summary>
-    #endregion
-    private Dictionary<int, Item> Items = new Dictionary<int, Item>();
-
-    private Dictionary<int, Item>.ValueCollection ItemValues;
-
-    private List<int> FishItems = new List<int>();
+    private List<ItemName> _FishList = new List<ItemName>();
     
-    #region 함수 설명 : 
-    /// <summary>
-    /// '기능을 하는' 아이템과 그 아이템의 스프라이트를 ItemMaster에 등록시키는 함수.
-    /// </summary>
-    /// <param name="item">
-    /// 등록할 '기능을 하는' 아이템 객체. 해당 객체에서 스프라이트를 추출한다.
-    /// </param>
-    #endregion
-    public void Registration(Item item)
-    {
-        if (!Items.ContainsKey((int)item.ItemCode))
-        {
-            Items.Add(item.ItemCode, item);
-        }
-    }
     public DroppedItem GetDroppedItem(ItemName item)
     {
         if (_DroppedItemPool.ContainsKey(item))
@@ -132,25 +109,6 @@ public class ItemMaster : Singleton<ItemMaster>
     /// <summary>
     /// '기능을 하는' 아이템을 반환하는 함수.
     /// </summary>
-    /// <param name="itemCode">
-    /// 반환을 원하는 아이템의 아이템 코드
-    /// </param>
-    /// <returns>
-    /// 인자와 일치하는 아이템 코드를 가진 아이템을 반환한다.
-    /// </returns>
-    #endregion
-    public Item GetItem(int itemCode)
-    {
-        if(Items.ContainsKey(itemCode))
-        {
-            return Items[itemCode];
-        }
-        return null;
-    }
-    #region 함수 설명 : 
-    /// <summary>
-    /// '기능을 하는' 아이템을 반환하는 함수.
-    /// </summary>
     /// <param name="item">
     /// 반환을 원하는 아이템의 ItemList 열거자
     /// </param>
@@ -160,9 +118,9 @@ public class ItemMaster : Singleton<ItemMaster>
     #endregion
     public Item GetItem(ItemName item)
     {
-        if (Items.ContainsKey((int)item))
+        if (_ItemDic.ContainsKey(item))
         {
-            return Items[(int)item];
+            return _ItemDic[item];
         }
         return null;
     }
@@ -174,7 +132,7 @@ public class ItemMaster : Singleton<ItemMaster>
     #endregion
     public int RandomFish()
     {
-        return FishItems[Random.Range(0, FishItems.Count)];
+        return (int)_FishList[Random.Range(0, _FishList.Count)];
     }
 
     #region 함수 설명 : 
@@ -190,46 +148,20 @@ public class ItemMaster : Singleton<ItemMaster>
     #endregion
     public Sprite GetItemSprt(int itemCode)
     {
-        ItemName key = (ItemName)itemCode;
-        if (_SpriteDic.ContainsKey(key))
-        {
-            return _SpriteDic[key];
-        }
-        return null;
+        return GetItemSprt((ItemName)itemCode);
     }
-    #region 함수 설명 : 
-    /// <summary>
-    /// 특정 아이템의 스프라이트를 반환하는 함수.
-    /// </summary>
-    /// <param name="item">
-    /// 반환을 원하는 아이템 스프라이트의 ItemList 열거자
-    /// </param>
-    /// <returns>
-    /// 인자와 일치하는 아이템 데이터를 가진 스프라이트를 반환한다.
-    /// </returns>
-    #endregion
     public Sprite GetItemSprt(ItemName item)
     {
-        if (_SpriteDic.ContainsKey(item))
+        if (_ItemDic.ContainsKey(item))
         {
-            return _SpriteDic[item];
+            return _ItemDic[item].Sprite;
         }
         return null;
     }
-
-
     private void Awake()
     {
-        ItemValues = Items.Values;
+        _ItemDic = _ItemList.GetKeyValuePairs();
 
-        foreach (Item item in ItemValues)
-        {
-            if(item.ItemType.Equals(ItemTypeList.FISH))
-            {
-                FishItems.Add(item.ItemCode);
-            }
-        }
-        _SpriteDic = _ItemSpriteList.GetKeyValuePairs();
         _DroppedItemCollection = _DroppedItemList.GetKeyValuePairs();
 
         _DroppedItemPool = new Dictionary<ItemName, Queue<DroppedItem>>();
