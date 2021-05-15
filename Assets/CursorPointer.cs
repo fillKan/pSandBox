@@ -1,9 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CursorPointer : Singleton<CursorPointer>
 {
+    [SerializeField] private SpriteRenderer _Renderer;
+
+    // ===== CarryingItem ===== //
+
+    int _CarryingCount = 0;
+    ItemName _CarryingItem = ItemName.NONE;
+
+    // ===== CarryingItem ===== //
+
     private Camera _MainCamera;
     public InteractableObject Highlighted
     { get; private set; }
@@ -20,7 +30,7 @@ public class CursorPointer : Singleton<CursorPointer>
             {
                 PlayerController.Instance.Interaction(Highlighted);
             }
-            else
+            else if (IsOnVoid())
             {
                 PlayerController.Instance.MoveToPoint(transform.position);
             }
@@ -71,6 +81,47 @@ public class CursorPointer : Singleton<CursorPointer>
         {
             Highlighted.DisHighLight();
             Highlighted = null;
+        }
+    }
+    public bool IsOnVoid()
+    {
+        return !EventSystem.current.IsPointerOverGameObject() && Highlighted == null;
+    }
+    public void AddCarryingItem(ItemName item, int count = 1)
+    {
+        if (item == _CarryingItem || _CarryingItem == ItemName.NONE)
+        {
+            _CarryingCount += count;
+
+            if (_CarryingItem == ItemName.NONE)
+            {
+                _CarryingItem = item;
+                _Renderer.sprite = ItemMaster.Instance.GetItemSprt(item);
+            }
+        }
+    }
+    public void SubtractCarryingItem(int count)
+    {
+        if (_CarryingCount == 0) return;
+
+        _CarryingCount -= count;
+
+        if (_CarryingCount <= 0)
+        {
+            _CarryingCount = 0;
+            _CarryingItem = ItemName.NONE;
+
+            _Renderer.sprite = null;
+        }
+    }
+    public void DropCarryingItem()
+    {
+        if (_CarryingCount > 0)
+        {
+            _CarryingCount--;
+
+            ItemMaster.Instance.GetDroppedItem(_CarryingItem)
+                .transform.position = transform.position;
         }
     }
 }
