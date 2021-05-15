@@ -9,8 +9,10 @@ public class CursorPointer : Singleton<CursorPointer>
 
     // ===== CarryingItem ===== //
 
-    int _CarryingCount = 0;
-    ItemName _CarryingItem = ItemName.NONE;
+    public int CarryingCount
+    { get; private set; }
+    public ItemName CarryingItem
+    { get; private set; }
 
     // ===== CarryingItem ===== //
 
@@ -21,6 +23,9 @@ public class CursorPointer : Singleton<CursorPointer>
     private void Awake()
     {
         _MainCamera = Camera.main;
+
+        CarryingCount = 0;
+        CarryingItem = ItemName.NONE;
     }
     private void LateUpdate()
     {
@@ -89,38 +94,38 @@ public class CursorPointer : Singleton<CursorPointer>
     }
     public void AddCarryingItem(ItemName item, int count = 1)
     {
-        if (item == _CarryingItem || _CarryingItem == ItemName.NONE)
+        if (item == CarryingItem || CarryingItem == ItemName.NONE)
         {
-            _CarryingCount += count;
+            CarryingCount += count;
 
-            if (_CarryingItem == ItemName.NONE)
+            if (CarryingItem == ItemName.NONE)
             {
-                _CarryingItem = item;
+                CarryingItem = item;
                 _Renderer.sprite = ItemMaster.Instance.GetItemSprt(item);
             }
         }
     }
-    public void SubtractCarryingItem(int count)
+    public void SubtractCarryingItem(int count = 1)
     {
-        if (_CarryingCount == 0) return;
+        if (CarryingCount == 0) return;
 
-        _CarryingCount -= count;
+        CarryingCount -= count;
 
-        if (_CarryingCount <= 0)
+        if (CarryingCount <= 0)
         {
-            _CarryingCount = 0;
-            _CarryingItem = ItemName.NONE;
+            CarryingCount = 0;
+            CarryingItem = ItemName.NONE;
 
             _Renderer.sprite = null;
         }
     }
     public void DropCarryingItem()
     {
-        if (_CarryingCount > 0)
+        if (CarryingCount > 0)
         {
-            _CarryingCount--;
+            CarryingCount--;
 
-            ItemMaster.Instance.GetDroppedItem(_CarryingItem)
+            ItemMaster.Instance.GetDroppedItem(CarryingItem)
                 .transform.position = transform.position;
         }
     }
