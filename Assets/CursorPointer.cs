@@ -1,11 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class CursorPointer : Singleton<CursorPointer>
 {
-    [SerializeField] private SpriteRenderer _Renderer;
+    private const float ImageRectScaling = 1.1f;
+    private const float TextPositionScalingX = 0.21484375f;
+    private const float TextPositionScalingY = 0.234375f;
+
+    private readonly Vector3 Offset = new Vector2(-Screen.width, -Screen.height) / 2f;
+
+    [SerializeField] private Image _Renderer;
+    [SerializeField] private Transform _CarryingInformator;
+    [SerializeField] private TMPro.TextMeshProUGUI _ItemCountText;
 
     // ===== CarryingItem ===== //
 
@@ -46,6 +55,10 @@ public class CursorPointer : Singleton<CursorPointer>
         }
         transform.position = _MainCamera.ScreenToWorldPoint(Input.mousePosition);
         transform.Translate(0, 0, 10.0f);
+
+        if (_CarryingInformator.gameObject.activeSelf) {
+            _CarryingInformator.localPosition = Input.mousePosition + Offset;
+        }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -105,8 +118,19 @@ public class CursorPointer : Singleton<CursorPointer>
             if (CarryingItem == ItemName.NONE)
             {
                 CarryingItem = item;
-                _Renderer.sprite = ItemMaster.Instance.GetItemSprt(item);
+
+                var sprite = ItemMaster.Instance.GetItemSprt(item);
+
+                _Renderer.sprite = sprite;
+                _Renderer.rectTransform.sizeDelta
+                    = new Vector2(sprite.rect.width, sprite.rect.height) * ImageRectScaling;
+
+                _ItemCountText.transform.localPosition 
+                    = new Vector3(sprite.rect.width * TextPositionScalingX, sprite.rect.height * TextPositionScalingY);
+
+                _CarryingInformator.gameObject.SetActive(true);
             }
+            TextUpdate();
         }
     }
     public void SubtractCarryingItem(int count = 1)
@@ -120,7 +144,9 @@ public class CursorPointer : Singleton<CursorPointer>
                 CarryingItem = ItemName.NONE;
 
                 _Renderer.sprite = null;
+                _CarryingInformator.gameObject.SetActive(false);
             }
+            TextUpdate();
         }
     }
     public void DropCarryingItem()
@@ -131,6 +157,11 @@ public class CursorPointer : Singleton<CursorPointer>
                 .transform.position = transform.position;
 
             SubtractCarryingItem();
+            TextUpdate();
         }
+    }
+    public void TextUpdate()
+    {
+        _ItemCountText.text = CarryingCount.ToString();
     }
 }
