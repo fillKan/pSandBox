@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum ItemElement
 {
-    None, Fuel, Wood, Fish, CottonFabric, CottonWool, Tool
+    None, Fuel, Wood, Fish, CottonFabric, CottonWool, Tool, Food
 }
 [Serializable] public struct ItemElementValuePair
 {

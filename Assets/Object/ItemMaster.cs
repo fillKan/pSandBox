@@ -19,7 +19,7 @@ public enum ItemName
     SEED_OAK,
     WOOL,
     EGG,
-    FISH_BUTTERFISH,
+    Fish_PampusArgenteus,
     FISH_CUTLASSFISH,
     FISH_MACKEREL,
     FISH_POLLACK,
