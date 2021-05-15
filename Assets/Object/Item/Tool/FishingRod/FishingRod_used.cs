@@ -123,7 +123,7 @@ public class FishingRod_used : Item, IItemFunction
         {
             if(other.gameObject.Equals(bobber.gameObject))
             {
-                slot.SetItem(ItemName.FISHING_ROD);
+                // slot.SetItem(ItemName.FISHING_ROD);
 
                 bobber.GetRigidbody2D.velocity = Vector2.zero;
                 bobber.gameObject.SetActive(false);

@@ -8,7 +8,7 @@ public class FishingRod : Item, IItemFunction
     {
         if (MouseCursor.Instance.RightClickVoid)
         {
-            itemSlot.SetItem(ItemName.FISHING_ROD_USED);
+            // itemSlot.SetItem(ItemName.FISHING_ROD_USED);
         }
         yield break;
     }
