@@ -210,9 +210,6 @@ public class Player : MonoBehaviour
 
                 transform.position = vDir;
             }
-
-            CarryItem.Patch(sprite.flipX);
-
             yield return null;
         }
 

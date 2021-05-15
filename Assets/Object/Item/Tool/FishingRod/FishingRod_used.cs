@@ -40,7 +40,7 @@ public class FishingRod_used : Item, IItemFunction
     {
         get
         {
-            Vector2 pos = PlayerGetter.Instance.player.CarryItem.transform.position;
+            Vector2 pos = Vector2.zero; //PlayerGetter.Instance.player.CarryItem.transform.position;
 
             if (PlayerGetter.Instance.player.FlipX)
             {
