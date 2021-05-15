@@ -4659,6 +4659,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bf5e91f5fe724845ba793c343f03bca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Renderer: {fileID: 1925261841}
+  _DefaultColor: {r: 1, g: 1, b: 1, a: 1}
   ItemContainer: {fileID: 796856969}
   ContainerText: {fileID: 728305350}
   sprOpen: {fileID: 21300000, guid: 2d08943e321448845a5e9707f72c8c67, type: 3}
@@ -5002,8 +5004,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb65f430519b81945bea8901151ac74c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _PrefabInstance: {fileID: 2719426319805514796, guid: 9d2b401a681030a43997da0d83e76233,
-    type: 3}
   _ItemList: {fileID: 11400000, guid: 8fac7e11a6d5e934295be4d35210d366, type: 2}
   _FishItemList: {fileID: 11400000, guid: f2a94f9db6c911d4e8f95147252b6ad2, type: 2}
   _DroppedItemList: {fileID: 11400000, guid: a6b8f87fb3e0ed6469c5f5b5bcc75cc9, type: 2}
