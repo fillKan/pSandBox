@@ -9,7 +9,9 @@ public class Inventory : MonoBehaviour
 
     [SerializeField, Space()]
     private Transform _EquipHandSlot;
+
     private Item _EquipedHandItem;
+    private IEquipItem _EquipedHandInterface;
 
     private void Start()
     {
@@ -18,9 +20,16 @@ public class Inventory : MonoBehaviour
             if (item == default) return;
 
             _EquipedHandItem = ItemMaster.Instance.GetItemObject(item);
-
+            
             _EquipedHandItem.transform.SetParent(_EquipHandSlot);
             _EquipedHandItem.transform.localPosition = Vector3.zero;
+
+            if (_EquipedHandItem.IsUsing(ItemInterface.Equip))
+            {
+                if (_EquipedHandItem.TryGetComponent(out _EquipedHandInterface)) {
+                    _EquipedHandInterface.OnEquipItem();
+                }
+            }
         };
         EquipItemSlot.ExitItem += item =>
         {
@@ -30,6 +39,9 @@ public class Inventory : MonoBehaviour
             ItemMaster.Instance.AddItemObject(_EquipedHandItem);
 
             _EquipedHandItem = null;
+
+            _EquipedHandInterface?.DisEquipItem();
+            _EquipedHandInterface = null;
         };
     }
     public void AddItem(DroppedItem item)
