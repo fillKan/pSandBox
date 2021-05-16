@@ -7,7 +7,7 @@ public enum ItemElement
 {
     None, Fuel, Wood, Fish, CottonFabric, CottonWool, Tool, Food
 }
-[Serializable] public struct ItemElementValuePair
+[Serializable] public class ItemElementValuePair
 {
     [Space()]
     public ItemElement Element;
