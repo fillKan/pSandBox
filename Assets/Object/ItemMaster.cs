@@ -139,15 +139,7 @@ public class ItemMaster : Singleton<ItemMaster>
     }
     public void AddItemObject(Item itemObject)
     {
-        try
-        {
-            _ItemObjectDic.Add(itemObject.Name, itemObject);
-            itemObject.gameObject.SetActive(false);
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError($"몬가...몬가가 일어나고 잇슴 : {e.Message}");
-        }
+        itemObject.gameObject.SetActive(false);
     }
 
     #region 함수 설명 : 
