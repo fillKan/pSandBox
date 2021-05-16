@@ -4,42 +4,31 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public ItemSlot[] itemSlots;
-    public ItemSlot CarryItemSlot;
+    public ItemSlot[]   ItemSlots;
+    public ItemSlot EquipItemSlot;
 
-    private sbyte empty = -1;
-
-    public void AddItemInventory(DroppedItem item)
+    public void AddItem(DroppedItem item)
     {
-        int emptySlotIndex = empty;
+        var itemName = item.Name;
+        int emptySlotIndex = -1;
 
-        for (int i = 0; i < itemSlots.Length; i++)
+        for (int i = 0; i < ItemSlots.Length; i++)
         {
-            if (itemSlots[i].ContainItem == ItemName.NONE)
+            if (ItemSlots[i].ContainItem == itemName) 
             {
-                if (emptySlotIndex.Equals(empty))
-                {
-                    emptySlotIndex = i;
-                }
-                continue;
-            }
-
-            if (itemSlots[i].ContainItem == item.Name)
-            {
-                itemSlots[i].AddItem(item.Name);
+                ItemSlots[i].AddItem();
                 ItemMaster.Instance.AddDroppedItem(item);
                 return;
             }
+            else if (emptySlotIndex == -1 && ItemSlots[i].ContainItem == default)
+            {
+                emptySlotIndex = i;
+            }
         }
-        if(!emptySlotIndex.Equals(empty))
+        if (emptySlotIndex != -1)
         {
-            itemSlots[emptySlotIndex].AddItem(item.Name);
+            ItemSlots[emptySlotIndex].AddItem(itemName);
             ItemMaster.Instance.AddDroppedItem(item);
-            return;
         }
-        Debug.LogWarning("인벤토리가 가득 차 있습니다");
     }
-
-
-
 }
