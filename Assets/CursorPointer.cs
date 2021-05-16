@@ -101,13 +101,17 @@ public class CursorPointer : Singleton<CursorPointer>
 
         if (collision.gameObject.GetInstanceID() == Highlighted.gameObject.GetInstanceID())
         {
-            Highlighted.DisHighLight();
-            Highlighted = null;
+            HighLightRelease();
         }
     }
     public bool IsOnVoid()
     {
         return !EventSystem.current.IsPointerOverGameObject() && Highlighted == null;
+    }
+    public void HighLightRelease()
+    {
+        Highlighted?.DisHighLight();
+        Highlighted = null;
     }
     public void AddCarryingItem(ItemName item, int count = 1)
     {

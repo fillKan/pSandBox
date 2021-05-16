@@ -41,4 +41,12 @@ public class InteractionManager : Singleton<InteractionManager>
             _InteractionDic.Add(instanceID, interactableObject);
         }
     }
+    public void DisRegister(int instanceID)
+    {
+        LazyInit();
+        if (_InteractionDic.ContainsKey(instanceID))
+        {
+            _InteractionDic.Remove(instanceID);
+        }
+    }
 }
