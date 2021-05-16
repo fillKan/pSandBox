@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8822178320297807050}
   - component: {fileID: 8822178320297807049}
-  - component: {fileID: 8822178320297807051}
   - component: {fileID: 1027252728476605684}
   m_Layer: 8
   m_Name: Tree_WhiteBirch
@@ -48,6 +47,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -83,18 +83,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8822178320297807051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8822178320297807048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc2c331bb54f8054498ccab3a99339e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &1027252728476605684
 BoxCollider2D:
   m_ObjectHideFlags: 0
