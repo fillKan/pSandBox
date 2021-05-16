@@ -9,13 +9,13 @@ public class Inventory : MonoBehaviour
 
     private sbyte empty = -1;
 
-    public void AddItemInventory(ItemExisting item)
+    public void AddItemInventory(DroppedItem item)
     {
         int emptySlotIndex = empty;
 
-        for(int i = 0; i < itemSlots.Length; i++)
+        for (int i = 0; i < itemSlots.Length; i++)
         {
-            if (itemSlots[i].ContainItem == null)
+            if (itemSlots[i].ContainItem == ItemName.NONE)
             {
                 if (emptySlotIndex.Equals(empty))
                 {
@@ -24,21 +24,17 @@ public class Inventory : MonoBehaviour
                 continue;
             }
 
-            if(itemSlots[i].ContainItem.ItemData == item.ItemData)
+            if (itemSlots[i].ContainItem == item.Name)
             {
-                item.gameObject.SetActive(false);
-
-                itemSlots[i].AddItem(item.ItemData);
-                ItemMaster.Instance.StoreItemExisting(item);
+                itemSlots[i].AddItem(item.Name);
+                ItemMaster.Instance.AddDroppedItem(item);
                 return;
             }
         }
         if(!emptySlotIndex.Equals(empty))
         {
-            item.gameObject.SetActive(false);
-
-            itemSlots[emptySlotIndex].AddItem(item.ItemData);
-            ItemMaster.Instance.StoreItemExisting(item);
+            itemSlots[emptySlotIndex].AddItem(item.Name);
+            ItemMaster.Instance.AddDroppedItem(item);
             return;
         }
         Debug.LogWarning("인벤토리가 가득 차 있습니다");

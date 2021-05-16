@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public const float MoveSpeed = 3.5f;
 
     public Inventory Inventory;
-    public PlayerCarryItem CarryItem;
+
     [Tooltip("플레이어가 근처 아이템을 감지할 때 사용되는 레이더입니다.")]
     public ItemRadar Radar;
     public bool FlipX
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     [Tooltip("플레이어가 현재 프레임에 장비한 아이템 슬롯들을 담는 배열")]
     public  List<ItemSlot> EquipItemSlots    = new List<ItemSlot>();
     [Tooltip("플레이어가 이전 프레임에 장비한 아이템 슬롯들을 담는 배열")]
-    private List<ItemList> EquippedItemSlots = new List<ItemList>();
+    private List<ItemName> EquippedItemSlots = new List<ItemName>();
 
 
     private IEnumerator _CurrentOrderRoutine;
@@ -74,48 +74,24 @@ public class Player : MonoBehaviour
     #endregion
     private void UseItem(int interactionID)
     {
+        var target = InteractionManager.Instance[interactionID];
+        if (target == null) return;
+
         for (int i = 0; i < EquipItemSlots.Count; ++i)
         {
             if (EquipItemSlots[i])
             {
-                if (EquipItemSlots[i].ContainItem)
+                if (EquipItemSlots[i].ContainItem != ItemName.NONE)
                 {
-                    if (EquipItemSlots[i].ContainItem.TryGetComponent(out IItemFunction function))
+                    var item = ItemMaster.Instance.GetItem(EquipItemSlots[i].ContainItem);
+                    if (item.IsUsing(ItemInterface.Use))
                     {
-                        if(function.HasFunction(ItemFunc.USE))
-                        {
-                            Player_Interaction.Instance.InObjGetValue(interactionID).OperateAction(function);
-                        }
-                        else
-                        {
-                            Player_Interaction.Instance.InObjGetValue(interactionID).OperateAction<IItemFunction>(null);
-                        }
-                    }
-                    else
-                    {
-                        Player_Interaction.Instance.InObjGetValue(interactionID).OperateAction<IItemFunction>(null);
+                        item.GetComponent<IUseItem>()?.UseItem(target);
                     }
                 }
             }
         }
        
-    }
-
-    private void OperateCarryItem()
-    {
-        for (int i = 0; i < EquipItemSlots.Count; i++)
-        {
-            if (EquipItemSlots[i].ContainItem)
-            {
-                if (EquipItemSlots[i].ContainItem.TryGetComponent(out IItemFunction function))
-                {
-                    if (function.HasFunction(ItemFunc.CARRY))
-                    {
-                        StartCoroutine(function.CarryItem(EquipItemSlots[i]));
-                    }
-                }
-            }
-        }
     }
 
     private void OperateMountAndUnmountItem()
@@ -125,29 +101,29 @@ public class Player : MonoBehaviour
         for (int i = 0; i < EquipItemSlots.Count; i++)
         {
             // 새로운 아이템이 들어왓을 때
-            if(EquippedItemSlots[i] == ItemList.NONE && EquipItemSlots[i].ContainItem != null)
-            {
-                if (EquipItemSlots[i].ContainItem.TryGetComponent(out function))
-                {
-                    if(function.HasFunction(ItemFunc.MOUNT))
-                    {
-                        StartCoroutine(function.MountItem());
-                    }
-                    EquippedItemSlots[i] = EquipItemSlots[i].ContainItem.ItemData;
-                }
-            }
+            // if(EquippedItemSlots[i] == ItemName.NONE && EquipItemSlots[i].ContainItem != null)
+            // {
+            //     if (EquipItemSlots[i].ContainItem.TryGetComponent(out function))
+            //     {
+            //         if(function.HasFunction(ItemInterface.MOUNT))
+            //         {
+            //             StartCoroutine(function.MountItem());
+            //         }
+            //         EquippedItemSlots[i] = EquipItemSlots[i].ContainItem.Name;
+            //     }
+            // }
             // 아이템이 나갔을 때
-            if (EquippedItemSlots[i] != ItemList.NONE && EquipItemSlots[i].ContainItem == null)
-            {
-                if (ItemMaster.Instance.GetItem(EquippedItemSlots[i]).TryGetComponent(out function))
-                {
-                    if(function.HasFunction(ItemFunc.UNMOUNT))
-                    {
-                        StartCoroutine(function.UnmountItem());
-                    }
-                    EquippedItemSlots[i] = ItemList.NONE;
-                }               
-            }
+            // if (EquippedItemSlots[i] != ItemName.NONE && EquipItemSlots[i].ContainItem == null)
+            // {
+            //     if (ItemMaster.Instance.GetItem(EquippedItemSlots[i]).TryGetComponent(out function))
+            //     {
+            //         if(function.HasFunction(ItemInterface.UNMOUNT))
+            //         {
+            //             StartCoroutine(function.UnmountItem());
+            //         }
+            //         EquippedItemSlots[i] = ItemName.NONE;
+            //     }               
+            // }
         }
 
     }
@@ -158,7 +134,7 @@ public class Player : MonoBehaviour
 
         for(int i = 0; i < EquipItemSlots.Count; i++)
         {
-            EquippedItemSlots.Add(ItemList.NONE);
+            EquippedItemSlots.Add(ItemName.NONE);
         }
 
         sprite = gameObject.GetComponent<SpriteRenderer>();
@@ -175,8 +151,6 @@ public class Player : MonoBehaviour
             vDir = transform.position;
 
             OperateMountAndUnmountItem();
-
-            OperateCarryItem();
 
             if (Input.GetKeyDown(KeyCode.Z))
             {
@@ -210,9 +184,6 @@ public class Player : MonoBehaviour
 
                 transform.position = vDir;
             }
-
-            CarryItem.Patch(sprite.flipX);
-
             yield return null;
         }
 
@@ -243,9 +214,9 @@ public class Player : MonoBehaviour
 
         bool isSlotEmpty = true;
 
-        for(int i = 0; i < EquipItemSlots.Count; i++)
+        for (int i = 0; i < EquipItemSlots.Count; i++)
         {
-            if(EquipItemSlots[i].ContainItem)
+            if (EquipItemSlots[i].ContainItem != ItemName.NONE)
             {
                 UseItem(interactObj);
 

@@ -30,15 +30,15 @@ public class TreeOak : Tree, IInteraction
     {
         int repeat = Random.Range(8, 14);
 
-        ItemExisting tItem;
+        DroppedItem tItem;
 
         for (int i = 0; i < repeat; i++)
         {
             if (Random.Range(0, 4) == 0)
             {
-                 tItem = ItemMaster.Instance.TakeItemExisting(ItemList.SEED_OAK);
+                 tItem = ItemMaster.Instance.GetDroppedItem(ItemName.SEED_OAK);
             }
-            else tItem = ItemMaster.Instance.TakeItemExisting(ItemList.LOG_OAK);
+            else tItem = ItemMaster.Instance.GetDroppedItem(ItemName.LOG_OAK);
 
             tItem.gameObject.SetActive(true);
             tItem.transform.position = transform.position;

@@ -30,15 +30,15 @@ public class TreeWhiteBirch : Tree, IInteraction
     {
         int repeat = Random.Range(8, 14);
 
-        ItemExisting tItem;
+        DroppedItem tItem;
 
         for (int i = 0; i < repeat; i++)
         {
             if (Random.Range(0, 4) == 0)
             {
-                 tItem = ItemMaster.Instance.TakeItemExisting(ItemList.SEED_WHITEBIRCH);
+                 tItem = ItemMaster.Instance.GetDroppedItem(ItemName.SEED_WHITEBIRCH);
             }
-            else tItem = ItemMaster.Instance.TakeItemExisting(ItemList.LOG_WHITEBIRCH);
+            else tItem = ItemMaster.Instance.GetDroppedItem(ItemName.LOG_WHITEBIRCH);
 
             tItem.gameObject.SetActive(true);
             tItem.transform.position = transform.position;

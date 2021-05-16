@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemRadar : MonoBehaviour
 {
-    private Dictionary<int, ItemExisting> senseItem = new Dictionary<int, ItemExisting>();
+    private Dictionary<int, DroppedItem> senseItem = new Dictionary<int, DroppedItem>();
 
     [Tooltip("CircleCollider의 Radius값을 지정합니다.")]
     public float Radius;
@@ -14,13 +14,13 @@ public class ItemRadar : MonoBehaviour
     /// 해당 레이더와 가장 가까이 있는 아이템을 반환합니다.
     /// </summary>
     #endregion
-    public ItemExisting GetCloseItem()
+    public DroppedItem GetCloseItem()
     {
-        ItemExisting closestItem = null;
+        DroppedItem closestItem = null;
 
         float distance = 0; float closestDistance = Radius;
 
-        foreach(KeyValuePair<int,ItemExisting> item in senseItem)
+        foreach(KeyValuePair<int,DroppedItem> item in senseItem)
         {
             distance = Vector2.Distance(transform.position, item.Value.transform.position);
 
@@ -41,11 +41,11 @@ public class ItemRadar : MonoBehaviour
     #endregion
     public int GetCloseItemID()
     {
-        ItemExisting closestItem = null;
+        DroppedItem closestItem = null;
 
         float distance = 0; float closestDistance = Radius;
 
-        foreach (KeyValuePair<int, ItemExisting> item in senseItem)
+        foreach (KeyValuePair<int, DroppedItem> item in senseItem)
         {
             distance = Vector2.Distance(transform.position, item.Value.transform.position);
 
@@ -61,7 +61,7 @@ public class ItemRadar : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.TryGetComponent(out ItemExisting item))
+        if(collision.TryGetComponent(out DroppedItem item))
         {
             if(!senseItem.ContainsKey(item.gameObject.GetInstanceID()))
             {

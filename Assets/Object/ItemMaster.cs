@@ -10,7 +10,7 @@ using UnityEngine;
 /// </para>
 /// </summary>
 #endregion
-public enum ItemList
+public enum ItemName
 {
     NONE,
     LOG_WHITEBIRCH,
@@ -19,7 +19,7 @@ public enum ItemList
     SEED_OAK,
     WOOL,
     EGG,
-    FISH_BUTTERFISH,
+    Fish_PampusArgenteus,
     FISH_CUTLASSFISH,
     FISH_MACKEREL,
     FISH_POLLACK,
@@ -54,181 +54,32 @@ public enum ItemTypeList
 #endregion
 public class ItemMaster : Singleton<ItemMaster>
 {
-    #region 딕셔너리 설명 : 
-    /// <summary>
-    /// '기능을 하는' 아이템들의 정보를 저장하는 딕셔너리.
-    /// </summary>
-    #endregion
-    private Dictionary<int, Item>   Items    = new Dictionary<int, Item>();
-    #region 딕셔너리 설명 : 
-    /// <summary>
-    /// 아이템들의 스프라이트를 저장하는 딕셔너리.
-    /// </summary>
-    #endregion
-    private Dictionary<int, Sprite> ItemSprs = new Dictionary<int, Sprite>();
+    [Header("Item Collection")]
+    [SerializeField] private ItemList _ItemList;
+    [SerializeField] private ItemList _FishItemList;
 
-    #region 딕셔너리 설명 : 
-    /// <summary>
-    /// '게임에서 보여지는' 아이템들의 정보를 저장하는 딕셔너리.
-    /// </summary>
-    #endregion
-    private Dictionary<int, ItemExisting> ItemExistings = new Dictionary<int, ItemExisting>();
-    #region 딕셔너리 설명 : 
-    /// <summary>
-    /// 생성된 '게임에서 보여지는' 아이템들을 풀링하는 딕셔너리.
-    /// </summary>
-    #endregion
-    private Dictionary<int, Stack<ItemExisting>> ItemPool = new Dictionary<int, Stack<ItemExisting>>();
+    [Header("DroppedItem Collection")]
+    [SerializeField] private DroppedItemList _DroppedItemList;
 
-    private Dictionary<int, Item>.ValueCollection ItemValues;
+    private Dictionary<ItemName, Item> _ItemDic;
+    private Dictionary<ItemName, Queue<DroppedItem>> _DroppedItemPool;
+    private Dictionary<ItemName, DroppedItem> _DroppedItemCollection;
 
-    private List<int> FishItems = new List<int>();
+    private List<ItemName> _FishList = new List<ItemName>();
     
-
-    #region 함수 설명 : 
-    /// <summary>
-    /// '게임에서 보여지는' 아이템을 ItemMaster에 등록시키는 함수.
-    /// </summary>
-    /// <param name="item">
-    /// 등록할 '게임에서 보여지는' 아이템 객체
-    /// </param>
-    #endregion
-    public void Registration(ItemExisting item)
+    public DroppedItem GetDroppedItem(ItemName item)
     {
-        if (!ItemExistings.ContainsKey(item.ItemCode))
+        if (_DroppedItemPool.ContainsKey(item))
         {
-            ItemExistings.Add(item.ItemCode, item);
-        }
-    }
-    #region 함수 설명 : 
-    /// <summary>
-    /// '기능을 하는' 아이템과 그 아이템의 스프라이트를 ItemMaster에 등록시키는 함수.
-    /// </summary>
-    /// <param name="item">
-    /// 등록할 '기능을 하는' 아이템 객체. 해당 객체에서 스프라이트를 추출한다.
-    /// </param>
-    #endregion
-    public void Registration(Item item)
-    {
-        if (!Items.ContainsKey((int)item.ItemCode))
-        {
-            Items.Add(item.ItemCode, item);
-        }
-        
-        if(!ItemSprs.ContainsKey(item.ItemCode))
-        {
-            item.TryGetComponent<SpriteRenderer>(out SpriteRenderer renderer);
-
-            ItemSprs.Add((int)item.ItemCode, renderer.sprite);
-        }
-    }
-
-    #region 함수 설명 : 
-    /// <summary>
-    /// ItemMaster에 등록된 '게임에서 보여지는' 아이템을 반환하는 함수.
-    /// </summary>
-    /// <param name="itemCode">
-    /// 반환을 원하는 아이템의 아이템 코드
-    /// </param>
-    /// <returns>
-    /// 인자와 일치하는 아이템 코드를 가진 아이템을 반환한다.
-    /// </returns>
-    #endregion
-    public ItemExisting GetItemExisting(int itemCode)
-    {
-        if (ItemExistings.ContainsKey(itemCode))
-        {
-            return ItemExistings[itemCode];
-        }
-        return null;
-    }
-    #region 함수 설명 : 
-    /// <summary>
-    /// ItemMaster에 등록된 '게임에서 보여지는' 아이템을 반환하는 함수.
-    /// </summary>
-    /// <param name="item">
-    /// 반환을 원하는 아이템의 ItemList 열거자
-    /// </param>
-    /// <returns>
-    /// 인자와 일치하는 아이템 데이터를 가진 아이템을 반환한다.
-    /// </returns>
-    #endregion
-    public ItemExisting GetItemExisting(ItemList item)
-    {
-        int itemCode = (int)item;
-
-        if (ItemExistings.ContainsKey(itemCode))
-        {
-            return ItemExistings[itemCode];
-        }
-        return null;
-    }
-
-    #region 함수 설명 : 
-    /// <summary>
-    /// '게임에서 보여지는' 아이템들의 풀에담긴 요소를 반환하는 함수.
-    /// <para>
-    /// 아이템 풀이 비어있거나, 존재하지 않는다면 ItemMaster에 등록된 아이템을 토대로 아이템을 하나 생성하여 반환한다.
-    /// </para>
-    /// </summary>
-    /// <param name="itemCode">
-    /// 반환을 원하는 아이템의 아이템 코드
-    /// </param>
-    /// <returns>
-    /// 인자와 일치하는 아이템 코드를 가진 아이템을 반환한다.
-    /// </returns>
-    #endregion
-    public ItemExisting TakeItemExisting(int itemCode)
-    {
-        if (ItemPool.ContainsKey(itemCode))
-        {
-            if (ItemPool[itemCode].Count > 0)
+            if (_DroppedItemPool[item].Count > 0)
             {
-                return ItemPool[itemCode].Pop();
+                var dropped = _DroppedItemPool[item].Dequeue();
+                    dropped.gameObject.SetActive(true);
+
+                return dropped;
             }
         }
-
-        // 만약 ItemPool에 키 값이 없거나, ItemPool이 비어있다면 여기로 오게된다.
-
-        if (ItemExistings.ContainsKey(itemCode))
-        {
-            return Instantiate(ItemExistings[itemCode], Vector2.zero, Quaternion.identity);
-        }
-        return null;
-    }
-    #region 함수 설명 : 
-    /// <summary>
-    /// '게임에서 보여지는' 아이템들의 풀에담긴 요소를 반환하는 함수.
-    /// <para>
-    /// 아이템 풀이 비어있거나, 존재하지 않는다면 ItemMaster에 등록된 아이템을 토대로 아이템을 하나 생성하여 반환한다.
-    /// </para>
-    /// </summary>
-    /// <param name="item">
-    /// 반환을 원하는 아이템의 아이템 열거자
-    /// </param>
-    /// <returns>
-    /// 인자와 일치하는 아이템 데이터를 가진 아이템을 반환한다.
-    /// </returns>
-    #endregion
-    public ItemExisting TakeItemExisting(ItemList item)
-    {
-        int itemCode = (int)item;
-
-        if (ItemPool.ContainsKey(itemCode))
-        {
-            if (ItemPool[itemCode].Count > 0)
-            {
-                return ItemPool[itemCode].Pop();
-            }
-        }
-
-        // 만약 ItemPool에 키 값이 없거나, ItemPool이 비어있다면 여기로 오게된다.
-
-        if (ItemExistings.ContainsKey(itemCode))
-        {
-            return Instantiate(ItemExistings[itemCode], Vector2.zero, Quaternion.identity);
-        }
-        return null;
+        return Instantiate(_DroppedItemCollection[item]);
     }
 
     #region 함수 설명 : 
@@ -242,39 +93,18 @@ public class ItemMaster : Singleton<ItemMaster>
     /// '게임에서 보여지는' 아이템들의 풀에 추가할 요소
     /// </param>
     #endregion
-    public void StoreItemExisting(ItemExisting item)
+    public void AddDroppedItem(DroppedItem item)
     {
-        if (ItemPool.ContainsKey(item.ItemCode))
-        {
-            ItemPool[item.ItemCode].Push(item);
+        if(!_DroppedItemPool.ContainsKey(item.Name)) {
+            _DroppedItemPool.Add(item.Name, new Queue<DroppedItem>());
         }
-        else
-        {
-            ItemPool.Add(item.ItemCode, new Stack<ItemExisting>());
+        _DroppedItemPool[item.Name].Enqueue(item);
 
-            ItemPool[item.ItemCode].Push(item);
-        }
+        item.gameObject.SetActive(false);
+        item.transform.rotation = Quaternion.identity;
+        item.Rigidbody.velocity = Vector2.zero;
     }
 
-    #region 함수 설명 : 
-    /// <summary>
-    /// '기능을 하는' 아이템을 반환하는 함수.
-    /// </summary>
-    /// <param name="itemCode">
-    /// 반환을 원하는 아이템의 아이템 코드
-    /// </param>
-    /// <returns>
-    /// 인자와 일치하는 아이템 코드를 가진 아이템을 반환한다.
-    /// </returns>
-    #endregion
-    public Item GetItem(int itemCode)
-    {
-        if(Items.ContainsKey(itemCode))
-        {
-            return Items[itemCode];
-        }
-        return null;
-    }
     #region 함수 설명 : 
     /// <summary>
     /// '기능을 하는' 아이템을 반환하는 함수.
@@ -286,11 +116,11 @@ public class ItemMaster : Singleton<ItemMaster>
     /// 인자와 일치하는 아이템 데이터를 가진 아이템을 반환한다.
     /// </returns>
     #endregion
-    public Item GetItem(ItemList item)
+    public Item GetItem(ItemName item)
     {
-        if (Items.ContainsKey((int)item))
+        if (_ItemDic.ContainsKey(item))
         {
-            return Items[(int)item];
+            return _ItemDic[item];
         }
         return null;
     }
@@ -302,7 +132,7 @@ public class ItemMaster : Singleton<ItemMaster>
     #endregion
     public int RandomFish()
     {
-        return FishItems[Random.Range(0, FishItems.Count)];
+        return (int)_FishList[Random.Range(0, _FishList.Count)];
     }
 
     #region 함수 설명 : 
@@ -318,44 +148,22 @@ public class ItemMaster : Singleton<ItemMaster>
     #endregion
     public Sprite GetItemSprt(int itemCode)
     {
-        if (ItemSprs.ContainsKey(itemCode))
+        return GetItemSprt((ItemName)itemCode);
+    }
+    public Sprite GetItemSprt(ItemName item)
+    {
+        if (_ItemDic.ContainsKey(item))
         {
-            return ItemSprs[itemCode];
+            return _ItemDic[item].Sprite;
         }
         return null;
     }
-    #region 함수 설명 : 
-    /// <summary>
-    /// 특정 아이템의 스프라이트를 반환하는 함수.
-    /// </summary>
-    /// <param name="item">
-    /// 반환을 원하는 아이템 스프라이트의 ItemList 열거자
-    /// </param>
-    /// <returns>
-    /// 인자와 일치하는 아이템 데이터를 가진 스프라이트를 반환한다.
-    /// </returns>
-    #endregion
-    public Sprite GetItemSprt(ItemList item)
+    private void Awake()
     {
-        if (ItemSprs.ContainsKey((int)item))
-        {
-            return ItemSprs[(int)item];
-        }
-        return null;
-    }
+        _ItemDic = _ItemList.GetKeyValuePairs();
 
+        _DroppedItemCollection = _DroppedItemList.GetKeyValuePairs();
 
-    private void Start()
-    {
-        ItemValues = Items.Values;
-
-        foreach (Item item in ItemValues)
-        {
-            if(item.ItemType.Equals(ItemTypeList.FISH))
-            {
-                FishItems.Add(item.ItemCode);
-            }
-        }
-
+        _DroppedItemPool = new Dictionary<ItemName, Queue<DroppedItem>>();
     }
 }

@@ -2,47 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Box : MonoBehaviour, IInteraction
+public class Box : InteractableObject
 {
-    public  GameObject ItemContainer;
-    public  GameObject ContainerText;
+    [Header("ItemBox Property")]
+    public GameObject ItemContainer;
+    public GameObject ContainerText;
 
     public  Sprite sprOpen;
     private Sprite sprClosed;
 
-    private SpriteRenderer Renderer;
+    private bool _IsOpend = false;
 
-    private void Start()
+    public override void OnActive()
     {
-        RegisterInteraction();
-
-        Renderer  = GetComponent<SpriteRenderer>();
+        base.OnActive(); 
+        
         sprClosed = Renderer.sprite;
     }
-
-    public GameObject InteractObject()
+    public override void Interaction()
     {
-        return gameObject;
-    }
-
-    public void OperateAction<T>(T xValue) where T : IItemFunction
-    {
-        if(Renderer.sprite.Equals(sprClosed))
-        {
-            Renderer.sprite = sprOpen;
-            ItemContainer.SetActive(true);
-            ContainerText.SetActive(true);
-        }
-        else
+        if (_IsOpend)
         {
             Renderer.sprite = sprClosed;
             ItemContainer.SetActive(false);
             ContainerText.SetActive(false);
         }
-    }
-
-    public void RegisterInteraction()
-    {
-        Player_Interaction.Instance.InObjRegister(gameObject.GetInstanceID(), this);
+        else
+        {
+            Renderer.sprite = sprOpen;
+            ItemContainer.SetActive(true);
+            ContainerText.SetActive(true);
+        }
+        _IsOpend = !_IsOpend;
     }
 }

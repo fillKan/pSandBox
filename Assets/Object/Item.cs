@@ -2,13 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ItemFunc
+public enum ItemInterface
 {
-    USE,
-    CARRY,
-    MOUNT,
-    UNMOUNT,
-    INSLOT
+    Use, Equip
 }
 
 #region 인터페이스 설명
@@ -54,44 +50,47 @@ public interface IItemFunction
     #endregion
     IEnumerator InSlotItem();
 
-    bool HasFunction(ItemFunc func);
+    bool HasFunction(ItemInterface func);
 }
 
-public abstract class Item : MonoBehaviour
+public interface IUseItem
 {
-    [HideInInspector]
+    void UseItem(InteractableObject target);
+}
+public interface IEquipItem
+{
+    void OnEquipItem();
+    void DisEquipItem();
+}
+
+public class Item : MonoBehaviour
+{
+    [SerializeField] private ItemName _Name;
+    [SerializeField] private Sprite _Sprite;
+
+    [Space()]
+    [SerializeField] private ItemCrystal _ItemCrystal;
+
+    public Sprite Sprite => _Sprite;
+    public ItemName Name => _Name;
+
+    public float this[ItemElement element] => _ItemCrystal[element];
+
+    [System.Obsolete]
     public    int  ItemCode
     {
         get { return _itemCode; }
     }
     protected int _itemCode;
 
-    #region 변수 설명
-    /// <summary>
-    /// 해당 아이템의 아이템 유형을 반환하는 변수. 기본값 : NONE
-    /// </summary>
-    #endregion
     public    ItemTypeList  ItemType
     {
         get { return _itemType; }
     }
     protected ItemTypeList _itemType = ItemTypeList.NONE;
 
-    public ItemList ItemData
+    public virtual bool IsUsing(ItemInterface itemInterface)
     {
-        get { return (ItemList)_itemCode; }
+        return false;
     }
-
-    protected abstract void Init();
-
-    private void Awake()
-    {
-        Init();
-
-        TryGetComponent<Renderer>(out Renderer renderer);
-                                               renderer.enabled = false;
-
-        ItemMaster.Instance.Registration(this);
-    }
-
 }

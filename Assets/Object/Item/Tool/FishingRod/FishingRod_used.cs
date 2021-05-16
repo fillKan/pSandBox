@@ -40,7 +40,7 @@ public class FishingRod_used : Item, IItemFunction
     {
         get
         {
-            Vector2 pos = PlayerGetter.Instance.player.CarryItem.transform.position;
+            Vector2 pos = Vector2.zero; //PlayerGetter.Instance.player.CarryItem.transform.position;
 
             if (PlayerGetter.Instance.player.FlipX)
             {
@@ -103,9 +103,9 @@ public class FishingRod_used : Item, IItemFunction
         yield break;
     }
 
-    protected override void Init()
+    private void Awake()
     {
-        _itemCode = (int)ItemList.FISHING_ROD_USED;
+        _itemCode = (int)ItemName.FISHING_ROD_USED;
 
         _itemType = ItemTypeList.TOOL;
     }
@@ -123,7 +123,7 @@ public class FishingRod_used : Item, IItemFunction
         {
             if(other.gameObject.Equals(bobber.gameObject))
             {
-                slot.SetItem(ItemList.FISHING_ROD);
+                // slot.SetItem(ItemName.FISHING_ROD);
 
                 bobber.GetRigidbody2D.velocity = Vector2.zero;
                 bobber.gameObject.SetActive(false);
@@ -155,11 +155,11 @@ public class FishingRod_used : Item, IItemFunction
         }
     }
 
-    public bool HasFunction(ItemFunc func)
+    public bool HasFunction(ItemInterface func)
     {
         switch (func)
         {
-            case ItemFunc.CARRY:
+            case ItemInterface.Equip:
                 return true;
         }
         return false;

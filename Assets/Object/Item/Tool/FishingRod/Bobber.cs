@@ -10,7 +10,7 @@ public class Bobber : MonoBehaviour
 
     private bool Catch;
 
-    private ItemExisting item;
+    private DroppedItem item;
     private ItemSlotSprt sprt;
 
     private void Start()
@@ -93,9 +93,9 @@ public class Bobber : MonoBehaviour
             WaitBiting = null;
         }
 
-        if (sprt.ItemData != ItemList.NONE)
+        if (sprt.ItemData != ItemName.NONE)
         {
-            item = ItemMaster.Instance.TakeItemExisting(sprt.ItemData);
+            item = ItemMaster.Instance.GetDroppedItem(sprt.ItemData);
             item.transform.position = transform.position;
             item.gameObject.SetActive(true);
 

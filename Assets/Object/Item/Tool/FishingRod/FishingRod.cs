@@ -8,7 +8,7 @@ public class FishingRod : Item, IItemFunction
     {
         if (MouseCursor.Instance.RightClickVoid)
         {
-            itemSlot.SetItem(ItemList.FISHING_ROD_USED);
+            // itemSlot.SetItem(ItemName.FISHING_ROD_USED);
         }
         yield break;
     }
@@ -28,9 +28,9 @@ public class FishingRod : Item, IItemFunction
         yield break;
     }
 
-    protected override void Init()
+    private void Awake()
     {
-        _itemCode = (int)ItemList.FISHING_ROD;
+        _itemCode = (int)ItemName.FISHING_ROD;
 
         _itemType = ItemTypeList.TOOL;
     }
@@ -40,11 +40,11 @@ public class FishingRod : Item, IItemFunction
         yield break;
     }
 
-    public bool HasFunction(ItemFunc func)
+    public bool HasFunction(ItemInterface func)
     {
         switch (func)
         {
-            case ItemFunc.CARRY:
+            case ItemInterface.Equip:
                 return true;
         }
         return false;
