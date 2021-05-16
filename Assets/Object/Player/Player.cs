@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private static readonly Vector3 FlipXScale = new Vector3(-1, 1, 1);
+    private static readonly Vector3 DefaultScale = Vector3.one;
+
     public const float MoveSpeed = 3.5f;
 
     public Inventory Inventory;
@@ -12,9 +15,7 @@ public class Player : MonoBehaviour
     [Tooltip("플레이어가 근처 아이템을 감지할 때 사용되는 레이더입니다.")]
     public ItemRadar Radar;
     public bool FlipX
-    {
-        get { return sprite.flipX; }
-    }
+    { get; private set; }
 
     #region 변수 설명 : 
     /// <summary>
@@ -28,7 +29,6 @@ public class Player : MonoBehaviour
     public Brake RightBrake;
 
     private Vector3 vDir;
-    private SpriteRenderer sprite;
 
     [Tooltip("플레이어가 현재 프레임에 장비한 아이템 슬롯들을 담는 배열")]
     public  List<ItemSlot> EquipItemSlots    = new List<ItemSlot>();
@@ -136,9 +136,6 @@ public class Player : MonoBehaviour
         {
             EquippedItemSlots.Add(ItemName.NONE);
         }
-
-        sprite = gameObject.GetComponent<SpriteRenderer>();
-
         StateStorage.Instance.IncreaseState(States.TREE_LOGGING, 1);
 
         StartCoroutine(UpdateRoutine());
@@ -169,7 +166,7 @@ public class Player : MonoBehaviour
                         yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
                         continue;
                     }
-                    sprite.flipX = false;
+                    SetFlipX(false);
                 }
                 else if (Input.GetAxis("Horizontal") < 0)
                 {
@@ -178,7 +175,7 @@ public class Player : MonoBehaviour
                         yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
                         continue;
                     }
-                    sprite.flipX = true;
+                    SetFlipX(true);
                 }
                 vDir.x += Time.deltaTime * 3.5f * Input.GetAxis("Horizontal");
 
@@ -249,7 +246,7 @@ public class Player : MonoBehaviour
 
         if(targetPoint.x > transform.position.x)
         {
-            sprite.flipX = false;
+            SetFlipX(false);
 
             while (targetPoint.x > transform.position.x)
             {
@@ -282,7 +279,7 @@ public class Player : MonoBehaviour
 
         else if (targetPoint.x < transform.position.x)
         {
-            sprite.flipX = true;
+            SetFlipX(true);
 
             while (targetPoint.x < transform.position.x)
             {
@@ -331,7 +328,7 @@ public class Player : MonoBehaviour
 
         if (Target.position.x > transform.position.x)
         {
-            sprite.flipX = false;
+            SetFlipX(false);
 
             while (Target.position.x > transform.position.x)
             {
@@ -364,7 +361,7 @@ public class Player : MonoBehaviour
 
         else if (Target.position.x < transform.position.x)
         {
-            sprite.flipX = true;
+            SetFlipX(true);
 
             while (Target.position.x < transform.position.x)
             {
@@ -414,7 +411,7 @@ public class Player : MonoBehaviour
 
         if (IntractObj.position.x > transform.position.x + InteractionRange)
         {
-            sprite.flipX = false;
+            SetFlipX(false);
 
             while (IntractObj.position.x > transform.position.x + InteractionRange)
             {
@@ -447,7 +444,7 @@ public class Player : MonoBehaviour
 
         else if (IntractObj.position.x < transform.position.x - InteractionRange)
         {
-            sprite.flipX = true;
+            SetFlipX(true);
 
             while (IntractObj.position.x < transform.position.x - InteractionRange)
             {
@@ -523,7 +520,13 @@ public class Player : MonoBehaviour
 
         return 0;
     }
+    public void SetFlipX(bool flipX)
+    {
+        FlipX = flipX;
 
+        if (flipX) transform.localScale = FlipXScale;
+        else transform.localScale = DefaultScale;
+    }
     public void OrderCancel()
     {
         if (_CurrentOrderRoutine != null) {
