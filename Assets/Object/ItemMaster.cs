@@ -62,6 +62,7 @@ public class ItemMaster : Singleton<ItemMaster>
     [SerializeField] private DroppedItemList _DroppedItemList;
 
     private Dictionary<ItemName, Item> _ItemDic;
+    private Dictionary<ItemName, Item> _ItemObjectDic;
     private Dictionary<ItemName, Queue<DroppedItem>> _DroppedItemPool;
     private Dictionary<ItemName, DroppedItem> _DroppedItemCollection;
 
@@ -124,6 +125,30 @@ public class ItemMaster : Singleton<ItemMaster>
         }
         return null;
     }
+    public Item GetItemObject(ItemName item)
+    {
+        Item returnValue;
+
+        if (!_ItemObjectDic.TryGetValue(item, out returnValue))
+        {
+            returnValue = Instantiate(_ItemDic[item]);
+            _ItemObjectDic.Add(item, returnValue);
+        }
+        returnValue.gameObject.SetActive(true);
+        return returnValue;
+    }
+    public void AddItemObject(Item itemObject)
+    {
+        try
+        {
+            _ItemObjectDic.Add(itemObject.Name, itemObject);
+            itemObject.gameObject.SetActive(false);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"몬가...몬가가 일어나고 잇슴 : {e.Message}");
+        }
+    }
 
     #region 함수 설명 : 
     /// <summary>
@@ -161,6 +186,7 @@ public class ItemMaster : Singleton<ItemMaster>
     private void Awake()
     {
         _ItemDic = _ItemList.GetKeyValuePairs();
+        _ItemObjectDic = new Dictionary<ItemName, Item>();
 
         _DroppedItemCollection = _DroppedItemList.GetKeyValuePairs();
 
