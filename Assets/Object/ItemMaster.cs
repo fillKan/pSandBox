@@ -95,10 +95,10 @@ public class ItemMaster : Singleton<ItemMaster>
     #endregion
     public void AddDroppedItem(DroppedItem item)
     {
-        if(!_DroppedItemPool.ContainsKey(item.ItemData)) {
-            _DroppedItemPool.Add(item.ItemData, new Queue<DroppedItem>());
+        if(!_DroppedItemPool.ContainsKey(item.Name)) {
+            _DroppedItemPool.Add(item.Name, new Queue<DroppedItem>());
         }
-        _DroppedItemPool[item.ItemData].Enqueue(item);
+        _DroppedItemPool[item.Name].Enqueue(item);
 
         item.gameObject.SetActive(false);
         item.transform.rotation = Quaternion.identity;

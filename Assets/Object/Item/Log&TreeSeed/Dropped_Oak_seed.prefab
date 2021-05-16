@@ -147,5 +147,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Renderer: {fileID: 2778243033363838995}
   _DefaultColor: {r: 1, g: 1, b: 1, a: 1}
-  ItemData: 4
+  Name: 4
   _Rigidbody: {fileID: 2778243033363839005}

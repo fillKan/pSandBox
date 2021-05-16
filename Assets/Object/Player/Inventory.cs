@@ -24,16 +24,16 @@ public class Inventory : MonoBehaviour
                 continue;
             }
 
-            if (itemSlots[i].ContainItem == item.ItemData)
+            if (itemSlots[i].ContainItem == item.Name)
             {
-                itemSlots[i].AddItem(item.ItemData);
+                itemSlots[i].AddItem(item.Name);
                 ItemMaster.Instance.AddDroppedItem(item);
                 return;
             }
         }
         if(!emptySlotIndex.Equals(empty))
         {
-            itemSlots[emptySlotIndex].AddItem(item.ItemData);
+            itemSlots[emptySlotIndex].AddItem(item.Name);
             ItemMaster.Instance.AddDroppedItem(item);
             return;
         }

@@ -13,7 +13,7 @@ public class DroppedItemList : ScriptableObject
 
         foreach (var itemPair in _DroppedItemInstances)
         {
-            pairs.Add(itemPair.ItemData, itemPair);
+            pairs.Add(itemPair.Name, itemPair);
         }
         return pairs;
     }
