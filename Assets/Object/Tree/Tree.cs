@@ -34,7 +34,8 @@ public class Tree : InteractableObject
     }
     public override void Interaction()
     {
-        Shaking(0.3f, 0.05f);
+        float logging = StateStorage.Instance.TreeLogging - 1f;
+        Shaking(0.3f + 0.05f * logging, 0.05f + 0.06f * logging);
 
         if ((RestDurability -= StateStorage.Instance.TreeLogging) <= 0)
         {
