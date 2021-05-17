@@ -520,6 +520,23 @@ public class Player : MonoBehaviour
 
         return 0;
     }
+    private void InteractAction(InteractableObject target)
+    {
+        target.Interaction();
+
+        for (int i = 0; i < EquipItemSlots.Count; i++)
+        {
+            ItemName item = EquipItemSlots[i].ContainItem;
+            if (item != default)
+            {
+                var equipItem = ItemMaster.Instance.GetItemObject(item);
+                if (equipItem.IsUsing(ItemInterface.Use))
+                {
+                    equipItem.GetComponent<IUseItem>().UseItem(target);
+                }
+            }
+        }
+    }
     public void SetFlipX(bool flipX)
     {
         FlipX = flipX;
@@ -543,11 +560,11 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(_CurrentOrderRoutine = TraceRoutine(target.transform, 
                 () => { return Mathf.Abs(target.transform.position.x - transform.position.x) > InteractionRange; }, 
-                () => { target.Interaction(); }));
+                () => { InteractAction(target); }));
         }
         else
         {
-            target.Interaction();
+            InteractAction(target);
         }
     }
     public void MoveToPointOrder(Vector2 point)
