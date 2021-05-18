@@ -23,6 +23,7 @@ public class Inventory : MonoBehaviour
             
             _EquipedHandItem.transform.SetParent(_EquipHandSlot);
             _EquipedHandItem.transform.localPosition = Vector3.zero;
+            _EquipedHandItem.transform.localScale = Vector3.one;
 
             if (_EquipedHandItem.IsUsing(ItemInterface.Equip))
             {
