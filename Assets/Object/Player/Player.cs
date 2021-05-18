@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     public Inventory Inventory;
 
     [Tooltip("플레이어가 근처 아이템을 감지할 때 사용되는 레이더입니다.")]
-    public ItemRadar Radar;
+    public ItemFinder Finder;
     public bool FlipX
     { get; private set; }
 
@@ -151,7 +151,7 @@ public class Player : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                var closeItem = Radar.GetCloseItem();
+                var closeItem = Finder.GetCloseItem();
                 if (closeItem != null)
                 {
                     InteractionOrder(closeItem);

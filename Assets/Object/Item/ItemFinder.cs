@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemRadar : MonoBehaviour
+public class ItemFinder : MonoBehaviour
 {
     private LinkedList<DroppedItem> _DroppedItems = new LinkedList<DroppedItem>();
 
