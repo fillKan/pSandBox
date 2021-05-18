@@ -4,77 +4,56 @@ using UnityEngine;
 
 public class ItemRadar : MonoBehaviour
 {
-    private Dictionary<int, DroppedItem> senseItem = new Dictionary<int, DroppedItem>();
+    private LinkedList<DroppedItem> _DroppedItems = new LinkedList<DroppedItem>();
 
-    [Tooltip("CircleCollider의 Radius값을 지정합니다.")]
-    public float Radius;
-
-    #region 함수 설명 :
-    /// <summary>
-    /// 해당 레이더와 가장 가까이 있는 아이템을 반환합니다.
-    /// </summary>
-    #endregion
     public DroppedItem GetCloseItem()
     {
-        DroppedItem closestItem = null;
+        if (_DroppedItems.Count == 0) return null;
 
-        float distance = 0; float closestDistance = Radius;
+        Vector2 pos = transform.position;
 
-        foreach(KeyValuePair<int,DroppedItem> item in senseItem)
+        float closeLength = float.MaxValue;
+        DroppedItem cloes = null;
+
+        for (var i = _DroppedItems.First; i != null; )
         {
-            distance = Vector2.Distance(transform.position, item.Value.transform.position);
-
-            if(distance < closestDistance)
+            if (!i.Value.gameObject.activeSelf)
             {
-                closestDistance = distance;
-
-                closestItem = item.Value;
+                var next = i.Next;
+                _DroppedItems.Remove(i);
+                i = next;
+                continue;
             }
-        }
-        return closestItem;
-    }
+            float length = Vector2.Distance(i.Value.transform.position, pos);
 
-    #region 함수 설명 :
-    /// <summary>
-    /// 해당 레이더와 가장 가까이 있는 아이템 오브젝트의 인스턴스 아이디를 반환합니다.
-    /// </summary>
-    #endregion
-    public int GetCloseItemID()
-    {
-        DroppedItem closestItem = null;
-
-        float distance = 0; float closestDistance = Radius;
-
-        foreach (KeyValuePair<int, DroppedItem> item in senseItem)
-        {
-            distance = Vector2.Distance(transform.position, item.Value.transform.position);
-
-            if (distance < closestDistance)
+            if (length < closeLength)
             {
-                closestDistance = distance;
-
-                closestItem = item.Value;
+                closeLength = length;
+                cloes = i.Value;
             }
+            i = i.Next;
         }
-        return closestItem.gameObject.GetInstanceID();
+        return cloes;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.TryGetComponent(out DroppedItem item))
+        if (collision.TryGetComponent(out DroppedItem dropped))
         {
-            if(!senseItem.ContainsKey(item.gameObject.GetInstanceID()))
-            {
-                senseItem.Add(item.gameObject.GetInstanceID(), item);
-            }
+            _DroppedItems.AddLast(dropped);
         }
     }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(senseItem.ContainsKey(collision.gameObject.GetInstanceID()))
+        if (_DroppedItems.Count == 0) return;
+
+        int compareID = collision.gameObject.GetInstanceID();
+        for (var i = _DroppedItems.First; i != null; i = i.Next)
         {
-            senseItem.Remove(collision.gameObject.GetInstanceID());
+            if (i.Value.gameObject.GetInstanceID() == compareID)
+            {
+                _DroppedItems.Remove(i);
+            }
         }
     }
 }

@@ -151,9 +151,10 @@ public class Player : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                if(Radar.GetCloseItem() != null)
+                var closeItem = Radar.GetCloseItem();
+                if (closeItem != null)
                 {
-                    Player_Instructions.Instance.FollowInstr(Instructions.DO_INTERACT, Radar.GetCloseItemID());
+                    InteractionOrder(closeItem);
                 }
             }
             {
@@ -578,8 +579,9 @@ public class Player : MonoBehaviour
         while (canTracing.Invoke())
         {
             float direction = (target.position.x > transform.position.x ? 1f : -1f);
-
             transform.position += Vector3.right * direction * Time.deltaTime * MoveSpeed;
+
+            SetFlipX(direction < 0);
 
             yield return null;
         }
