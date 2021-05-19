@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FishingRod : Item, IEquipItem
 {
+    private const float MaxLineLength = 15f;
+
     [Header("FishingRod Property")]
     [SerializeField] private Sprite _UsedSprite;
     [SerializeField] private Sprite _DefaultSprite;
@@ -56,10 +58,17 @@ public class FishingRod : Item, IEquipItem
                     _IsUsed = !_IsUsed;
                 }
             }
-            if (_Bobber.gameObject.activeSelf)
+            Vector2 bobberPos = _Bobber.transform.position;
+            Vector2 rodTopPos = _RodTopPoint.position;
+
+            if (_IsUsed && Vector2.Distance(bobberPos, rodTopPos) > MaxLineLength)
             {
-                _LineRenderer.SetPosition(0, _RodTopPoint.position);
-                _LineRenderer.SetPosition(1, _Bobber.transform.position);
+                BobberDisable();
+            }
+            else if (_Bobber.gameObject.activeSelf)
+            {
+                _LineRenderer.SetPosition(0, rodTopPos);
+                _LineRenderer.SetPosition(1, bobberPos);
             }
             yield return null;
         }
@@ -87,15 +96,21 @@ public class FishingRod : Item, IEquipItem
     {
         if (collision.gameObject.Equals(_Bobber.gameObject) && !_IsUsed)
         {
-            _Renderer.sprite = _DefaultSprite;
-
-            _Bobber.transform.SetParent(transform);
-            _Bobber.gameObject.SetActive(false);
-            _LineRenderer.gameObject.SetActive(false);
-
-            _Bobber.transform.position = _RodTopPoint.position;
-            _BobberRigid.velocity = Vector2.zero;
+            BobberDisable();
         }
+    }
+    private void BobberDisable()
+    {
+        _Renderer.sprite = _DefaultSprite;
+
+        _Bobber.transform.SetParent(transform);
+        _Bobber.gameObject.SetActive(false);
+        _LineRenderer.gameObject.SetActive(false);
+
+        _Bobber.transform.position = _RodTopPoint.position;
+        _BobberRigid.velocity = Vector2.zero;
+
+        _IsUsed = false;
     }
     public override bool IsUsing(ItemInterface itemInterface)
     {
