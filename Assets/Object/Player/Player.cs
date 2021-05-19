@@ -25,8 +25,6 @@ public class Player : MonoBehaviour
     [Tooltip("플레이어의 상호작용 범위를 지정합니다.")]
     public float InteractionRange = 1;
 
-    private Vector3 vDir;
-
     [Tooltip("플레이어가 현재 프레임에 장비한 아이템 슬롯들을 담는 배열")]
     public  List<ItemSlot> EquipItemSlots    = new List<ItemSlot>();
     [Tooltip("플레이어가 이전 프레임에 장비한 아이템 슬롯들을 담는 배열")]
@@ -67,9 +65,7 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        vDir = transform.position;
-
-        for(int i = 0; i < EquipItemSlots.Count; i++)
+        for (int i = 0; i < EquipItemSlots.Count; i++)
         {
             EquippedItemSlots.Add(ItemName.NONE);
         }
@@ -80,8 +76,6 @@ public class Player : MonoBehaviour
     {
         while (gameObject.activeInHierarchy)
         {
-            vDir = transform.position;
-
             if (Input.GetKeyDown(KeyCode.Z))
             {
                 var closeItem = Finder.GetCloseItem();
@@ -92,19 +86,16 @@ public class Player : MonoBehaviour
             }
             #region Moving
             {
-                Player_Instructions.Instance.DiscontinueInstr();
-
-                if (Input.GetAxis("Horizontal") > 0)
+                float axisX = Input.GetAxis("Horizontal");
+                if (axisX > 0)
                 {                   
                     SetFlipX(false);
                 }
-                else if (Input.GetAxis("Horizontal") < 0)
+                else if (axisX < 0)
                 {
                     SetFlipX(true);
                 }
-                vDir.x += Time.deltaTime * 3.5f * Input.GetAxis("Horizontal");
-
-                transform.position = vDir;
+                transform.Translate(Time.deltaTime * MoveSpeed * axisX, 0, 0);
             }
             #endregion
         }
