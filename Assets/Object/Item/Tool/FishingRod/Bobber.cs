@@ -5,18 +5,16 @@ using UnityEngine;
 public class Bobber : MonoBehaviour
 {
     private const string FishingColliderName = "Water";
+    private const float ShakingForce = 2.5f;
 
     [SerializeField] private Rigidbody2D _Rigidbody;
-
-    [Header("Fishing Property")]
     [SerializeField] private float _WaitTimeMin;
     [SerializeField] private float _WaitTimeMax;
-
-    [Space()] [SerializeField] private float _OnFishTime;
+    [SerializeField] private Animator _Animator;
+    private int _AinmControlKey;
 
     public Rigidbody2D Rigidbody => _Rigidbody;
 
-    private bool _CanCatching;
     private IEnumerator _WaitFishRoutine;
     private DroppedItem _CatchedItem;
 
@@ -51,19 +49,12 @@ public class Bobber : MonoBehaviour
                 yield return null;
 
             Vector2 startPos = transform.position;
-            _CanCatching = true;
-            for (float i = 0; i < _OnFishTime; i += Time.deltaTime)
-            {
-                transform.position = startPos + (Random.insideUnitCircle * 0.05f);
-                yield return null;
-            }
-            transform.position = startPos;
-            _CanCatching = false;
+            _Animator.SetBool(_AinmControlKey, true);
         }
     }
     public void CatchFish()
     {
-        if (_CanCatching)
+        if (_Animator.GetBool(_AinmControlKey))
         {
             ItemName fish = ItemMaster.Instance.RandomFish();
 
@@ -71,8 +62,6 @@ public class Bobber : MonoBehaviour
             _CatchedItem.Rigidbody.isKinematic = true;
             _CatchedItem.transform.SetParent(transform);
             _CatchedItem.transform.localPosition = Vector3.zero;
-
-            _CanCatching = false;
         }
     }
     public void DropFish()
@@ -91,5 +80,14 @@ public class Bobber : MonoBehaviour
             StopCoroutine(_WaitFishRoutine);
             _WaitFishRoutine = null;
         }
+        _Animator.SetBool(_AinmControlKey, false);
+    }
+    private void OnEnable()
+    {
+        _AinmControlKey = _Animator.GetParameter(0).nameHash;
+    }
+    private void AE_NiddleOver()
+    {
+        _Animator.SetBool(_AinmControlKey, false);
     }
 }

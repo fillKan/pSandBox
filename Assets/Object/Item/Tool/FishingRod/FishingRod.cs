@@ -22,6 +22,7 @@ public class FishingRod : Item, IEquipItem
 
     [Header("Bobber Property")]
     [SerializeField] private Bobber _Bobber;
+    [SerializeField] private Transform _BobberTransform;
     [SerializeField] private float _ThrowingForce;
 
     private CursorPointer _Cursor;
@@ -67,7 +68,7 @@ public class FishingRod : Item, IEquipItem
                     }
                 }
             }
-            Vector2 bobberPos = _Bobber.transform.position;
+            Vector2 bobberPos = _BobberTransform.position;
             Vector2 rodTopPos = _RodTopPoint.position;
 
             if (_IsUsed && Vector2.Distance(bobberPos, rodTopPos) > MaxLineLength)
@@ -110,7 +111,7 @@ public class FishingRod : Item, IEquipItem
         _Bobber.transform.SetParent(null);
         _Bobber.gameObject.SetActive(true);
 
-        Vector3 bobberPos = _Bobber.transform.position;
+        Vector3 bobberPos = _BobberTransform.position;
         Vector3 rodTopPos = _RodTopPoint.position;
 
         _LineRenderer.SetPosition(0, rodTopPos);
