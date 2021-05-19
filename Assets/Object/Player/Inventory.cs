@@ -4,42 +4,69 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public ItemSlot[] itemSlots;
-    public ItemSlot CarryItemSlot;
+    public ItemSlot[]   ItemSlots;
+    public ItemSlot EquipItemSlot;
 
-    private sbyte empty = -1;
+    [SerializeField, Space()]
+    private Transform _EquipHandSlot;
 
-    public void AddItemInventory(DroppedItem item)
+    private Item _EquipedHandItem;
+    private IEquipItem _EquipedHandInterface;
+
+    private void Start()
     {
-        int emptySlotIndex = empty;
-
-        for (int i = 0; i < itemSlots.Length; i++)
+        EquipItemSlot.EnterItem += item =>
         {
-            if (itemSlots[i].ContainItem == ItemName.NONE)
-            {
-                if (emptySlotIndex.Equals(empty))
-                {
-                    emptySlotIndex = i;
-                }
-                continue;
-            }
+            if (item == default) return;
 
-            if (itemSlots[i].ContainItem == item.Name)
+            _EquipedHandItem = ItemMaster.Instance.GetItemObject(item);
+            
+            _EquipedHandItem.transform.SetParent(_EquipHandSlot);
+            _EquipedHandItem.transform.localPosition = Vector3.zero;
+            _EquipedHandItem.transform.localScale = Vector3.one;
+
+            if (_EquipedHandItem.IsUsing(ItemInterface.Equip))
             {
-                itemSlots[i].AddItem(item.Name);
+                if (_EquipedHandItem.TryGetComponent(out _EquipedHandInterface)) {
+                    _EquipedHandInterface.OnEquipItem();
+                }
+            }
+        };
+        EquipItemSlot.ExitItem += item =>
+        {
+            if (_EquipedHandItem == null) return;
+
+            _EquipedHandItem.transform.SetParent(null);
+            ItemMaster.Instance.AddItemObject(_EquipedHandItem);
+
+            _EquipedHandItem = null;
+
+            _EquipedHandInterface?.DisEquipItem();
+            _EquipedHandInterface = null;
+        };
+    }
+    public void AddItem(DroppedItem item)
+    {
+        var itemName = item.Name;
+        int emptySlotIndex = -1;
+
+        for (int i = 0; i < ItemSlots.Length; i++)
+        {
+            if (ItemSlots[i].ContainItem == itemName) 
+            {
+                ItemSlots[i].AddItem();
                 ItemMaster.Instance.AddDroppedItem(item);
                 return;
             }
+            else if (emptySlotIndex == -1 && ItemSlots[i].ContainItem == default)
+            {
+                emptySlotIndex = i;
+            }
         }
-        if(!emptySlotIndex.Equals(empty))
+        if (emptySlotIndex != -1)
         {
-            itemSlots[emptySlotIndex].AddItem(item.Name);
+            ItemSlots[emptySlotIndex].AddItem(itemName);
             ItemMaster.Instance.AddDroppedItem(item);
-            return;
         }
-        Debug.LogWarning("인벤토리가 가득 차 있습니다");
     }
-
-
-
 }

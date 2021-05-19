@@ -19,7 +19,8 @@ public class Tree : InteractableObject
     private float _ShakeTime = 0f;
     private float _ShakeForcePerFrame = 0f;
 
-    private float _RestDurability;
+    public float RestDurability
+    { get; private set; }
 
     public override void OnActive()
     {
@@ -28,14 +29,15 @@ public class Tree : InteractableObject
         StartCoroutine(ShakingRoutine());
         _AnimControlKey = _Animator.GetParameter(0).nameHash;
 
-        _RestDurability = _Durability;
+        RestDurability = _Durability;
         _Collider.enabled = true;
     }
     public override void Interaction()
     {
-        Shaking(0.3f, 0.05f);
+        float logging = StateStorage.Instance.TreeLogging - 1f;
+        Shaking(0.3f + 0.05f * logging, 0.05f + 0.06f * logging);
 
-        if ((_RestDurability -= StateStorage.Instance.TreeLogging) <= 0)
+        if ((RestDurability -= StateStorage.Instance.TreeLogging) <= 0)
         {
             _ItemDropper.DropItem(0);
 

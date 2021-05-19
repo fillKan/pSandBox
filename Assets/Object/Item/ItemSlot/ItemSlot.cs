@@ -67,7 +67,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
         }
         else if (_ContainItem == ItemName.NONE)
         {
-            ExitItem?.Invoke(itemName);
+            EnterItem?.Invoke(itemName);
 
             _ContainItem = itemName;
             
