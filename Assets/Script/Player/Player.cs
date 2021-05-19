@@ -107,6 +107,7 @@ public class Player : MonoBehaviour
     private IEnumerator MoveRoutine(Vector2 point)
     {
         float direction = (point.x > transform.position.x ? 1f : -1f);
+        SetFlipX(direction < 0);
 
         while (gameObject.activeInHierarchy)
         {
