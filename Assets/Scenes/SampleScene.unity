@@ -2365,6 +2365,8 @@ MonoBehaviour:
   _StartStat:
   - Stat: 0
     Value: 1
+  - Stat: 1
+    Value: 3.5
 --- !u!4 &1115120145 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8549311082329877611, guid: ced20fdd932ba8e4e9f1f4332e70484d,

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum Stat
 {
-    Logging
+    Logging, MoveSpeed
 }
 [Serializable]
 public class StatValuePair
@@ -54,6 +54,10 @@ public class PlayerStat : Singleton<PlayerStat>
     public float Logging
     {
         get => _Storage[Stat.Logging];
+    }
+    public float MoveSpeed
+    {
+        get => _Storage[Stat.MoveSpeed];
     }
     #endregion
 }

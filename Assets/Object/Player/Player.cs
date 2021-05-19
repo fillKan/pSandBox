@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     public bool FlipX
     { get; private set; }
-    public const float MoveSpeed = 3.5f;
+    private float MoveSpeed => PlayerStat.Instance.MoveSpeed;
 
     [SerializeField] private Inventory _Inventory;
     [SerializeField] private ItemFinder _Finder;
