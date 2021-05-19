@@ -27,8 +27,7 @@ public enum ItemName
     FISH_SALMON,
     AXE,
     FISHING_ROD,
-    FISHING_ROD_USED,
-    AXE_ELECTRIC_SAW,
+    AXE_ELECTRIC_SAW = 16,
     AXE_ORC_HANDAXE
 };
 
