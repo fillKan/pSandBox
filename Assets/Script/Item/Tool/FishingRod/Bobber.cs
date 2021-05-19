@@ -5,7 +5,6 @@ using UnityEngine;
 public class Bobber : MonoBehaviour
 {
     private const string FishingColliderName = "Water";
-    private const float ShakingForce = 2.5f;
 
     [SerializeField] private Rigidbody2D _Rigidbody;
     [SerializeField] private float _WaitTimeMin;
