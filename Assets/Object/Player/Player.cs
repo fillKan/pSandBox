@@ -12,33 +12,15 @@ public class Player : MonoBehaviour
 
     public Inventory Inventory;
 
-    [Tooltip("플레이어가 근처 아이템을 감지할 때 사용되는 레이더입니다.")]
     public ItemFinder Finder;
     public bool FlipX
     { get; private set; }
 
-    #region 변수 설명 : 
-    /// <summary>
-    /// 플레이어의 상호작용 범위를 지정합니다.
-    /// </summary>
-    #endregion
-    [Tooltip("플레이어의 상호작용 범위를 지정합니다.")]
     public float InteractionRange = 1;
-
-    [Tooltip("플레이어가 현재 프레임에 장비한 아이템 슬롯들을 담는 배열")]
-    public  List<ItemSlot> EquipItemSlots    = new List<ItemSlot>();
-    [Tooltip("플레이어가 이전 프레임에 장비한 아이템 슬롯들을 담는 배열")]
-    private List<ItemName> EquippedItemSlots = new List<ItemName>();
-
-
     private IEnumerator _CurrentOrderRoutine;
 
-    private void OnEnable()
+    private void Awake()
     {
-        for (int i = 0; i < EquipItemSlots.Count; i++)
-        {
-            EquippedItemSlots.Add(ItemName.NONE);
-        }
         StateStorage.Instance.IncreaseState(States.TREE_LOGGING, 1);
     }
 
@@ -68,16 +50,13 @@ public class Player : MonoBehaviour
     {
         target.Interaction();
 
-        for (int i = 0; i < EquipItemSlots.Count; i++)
+        ItemName item = Inventory.EquipItemSlot.ContainItem;
+        if (item != default)
         {
-            ItemName item = EquipItemSlots[i].ContainItem;
-            if (item != default)
+            var equipItem = ItemMaster.Instance.GetItemObject(item);
+            if (equipItem.IsUsing(ItemInterface.Use))
             {
-                var equipItem = ItemMaster.Instance.GetItemObject(item);
-                if (equipItem.IsUsing(ItemInterface.Use))
-                {
-                    equipItem.GetComponent<IUseItem>().UseItem(target);
-                }
+                equipItem.GetComponent<IUseItem>().UseItem(target);
             }
         }
     }
