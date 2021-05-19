@@ -33,36 +33,6 @@ public class Player : MonoBehaviour
 
     private IEnumerator _CurrentOrderRoutine;
 
-    #region 함수 설명 : 
-    /// <summary>
-    /// 플레이어가 들고있는 아이템들을 모두 사용하는 함수입니다.
-    /// </summary>
-    /// <param name="interactionID">
-    /// 플레이어가 상호작용한 대상의 GetInstanceID를 지정합니다   
-    /// </param>
-    #endregion
-    private void UseItem(int interactionID)
-    {
-        var target = InteractionManager.Instance[interactionID];
-        if (target == null) return;
-
-        for (int i = 0; i < EquipItemSlots.Count; ++i)
-        {
-            if (EquipItemSlots[i])
-            {
-                if (EquipItemSlots[i].ContainItem != ItemName.NONE)
-                {
-                    var item = ItemMaster.Instance.GetItem(EquipItemSlots[i].ContainItem);
-                    if (item.IsUsing(ItemInterface.Use))
-                    {
-                        item.GetComponent<IUseItem>()?.UseItem(target);
-                    }
-                }
-            }
-        }
-       
-    }
-
     private void OnEnable()
     {
         for (int i = 0; i < EquipItemSlots.Count; i++)
