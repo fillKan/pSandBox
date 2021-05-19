@@ -140,68 +140,68 @@ public class Player_Instructions : Singleton<Player_Instructions>
 
         Type type = InstrToType(instructions);
 
-        switch (instructions)
-        {
-            case Instructions.GOTO_POINT:
-                if (typeof(T).Equals(type))
-                {
-                    DiscontinueInstr();
-                    progressInstr.instructions = Instructions.GOTO_POINT;
+        //switch (instructions)
+        //{
+        //    case Instructions.GOTO_POINT:
+        //        if (typeof(T).Equals(type))
+        //        {
+        //            DiscontinueInstr();
+        //            progressInstr.instructions = Instructions.GOTO_POINT;
 
-                    Vector2 value;
-                            value = (Vector2)Convert.ChangeType(xValue, typeof(Vector2));
+        //            Vector2 value;
+        //                    value = (Vector2)Convert.ChangeType(xValue, typeof(Vector2));
 
-                                   progressInstr.progress = player.CR_moveMovementPoint(value);
-                    StartCoroutine(progressInstr.progress);
-                }
-                break;
+        //                           progressInstr.progress = player.CR_moveMovementPoint(value);
+        //            StartCoroutine(progressInstr.progress);
+        //        }
+        //        break;
 
-            case Instructions.DO_INTERACT:
-                if (typeof(T).Equals(type))
-                {
-                    DiscontinueInstr();
-                    progressInstr.instructions = Instructions.DO_INTERACT;
+        //    case Instructions.DO_INTERACT:
+        //        if (typeof(T).Equals(type))
+        //        {
+        //            DiscontinueInstr();
+        //            progressInstr.instructions = Instructions.DO_INTERACT;
 
-                    int value;
-                        value = (int)Convert.ChangeType(xValue, typeof(int));
+        //            int value;
+        //                value = (int)Convert.ChangeType(xValue, typeof(int));
 
-                                   progressInstr.progress = player.CR_Interaction(value);
-                    StartCoroutine(progressInstr.progress);
-                }
-                break;
+        //                           progressInstr.progress = player.CR_Interaction(value);
+        //            StartCoroutine(progressInstr.progress);
+        //        }
+        //        break;
 
-            case Instructions.GOTO_OBJECT:
-                if (typeof(T).Equals(type))
-                {
-                    DiscontinueInstr();
-                    progressInstr.instructions = Instructions.GOTO_OBJECT;
+        //    case Instructions.GOTO_OBJECT:
+        //        if (typeof(T).Equals(type))
+        //        {
+        //            DiscontinueInstr();
+        //            progressInstr.instructions = Instructions.GOTO_OBJECT;
 
-                    GameObject value;
-                               value = (GameObject)Convert.ChangeType(xValue, typeof(GameObject));
+        //            GameObject value;
+        //                       value = (GameObject)Convert.ChangeType(xValue, typeof(GameObject));
 
-                                   progressInstr.progress = player.CR_moveMovementPoint(value);
-                    StartCoroutine(progressInstr.progress);
-                }
-                break;
+        //                           progressInstr.progress = player.CR_moveMovementPoint(value);
+        //            StartCoroutine(progressInstr.progress);
+        //        }
+        //        break;
 
-            case Instructions.GOTO_INSTR:
-                if (typeof(T).Equals(type))
-                {
-                    DiscontinueInstr();
-                    progressInstr.instructions = Instructions.GOTO_INSTR;
+        //    case Instructions.GOTO_INSTR:
+        //        if (typeof(T).Equals(type))
+        //        {
+        //            DiscontinueInstr();
+        //            progressInstr.instructions = Instructions.GOTO_INSTR;
 
-                    int value;
-                        value = (int)Convert.ChangeType(xValue, typeof(int));
+        //            int value;
+        //                value = (int)Convert.ChangeType(xValue, typeof(int));
 
-                                   progressInstr.progress = player.CR_moveMovementPoint(value);
-                    StartCoroutine(progressInstr.progress);
-                }
-                break;
+        //                           progressInstr.progress = player.CR_moveMovementPoint(value);
+        //            StartCoroutine(progressInstr.progress);
+        //        }
+        //        break;
 
-            default:
-                Debug.LogWarning("잘못된 지시입니다");
-                break;
-        }
+        //    default:
+        //        Debug.LogWarning("잘못된 지시입니다");
+        //        break;
+        //}
     }
 
     #region 함수 설명 : 
