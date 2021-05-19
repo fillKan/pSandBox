@@ -74,11 +74,9 @@ public class Player : MonoBehaviour
             EquippedItemSlots.Add(ItemName.NONE);
         }
         StateStorage.Instance.IncreaseState(States.TREE_LOGGING, 1);
-
-        StartCoroutine(UpdateRoutine());
     }
 
-    private IEnumerator UpdateRoutine()
+    private void Update()
     {
         while (gameObject.activeInHierarchy)
         {
@@ -109,7 +107,6 @@ public class Player : MonoBehaviour
                 transform.position = vDir;
             }
             #endregion
-            yield return null;
         }
     }
 
