@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class FishingRod : Item, IEquipItem
 {
+    private const int Default = 0;
+    private const int ThrowBobber = 1;
+    private const int CatchBobber = 2;
+
     private const float MaxLineLength = 15f;
 
     [Header("FishingRod Property")]
@@ -11,6 +15,8 @@ public class FishingRod : Item, IEquipItem
     [SerializeField] private Sprite _DefaultSprite;
     [SerializeField] private SpriteRenderer _Renderer;
 
+    [SerializeField] private Animator _Animator;
+    private int _AnimControlKey;
     [SerializeField] private LineRenderer _LineRenderer;
     [SerializeField] private Transform _RodTopPoint;
 
@@ -32,11 +38,16 @@ public class FishingRod : Item, IEquipItem
         _LineRenderer.gameObject.SetActive(false);
 
         _Cursor ??= CursorPointer.Instance;
+        _AnimControlKey = _Animator.GetParameter(0).nameHash;
     }
     public void DisEquipItem()
     {
         _IsEquiped = false;
-        DisThrowBobber();
+        BobberDisable();
+    }
+    public override bool IsUsing(ItemInterface itemInterface)
+    {
+        return itemInterface == ItemInterface.Equip;
     }
     private IEnumerator UpdateRoutine()
     {
@@ -48,11 +59,11 @@ public class FishingRod : Item, IEquipItem
                 {
                     if (_IsUsed)
                     {
-                        DisThrowBobber();
+                        _Animator.SetInteger(_AnimControlKey, CatchBobber);
                     }
                     else
                     {
-                        OnThrowBobber();
+                        _Animator.SetInteger(_AnimControlKey, ThrowBobber);
                     }
                     _IsUsed = !_IsUsed;
                 }
@@ -71,27 +82,6 @@ public class FishingRod : Item, IEquipItem
             }
             yield return null;
         }
-    }
-    private void OnThrowBobber()
-    {
-        _Renderer.sprite = _UsedSprite;
-
-        _Bobber.transform.SetParent(null);
-        _Bobber.gameObject.SetActive(true);
-        _LineRenderer.gameObject.SetActive(true);
-
-        Vector2 dir = (_Cursor.transform.position - _RodTopPoint.position);
-        _Bobber.Rigidbody.AddForce(dir.normalized * _ThrowingForce * dir.magnitude);
-    }
-    private void DisThrowBobber()
-    {
-        _Bobber.CatchFish();
-
-        Vector2 dir = (_RodTopPoint.position - _Bobber.transform.position);
-        Vector2 force = dir.normalized * _ThrowingForce * dir.magnitude;
-
-        _Bobber.Rigidbody.velocity = force;
-        _Bobber.Rigidbody.AddForce(force);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -114,8 +104,29 @@ public class FishingRod : Item, IEquipItem
 
         _IsUsed = false;
     }
-    public override bool IsUsing(ItemInterface itemInterface)
+    private void AE_ThrowBobber()
     {
-        return itemInterface == ItemInterface.Equip;
+        _Renderer.sprite = _UsedSprite;
+
+        _Bobber.transform.SetParent(null);
+        _Bobber.gameObject.SetActive(true);
+        _LineRenderer.gameObject.SetActive(true);
+
+        Vector2 dir = (_Cursor.transform.position - _RodTopPoint.position);
+        _Bobber.Rigidbody.AddForce(dir.normalized * _ThrowingForce * dir.magnitude);
+    }
+    private void AE_CatchBobber()
+    {
+        _Bobber.CatchFish();
+
+        Vector2 dir = (_RodTopPoint.position - _Bobber.transform.position);
+        Vector2 force = dir.normalized * _ThrowingForce * dir.magnitude;
+
+        _Bobber.Rigidbody.velocity = force;
+        _Bobber.Rigidbody.AddForce(force);
+    }
+    private void AE_AnimPlayOver()
+    {
+        _Animator.SetInteger(_AnimControlKey, Default);
     }
 }

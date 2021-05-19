@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 3722041934244083467}
   - component: {fileID: 3722041934244083465}
   - component: {fileID: 6768112154359938587}
+  - component: {fileID: 3892125924908518490}
   m_Layer: 0
   m_Name: FishingRod
   m_TagString: Untagged
@@ -204,6 +205,7 @@ MonoBehaviour:
   _DefaultSprite: {fileID: 5268473884595868589, guid: a114677ce6eb5a349b04190f2d345308,
     type: 3}
   _Renderer: {fileID: 7291220526790481601}
+  _Animator: {fileID: 3892125924908518490}
   _LineRenderer: {fileID: 7004682416123291096}
   _RodTopPoint: {fileID: 4533351675042505641}
   _Bobber: {fileID: 1925740235195713664}
@@ -249,6 +251,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &3892125924908518490
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3722041934244083469}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 553dc0be1b44fb846ae9449e53adabd4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4210564873496770129
 GameObject:
   m_ObjectHideFlags: 0
