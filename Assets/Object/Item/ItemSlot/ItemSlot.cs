@@ -71,7 +71,7 @@ public class ItemSlot : MonoBehaviour, IPointerDownHandler
 
             _ContainItem = itemName;
             
-            var sprite = ItemMaster.Instance.GetItemSprt(itemName);
+            var sprite = ItemMaster.Instance.GetItemSprite(itemName);
 
             _ItemRenderer.sprite = sprite;
             _ItemRenderer.rectTransform.sizeDelta 

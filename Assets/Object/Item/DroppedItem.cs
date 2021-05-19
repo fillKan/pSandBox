@@ -14,6 +14,6 @@ public class DroppedItem : InteractableObject
 
     public override void Interaction()
     {
-        PlayerGetter.Instance.Inventory.AddItem(this);
+        Inventory.Instance.AddItem(this);
     }
 }

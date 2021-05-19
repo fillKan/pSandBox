@@ -40,7 +40,7 @@ public class OrcHandAxe : Item, IEquipItem, IUseItem
     private void AE_AxeSwing()
     {
         MainCamera.Instance.CameraShake(0.85f, 0.35f);
-        StateStorage.Instance.IncreaseState(States.TREE_LOGGING, LoggingValue);
+        PlayerStat.Instance[Stat.Logging] += LoggingValue;
 
         var filter = new ContactFilter2D();
         filter.useTriggers = true;
@@ -55,6 +55,6 @@ public class OrcHandAxe : Item, IEquipItem, IUseItem
                 if (inter is Tree) inter.Interaction();
             }
         }
-        StateStorage.Instance.DecreaseState(States.TREE_LOGGING, LoggingValue);
+        PlayerStat.Instance[Stat.Logging] -= LoggingValue;
     }
 }

@@ -123,7 +123,7 @@ public class CursorPointer : Singleton<CursorPointer>
             {
                 CarryingItem = item;
 
-                var sprite = ItemMaster.Instance.GetItemSprt(item);
+                var sprite = ItemMaster.Instance.GetItemSprite(item);
 
                 _Renderer.sprite = sprite;
                 _Renderer.rectTransform.sizeDelta
