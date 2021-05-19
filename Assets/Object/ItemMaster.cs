@@ -19,7 +19,7 @@ public enum ItemName
     SEED_OAK,
     WOOL,
     EGG,
-    Fish_PampusArgenteus,
+    FISH_PAMPUS_ARGENTEUS,
     FISH_CUTLASSFISH,
     FISH_MACKEREL,
     FISH_POLLACK,
@@ -27,8 +27,8 @@ public enum ItemName
     FISH_SALMON,
     AXE,
     FISHING_ROD,
-    AXE_ELECTRIC_SAW = 16,
-    AXE_ORC_HANDAXE
+    ELECTRIC_SAW = 16,
+    ORC_HANDAXE
 };
 
 #region 클래스 설명 : 
