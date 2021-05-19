@@ -27,8 +27,7 @@ public enum ItemName
     FISH_SALMON,
     AXE,
     FISHING_ROD,
-    FISHING_ROD_USED,
-    AXE_ELECTRIC_SAW,
+    AXE_ELECTRIC_SAW = 16,
     AXE_ORC_HANDAXE
 };
 
@@ -147,9 +146,9 @@ public class ItemMaster : Singleton<ItemMaster>
     /// 무작위 물고기아이템의 아이템 코드를 반환하는 함수.
     /// </summary>
     #endregion
-    public int RandomFish()
+    public ItemName RandomFish()
     {
-        return (int)_FishList[Random.Range(0, _FishList.Count)];
+        return _FishList[Random.Range(0, _FishList.Count)];
     }
 
     #region 함수 설명 : 
@@ -181,7 +180,8 @@ public class ItemMaster : Singleton<ItemMaster>
         _ItemObjectDic = new Dictionary<ItemName, Item>();
 
         _DroppedItemCollection = _DroppedItemList.GetKeyValuePairs();
-
         _DroppedItemPool = new Dictionary<ItemName, Queue<DroppedItem>>();
+
+        _FishList = _FishItemList.GetList();
     }
 }
