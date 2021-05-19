@@ -25,9 +25,6 @@ public class Player : MonoBehaviour
     [Tooltip("플레이어의 상호작용 범위를 지정합니다.")]
     public float InteractionRange = 1;
 
-    public Brake  LeftBrake;
-    public Brake RightBrake;
-
     private Vector3 vDir;
 
     [Tooltip("플레이어가 현재 프레임에 장비한 아이템 슬롯들을 담는 배열")]
@@ -37,32 +34,6 @@ public class Player : MonoBehaviour
 
 
     private IEnumerator _CurrentOrderRoutine;
-
-
-
-    #region 함수 설명 : 
-    /// <summary>
-    /// 플레이어가 가진 브레이크를 통해, 이동하려는 방향으로 나아갈 수 있는지를 판단하는 함수.
-    /// </summary>
-    /// <param name="moveDir">
-    /// 플레이어가 움직이려는 방향. 
-    /// <para>
-    /// ※ Vector2.left와 같이 방향을 나타내는 벡터를 하십시오 ※
-    /// </para>
-    /// </param>
-    #endregion 
-    public bool CheckBrakeOper(Vector2 moveDir)
-    {
-        if (LeftBrake.Exit && moveDir.Equals(Vector2.left))
-        {
-            return true;
-        }
-        else if (RightBrake.Exit && moveDir.Equals(Vector2.right))
-        {
-            return true;
-        }
-        return false;
-    }
 
     #region 함수 설명 : 
     /// <summary>
@@ -94,40 +65,6 @@ public class Player : MonoBehaviour
        
     }
 
-    private void OperateMountAndUnmountItem()
-    {
-        IItemFunction function;
-
-        for (int i = 0; i < EquipItemSlots.Count; i++)
-        {
-            // 새로운 아이템이 들어왓을 때
-            // if(EquippedItemSlots[i] == ItemName.NONE && EquipItemSlots[i].ContainItem != null)
-            // {
-            //     if (EquipItemSlots[i].ContainItem.TryGetComponent(out function))
-            //     {
-            //         if(function.HasFunction(ItemInterface.MOUNT))
-            //         {
-            //             StartCoroutine(function.MountItem());
-            //         }
-            //         EquippedItemSlots[i] = EquipItemSlots[i].ContainItem.Name;
-            //     }
-            // }
-            // 아이템이 나갔을 때
-            // if (EquippedItemSlots[i] != ItemName.NONE && EquipItemSlots[i].ContainItem == null)
-            // {
-            //     if (ItemMaster.Instance.GetItem(EquippedItemSlots[i]).TryGetComponent(out function))
-            //     {
-            //         if(function.HasFunction(ItemInterface.UNMOUNT))
-            //         {
-            //             StartCoroutine(function.UnmountItem());
-            //         }
-            //         EquippedItemSlots[i] = ItemName.NONE;
-            //     }               
-            // }
-        }
-
-    }
-
     private void OnEnable()
     {
         vDir = transform.position;
@@ -147,8 +84,6 @@ public class Player : MonoBehaviour
         {
             vDir = transform.position;
 
-            OperateMountAndUnmountItem();
-
             if (Input.GetKeyDown(KeyCode.Z))
             {
                 var closeItem = Finder.GetCloseItem();
@@ -157,35 +92,25 @@ public class Player : MonoBehaviour
                     InteractionOrder(closeItem);
                 }
             }
+            #region Moving
             {
                 Player_Instructions.Instance.DiscontinueInstr();
 
                 if (Input.GetAxis("Horizontal") > 0)
-                {
-                    if (CheckBrakeOper(Vector2.right))
-                    {
-                        yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
-                        continue;
-                    }
+                {                   
                     SetFlipX(false);
                 }
                 else if (Input.GetAxis("Horizontal") < 0)
                 {
-                    if (CheckBrakeOper(Vector2.left))
-                    {
-                        yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
-                        continue;
-                    }
                     SetFlipX(true);
                 }
                 vDir.x += Time.deltaTime * 3.5f * Input.GetAxis("Horizontal");
 
                 transform.position = vDir;
             }
+            #endregion
             yield return null;
         }
-
-        yield break;
     }
 
     #region 코루틴 설명
@@ -255,12 +180,6 @@ public class Player : MonoBehaviour
                 {
                     fMoveAmount += 0.06f;
                 }
-                if (CheckBrakeOper(Vector2.right))
-                {
-                    yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
-
-                    Player_Instructions.Instance.DiscontinueInstr();
-                }
                 vDir.x += fMoveAmount * Time.deltaTime * 3.5f;
 
                 transform.position = vDir;
@@ -287,12 +206,6 @@ public class Player : MonoBehaviour
                 if (fMoveAmount < 1)
                 {
                     fMoveAmount += 0.06f;
-                }
-                if (CheckBrakeOper(Vector2.left))
-                {
-                    yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
-
-                    Player_Instructions.Instance.DiscontinueInstr();
                 }
                 vDir.x -= fMoveAmount * Time.deltaTime * 3.5f;
 
@@ -337,12 +250,6 @@ public class Player : MonoBehaviour
                 {
                     fMoveAmount += 0.06f;
                 }
-                if (CheckBrakeOper(Vector2.right))
-                {
-                    yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
-
-                    Player_Instructions.Instance.DiscontinueInstr();
-                }
                 vDir.x += fMoveAmount * Time.deltaTime * 3.5f;
 
                 transform.position = vDir;
@@ -369,12 +276,6 @@ public class Player : MonoBehaviour
                 if (fMoveAmount < 1)
                 {
                     fMoveAmount += 0.06f;
-                }
-                if (CheckBrakeOper(Vector2.left))
-                {
-                    yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
-
-                    Player_Instructions.Instance.DiscontinueInstr();
                 }
                 vDir.x -= fMoveAmount * Time.deltaTime * 3.5f;
 
@@ -420,12 +321,6 @@ public class Player : MonoBehaviour
                 {
                     fMoveAmount += 0.06f;
                 }
-                if (CheckBrakeOper(Vector2.right))
-                {
-                    yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
-
-                    Player_Instructions.Instance.DiscontinueInstr();
-                }
                 vDir.x += fMoveAmount * Time.deltaTime * 3.5f;
 
                 transform.position = vDir;
@@ -452,12 +347,6 @@ public class Player : MonoBehaviour
                 if (fMoveAmount < 1)
                 {
                     fMoveAmount += 0.06f;
-                }
-                if (CheckBrakeOper(Vector2.left))
-                {
-                    yield return StartCoroutine(CR_Vibration(0.06f, 0.25f));
-
-                    Player_Instructions.Instance.DiscontinueInstr();
                 }
                 vDir.x -= fMoveAmount * Time.deltaTime * 3.5f;
 
