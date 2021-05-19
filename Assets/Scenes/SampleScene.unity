@@ -3186,11 +3186,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6412737fa6857845ac0557f8285c293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Inventory: {fileID: 1393031041}
-  Finder: {fileID: 112416528}
-  InteractionRange: 1
-  EquipItemSlots:
-  - {fileID: 613531256}
+  _Inventory: {fileID: 1393031041}
+  _Finder: {fileID: 112416528}
+  _InteractionRange: 1
 --- !u!61 &1421140143
 BoxCollider2D:
   m_ObjectHideFlags: 0

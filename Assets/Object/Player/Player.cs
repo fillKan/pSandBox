@@ -8,15 +8,14 @@ public class Player : MonoBehaviour
     private static readonly Vector3 FlipXScale = new Vector3(-1, 1, 1);
     private static readonly Vector3 DefaultScale = Vector3.one;
 
-    public const float MoveSpeed = 3.5f;
-
-    public Inventory Inventory;
-
-    public ItemFinder Finder;
     public bool FlipX
     { get; private set; }
+    public const float MoveSpeed = 3.5f;
 
-    public float InteractionRange = 1;
+    [SerializeField] private Inventory _Inventory;
+    [SerializeField] private ItemFinder _Finder;
+    [SerializeField] private float _InteractionRange = 1;
+
     private IEnumerator _CurrentOrderRoutine;
 
     private void Awake()
@@ -28,7 +27,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            var closeItem = Finder.GetCloseItem();
+            var closeItem = _Finder.GetCloseItem();
             if (closeItem != null)
             {
                 InteractionOrder(closeItem);
@@ -50,7 +49,7 @@ public class Player : MonoBehaviour
     {
         target.Interaction();
 
-        ItemName item = Inventory.EquipItemSlot.ContainItem;
+        ItemName item = _Inventory.EquipItemSlot.ContainItem;
         if (item != default)
         {
             var equipItem = ItemMaster.Instance.GetItemObject(item);
@@ -79,10 +78,10 @@ public class Player : MonoBehaviour
         OrderCancel();
 
         var distance = Mathf.Abs(target.transform.position.x - transform.position.x);
-        if (distance > InteractionRange)
+        if (distance > _InteractionRange)
         {
             StartCoroutine(_CurrentOrderRoutine = TraceRoutine(target.transform, 
-                () => { return Mathf.Abs(target.transform.position.x - transform.position.x) > InteractionRange; }, 
+                () => { return Mathf.Abs(target.transform.position.x - transform.position.x) > _InteractionRange; }, 
                 () => { InteractAction(target); }));
         }
         else
