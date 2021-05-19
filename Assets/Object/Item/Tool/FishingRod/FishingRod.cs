@@ -56,7 +56,7 @@ public class FishingRod : Item, IEquipItem
                     _IsUsed = !_IsUsed;
                 }
             }
-            if (_IsUsed)
+            if (_Bobber.gameObject.activeSelf)
             {
                 _LineRenderer.SetPosition(0, _RodTopPoint.position);
                 _LineRenderer.SetPosition(1, _Bobber.transform.position);
@@ -77,14 +77,25 @@ public class FishingRod : Item, IEquipItem
     }
     private void DisThrowBobber()
     {
-        _Renderer.sprite = _DefaultSprite;
+        Vector2 dir = (_RodTopPoint.position - _Bobber.transform.position);
+        Vector2 force = dir.normalized * _ThrowingForce * dir.magnitude;
 
-        _Bobber.transform.SetParent(transform);
-        _Bobber.gameObject.SetActive(false);
-        _LineRenderer.gameObject.SetActive(false);
+        _BobberRigid.velocity = force;
+        _BobberRigid.AddForce(force);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.Equals(_Bobber.gameObject) && !_IsUsed)
+        {
+            _Renderer.sprite = _DefaultSprite;
 
-        _Bobber.transform.position = _RodTopPoint.position;
-        _BobberRigid.velocity = Vector2.zero;
+            _Bobber.transform.SetParent(transform);
+            _Bobber.gameObject.SetActive(false);
+            _LineRenderer.gameObject.SetActive(false);
+
+            _Bobber.transform.position = _RodTopPoint.position;
+            _BobberRigid.velocity = Vector2.zero;
+        }
     }
     public override bool IsUsing(ItemInterface itemInterface)
     {
