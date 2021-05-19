@@ -2792,6 +2792,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1332660636}
   - component: {fileID: 1332660638}
+  - component: {fileID: 1332660637}
   m_Layer: 0
   m_Name: Lake
   m_TagString: Water
@@ -2814,6 +2815,25 @@ Transform:
   m_Father: {fileID: 499526667}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1332660637
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332660635}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 92b3cb8561bd3e64a99017c566efb316, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!61 &1332660638
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2850,7 +2870,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1367808418}
   - component: {fileID: 1367808420}
-  - component: {fileID: 1367808419}
   m_Layer: 0
   m_Name: Lake_Wave
   m_TagString: Untagged
@@ -2872,23 +2891,6 @@ Transform:
   m_Father: {fileID: 1332660636}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1367808419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1367808417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 775635b08f33727428f50b5d426bb33e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StartTide: 0
-  WavingObjct: {fileID: 1367808417}
-  IncreaseAmount: 0.06
-  MaximumWaveHeight: 0.1
-  MinimumWaveHeight: -0.1
 --- !u!212 &1367808420
 SpriteRenderer:
   m_ObjectHideFlags: 0
