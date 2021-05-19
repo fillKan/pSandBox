@@ -85,15 +85,12 @@ public class Player : MonoBehaviour
         #region Moving
         {
             float axisX = Input.GetAxis("Horizontal");
-            if (axisX > 0)
+
+            if (axisX != 0)
             {
-                SetFlipX(false);
+                SetFlipX(axisX < 0);
+                transform.Translate(Time.deltaTime * MoveSpeed * axisX, 0, 0);
             }
-            else if (axisX < 0)
-            {
-                SetFlipX(true);
-            }
-            transform.Translate(Time.deltaTime * MoveSpeed * axisX, 0, 0);
         }
         #endregion
     }
