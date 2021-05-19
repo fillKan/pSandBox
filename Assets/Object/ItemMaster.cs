@@ -89,26 +89,6 @@ public class ItemMaster : Singleton<ItemMaster>
         item.transform.rotation = Quaternion.identity;
         item.Rigidbody.velocity = Vector2.zero;
     }
-
-    #region 함수 설명 : 
-    /// <summary>
-    /// '기능을 하는' 아이템을 반환하는 함수.
-    /// </summary>
-    /// <param name="item">
-    /// 반환을 원하는 아이템의 ItemList 열거자
-    /// </param>
-    /// <returns>
-    /// 인자와 일치하는 아이템 데이터를 가진 아이템을 반환한다.
-    /// </returns>
-    #endregion
-    public Item GetItem(ItemName item)
-    {
-        if (_ItemDic.ContainsKey(item))
-        {
-            return _ItemDic[item];
-        }
-        return null;
-    }
     public Item GetItemObject(ItemName item)
     {
         Item returnValue;
@@ -135,23 +115,7 @@ public class ItemMaster : Singleton<ItemMaster>
     {
         return _FishList[Random.Range(0, _FishList.Count)];
     }
-
-    #region 함수 설명 : 
-    /// <summary>
-    /// 특정 아이템의 스프라이트를 반환하는 함수.
-    /// </summary>
-    /// <param name="itemCode">
-    /// 반환을 원하는 아이템 스프라이트의 아이템 코드
-    /// </param>
-    /// <returns>
-    /// 인자와 일치하는 아이템 코드를 가진 스프라이트를 반환한다.
-    /// </returns>
-    #endregion
-    public Sprite GetItemSprt(int itemCode)
-    {
-        return GetItemSprt((ItemName)itemCode);
-    }
-    public Sprite GetItemSprt(ItemName item)
+    public Sprite GetItemSprite(ItemName item)
     {
         if (_ItemDic.ContainsKey(item))
         {
