@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6291212031566549028}
   - component: {fileID: 7357611078802016859}
   - component: {fileID: 1952226627405099440}
-  - component: {fileID: 7984324493633674767}
+  - component: {fileID: 1925740235195713664}
   m_Layer: 10
   m_Name: FishingRod_Bobber
   m_TagString: Untagged
@@ -132,7 +132,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7984324493633674767
+--- !u!114 &1925740235195713664
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,10 +141,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 962718588064226033}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7b453648eed31745953caafa7cfca87, type: 3}
+  m_Script: {fileID: 11500000, guid: 767dbd8574d8e2742a5101680a5076bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Collider: {fileID: 7357611078802016859}
+  _Rigidbody: {fileID: 1952226627405099440}
+  _WaitTimeMin: 3.5
+  _WaitTimeMax: 12.5
+  _OnFishTime: 0.4
 --- !u!1 &3722041934244083469
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,8 +207,7 @@ MonoBehaviour:
   _Renderer: {fileID: -1371305968768083170}
   _LineRenderer: {fileID: 7004682416123291096}
   _RodTopPoint: {fileID: 4533351675042505641}
-  _Bobber: {fileID: 7984324493633674767}
-  _BobberRigid: {fileID: 1952226627405099440}
+  _Bobber: {fileID: 1925740235195713664}
   _ThrowingForce: 4.5
 --- !u!114 &3722041934244083465
 MonoBehaviour:

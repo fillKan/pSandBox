@@ -15,8 +15,7 @@ public class FishingRod : Item, IEquipItem
     [SerializeField] private Transform _RodTopPoint;
 
     [Header("Bobber Property")]
-    [SerializeField] private SecondryCollider _Bobber;
-    [SerializeField] private Rigidbody2D _BobberRigid;
+    [SerializeField] private Bobber _Bobber;
     [SerializeField] private float _ThrowingForce;
 
     private CursorPointer _Cursor;
@@ -82,20 +81,23 @@ public class FishingRod : Item, IEquipItem
         _LineRenderer.gameObject.SetActive(true);
 
         Vector2 dir = (_Cursor.transform.position - _RodTopPoint.position);
-        _BobberRigid.AddForce(dir.normalized * _ThrowingForce * dir.magnitude);
+        _Bobber.Rigidbody.AddForce(dir.normalized * _ThrowingForce * dir.magnitude);
     }
     private void DisThrowBobber()
     {
+        _Bobber.CatchFish();
+
         Vector2 dir = (_RodTopPoint.position - _Bobber.transform.position);
         Vector2 force = dir.normalized * _ThrowingForce * dir.magnitude;
 
-        _BobberRigid.velocity = force;
-        _BobberRigid.AddForce(force);
+        _Bobber.Rigidbody.velocity = force;
+        _Bobber.Rigidbody.AddForce(force);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.Equals(_Bobber.gameObject) && !_IsUsed)
         {
+            _Bobber.DropFish();
             BobberDisable();
         }
     }
@@ -108,7 +110,7 @@ public class FishingRod : Item, IEquipItem
         _LineRenderer.gameObject.SetActive(false);
 
         _Bobber.transform.position = _RodTopPoint.position;
-        _BobberRigid.velocity = Vector2.zero;
+        _Bobber.Rigidbody.velocity = Vector2.zero;
 
         _IsUsed = false;
     }

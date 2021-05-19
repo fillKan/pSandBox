@@ -147,9 +147,9 @@ public class ItemMaster : Singleton<ItemMaster>
     /// 무작위 물고기아이템의 아이템 코드를 반환하는 함수.
     /// </summary>
     #endregion
-    public int RandomFish()
+    public ItemName RandomFish()
     {
-        return (int)_FishList[Random.Range(0, _FishList.Count)];
+        return _FishList[Random.Range(0, _FishList.Count)];
     }
 
     #region 함수 설명 : 

@@ -4,104 +4,92 @@ using UnityEngine;
 
 public class Bobber : MonoBehaviour
 {
-    public Rigidbody2D GetRigidbody2D;
+    private const string FishingColliderName = "Water";
 
-    private IEnumerator WaitBiting;
+    [SerializeField] private Rigidbody2D _Rigidbody;
 
-    private bool Catch;
+    [Header("Fishing Property")]
+    [SerializeField] private float _WaitTimeMin;
+    [SerializeField] private float _WaitTimeMax;
 
-    private DroppedItem item;
-    private ItemSlotSprt sprt;
+    [Space()] [SerializeField] private float _OnFishTime;
 
-    private void Start()
-    {
-        transform.GetChild(0).TryGetComponent(out sprt);
-    }
+    public Rigidbody2D Rigidbody => _Rigidbody;
+
+    private bool _CanCatching;
+    private IEnumerator _WaitFishRoutine;
+    private DroppedItem _CatchedItem;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Water"))
+        if (collision.gameObject.CompareTag(FishingColliderName))
         {
-            if(WaitBiting == null)
+            if (_WaitFishRoutine == null && _Rigidbody.velocity.sqrMagnitude < 1.0f)
             {
-                WaitBiting = CR_waitBiting();
-
-                StartCoroutine(WaitBiting);
+                StartCoroutine(_WaitFishRoutine = WaitFishRoutine());
             }
         }
     }
-
-    private IEnumerator CR_waitBiting()
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag(FishingColliderName))
+        {
+            if (_WaitFishRoutine != null)
+            {
+                StopCoroutine(_WaitFishRoutine);
+                _WaitFishRoutine = null;
+            }
+        }
+    }
+    private IEnumerator WaitFishRoutine()
     {
         while (gameObject.activeSelf)
         {
-            float waitTime = Random.Range(5.0f, 10.0f);
+            float waitTime = Random.Range(_WaitTimeMin, _WaitTimeMax);
 
-            for (float i = 0; i < waitTime; i += Time.deltaTime)
+            for (float i = 0; i < waitTime; i += Time.deltaTime * Time.timeScale)
+                yield return null;
+
+            Vector2 startPos = transform.position;
+            _CanCatching = true;
+            for (float i = 0; i < _OnFishTime; i += Time.deltaTime)
             {
+                transform.position = startPos + (Random.insideUnitCircle * 0.05f);
                 yield return null;
             }
-
-            Vector2 InitPos = transform.position;
-
-            Catch = true;
-
-            for (float i = 0; i < 0.6f; i += Time.deltaTime)
-            {
-                transform.position = InitPos + (Random.insideUnitCircle * 0.05f);
-
-                yield return null;
-            }
-            Catch = false;
-
-            transform.position = InitPos;
+            transform.position = startPos;
+            _CanCatching = false;
         }
-        yield break;
     }
-
-    #region 함수 설명 : 
-    /// <summary>
-    /// 잡힌 물고기를 낚습니다. *휙!*
-    /// </summary>
-    #endregion
-    public void CatchFish(Vector2 force)
+    public void CatchFish()
     {
-        if(Catch)
+        if (_CanCatching)
         {
-            Debug.Log("Catch !");
+            ItemName fish = ItemMaster.Instance.RandomFish();
 
-            sprt.ShowItemExisting(ItemMaster.Instance.RandomFish());
+            _CatchedItem = ItemMaster.Instance.GetDroppedItem(fish);
+            _CatchedItem.Rigidbody.isKinematic = true;
+            _CatchedItem.transform.SetParent(transform);
+            _CatchedItem.transform.localPosition = Vector3.zero;
 
-            Catch = false;
+            _CanCatching = false;
         }
-        GetRigidbody2D.AddForce(force);
-
-        if (WaitBiting != null)
-        {
-            StopCoroutine(WaitBiting);
-
-            WaitBiting = null;
-        }     
     }
-
+    public void DropFish()
+    {
+        if (_CatchedItem != null)
+        {
+            _CatchedItem.transform.SetParent(null);
+            _CatchedItem.Rigidbody.isKinematic = false;
+            _CatchedItem = null;
+        }
+    }
     private void OnDisable()
     {
-        if (WaitBiting != null)
+        if (_WaitFishRoutine != null)
         {
-            StopCoroutine(WaitBiting);
-
-            WaitBiting = null;
-        }
-
-        if (sprt.ItemData != ItemName.NONE)
-        {
-            item = ItemMaster.Instance.GetDroppedItem(sprt.ItemData);
-            item.transform.position = transform.position;
-            item.gameObject.SetActive(true);
-
-            //PlayerGetter.Instance.Inventory.AddItemInventory(ItemMaster.Instance.TakeItemExisting(sprt.ItemData));
-
-            sprt.HideItemExisting();
+            StopCoroutine(_WaitFishRoutine);
+            _WaitFishRoutine = null;
         }
     }
 }

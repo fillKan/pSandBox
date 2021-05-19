@@ -64,8 +64,8 @@ public class FishingRod_used : Item, IItemFunction
 
             bobber.gameObject.SetActive(true);
 
-            bobber.GetRigidbody2D.velocity = Vector2.zero;
-            bobber.GetRigidbody2D.AddForce(vDir.normalized * vDir.magnitude * 4.5f);
+            // bobber.GetRigidbody2D.velocity = Vector2.zero;
+            // bobber.GetRigidbody2D.AddForce(vDir.normalized * vDir.magnitude * 4.5f);
 
             bobber.transform.position = vRodTopPoint;
         }
@@ -74,9 +74,9 @@ public class FishingRod_used : Item, IItemFunction
         {
             slot = itemSlot;
             vDir = vRodTopPoint - (Vector2)bobber.transform.position;
-            bobber.GetRigidbody2D.velocity = Vector2.zero;
+            // bobber.GetRigidbody2D.velocity = Vector2.zero;
 
-            bobber.CatchFish(vDir.normalized * vDir.sqrMagnitude * 4.5f);
+            // bobber.CatchFish(vDir.normalized * vDir.sqrMagnitude * 4.5f);
 
             tryRetrieve = true;
         }
@@ -125,7 +125,7 @@ public class FishingRod_used : Item, IItemFunction
             {
                 // slot.SetItem(ItemName.FISHING_ROD);
 
-                bobber.GetRigidbody2D.velocity = Vector2.zero;
+                // bobber.GetRigidbody2D.velocity = Vector2.zero;
                 bobber.gameObject.SetActive(false);
 
                 isThrowBobber       = false;
