@@ -181,7 +181,8 @@ public class ItemMaster : Singleton<ItemMaster>
         _ItemObjectDic = new Dictionary<ItemName, Item>();
 
         _DroppedItemCollection = _DroppedItemList.GetKeyValuePairs();
-
         _DroppedItemPool = new Dictionary<ItemName, Queue<DroppedItem>>();
+
+        _FishList = _FishItemList.GetList();
     }
 }
