@@ -65,7 +65,6 @@ public class FishingRod : Item, IEquipItem
                     {
                         _Animator.SetInteger(_AnimControlKey, ThrowBobber);
                     }
-                    _IsUsed = !_IsUsed;
                 }
             }
             Vector2 bobberPos = _Bobber.transform.position;
@@ -99,7 +98,6 @@ public class FishingRod : Item, IEquipItem
         _Bobber.gameObject.SetActive(false);
         _LineRenderer.gameObject.SetActive(false);
 
-        _Bobber.transform.position = _RodTopPoint.position;
         _Bobber.Rigidbody.velocity = Vector2.zero;
 
         _IsUsed = false;
@@ -108,12 +106,21 @@ public class FishingRod : Item, IEquipItem
     {
         _Renderer.sprite = _UsedSprite;
 
+        _Bobber.transform.position = _RodTopPoint.position;
         _Bobber.transform.SetParent(null);
         _Bobber.gameObject.SetActive(true);
+
+        Vector3 bobberPos = _Bobber.transform.position;
+        Vector3 rodTopPos = _RodTopPoint.position;
+
+        _LineRenderer.SetPosition(0, rodTopPos);
+        _LineRenderer.SetPosition(1, bobberPos);
         _LineRenderer.gameObject.SetActive(true);
 
-        Vector2 dir = (_Cursor.transform.position - _RodTopPoint.position);
+        Vector2 dir = (_Cursor.transform.position - rodTopPos);
         _Bobber.Rigidbody.AddForce(dir.normalized * _ThrowingForce * dir.magnitude);
+
+        _IsUsed = !_IsUsed;
     }
     private void AE_CatchBobber()
     {
@@ -124,6 +131,8 @@ public class FishingRod : Item, IEquipItem
 
         _Bobber.Rigidbody.velocity = force;
         _Bobber.Rigidbody.AddForce(force);
+
+        _IsUsed = !_IsUsed;
     }
     private void AE_AnimPlayOver()
     {
