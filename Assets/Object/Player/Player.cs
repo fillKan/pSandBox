@@ -74,31 +74,28 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        while (gameObject.activeInHierarchy)
+        if (Input.GetKeyDown(KeyCode.Z))
         {
-            if (Input.GetKeyDown(KeyCode.Z))
+            var closeItem = Finder.GetCloseItem();
+            if (closeItem != null)
             {
-                var closeItem = Finder.GetCloseItem();
-                if (closeItem != null)
-                {
-                    InteractionOrder(closeItem);
-                }
+                InteractionOrder(closeItem);
             }
-            #region Moving
-            {
-                float axisX = Input.GetAxis("Horizontal");
-                if (axisX > 0)
-                {                   
-                    SetFlipX(false);
-                }
-                else if (axisX < 0)
-                {
-                    SetFlipX(true);
-                }
-                transform.Translate(Time.deltaTime * MoveSpeed * axisX, 0, 0);
-            }
-            #endregion
         }
+        #region Moving
+        {
+            float axisX = Input.GetAxis("Horizontal");
+            if (axisX > 0)
+            {
+                SetFlipX(false);
+            }
+            else if (axisX < 0)
+            {
+                SetFlipX(true);
+            }
+            transform.Translate(Time.deltaTime * MoveSpeed * axisX, 0, 0);
+        }
+        #endregion
     }
     private void InteractAction(InteractableObject target)
     {
