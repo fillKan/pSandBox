@@ -18,11 +18,6 @@ public class Player : MonoBehaviour
 
     private IEnumerator _CurrentOrderRoutine;
 
-    private void Awake()
-    {
-        StateStorage.Instance.IncreaseState(States.TREE_LOGGING, 1);
-    }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Z))

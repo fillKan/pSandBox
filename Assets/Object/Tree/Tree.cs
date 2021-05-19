@@ -34,10 +34,10 @@ public class Tree : InteractableObject
     }
     public override void Interaction()
     {
-        float logging = StateStorage.Instance.TreeLogging - 1f;
+        float logging = PlayerStat.Instance.Logging - 1f;
         Shaking(0.3f + 0.05f * logging, 0.05f + 0.06f * logging);
 
-        if ((RestDurability -= StateStorage.Instance.TreeLogging) <= 0)
+        if ((RestDurability -= PlayerStat.Instance.Logging) <= 0)
         {
             _ItemDropper.DropItem(0);
 

@@ -8,11 +8,11 @@ public class Axe : Item, IEquipItem
 
     public void DisEquipItem()
     {
-        StateStorage.Instance.DecreaseState(States.TREE_LOGGING, LoggingValue);
+        PlayerStat.Instance[Stat.Logging] -= LoggingValue;
     }
     public void OnEquipItem()
     {
-        StateStorage.Instance.IncreaseState(States.TREE_LOGGING, LoggingValue);
+        PlayerStat.Instance[Stat.Logging] += LoggingValue;
     }
     public override bool IsUsing(ItemInterface itemInterface)
     {
