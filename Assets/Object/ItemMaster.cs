@@ -31,21 +31,6 @@ public enum ItemName
     AXE_ORC_HANDAXE
 };
 
-#region 열거체 설명 : 
-/// <summary>
-/// 아이템들의 유형들을 열거하는 열거체.
-/// <para>
-/// 해당 열거체를 통해 아이템의 유형이 구분된다.
-/// </para>
-/// </summary>
-#endregion
-public enum ItemTypeList
-{
-    NONE,
-    TOOL,
-    FISH
-}
-
 #region 클래스 설명 : 
 /// <summary>
 /// 아이템과 관련된 모든 정보를 다루는 싱글톤 객체.

@@ -29,19 +29,6 @@ public class Item : MonoBehaviour
 
     public float this[ItemElement element] => _ItemCrystal[element];
 
-    [System.Obsolete]
-    public    int  ItemCode
-    {
-        get { return _itemCode; }
-    }
-    protected int _itemCode;
-
-    public    ItemTypeList  ItemType
-    {
-        get { return _itemType; }
-    }
-    protected ItemTypeList _itemType = ItemTypeList.NONE;
-
     public virtual bool IsUsing(ItemInterface itemInterface)
     {
         return false;
