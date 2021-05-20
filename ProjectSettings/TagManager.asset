@@ -49,6 +49,9 @@ TagManager:
   - name: BackObject
     uniqueID: 1070823771
     locked: 0
+  - name: Player
+    uniqueID: 736894333
+    locked: 0
   - name: FrontObject
     uniqueID: 3465510677
     locked: 0
