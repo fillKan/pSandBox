@@ -10,7 +10,7 @@ public class ItemFinder : MonoBehaviour
     {
         if (_DroppedItems.Count == 0) return null;
 
-        Vector3 pos = transform.position;
+        Vector2 pos = transform.position;
 
         float closeLength = float.MaxValue;
         DroppedItem cloes = null;
@@ -24,7 +24,7 @@ public class ItemFinder : MonoBehaviour
                 i = next;
                 continue;
             }
-            float length = (pos - i.Value.transform.position).sqrMagnitude;
+            float length = Vector2.Distance(i.Value.transform.position, pos);
 
             if (length < closeLength)
             {
@@ -53,7 +53,6 @@ public class ItemFinder : MonoBehaviour
             if (i.Value.gameObject.GetInstanceID() == compareID)
             {
                 _DroppedItems.Remove(i);
-                break;
             }
         }
     }
