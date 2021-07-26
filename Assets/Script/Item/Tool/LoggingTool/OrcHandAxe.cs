@@ -2,27 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrcHandAxe : Item, IEquipItem, IUseItem
+public class OrcHandAxe : Item, IUseItem
 {
     [Header("OrcHandAxe Property")]
     [SerializeField] private float LoggingValue;
     [SerializeField] private Animator _Animator;
     [SerializeField] private Collider2D _AxeBlade;
 
+    private bool _IsAlreadyInit = false;
+
     private int _AnimControlKey;
-    private InteractionManager _Interaction;
 
-    public void OnEquipItem()
-    {
-        _AnimControlKey = _Animator.GetParameter(0).nameHash;
-        _Interaction ??= InteractionManager.Instance;
-    }
-    public void DisEquipItem()
-    {
+    private ContactFilter2D _ContactFilter;
+    private List<Collider2D> _ContactList;
 
-    }
+    private delegate bool IsInteractable(GameObject @object, out InteractableObject interactableObject);
+    private IsInteractable InteractableCheck;
+
     public void UseItem(InteractableObject target)
     {
+        if (!_IsAlreadyInit)
+        {
+            _AnimControlKey = _Animator.GetParameter(0).nameHash;
+            InteractableCheck = InteractionManager.Instance.IsInteractable;
+
+            _ContactFilter = new ContactFilter2D
+            {
+                useTriggers = true
+            };
+            _ContactList = new List<Collider2D>();
+
+            _IsAlreadyInit = true;
+        }
         if (target is Tree)
         {
             _Animator.SetBool(_AnimControlKey, true);
@@ -30,8 +41,7 @@ public class OrcHandAxe : Item, IEquipItem, IUseItem
     }
     public override bool IsUsing(ItemInterface itemInterface)
     {
-        return itemInterface == ItemInterface.Equip
-            || itemInterface == ItemInterface.Use;
+        return itemInterface == ItemInterface.Use;
     }
     private void AE_RewindOver()
     {
@@ -42,19 +52,15 @@ public class OrcHandAxe : Item, IEquipItem, IUseItem
         MainCamera.Instance.CameraShake(0.85f, 0.35f);
         PlayerStat.Instance[Stat.Logging] += LoggingValue;
 
-        var filter = new ContactFilter2D();
-        filter.useTriggers = true;
-
-        var result = new List<Collider2D>();
-
-        _AxeBlade.OverlapCollider(filter, result);
-        foreach (var coll in result)
+        _AxeBlade.OverlapCollider(_ContactFilter, _ContactList);
+        foreach (var coll in _ContactList)
         {
-            if (_Interaction.IsInteractable(coll.gameObject, out var inter))
+            if (InteractableCheck(coll.gameObject, out var inter))
             {
                 if (inter is Tree) inter.Interaction();
             }
         }
+        _ContactList.Clear();
         PlayerStat.Instance[Stat.Logging] -= LoggingValue;
     }
 }
