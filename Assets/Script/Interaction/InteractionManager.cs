@@ -19,7 +19,7 @@ public class InteractionManager : Singleton<InteractionManager>
 
     private void LazyInit()
     {
-        _InteractionDic = _InteractionDic ?? new Dictionary<int, InteractableObject>();
+        _InteractionDic ??= new Dictionary<int, InteractableObject>();
     }
     public bool IsInteractable(GameObject instance, out InteractableObject interactableObject)
     {
